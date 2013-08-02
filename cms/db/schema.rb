@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130802100109) do
+ActiveRecord::Schema.define(version: 20130802143846) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -42,6 +42,41 @@ ActiveRecord::Schema.define(version: 20130802100109) do
   add_index "branches", ["position"], name: "index_branches_on_position", using: :btree
   add_index "branches", ["project_id"], name: "index_branches_on_project_id", using: :btree
   add_index "branches", ["ref_id"], name: "index_branches_on_ref_id", using: :btree
+
+  create_table "content_element_types", force: true do |t|
+    t.integer  "content_type_id"
+    t.integer  "ref_id"
+    t.string   "name"
+    t.string   "intern"
+    t.integer  "field_type"
+    t.integer  "position"
+    t.boolean  "mandatory"
+    t.boolean  "badge"
+    t.text     "meta"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "content_element_types", ["badge"], name: "index_content_element_types_on_badge", using: :btree
+  add_index "content_element_types", ["content_type_id"], name: "index_content_element_types_on_content_type_id", using: :btree
+  add_index "content_element_types", ["field_type"], name: "index_content_element_types_on_field_type", using: :btree
+  add_index "content_element_types", ["mandatory"], name: "index_content_element_types_on_mandatory", using: :btree
+  add_index "content_element_types", ["position"], name: "index_content_element_types_on_position", using: :btree
+  add_index "content_element_types", ["ref_id"], name: "index_content_element_types_on_ref_id", using: :btree
+
+  create_table "content_types", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "ref_id"
+    t.string   "name"
+    t.string   "intern"
+    t.integer  "editor"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "content_types", ["editor"], name: "index_content_types_on_editor", using: :btree
+  add_index "content_types", ["project_id"], name: "index_content_types_on_project_id", using: :btree
+  add_index "content_types", ["ref_id"], name: "index_content_types_on_ref_id", using: :btree
 
   create_table "languages", force: true do |t|
     t.string   "sign"

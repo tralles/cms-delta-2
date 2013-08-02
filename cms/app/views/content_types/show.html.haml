@@ -1,0 +1,43 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+
+
+    .span4
+      %h1= @content_type.name
+      
+      %dl.dl-horizontal
+
+        %dt
+          Intern
+        %dd
+          = @content_type.intern
+        %dt
+          Editor
+        %dd
+          = @content_type.editor
+      
+        %dt
+          Ref
+        %dd
+          = @content_type.ref_id
+
+    .span5
+      %h1 Datenfelder
+      
+      %table.table.table-condensed.table-striped.table-bordered
+        - @content_type.content_element_types.each do |cet|
+          %tr
+            %td
+              = cet.name
+            %td
+              = cet.intern
+      
+      = link_to new_project_content_type_content_element_type_path(@project, @content_type), :class => 'btn btn-mini btn-primary' do
+        %i.icon-plus
+        Neues Datenfeld
+              
+        
+        
+      

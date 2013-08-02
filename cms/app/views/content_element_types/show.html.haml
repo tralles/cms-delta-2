@@ -1,0 +1,30 @@
+%p#notice= notice
+
+%p
+  %b Content type:
+  = @content_element_type.content_type_id
+%p
+  %b Ref:
+  = @content_element_type.ref_id
+%p
+  %b Name:
+  = @content_element_type.name
+%p
+  %b Field type:
+  = @content_element_type.field_type
+%p
+  %b Position:
+  = @content_element_type.position
+%p
+  %b Mandatory:
+  = @content_element_type.mandatory
+%p
+  %b Badge:
+  = @content_element_type.badge
+%p
+  %b Meta:
+  = @content_element_type.meta
+
+= link_to 'Edit', edit_content_element_type_path(@content_element_type)
+\|
+= link_to 'Back', content_element_types_path

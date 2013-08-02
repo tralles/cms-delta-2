@@ -1,0 +1,33 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+
+      
+    .span9
+      %h1
+        Benutzer
+        
+      %table.table.table-condensed.table-bordered.table-striped
+        %tr
+          %th
+            Name
+          %th
+            email
+          %th{width: 100}
+            Action
+      
+        - @users.each do |user|
+          %tr
+            %td= link_to user.name, user
+            %td= user.email
+            %td
+              .btn-group
+                = link_to edit_user_path(user), :class => 'btn btn-mini btn-success' do
+                  %i.icon-edit
+                  Bearbeiten
+                
+                = link_to user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                  %i.icon-trash
+                  Löschen
+          

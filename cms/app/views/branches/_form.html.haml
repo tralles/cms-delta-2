@@ -1,4 +1,5 @@
 = simple_form_for([@project, @parent, @branch], html: {class: 'form-horizontal' }) do |f|
+
   - unless @branch.new_record?
     %fieldset
       %legend
@@ -21,8 +22,10 @@
       Branch
 
     .row
-      .span5
+      .span9
         = f.error_notification
+      .span5
+        
       
         = f.input :name           if permitted_params.branch_attributes.include?(:name)
           
@@ -41,7 +44,8 @@
     .row
       .span9
         = f.fields_for :branch_routes do |ff| 
-          = ff.input :language_id
+          = ff.error_notification
+          = ff.input :language_id, :as => :select, :collection => @project.languages, :include_blank => false
           = ff.input :name 
           = ff.input :route
           = ff.input :jump 

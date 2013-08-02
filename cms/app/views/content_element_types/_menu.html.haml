@@ -1,0 +1,26 @@
+%h1
+  &nbsp;
+
+.well.navi
+  %ul.nav.nav-list
+    %li
+      = link_to project_path(@project) do
+        %i.icon-th-list
+        = @project.name
+    
+    %li.divider
+        
+    %li
+      = link_to project_content_types_path(@project) do
+        %i.icon-list
+        Inhalts Typen
+      
+        
+    %li.nav-header
+      = @content_type.name
+    %li
+      = link_to new_project_content_type_content_element_type_path(@project, @content_type) do
+        %i.icon-plus
+        Neues Datenfeld
+      
+    

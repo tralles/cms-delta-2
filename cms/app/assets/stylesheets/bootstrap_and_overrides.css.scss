@@ -10,7 +10,7 @@ $headingsFontFamily:    'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, s
 $headingsFontWeight:    200;    // instead of browser default, bold
 
 $headingsColor:         #000;
-$linkColor:             #990000;
+$linkColor:             #3399ff;
 
 @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,200italic');
 
@@ -34,4 +34,17 @@ a.brand
 .brand .small
 {
   font-weight: 100  !important;
+}
+
+.well.navi
+{
+  padding: 8px 0;
+}
+
+.well.navi .nav-header
+{
+  background: #eee;
+  color: #666;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
 }

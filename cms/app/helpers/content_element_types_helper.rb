@@ -1,0 +1,2 @@
+module ContentElementTypesHelper
+end

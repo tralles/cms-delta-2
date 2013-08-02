@@ -1,0 +1,42 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+
+      
+    .span9
+      %h1
+        Datenfelder
+        %small
+          %i.icon-angle-right
+          = @content_type.name
+        
+      %table.table.table-condensed.table-bordered.table-striped
+        %tr
+          %th Content type
+          %th Ref
+          %th Name
+          %th Field type
+          %th Position
+          %th Mandatory
+          %th Badge
+          %th Meta
+          %th Actions
+
+      
+        - @content_element_types.each do |content_element_type|
+          %tr
+            %td= content_element_type.content_type_id
+            %td= content_element_type.ref_id
+            %td= content_element_type.name
+            %td= content_element_type.field_type
+            %td= content_element_type.position
+            %td= content_element_type.mandatory
+            %td= content_element_type.badge
+            %td= content_element_type.meta
+            %td
+              .btn-group
+                = link_to 'Show', content_element_type
+                = link_to 'Edit', edit_content_element_type_path(content_element_type)
+                = link_to 'Destroy', content_element_type, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      

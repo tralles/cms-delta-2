@@ -11,6 +11,7 @@ class User < ActiveRecord::Base
   has_many :responsibilities, :class_name => "UsersToProjects"
   has_many :projects, :through => :responsibilities
 
+  validates_presence_of :name, :surname, :email
 
 
 

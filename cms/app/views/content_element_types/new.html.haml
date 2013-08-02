@@ -1,0 +1,14 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+
+      
+    .span9
+      %h1
+        Datenfeld
+        %small
+          %i.icon-angle-right
+          = @content_type.name
+        
+      = render 'form'

@@ -1,0 +1,20 @@
+= simple_form_for([@project, @content_type, @content_element_type], html: {class: 'form-horizontal' }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :name
+    = f.input :intern
+
+    %hr  
+    = f.input :field_type
+
+    %hr  
+    = f.input :mandatory
+    = f.input :badge
+  
+    %hr  
+    = f.input :meta
+    = f.input :ref_id
+
+  .form-actions
+    = f.button :submit

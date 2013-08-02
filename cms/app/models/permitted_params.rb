@@ -24,6 +24,26 @@ class PermittedParams < Struct.new(:params, :current_user)
 
 
 
+  # ContentType
+  def content_type
+    params.require(:content_type).permit(*content_type_attributes)
+  end
+
+  def content_type_attributes
+    [:ref_id, :name, :intern, :editor]
+  end
+  
+  # ContentElementType
+  def content_element_type
+    params.require(:content_element_type).permit(*content_element_type_attributes)
+  end
+
+  def content_element_type_attributes
+    [:ref_id, :name, :intern, :editor]
+  end
+
+
+
   # Project
   def project
     params.require(:project).permit(*project_attributes)
@@ -46,9 +66,9 @@ class PermittedParams < Struct.new(:params, :current_user)
 
   def user_attributes
     if current_user.admin?
-      [:email, :password, :password_confirmation, :remember_me]
+      [:name, :surname, :email, :password, :password_confirmation, :remember_me, :admin]
     else
-      [:email, :password, :password_confirmation, :remember_me]
+      [:name, :surname, :email, :password, :password_confirmation, :remember_me]
     end
   end
 end

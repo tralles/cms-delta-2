@@ -1,0 +1,26 @@
+
+%h1
+  &nbsp;
+
+.well.navi
+  %ul.nav.nav-list
+    - if @user && !@user.new_record?
+      %li
+        = link_to @user do
+          %i.icon-user
+          Anzeigen
+            
+      %li
+        = link_to edit_user_path(@user) do
+          %i.icon-edit
+          Bearbeiten
+  
+    - if current_user.admin?
+      %li.divider
+      %li.nav-header
+        Administration
+        
+      %li
+        = link_to new_user_path do
+          %i.icon-plus
+          User anlegen

@@ -1,0 +1,33 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+
+      
+    .span9
+      %h1
+        Inhalts Typen
+        
+      %table.table.table-condensed.table-bordered.table-striped
+        %tr
+          %th
+            Name
+          %th
+            Intern
+          %th{width: 100}
+            Action
+      
+        - @content_types.each do |content_type|
+          %tr
+            %td= link_to content_type.name, project_content_type_path(content_type.project, content_type)
+            %td= content_type.intern
+            %td
+              .btn-group
+                = link_to edit_project_content_type_path(content_type.project, content_type), :class => 'btn btn-mini btn-success' do
+                  %i.icon-edit
+                  Bearbeiten
+                
+                = link_to project_content_type_path(content_type.project, content_type), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                  %i.icon-trash
+                  Löschen
+          

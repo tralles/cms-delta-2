@@ -21,9 +21,14 @@
   list-style: none;
   position: relative;
   border-left: 1px dotted #999;
-  background: rgba(0, 0, 0, .05);
+  background: rgba(0, 0, 0, .01);
   margin: 1px 0 0 0;
   padding-left: 15px;
+}
+
+#tree ul li:hover
+{
+  background: rgba(50, 100, 0, .025);
 }
 
 #tree ul li.disabled

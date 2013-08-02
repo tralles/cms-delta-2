@@ -9,6 +9,7 @@ class Branch < ActiveRecord::Base
   accepts_nested_attributes_for :branch_routes, :allow_destroy => true
   
   validates_associated :branch_routes
+  validates_presence_of :name
   
   before_destroy :cleanup
   

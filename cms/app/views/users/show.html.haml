@@ -1,0 +1,60 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+
+
+    .span9
+      %h1
+        Benutzerkonto
+    
+      .row      
+        .span2
+            
+          
+          %dl
+            %dt
+              Name
+            %dd
+              = @user.name
+              = @user.surname
+              
+              
+            %dt
+              E-Mail
+            %dd
+              = @user.email
+    
+        .span2
+
+          %dl
+              
+            %dt
+              Projekte
+            %dd
+              %ul.unstyled
+                - @user.projects.each do |project|
+                  %li
+                    = project.name
+                
+    
+        .span5
+
+          %dl.dl-horizontal
+              
+            %dt
+              Erstellt am
+            %dd
+              = l @user.created_at
+                
+            %dt
+              Logins
+            %dd
+              = @user.sign_in_count
+              
+
+            %dt
+              Letzter Login
+            %dd
+              = l @user.current_sign_in_at unless @user.current_sign_in_at.nil?
+

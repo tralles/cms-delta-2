@@ -11,10 +11,15 @@ Delta2::Application.routes.draw do
     resources :content_types do
       resources :content_element_types do
       end  
+
+      resources :contents do
+        resources :content_elements do
+        end  
+      end  
+
+      
     end  
     
-    resources :contents do
-    end  
 
     
     member do
