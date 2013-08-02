@@ -8,44 +8,15 @@
       %h1
         Baumstruktur
       
-      .well#tree
+      #tree
         %ul.nested_branches
           = nested_branches @branches.arrange(:order => :position) 
         
 
       %br
       
-      = link_to new_project_branch_path(@project), :class => 'btn btn-primary' do
+      = link_to new_project_branch_path(@project), :class => 'btn btn-mini btn-primary' do
         %i.icon-plus
         Menüpunkt anlegen
       
--#      .span4
--#        %h1
--#          ext
--#        #ext
--#  
--#  :javascript
--#    Ext.define('Admin.TestTreeStore', {
--#                                        extend: 'Ext.data.TreeStore',
--#                                        proxy: {
--#                                          type:'ajax',
--#                                          url: '#{project_branches_path(@project, :format => :json)}'
--#                                        }
--#                                      });
--#    
--#    Ext.define('Admin.TestTree', {
--#                                  extend: 'Ext.tree.Panel',
--#                                  title:'TestTree',
--#                                  initComponent: function() {
--#                                  console.log('Admin.TestTree::initComponent()');
--#                                  this.store = Ext.create('Admin.TestTreeStore');
--#                                  this.store.load();
--#                                  this.callParent();
--#                                  }
--#                                  });
--#    
--#    Ext.create('Admin.TestTree', {
--#    height: 150, 
--#    renderTo: Ext.get('ext')
--#    });
--#  
+      

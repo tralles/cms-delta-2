@@ -7,7 +7,12 @@
     - if @project && !@project.new_record?
   
       %li.nav-header
+        = link_to projects_path, :class => 'pull-right', :style => 'margin: 0; padding: 0' do
+          %i.icon-chevron-up
+
         = @project.name
+        
+        
   
       
       %li

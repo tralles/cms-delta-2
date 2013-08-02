@@ -38,13 +38,23 @@ a.brand
 
 .well.navi
 {
-  padding: 8px 0;
+  padding: 0 0 8px 0;
 }
 
 .well.navi .nav-header
 {
-  background: #eee;
-  color: #666;
+  background: #ddd;
+  color: #333;
   letter-spacing: 1px;
   text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
+}
+
+.well.navi .nav-header a:hover
+{
+  background: transparent;
+}
+
+thin
+{
+  font-weight: 100 !important;
 }

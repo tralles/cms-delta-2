@@ -3,16 +3,17 @@
 
 .well.navi
   %ul.nav.nav-list
-    %li
-      = link_to project_path(@project) do
-        %i.icon-th-list
-        = @project.name
-    
-    %li.divider
+  
+    %li.nav-header
+      = link_to project_path(@project), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
+        %i.icon-chevron-left
+
+      = @project.name
+
         
     %li
       = link_to project_content_types_path(@project) do
-        %i.icon-list
+        %i.icon-th-list
         Inhalts Typen
         
       
@@ -23,6 +24,7 @@
       
     - if @content_type
       %li.nav-header
+        %i.icon-file-text-alt
         = @content_type.name
       %li
         = link_to new_project_content_type_content_element_type_path(@project, @content_type) do
