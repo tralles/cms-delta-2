@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Ref:
+  = @branch.ref_id
+%p
+  %b Project:
+  = @branch.project_id
+%p
+  %b Name:
+  = @branch.name
+%p
+  %b Position:
+  = @branch.position
+%p
+  %b Hidden:
+  = @branch.hidden
+
+= link_to 'Edit', edit_project_branch_path(@branch.project, @branch)
+\|
+= link_to 'Back', project_branches_path(@project)

@@ -1,0 +1,53 @@
+= simple_form_for([@project, @parent, @branch], html: {class: 'form-horizontal' }) do |f|
+  - unless @branch.new_record?
+    %fieldset
+      %legend
+        Untermenü zu Punkt
+        
+    
+      #tree
+        %ul.nested_branches
+          %li
+            Haupt-Ebene
+            .pull-right
+              = radio_button_tag 'parent_id', 0, (@branch.root?)
+          %li
+            %ul
+              = nested_branches @branches.arrange(:order => :position), f
+  
+
+  %fieldset
+    %legend
+      Branch
+
+    .row
+      .span5
+        = f.error_notification
+      
+        = f.input :name           if permitted_params.branch_attributes.include?(:name)
+          
+        = f.input :ref_id         if permitted_params.branch_attributes.include?(:ref_id)
+          
+      
+  
+      .span4
+        = f.input :hidden         if permitted_params.branch_attributes.include?(:hidden)
+        = f.input :unattached     if permitted_params.branch_attributes.include?(:unattached)
+
+
+  %fieldset
+    %legend
+      Routes
+    .row
+      .span9
+        = f.fields_for :branch_routes do |ff| 
+          = ff.input :language_id
+          = ff.input :name 
+          = ff.input :route
+          = ff.input :jump 
+
+
+  .row
+    .form-actions
+      = f.button :submit
+  

@@ -1,0 +1,49 @@
+// Place all the styles related to the Branches controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+#tree ul
+{
+  list-style: none;
+  clear: both;
+  
+  padding: 0;
+  margin: 0;
+  
+}
+
+#tree ul li
+{
+  padding: 0;
+  margin: 0;
+  clear: both;
+  list-style: none;
+  position: relative;
+  border-left: 1px dotted #999;
+  background: rgba(0, 0, 0, .05);
+  margin: 1px 0 0 0;
+  padding-left: 15px;
+}
+
+#tree ul li.disabled
+{
+  color: #999;
+}
+
+#tree ul li input
+{
+  margin: -2px 5px 0 0;
+}
+
+
+#tree li .handle
+{
+  position: absolute;
+  left: 0px;
+  top: 0px;
+  bottom: 0px;
+  width: 10px;
+  display: block;
+  background: rgba(0, 0, 255, .1);
+}

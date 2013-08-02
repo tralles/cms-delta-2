@@ -1,0 +1,34 @@
+.section
+  .da
+
+.container
+  .row
+    .span3
+      %h4
+        %strong Account
+        | entsperren
+        
+      = render :partial => "devise/shared/links" 
+      
+    .span9
+      %h4
+        %i.icon-ambulance
+        &nbsp;
+        Account Reaktivieren
+        
+      %br
+      = form_for(resource, :as => resource_name, :url => unlock_path(resource_name), :html => { :method => :post, :class => 'form-horizontal'} ) do |f| 
+        - devise_error_messages! 
+
+
+        .control-group
+          = f.label :email, :class => 'control-label'
+          .controls
+            = f.text_field :email , :class => 'input-block-level'
+
+            
+            
+        .form-actions
+          = f.submit "Account-Reaktivierung anfordern", :class => 'btn btn-primary'
+
+

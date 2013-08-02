@@ -1,0 +1,18 @@
+.container
+  .row
+    .span3
+      = render 'menu'     
+
+    .span9
+
+      %h1 
+        = @project.name
+
+      %p.lead
+        = @project.description
+
+
+
+      %fieldset
+        %legend
+          Internationalisierung

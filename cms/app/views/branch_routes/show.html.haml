@@ -1,0 +1,21 @@
+%p#notice= notice
+
+%p
+  %b Branch:
+  = @branch_route.branch_id
+%p
+  %b Language:
+  = @branch_route.language_id
+%p
+  %b Name:
+  = @branch_route.name
+%p
+  %b Route:
+  = @branch_route.route
+%p
+  %b Jump:
+  = @branch_route.jump
+
+= link_to 'Edit', edit_branch_route_path(@branch_route)
+\|
+= link_to 'Back', branch_routes_path

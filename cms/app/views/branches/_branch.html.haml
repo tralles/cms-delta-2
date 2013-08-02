@@ -1,0 +1,30 @@
+.handle
+
+- if form && branch == form.object
+  %strong 
+    = branch.name
+  %small
+    > kann nicht Unterpunkt zu sich oder seinen Unterpunkten sein …
+    
+- else
+  = branch.name
+
+- unless form
+  .btn-group.pull-right
+    = link_to edit_project_branch_path(@project, branch), :class=> 'btn btn-mini' do
+      %i.icon-edit
+  
+    = link_to new_project_branch_branch_path(branch.project, branch), :class=> 'btn btn-mini' do
+      %i.icon-plus
+  
+    
+    = link_to [@project, branch], :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do 
+      %i.icon-trash
+  
+- else
+  .pull-right
+    - if form.object.subtree.include?(branch)
+      = radio_button_tag '', '', false, :disabled => :disabled
+    
+    - else
+      = radio_button_tag 'parent_id', branch.id, (branch == form.object.parent)

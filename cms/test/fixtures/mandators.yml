@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  old_id: 1
+  name: MyString
+  name_intern: MyString
+  identifizierung: MyString
+  muttersprache: MyString
+  sprachen: MyText
+  status: 1
+  optionen: MyText
+  portal_mandator_id: 1
+
+two:
+  old_id: 1
+  name: MyString
+  name_intern: MyString
+  identifizierung: MyString
+  muttersprache: MyString
+  sprachen: MyText
+  status: 1
+  optionen: MyText
+  portal_mandator_id: 1

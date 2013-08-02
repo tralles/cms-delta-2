@@ -1,0 +1,42 @@
+%h1
+  &nbsp;
+
+%ul.nav.nav-list
+  %li
+    = link_to projects_path do
+      %i.icon-list
+      Meine Projekte
+    
+  - if @project && !@project.new_record?
+
+    %li.nav-header
+      = @project.name
+
+    
+    %li
+      = link_to project_branches_path(@project) do
+        %i.icon-code-fork
+        Baumstruktur
+      
+  
+  
+
+  - if current_user.admin?
+    %li.divider
+    %li.nav-header
+      Administration
+      
+    - if @project
+      %li
+        = link_to languages_project_path(@project) do
+          %i.icon-flag
+          Sprachen
+      %li
+        = link_to users_project_path(@project) do
+          %i.icon-group
+          Benutzer
+    - else
+      %li
+        = link_to new_project_path do
+          %i.icon-plus
+          Projekt anlegen

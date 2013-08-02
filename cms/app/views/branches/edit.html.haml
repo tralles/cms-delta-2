@@ -1,0 +1,19 @@
+.container
+  .row
+    .span3
+      = render 'projects/menu'  
+
+
+    .span9
+      %h1 Menüpunkt bearbeiten
+      
+      %ul.breadcrumb
+        - @branch.path.each do |branch|
+          %li
+            = branch.name
+            %span.divider
+              %i.icon-angle-right
+
+      
+      = render 'form'
+      

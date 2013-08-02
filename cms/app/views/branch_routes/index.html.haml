@@ -1,0 +1,27 @@
+%h1 Listing branch_routes
+
+%table
+  %tr
+    %th Branch
+    %th Language
+    %th Name
+    %th Route
+    %th Jump
+    %th
+    %th
+    %th
+
+  - @branch_routes.each do |branch_route|
+    %tr
+      %td= branch_route.branch_id
+      %td= branch_route.language_id
+      %td= branch_route.name
+      %td= branch_route.route
+      %td= branch_route.jump
+      %td= link_to 'Show', branch_route
+      %td= link_to 'Edit', edit_branch_route_path(branch_route)
+      %td= link_to 'Destroy', branch_route, :method => :delete, :data => { :confirm => 'Are you sure?' }
+
+%br
+
+= link_to 'New Branch route', new_branch_route_path

@@ -1,0 +1,30 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+      
+
+    .span9
+
+      %h1 Projekte
+      
+      %table.table.table-condensed.table-bordered.table-striped
+        %tr
+          %th
+            Projekt
+          %th{width: 100}
+            Action
+      
+        - @projects.each do |project|
+          %tr
+            %td= link_to project.name, project
+            %td
+              .btn-group
+                = link_to edit_project_path(project), :class => 'btn btn-mini' do
+                  %i.icon-edit
+                  Bearbeiten
+                
+                = link_to project, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                  %i.icon-trash
+                  Löschen
+          

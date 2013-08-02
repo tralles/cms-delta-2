@@ -1,0 +1,28 @@
+= simple_form_for(@project, html: {class: 'form-horizontal' }) do |f|
+  - if @project.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
+      %ul
+        - @project.errors.full_messages.each do |msg|
+          %li= msg
+
+
+  - if current_user.admin?
+    %fieldset
+      %legend
+        Admin
+  
+      = f.input :ref_id         if permitted_params.project_attributes.include?(:ref_id)
+      = f.input :status         if permitted_params.project_attributes.include?(:status)
+    
+  
+  %fieldset
+    %legend
+      Projekt
+
+    = f.input :name           if permitted_params.project_attributes.include?(:name)
+    = f.input :description    if permitted_params.project_attributes.include?(:name)
+
+
+  .form-actions
+    = f.submit 'Speichern', :class => 'btn btn-primary', :disable_with => 'Übertrage Daten ...'

@@ -1,0 +1,12 @@
+= simple_form_for(@branch_route) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :branch_id
+    = f.input :language_id
+    = f.input :name
+    = f.input :route
+    = f.input :jump
+
+  .form-actions
+    = f.button :submit
