@@ -26,13 +26,28 @@
     .span5
       %h1 Datenfelder
       
-      %table.table.table-condensed.table-striped.table-bordered
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
+        %tr
+          %th Name
+          %th intern
+          %th Typ
+          %th
         - @content_type.content_element_types.each do |cet|
           %tr
             %td
               = cet.name
             %td
               = cet.intern
+            %td
+              = Constant.fields(:id => cet.field_type).name
+              
+            %td{ :style => 'width: 50px;' }
+              .btn-group
+                = link_to edit_project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :class => 'btn btn-mini btn-success' do
+                  %i.icon-edit
+                
+                = link_to project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                  %i.icon-trash
       
       = link_to new_project_content_type_content_element_type_path(@project, @content_type), :class => 'btn btn-mini btn-primary' do
         %i.icon-plus

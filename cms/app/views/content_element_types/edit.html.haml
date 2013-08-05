@@ -1,7 +1,15 @@
-%h1 Editing content_element_type
+.container
+  .row
+    .span3
+      = render 'menu'  
 
-= render 'form'
-
-= link_to 'Show', @content_element_type
-\|
-= link_to 'Back', content_element_types_path
+      
+    .span9
+      %h1
+        = @content_type.name
+        
+        %small
+          %i.icon-angle-right
+          Datenfeld bearbeiten  
+        
+      = render 'form'

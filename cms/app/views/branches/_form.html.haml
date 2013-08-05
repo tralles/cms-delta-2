@@ -45,7 +45,7 @@
       .span9
         = f.fields_for :branch_routes do |ff| 
           = ff.error_notification
-          = ff.input :language_id, :as => :select, :collection => @project.languages, :include_blank => false
+          = ff.input :language, :as => :select, :collection => @project.languages, :include_blank => false
           = ff.input :name 
           = ff.input :route
           = ff.input :jump 

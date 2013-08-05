@@ -14,13 +14,13 @@
   - @branch_routes.each do |branch_route|
     %tr
       %td= branch_route.branch_id
-      %td= branch_route.language_id
+      %td= branch_route.language
       %td= branch_route.name
       %td= branch_route.route
       %td= branch_route.jump
       %td= link_to 'Show', branch_route
-      %td= link_to 'Edit', edit_branch_route_path(branch_route)
-      %td= link_to 'Destroy', branch_route, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Edit', edit_branch_route_path( branch_route)
+      %td= link_to 'Destroy', branch_route_path( branch_route), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

@@ -1,0 +1,23 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  old_id: 1
+  ref_id: 1
+  project_id: 1
+  content_type_id: 1
+  alpha_datum: 2013-08-04 18:17:00
+  omega_datum: 2013-08-04 18:17:00
+  position: 1
+  user_id: 1
+  status: 1
+
+two:
+  old_id: 1
+  ref_id: 1
+  project_id: 1
+  content_type_id: 1
+  alpha_datum: 2013-08-04 18:17:00
+  omega_datum: 2013-08-04 18:17:00
+  position: 1
+  user_id: 1
+  status: 1

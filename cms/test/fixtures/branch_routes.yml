@@ -2,14 +2,14 @@
 
 one:
   branch_id: 1
-  language_id: 1
+  language: 'de'
   name: MyString
   route: MyString
   jump: MyString
 
 two:
   branch_id: 1
-  language_id: 1
+  language: 'en'
   name: MyString
   route: MyString
   jump: MyString

@@ -6,7 +6,11 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-admin = User.create!({:email => "tralles@qb-it.de", :admin => true, :password => "initialp4ssword", :password_confirmation => "initialp4ssword" })
+admin = User.create!({:email => "tralles@qb-it.de", :name => 'tralles', :surname => 'Marco', :admin => true, :password => "initialp4ssword", :password_confirmation => "initialp4ssword" })
 
-de = Language.create!({ :sign => 'de', :name => 'Deutsch' })
-en = Language.create!({ :sign => 'en', :name => 'Englisch' })
+languages = Constant.create!({ :category => 'languages', :name => 'Deutsch', :value => 'de', :art => 'String' })
+languages = Constant.create!({ :category => 'languages', :name => 'Englisch', :value => 'en', :art => 'String' })
+
+fields = Constant.create!({ :category => 'fields', :name => 'Text : Einzeilig', :value => 1, :art => 'String' })
+fields = Constant.create!({ :category => 'fields', :name => 'Text : Mehrzeilig', :value => 2, :art => 'String' })
+

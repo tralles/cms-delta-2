@@ -58,3 +58,8 @@ thin
 {
   font-weight: 100 !important;
 }
+
+.control-group.datetime select
+{
+  width: auto;
+}

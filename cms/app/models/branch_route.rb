@@ -1,6 +1,5 @@
 class BranchRoute < ActiveRecord::Base
 
-  belongs_to :language
   belongs_to :branch
 
   validates_presence_of :name

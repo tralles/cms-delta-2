@@ -5,7 +5,7 @@
   = @branch_route.branch_id
 %p
   %b Language:
-  = @branch_route.language_id
+  = @branch_route.language
 %p
   %b Name:
   = @branch_route.name
@@ -16,6 +16,3 @@
   %b Jump:
   = @branch_route.jump
 
-= link_to 'Edit', edit_branch_route_path(@branch_route)
-\|
-= link_to 'Back', branch_routes_path

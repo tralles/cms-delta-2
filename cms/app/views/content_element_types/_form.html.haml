@@ -6,7 +6,7 @@
     = f.input :intern
 
     %hr  
-    = f.input :field_type
+    = f.input :field_type, :as => :select, :collection => Constant.fields.collect {|p| [ p.name, p.value ] }, :include_blank => false
 
     %hr  
     = f.input :mandatory

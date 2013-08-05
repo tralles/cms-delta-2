@@ -20,7 +20,7 @@
       %td= permission.description
       %td= link_to 'Show', permission
       %td= link_to 'Edit', edit_permission_path(permission)
-      %td= link_to 'Destroy', permission, :method => :delete, :data => { :confirm => 'Are you sure?' }
+      %td= link_to 'Destroy', permission_path(permission), :method => :delete, :data => { :confirm => 'Are you sure?' }
 
 %br
 

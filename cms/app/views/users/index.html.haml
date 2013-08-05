@@ -8,7 +8,7 @@
       %h1
         Benutzer
         
-      %table.table.table-condensed.table-bordered.table-striped
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
           %th
             Name
@@ -27,7 +27,7 @@
                   %i.icon-edit
                   Bearbeiten
                 
-                = link_to user, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                = link_to user_path(user), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
                   %i.icon-trash
                   Löschen
           

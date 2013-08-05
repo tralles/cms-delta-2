@@ -8,12 +8,14 @@
       %h1
         Inhalts Typen
         
-      %table.table.table-condensed.table-bordered.table-striped
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
           %th
             Name
           %th
             Intern
+          %th
+            Felder
           %th{width: 100}
             Action
       
@@ -21,6 +23,15 @@
           %tr
             %td= link_to content_type.name, project_content_type_path(content_type.project, content_type)
             %td= content_type.intern
+            %td
+              - content_type.content_element_types.each do |cet|
+                = cet.name
+                - unless content_type.content_element_types.last == cet
+                  ,
+                
+                
+              
+            
             %td
               .btn-group
                 = link_to edit_project_content_type_path(content_type.project, content_type), :class => 'btn btn-mini btn-success' do

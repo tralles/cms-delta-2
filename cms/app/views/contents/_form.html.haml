@@ -1,0 +1,52 @@
+.row
+  .span6
+    = simple_form_for([@project, @content_type, @content], html: {class: 'form-horizontal' }) do |f|
+      = f.error_notification
+
+
+
+      %fieldset
+        %legend
+          Optionen
+            
+        %options
+          .form-inputs
+            - @content_type.content_element_types.each do |cet|
+              .control-group
+                %label.control-label
+                  = cet.name
+                .controls
+                  = cetform @content, cet
+        
+        
+    
+      %fieldset
+        %legend
+          Metadaten
+
+            
+        %options
+          .form-inputs
+            = f.input :ref_id
+            = f.input :alpha_datum, :include_blank => true
+            = f.input :omega_datum, :include_blank => true
+
+
+
+
+      - unless @content.new_record?
+        %fieldset
+          %legend
+            Dokumente
+          %options
+
+
+    
+      .form-actions
+        = f.button :submit
+        
+  
+  .span3
+    #sitemap.well.navi
+      %ul.nested_branches
+        = sitemap @branches.arrange(:order => :position) 

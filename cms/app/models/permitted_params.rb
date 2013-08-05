@@ -6,7 +6,7 @@ class PermittedParams < Struct.new(:params, :current_user)
   end
 
   def branch_attributes
-    [:ref_id, :name, :hidden, :unattached, branch_routes_attributes: [:id, :language_id, :name, :route, :jump] ]
+    [:ref_id, :name, :hidden, :unattached, branch_routes_attributes: [:id, :language, :name, :route, :jump] ]
   end
 
 
@@ -18,7 +18,7 @@ class PermittedParams < Struct.new(:params, :current_user)
   end
 
   def branch_route_attributes
-    [:id, :language_id, :name, :route, :jump]
+    [:id, :language, :name, :route, :jump]
   end
 
 
@@ -33,14 +33,49 @@ class PermittedParams < Struct.new(:params, :current_user)
     [:ref_id, :name, :intern, :editor]
   end
   
+  
+  
   # ContentElementType
   def content_element_type
     params.require(:content_element_type).permit(*content_element_type_attributes)
   end
 
   def content_element_type_attributes
-    [:ref_id, :name, :intern, :editor]
+    [:ref_id, :name, :intern, :field_type, :mandatory, :badge, :meta, :position]
   end
+
+
+
+
+
+
+
+
+  # content
+  def content
+    params.require(:content).permit(*content_attributes)
+  end
+
+  def content_attributes
+    [:old_id, :ref_id, :project_id, :content_type_id, :alpha_datum, :omega_datum, :position, :user_id, :status, content_element_attributes: [:content_id, :content_element_type_id, :language, :value, :status] ]
+  end
+
+
+
+
+  # ContentElement
+  def content_element
+    params.require(:content_element).permit(*content_element_attributes)
+  end
+
+  def content_element_attributes
+    [:content_id, :content_element_type_id, :language, :value, :status]
+  end
+
+
+
+
+
 
 
 

@@ -8,8 +8,9 @@
 
       %h1 Projekte
       
-      %table.table.table-condensed.table-bordered.table-striped
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
+          %th{ :width => 10 }
           %th
             Projekt
           %th{width: 100}
@@ -17,14 +18,16 @@
       
         - @projects.each do |project|
           %tr
-            %td= link_to project.name, project
+            %td
+              = project.id
+            %td= link_to project.name, project_path(project)
             %td
               .btn-group
                 = link_to edit_project_path(project), :class => 'btn btn-mini btn-success' do
                   %i.icon-edit
                   Bearbeiten
                 
-                = link_to project, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                = link_to project_path(project), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
                   %i.icon-trash
                   Löschen
           

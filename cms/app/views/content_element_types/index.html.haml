@@ -11,7 +11,7 @@
           %i.icon-angle-right
           = @content_type.name
         
-      %table.table.table-condensed.table-bordered.table-striped
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
           %th Content type
           %th Ref
@@ -36,7 +36,7 @@
             %td= content_element_type.meta
             %td
               .btn-group
-                = link_to 'Show', content_element_type
+                = link_to 'Show', content_element_type_path(content_element_type)
                 = link_to 'Edit', edit_content_element_type_path(content_element_type)
-                = link_to 'Destroy', content_element_type, :method => :delete, :data => { :confirm => 'Are you sure?' }
+                = link_to 'Destroy', content_element_type_path(content_element_type), :method => :delete, :data => { :confirm => 'Are you sure?' }
       

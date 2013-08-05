@@ -7,7 +7,7 @@
     - if @project && !@project.new_record?
   
       %li.nav-header
-        = link_to projects_path, :class => 'pull-right', :style => 'margin: 0; padding: 0' do
+        = link_to projects_path(locale), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
           %i.icon-chevron-up
 
         = @project.name
@@ -25,7 +25,7 @@
           Redaktion
           -  @project.content_types.each do |ct|
             %li
-              = link_to '#' do
+              = link_to project_content_type_contents_path(@project, ct) do
                 %i.icon-file-text
                 = ct.name
             

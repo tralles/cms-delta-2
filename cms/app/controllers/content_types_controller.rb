@@ -43,7 +43,7 @@ class ContentTypesController < ApplicationController
   def update
     respond_to do |format|
       if @content_type.update(permitted_params.content_type)
-        format.html { redirect_to project_content_type_content_element_types_path(@project, @content_type), notice: 'Content type was successfully updated.' }
+        format.html { redirect_to project_content_type_content_element_types_path( @project, @content_type), notice: 'Content type was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -57,7 +57,7 @@ class ContentTypesController < ApplicationController
   def destroy
     @content_type.destroy
     respond_to do |format|
-      format.html { redirect_to project_content_types_url(@project) }
+      format.html { redirect_to project_content_types_url( @project) }
       format.json { head :no_content }
     end
   end

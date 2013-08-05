@@ -1,0 +1,54 @@
+.container
+  .row
+    .span3
+      = render 'projects/menu'  
+    
+    .span6
+
+      %h1
+        Inhalt
+        %small
+          »
+          = @content_type.name
+
+      
+      %p#notice= notice
+      
+      %p
+        %b Old:
+        = @content.old_id
+      %p
+        %b Ref:
+        = @content.ref_id
+      %p
+        %b Project:
+        = @content.project_id
+      %p
+        %b Content type:
+        = @content.content_type_id
+      %p
+        %b Alpha datum:
+        = @content.alpha_datum
+      %p
+        %b Omega datum:
+        = @content.omega_datum
+      %p
+        %b Position:
+        = @content.position
+      %p
+        %b User:
+        = @content.user_id
+      %p
+        %b Status:
+        = @content.status
+      
+
+
+
+    .span3
+      %h1
+        Sitemap
+        
+      #sitemap.well.navi
+        %ul.nested_branches
+          = sitemap @branches.arrange(:order => :position) 

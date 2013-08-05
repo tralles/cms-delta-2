@@ -1,0 +1,34 @@
+.container
+  .row
+    .span3
+      = render 'menu'    
+
+    .span9
+      %h1 Konstanten 
+
+      
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
+        %tr
+          %th Category
+          %th Name
+          %th Value
+          %th Type
+          %th{ :width => 50 }
+      
+        - @constants.each do |constant|
+          %tr
+            %td= constant.category
+            %td= constant.name
+            %td= constant.value
+            %td= constant.art
+            %td
+              .btn-group            
+                = link_to edit_constant_path(constant), :class => 'btn btn-mini btn-success' do
+                  %i.icon-edit
+                  Bearbeiten
+              
+                = link_to constant, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                  %i.icon-trash
+                  Löshen
+                
+

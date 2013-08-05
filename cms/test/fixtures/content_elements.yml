@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/Fixtures.html
+
+one:
+  content_id: 1
+  content_element_type_id: 1
+  language: 1
+  value: MyText
+  status: 1
+
+two:
+  content_id: 1
+  content_element_type_id: 1
+  language: 1
+  value: MyText
+  status: 1

@@ -1,6 +1,16 @@
 Delta2::Application.routes.draw do
 
+  devise_for :users # , :path => "/", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'join' }
+
+  resources :users
+  resources :constants
   resources :permissions
+    
+  
+  resources :contents
+  
+  
+
 
   resources :projects do
     resources :branches do
@@ -17,7 +27,6 @@ Delta2::Application.routes.draw do
         end  
       end  
 
-      
     end  
     
 
@@ -27,12 +36,10 @@ Delta2::Application.routes.draw do
       match 'users', :via => :all
     end
   end
-
-  devise_for :users # , :path => "/", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'join' }
-
-  resources :users do
-
-  end
+    
+  
+  
+  
   
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".

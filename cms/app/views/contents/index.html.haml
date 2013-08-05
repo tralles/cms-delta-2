@@ -1,0 +1,43 @@
+.container
+  .row
+    .span3
+      = render 'projects/menu'  
+    
+    .span6
+
+      %h1
+        = @content_type.name
+      
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
+        %tr
+          %th Titel
+      
+        - @contents.each do |content|
+          %tr
+            %td= content.rep
+            %td= content.user_id
+            %td{ :width => 50 }
+              .btn-group
+                = link_to edit_project_content_type_content_path(@project, @content_type, content), :class => 'btn btn-mini btn-success' do
+                  %i.icon-edit
+                
+                = link_to project_content_type_content_path(@project, @content_type, content), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                  %i.icon-trash
+                
+      
+      %br
+      
+      = link_to new_project_content_type_content_path(@project, @content_type) do 
+        %i.icon-plus
+        = @content_type.name
+        Inhalt anlegen
+      
+
+
+    .span3
+      %h1
+        Sitemap
+        
+      #sitemap.well.navi
+        %ul.nested_branches
+          = sitemap @branches.arrange(:order => :position) 

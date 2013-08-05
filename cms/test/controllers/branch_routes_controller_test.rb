@@ -18,7 +18,7 @@ class BranchRoutesControllerTest < ActionController::TestCase
 
   test "should create branch_route" do
     assert_difference('BranchRoute.count') do
-      post :create, branch_route: { branch_id: @branch_route.branch_id, jump: @branch_route.jump, language_id: @branch_route.language_id, name: @branch_route.name, route: @branch_route.route }
+      post :create, branch_route: { branch_id: @branch_route.branch_id, jump: @branch_route.jump, language: @branch_route.language, name: @branch_route.name, route: @branch_route.route }
     end
 
     assert_redirected_to branch_route_path(assigns(:branch_route))
@@ -35,7 +35,7 @@ class BranchRoutesControllerTest < ActionController::TestCase
   end
 
   test "should update branch_route" do
-    patch :update, id: @branch_route, branch_route: { branch_id: @branch_route.branch_id, jump: @branch_route.jump, language_id: @branch_route.language_id, name: @branch_route.name, route: @branch_route.route }
+    patch :update, id: @branch_route, branch_route: { branch_id: @branch_route.branch_id, jump: @branch_route.jump, language: @branch_route.language, name: @branch_route.name, route: @branch_route.route }
     assert_redirected_to branch_route_path(assigns(:branch_route))
   end
 

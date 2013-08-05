@@ -52,3 +52,35 @@
   display: block;
   background: rgba(0, 0, 255, .1);
 }
+
+
+#sitemap ul
+{
+  list-style: none;
+  clear: both;
+  
+  padding: 0;
+  margin: 0;
+  
+}
+
+#sitemap ul ul
+{
+  padding-left: 10px;
+  margin: 0 0 0 5px;
+  border-left: 1px dotted #000;
+}
+
+#sitemap ul li
+{
+  padding: 1px 0 1px 5px;
+  margin: 0;
+  clear: both;
+  list-style: none;
+  position: relative;
+  margin: 1px 0 0 0;
+}
+
+
+
+

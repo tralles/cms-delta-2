@@ -4,7 +4,8 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   
   before_filter :configure_permitted_parameters, if: :devise_controller?
-  
+  before_action :set_locale
+ 
   
   def dashboard
     redirect_to new_session_path('user') unless current_user
@@ -33,5 +34,10 @@ protected
     devise_parameter_sanitizer.for(:sign_in) { |u| u.permit(:username, :login, :password, :remember_me) }
     devise_parameter_sanitizer.for(:login) { |u| u.permit(:username, :login, :password, :remember_me) }
   end  
+  
+  
+  def set_locale
+    I18n.locale = params[:locale] || I18n.default_locale
+  end
   
 end
