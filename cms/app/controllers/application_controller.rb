@@ -38,6 +38,8 @@ protected
   
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
+    @locale = I18n.locale
+    
   end
   
 end

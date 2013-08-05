@@ -10,6 +10,8 @@
         %small
           »
           = @content_type.name
+
+          = image_tag asset_path("flags/#{@locale}.png")
       
       
       = render 'form'

@@ -25,9 +25,8 @@
             %td= content_type.intern
             %td
               - content_type.content_element_types.each do |cet|
-                = cet.name
-                - unless content_type.content_element_types.last == cet
-                  ,
+                = "#{cet.name}#{', ' unless content_type.content_element_types.last == cet}"
+                  
                 
                 
               

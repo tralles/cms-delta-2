@@ -57,7 +57,7 @@ class PermittedParams < Struct.new(:params, :current_user)
   end
 
   def content_attributes
-    [:old_id, :ref_id, :project_id, :content_type_id, :alpha_datum, :omega_datum, :position, :user_id, :status, content_element_attributes: [:content_id, :content_element_type_id, :language, :value, :status] ]
+    [:old_id, :ref_id, :project_id, :content_type_id, :alpha_datum, :omega_datum, :user_id, :status, content_element_attributes: [:content_id, :content_element_type_id, :language, :value, :status] ]
   end
 
 

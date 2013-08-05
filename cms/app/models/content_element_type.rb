@@ -1,6 +1,7 @@
 class ContentElementType < ActiveRecord::Base
 
   belongs_to :content_type
+  has_many :content_elements, :dependent => :destroy
   
   
   
@@ -19,9 +20,7 @@ class ContentElementType < ActiveRecord::Base
     ausgabe = nil 
 
     meta = YAML::load(self.meta)
-    puts 'meta ==> '
-    puts meta
-    
+
     if meta && meta.send(name.to_sym)
       ausgabe = meta.send(name.to_sym)
     else

@@ -7,7 +7,6 @@ class CreateContents < ActiveRecord::Migration
       t.integer :content_type_id
       t.datetime :alpha_datum
       t.datetime :omega_datum
-      t.integer :position
       t.integer :user_id
       t.integer :status
 

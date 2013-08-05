@@ -7,22 +7,35 @@
 
       %h1
         = @content_type.name
+        %small.pull-right
+          - @project.languages.each do |lng|
+            - btnclass = 'btn-inverse' if @locale.to_s == lng.to_s
+            = link_to url_for(params.merge(:locale => lng)), :class => "btn btn-mini #{btnclass}" do
+              = lng 
+
+        
       
       %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
           %th Titel
+          %th
+          %th
+          %th
       
         - @contents.each do |content|
           %tr
-            %td= content.rep
-            %td= content.user_id
-            %td{ :width => 50 }
-              .btn-group
-                = link_to edit_project_content_type_content_path(@project, @content_type, content), :class => 'btn btn-mini btn-success' do
-                  %i.icon-edit
+            %td
+              = link_to project_content_type_content_path(@project, @content_type, content, params.merge(:locale => @locale)) do
+                = content.rep @locale
+            %td.muted
+              = content.user.username if content.user
+            %td{ :width => 35 }
+              - content.languages.each do |lng|
+                = image_tag asset_path("flags/#{lng}.png")
                 
-                = link_to project_content_type_content_path(@project, @content_type, content), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
-                  %i.icon-trash
+            %td{ :width => 50 }
+              = render :partial => 'content_actions', :locals => { :content => content }
+
                 
       
       %br

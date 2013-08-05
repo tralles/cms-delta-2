@@ -12,38 +12,52 @@
           = @content_type.name
 
       
-      %p#notice= notice
       
-      %p
-        %b Old:
-        = @content.old_id
-      %p
-        %b Ref:
-        = @content.ref_id
-      %p
-        %b Project:
-        = @content.project_id
-      %p
-        %b Content type:
-        = @content.content_type_id
-      %p
-        %b Alpha datum:
-        = @content.alpha_datum
-      %p
-        %b Omega datum:
-        = @content.omega_datum
-      %p
-        %b Position:
-        = @content.position
-      %p
-        %b User:
-        = @content.user_id
-      %p
-        %b Status:
-        = @content.status
+      %fieldset
+        %legend
+          Inhalte
+          .pull-right
+            - @content.languages.each do |lng|
+              - btnclass = 'btn-inverse' if @locale.to_s == lng.to_s
+              = link_to url_for(params.merge(:locale => lng)), :class => "btn btn-mini #{btnclass}" do
+                = lng
+                
+              
+            
+            
+
+        %dl.dl-horizontal
+          - @content.content_elements.lang(@locale).each do |ce|
+            %dt
+              = ce.content_element_type.name
+            %dd
+              = ce.value
+            
+      %fieldset
+        %legend
+          Meta
+
+        %dl.dl-horizontal
+          %dt
+            Referenz
+          %dd
+            = @content.ref_id
+              
+            
+          %dt
+            Sichtbar ab
+          %dd
+            = l @content.alpha_datum unless @content.alpha_datum.nil?
+            
+          %dt
+            Sichtbar bis
+          %dd
+            = l @content.omega_datum unless @content.omega_datum.nil?
       
-
-
+      .form-actions
+        .pull-right
+          = render :partial => 'content_actions', :locals => { :content => @content, :large => true }
+          
 
     .span3
       %h1
@@ -51,4 +65,4 @@
         
       #sitemap.well.navi
         %ul.nested_branches
-          = sitemap @branches.arrange(:order => :position) 
+          = sitemap @branches.arrange(:order => :position)

@@ -3,11 +3,13 @@
     = simple_form_for([@project, @content_type, @content], html: {class: 'form-horizontal' }) do |f|
       = f.error_notification
 
-
+      - if @locale
+        = hidden_field_tag :locale, @locale
+      
 
       %fieldset
         %legend
-          Optionen
+          Inhalte
             
         %options
           .form-inputs
@@ -44,6 +46,14 @@
     
       .form-actions
         = f.button :submit
+        - unless @content.new_record?
+          = link_to close_project_content_type_content_path(@project, @content_type, @content), :class => 'btn btn-inverse pull-right' do
+            %i.icon-unlock
+        - else
+          = link_to project_content_type_contents_path(@project, @content_type), :class => 'btn btn-inverse pull-right' do
+            %i.icon-remove-sign
+        
+        
         
   
   .span3

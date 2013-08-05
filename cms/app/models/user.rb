@@ -15,6 +15,10 @@ class User < ActiveRecord::Base
 
 
 
+  def username
+    "#{self.name} #{self.surname}"
+  end
+
   def admin?
     return admin
   end

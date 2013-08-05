@@ -28,7 +28,7 @@ class Project < ActiveRecord::Base
     languages = []
     puts 'languages:'
     self.constant_relations.each do |cr|
-      languages << cr.constant if cr.constant.category == 'languages'
+      languages << cr.constant.value if cr.constant.category == 'languages'
     end
     
     languages

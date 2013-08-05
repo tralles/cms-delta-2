@@ -58,7 +58,7 @@ class ContentElementTypesController < ApplicationController
   def destroy
     @content_element_type.destroy
     respond_to do |format|
-      format.html { redirect_to content_element_types_url }
+      format.html { redirect_to [@project, @content_type] }
       format.json { head :no_content }
     end
   end

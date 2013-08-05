@@ -25,6 +25,10 @@ Delta2::Application.routes.draw do
       resources :contents do
         resources :content_elements do
         end  
+        
+        member do
+          get 'close'
+        end
       end  
 
     end  
