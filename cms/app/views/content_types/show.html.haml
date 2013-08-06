@@ -23,15 +23,36 @@
                 Intern
               %dd
                 = @content_type.intern
+                &nbsp;
+
               %dt
                 Editor
               %dd
                 = @content_type.editor
+                &nbsp;
             
               %dt
                 Ref
               %dd
                 = @content_type.ref_id
+                &nbsp;
+                
+            
+              %dt
+                Meta
+              %dd
+                %code
+                  = @content_type.meta
+    
+          .form-actions
+            .btn-group.pull-right
+              = link_to edit_project_content_type_path(@project, @content_type), :class => 'btn btn-mini btn-success' do
+                %i.icon-edit
+                Bearbeiten
+              
+              = link_to project_content_type_path(@project, @content_type), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                %i.icon-trash
+                Löschen
     
         .span9
           %fieldset

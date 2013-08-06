@@ -3,6 +3,7 @@ class ContentElementType < ActiveRecord::Base
   belongs_to :content_type
   has_many :content_elements, :dependent => :destroy
   
+  validates_presence_of :name, :intern
   
   
   def simple_form 

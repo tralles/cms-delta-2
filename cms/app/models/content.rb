@@ -43,6 +43,18 @@ class Content < ActiveRecord::Base
   
   
   
+  def option(name, args = nil)
+    ausgabe = nil
+    
+    meta = YAML::load(self.content_type.meta)
+
+    if meta && meta.send(name.to_sym)
+      ausgabe = meta.send(name.to_sym)
+    end
+      
+    return ausgabe
+
+  end
   
   
   def method_missing(name, args = nil)

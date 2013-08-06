@@ -9,9 +9,24 @@ class Branch < ActiveRecord::Base
   accepts_nested_attributes_for :branch_routes, :allow_destroy => true
   
   validates_associated :branch_routes
-  validates_presence_of :name
+
   
   before_destroy :cleanup
+  
+  
+  
+  
+  
+  def route language
+    if route = self.branch_routes.where(:language => language).first
+      return route
+    elsif route = self.branch_routes.first
+      return route
+    else
+      return nil?
+    end
+  end
+  
   
   
   

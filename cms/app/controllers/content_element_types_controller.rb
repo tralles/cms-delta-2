@@ -30,7 +30,7 @@ class ContentElementTypesController < ApplicationController
 
     respond_to do |format|
       if @content_element_type.save
-        format.html { redirect_to [@project, @content_type], notice: 'Content element type was successfully created.' }
+        format.html { redirect_to project_content_type_path(@project, @content_type), notice: 'Content element type was successfully created.' }
         format.json { render action: 'show', status: :created, location: [@project, @content_type] }
       else
         format.html { render action: 'new' }
@@ -44,7 +44,7 @@ class ContentElementTypesController < ApplicationController
   def update
     respond_to do |format|
       if @content_element_type.update(permitted_params.content_element_type)
-        format.html { redirect_to [@project, @content_type], notice: 'Content element type was successfully updated.' }
+        format.html { redirect_to project_content_type_path(@project, @content_type), notice: 'Content element type was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

@@ -6,6 +6,7 @@ class CreateContentTypes < ActiveRecord::Migration
       t.string :name
       t.string :intern
       t.integer :editor
+      t.text :meta
 
       t.timestamps
     end

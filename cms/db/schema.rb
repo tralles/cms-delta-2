@@ -101,6 +101,7 @@ ActiveRecord::Schema.define(version: 20130804183427) do
     t.string   "name"
     t.string   "intern"
     t.integer  "editor"
+    t.text     "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -116,7 +117,6 @@ ActiveRecord::Schema.define(version: 20130804183427) do
     t.integer  "content_type_id"
     t.datetime "alpha_datum"
     t.datetime "omega_datum"
-    t.integer  "position"
     t.integer  "user_id"
     t.integer  "status"
     t.datetime "created_at"

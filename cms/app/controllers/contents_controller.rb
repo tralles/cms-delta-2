@@ -15,6 +15,8 @@ class ContentsController < ApplicationController
   # GET /contents/new
   def new
     @content = Content.new
+    @content.project        = @project
+    @content.content_type   = @content_type
   end
   
   def close

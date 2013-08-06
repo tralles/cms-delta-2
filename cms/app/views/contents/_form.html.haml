@@ -19,21 +19,28 @@
                   = cet.name
                 .controls
                   = cetform @content, cet
+      %br
         
         
     
+      - if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega)
+        %fieldset
+          %legend
+            Metadaten
+              
+          %options
+            .form-inputs
+              = f.input :ref_id                                 if @content.option 'ref'
+              = f.input :alpha_datum, :include_blank => true    if @content.option 'alpha'
+              = f.input :omega_datum, :include_blank => true    if @content.option 'omega'
+        %br
+
       %fieldset
         %legend
-          Metadaten
-
-            
+          In folgenden Menüpunkten
         %options
-          .form-inputs
-            = f.input :ref_id
-            = f.input :alpha_datum, :include_blank => true
-            = f.input :omega_datum, :include_blank => true
-
-
+        
+      %br
 
 
       - unless @content.new_record?
@@ -42,21 +49,27 @@
             Dokumente
           %options
 
+        %br
 
     
       .form-actions
         = f.button :submit
         - unless @content.new_record?
-          = link_to close_project_content_type_content_path(@project, @content_type, @content), :class => 'btn btn-inverse pull-right' do
-            %i.icon-unlock
+          = link_to close_project_content_type_content_path(@project, @content_type, @content), :class => 'btn btn-inverse pull-right', :data => { :confirm => 'Eingaben sind ggf. nicht gespeichert!' } do
+            Schließen
         - else
-          = link_to project_content_type_contents_path(@project, @content_type), :class => 'btn btn-inverse pull-right' do
-            %i.icon-remove-sign
+          = link_to project_content_type_contents_path(@project, @content_type), :class => 'btn btn-inverse pull-right', :data => { :confirm => 'Eingaben werden nicht gespeichert!' } do
+            Abbrechen
         
         
         
   
   .span3
-    #sitemap.well.navi
-      %ul.nested_branches
-        = sitemap @branches.arrange(:order => :position) 
+  
+    %fieldset
+      %legend
+        Sitemap
+
+      #sitemap.navi
+        %ul.nested_branches
+          = sitemap @branches.arrange(:order => :position) 

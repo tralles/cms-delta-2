@@ -2,12 +2,16 @@
 
 - if form && branch == form.object
   %strong 
-    = branch.name
+    = branch.route(@locale).name
+
   %small
     > kann nicht Unterpunkt zu sich oder seinen Unterpunkten sein …
     
 - else
-  = branch.name
+  = branch.route(@locale).name
+  %small.muted
+    = branch.route(@locale).route
+  
 
 - unless form
   .btn-group.pull-right

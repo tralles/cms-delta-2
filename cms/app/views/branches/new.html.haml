@@ -12,7 +12,7 @@
         - if @parent
           - @parent.path.each do |branch|
             %li
-              = branch.name
+              = branch.route(@locale).name
               %span.divider
                 %i.icon-angle-right
         - else

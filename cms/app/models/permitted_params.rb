@@ -30,7 +30,7 @@ class PermittedParams < Struct.new(:params, :current_user)
   end
 
   def content_type_attributes
-    [:ref_id, :name, :intern, :editor]
+    [:ref_id, :name, :intern, :editor, :meta]
   end
   
   
