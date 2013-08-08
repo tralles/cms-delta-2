@@ -7,29 +7,52 @@
 
       %h1
         = @content_type.name
+          
+        - if @branch
+          %small
+            %i.icon-double-angle-right
+            = @branch.route(@locale).name
+        
+          
+        
         %small.pull-right
           - @project.languages.each do |lng|
             - btnclass = 'btn-inverse' if @locale.to_s == lng.to_s
             = link_to url_for(params.merge(:locale => lng)), :class => "btn btn-mini #{btnclass}" do
               = lng 
 
-        
       
       %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
+          - if @branch
+            %th{:width => 10}
+          
           %th Titel
-          %th
           %th
           %th
       
         - @contents.each do |content|
           %tr
+            - if @branch
+              %td.handle
+                
+            
             %td
               = link_to project_content_type_content_path(@project, @content_type, content, params.merge(:locale => @locale)) do
                 = content.rep @locale
-            %td.muted
-              = content.user.username if content.user
-            %td{ :width => 35 }
+                
+              - if content.user
+                %small.muted.pull-right{ :title => l( content.updated_at ) }
+                  %i.icon-lock
+                  = content.user.username if content.user
+
+              - unless content.branches.empty?
+                %strong.muted.pull-right
+                  %i.icon-code-fork
+              
+
+
+            %td{ :width => 45 }
               - content.languages.each do |lng|
                 = image_tag asset_path("flags/#{lng}.png")
                 
@@ -40,7 +63,7 @@
       
       %br
       
-      = link_to new_project_content_type_content_path(@project, @content_type) do 
+      = link_to new_project_content_type_content_path(@project, @content_type, params.merge(:branch => @branch)) do 
         %i.icon-plus
         = @content_type.name
         Inhalt anlegen

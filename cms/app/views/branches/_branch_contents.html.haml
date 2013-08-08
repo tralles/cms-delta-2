@@ -1,0 +1,9 @@
+- if branch.contents.include?(@content)
+  %strong
+    = branch.route(@locale).name
+- else
+  = branch.route(@locale).name
+
+- if @content_type && branch.content_types.include?(@content_type)
+  - checked = ( branch.contents.include?(@content) || (@content.new_record? && @branch && @branch == branch) ) ? true : false
+  = check_box_tag 'content[branch_ids][]', branch.id, checked, :class => 'pull-right', :style => 'margin: 5px 5px 0 0;'

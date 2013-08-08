@@ -6,9 +6,16 @@ class Content < ActiveRecord::Base
 
 
   belongs_to :project
-  belongs_to :content_type
-  has_many :content_elements, :dependent => :destroy
+
   belongs_to :user
+
+  belongs_to :content_type
+
+  has_many :content_elements, :dependent => :destroy
+
+  has_many :ctbs, :class_name => "ContentToBranches", :dependent => :destroy
+  has_many :branches, :through => :ctbs
+
 
 
 

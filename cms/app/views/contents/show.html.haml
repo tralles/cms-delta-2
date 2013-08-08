@@ -33,26 +33,30 @@
             %dd
               = ce.value
             
-      %fieldset
-        %legend
-          Meta
+      - if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega)
+        %fieldset
+          %legend
+            Meta
+  
+          %dl.dl-horizontal
+            - if @content.option(:ref)
+              %dt
+                Referenz
+              %dd
+                = @content.ref_id
 
-        %dl.dl-horizontal
-          %dt
-            Referenz
-          %dd
-            = @content.ref_id
-              
-            
-          %dt
-            Sichtbar ab
-          %dd
-            = l @content.alpha_datum unless @content.alpha_datum.nil?
-            
-          %dt
-            Sichtbar bis
-          %dd
-            = l @content.omega_datum unless @content.omega_datum.nil?
+                
+            - if @content.option(:alpha)
+              %dt
+                Sichtbar ab
+              %dd
+                = l @content.alpha_datum unless @content.alpha_datum.nil?
+
+            - if @content.option(:omega)                
+              %dt
+                Sichtbar bis
+              %dd
+                = l @content.omega_datum unless @content.omega_datum.nil?
       
       .form-actions
         .pull-right
@@ -64,5 +68,5 @@
         Sitemap
         
       #sitemap.well.navi
-        %ul.nested_branches
+        %ul.nested_branches.contents
           = sitemap @branches.arrange(:order => :position)

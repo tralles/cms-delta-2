@@ -47,6 +47,16 @@ class UsersController < ApplicationController
   end
   
   
+  def logout
+    current_user.releaseContents
+    
+    session[:user_id] = nil
+    reset_session
+    
+    redirect_to root_path
+  end
+  
+  
   
 private
 

@@ -39,7 +39,11 @@
         %legend
           In folgenden Menüpunkten
         %options
-        
+          #tree.navi
+            = hidden_field_tag 'content[branch_ids][]', ''
+            %ul.nested_branches.contents
+              = content_in_branches @branches.arrange(:order => :position) 
+            
       %br
 
 
@@ -53,7 +57,7 @@
 
     
       .form-actions
-        = f.button :submit
+        = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
         - unless @content.new_record?
           = link_to close_project_content_type_content_path(@project, @content_type, @content), :class => 'btn btn-inverse pull-right', :data => { :confirm => 'Eingaben sind ggf. nicht gespeichert!' } do
             Schließen

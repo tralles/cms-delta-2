@@ -55,8 +55,9 @@
     %legend
       Inhalts-Typen
         
+    = f.association :content_types, :as => :check_boxes, :collection => @project.content_types
       
   .row
     .form-actions
-      = f.button :submit
+      = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
   

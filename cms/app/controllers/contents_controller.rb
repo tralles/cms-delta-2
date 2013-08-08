@@ -5,6 +5,9 @@ class ContentsController < ApplicationController
   # GET /contents
   # GET /contents.json
   def index
+    if params[:branch] && @branch = @project.branches.where('branches.id = ?', params[:branch]).first
+      @contents = @branch.contents
+    end
   end
 
   # GET /contents/1
@@ -35,7 +38,7 @@ class ContentsController < ApplicationController
   # POST /contents
   # POST /contents.json
   def create
-    @content = Content.new(content_params)
+    @content = Content.new(permitted_params.content)
     
     @content.project        = @project
     @content.content_type   = @content_type
@@ -62,13 +65,18 @@ class ContentsController < ApplicationController
   # PATCH/PUT /contents/1.json
   def update
     respond_to do |format|
-      if @content.update(content_params)
+      if @content.update(permitted_params.content)
+      
+        
+        @content.user = nil
+        @content.save
       
         if params[:content_elements][:add]
           params[:content_elements][:add].each do |content_element_type, value|
             @content.content_elements.build(:content_element_type_id => content_element_type, :language => locale, :value => value).save
           end
         end
+
 
         if params[:content_elements][:update]
           params[:content_elements][:update].each do |content_element_id, value|
@@ -77,9 +85,7 @@ class ContentsController < ApplicationController
             ce.save
           end
         end
-      
-        @content.user = nil
-        @content.save
+
       
         format.html { redirect_to project_content_type_content_path(@project, @content_type, @content, :locale => @locale), notice: 'Content was successfully updated.' }
         format.json { head :no_content }
@@ -111,10 +117,9 @@ class ContentsController < ApplicationController
       @content_type = ContentType.find(params[:content_type_id])
       @contents     = @content_type.contents
       @branches     = @project.branches
+      
+      @branch = @project.branches.where('branches.id = ?', params[:branch]).first if params[:branch]
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
-    def content_params
-      params.require(:content).permit(:old_id, :ref_id, :project_id, :content_type_id, :alpha_datum, :omega_datum, :position, :user_id, :status, :content_elements )
-    end
+
 end

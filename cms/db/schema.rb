@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130804183427) do
+ActiveRecord::Schema.define(version: 20130807141330) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -95,6 +95,18 @@ ActiveRecord::Schema.define(version: 20130804183427) do
   add_index "content_elements", ["content_id"], name: "index_content_elements_on_content_id", using: :btree
   add_index "content_elements", ["language"], name: "index_content_elements_on_language", using: :btree
 
+  create_table "content_to_branches", force: true do |t|
+    t.integer  "branch_id"
+    t.integer  "content_id"
+    t.integer  "position"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "content_to_branches", ["branch_id"], name: "index_content_to_branches_on_branch_id", using: :btree
+  add_index "content_to_branches", ["content_id"], name: "index_content_to_branches_on_content_id", using: :btree
+  add_index "content_to_branches", ["position"], name: "index_content_to_branches_on_position", using: :btree
+
   create_table "content_types", force: true do |t|
     t.integer  "project_id"
     t.integer  "ref_id"
@@ -109,6 +121,13 @@ ActiveRecord::Schema.define(version: 20130804183427) do
   add_index "content_types", ["editor"], name: "index_content_types_on_editor", using: :btree
   add_index "content_types", ["project_id"], name: "index_content_types_on_project_id", using: :btree
   add_index "content_types", ["ref_id"], name: "index_content_types_on_ref_id", using: :btree
+
+  create_table "content_types_to_branches", force: true do |t|
+    t.integer  "branch_id"
+    t.integer  "content_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "contents", force: true do |t|
     t.integer  "old_id"
@@ -183,7 +202,7 @@ ActiveRecord::Schema.define(version: 20130804183427) do
   add_index "users_to_permissions", ["project_id"], name: "index_users_to_permissions_on_project_id", using: :btree
   add_index "users_to_permissions", ["user_id"], name: "index_users_to_permissions_on_user_id", using: :btree
 
-  create_table "users_to_projects", id: false, force: true do |t|
+  create_table "users_to_projects", force: true do |t|
     t.integer  "project_id"
     t.integer  "user_id"
     t.datetime "created_at"

@@ -40,9 +40,9 @@
         
       - if @project && !@project.new_record?
         %li
-          = link_to languages_project_path(@project) do
-            %i.icon-flag
-            Sprachen
+          = link_to settings_project_path(@project) do
+            %i.icon-gear
+            Einstellungen
         %li
           = link_to users_project_path(@project) do
             %i.icon-group

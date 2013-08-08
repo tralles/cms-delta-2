@@ -48,6 +48,9 @@ class ProjectsController < ApplicationController
   def update
     respond_to do |format|
       if @project.update(permitted_params.project)
+
+        @project.set_languages( params[:project][:languages] ) if params[:project][:languages]
+
         format.html { redirect_to @project, notice: 'Project was successfully updated.' }
         format.json { head :no_content }
       else
@@ -74,7 +77,7 @@ class ProjectsController < ApplicationController
   
   
   
-  def languages
+  def settings
   end
   
   

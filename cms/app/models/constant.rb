@@ -4,6 +4,8 @@ class Constant < ActiveRecord::Base
   default_scope { order('category ASC, value ASC') }
 
 
+  scope :category, ->(category) { where('constants.category = ?', category) unless category.nil? }
+  
 
   def self.method_missing(name, args = nil)
 

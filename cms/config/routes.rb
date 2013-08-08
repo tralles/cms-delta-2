@@ -36,7 +36,7 @@ Delta2::Application.routes.draw do
 
     
     member do
-      match 'languages', :via => :all
+      match 'settings', :via => :all
       match 'users', :via => :all
     end
   end
@@ -50,6 +50,8 @@ Delta2::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'application#dashboard'
+  
+  get 'logout' => 'users#logout', :as => 'logout'
 
 
 

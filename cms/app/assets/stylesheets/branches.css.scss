@@ -81,6 +81,33 @@
   margin: 1px 0 0 0;
 }
 
+#tree ul li.disabled,
+#sitemap ul li.disabled
+{
+  color: #999;
+}
+
+#tree ul li.enabled,
+#sitemap ul li.enabled
+{
+  color: #000;
+}
 
 
 
+
+
+ul.contents .line.even
+{
+  background: rgba(255, 255, 255, .5);
+}
+
+ul.contents .line.odd
+{
+  background: rgba(255, 255, 255, .25);
+}
+
+ul.contents .line .pull-right
+{
+  margin: 4px 4px 0 0;
+}

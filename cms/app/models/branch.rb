@@ -7,6 +7,16 @@ class Branch < ActiveRecord::Base
   
   has_many :branch_routes, :dependent => :destroy
   accepts_nested_attributes_for :branch_routes, :allow_destroy => true
+
+
+  has_many :cttb, :class_name => "ContentTypesToBranch", :dependent => :destroy
+  has_many :content_types, :through => :cttb
+
+
+  has_many :ctbs, :class_name => "ContentToBranches", :dependent => :destroy
+  has_many :contents, :through => :ctbs
+  
+  
   
   validates_associated :branch_routes
 

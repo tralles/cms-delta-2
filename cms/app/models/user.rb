@@ -13,6 +13,7 @@ class User < ActiveRecord::Base
 
   validates_presence_of :name, :surname, :email
 
+  has_many :contents
 
 
   def username
@@ -21,6 +22,19 @@ class User < ActiveRecord::Base
 
   def admin?
     return admin
+  end
+  
+  
+  
+  
+  
+  
+  def releaseContents
+  
+    self.contents.each do |content|
+      content.user = nil 
+      content.save
+    end
   end
 
 
