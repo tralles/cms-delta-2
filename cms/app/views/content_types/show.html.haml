@@ -25,24 +25,27 @@
                 = @content_type.intern
                 &nbsp;
 
-              %dt
-                Editor
-              %dd
-                = @content_type.editor
-                &nbsp;
+              - unless @content_type.editor.blank?
+                %dt
+                  Editor
+                %dd
+                  = @content_type.editor
+                  &nbsp;
             
-              %dt
-                Ref
-              %dd
-                = @content_type.ref_id
-                &nbsp;
+              - unless @content_type.ref_id.blank?
+                %dt
+                  Ref
+                %dd
+                  = @content_type.ref_id
+                  &nbsp;
                 
             
-              %dt
-                Meta
-              %dd
-                %code
-                  = @content_type.meta
+              - unless @content_type.meta.blank?
+                %dt
+                  Meta
+                %dd
+                  %code
+                    = @content_type.meta
     
           .form-actions
             .btn-group.pull-right
@@ -60,27 +63,30 @@
               Datenfelder
           
             %table.table.table-condensed.table-striped.table-bordered.table-hover
-              %tr
+              %tr 
+                %th{:width => 5}
                 %th Name
                 %th intern
                 %th Typ
                 %th
-              - @content_type.content_element_types.each do |cet|
-                %tr
-                  %td
-                    = cet.name
-                  %td
-                    = cet.intern
-                  %td
-                    = Constant.fields(:id => cet.field_type).name
-                    
-                  %td{ :style => 'width: 50px;' }
-                    .btn-group
-                      = link_to edit_project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :class => 'btn btn-mini btn-success' do
-                        %i.icon-edit
+              %tbody{ :class => 'sortable', :data => { :update => { :url => sort_project_content_type_path(@project, @content_type) } } }
+                - @content_type.content_element_types.each do |cet|
+                  %tr{ :id => "content_element_type_#{cet.id}", :width => '100%' }
+                    %td.handle
+                    %td
+                      = cet.name
+                    %td
+                      = cet.intern
+                    %td
+                      = Constant.fields(:id => cet.field_type).name
                       
-                      = link_to project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
-                        %i.icon-trash
+                    %td{ :style => 'width: 50px;' }
+                      .btn-group
+                        = link_to edit_project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :class => 'btn btn-mini btn-success' do
+                          %i.icon-edit
+                        
+                        = link_to project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                          %i.icon-trash
             
             = link_to new_project_content_type_content_element_type_path(@project, @content_type), :class => 'btn btn-mini btn-primary' do
               %i.icon-plus

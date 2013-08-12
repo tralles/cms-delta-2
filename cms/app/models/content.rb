@@ -29,7 +29,8 @@ class Content < ActiveRecord::Base
 
     repraesentant = ''
     self.content_elements.where('content_elements.language = ?', language).each do |ce|
-      repraesentant = repraesentant + ce.value if ce.content_element_type.mandatory
+      trenner = (repraesentant.empty?) ? '' : ' : '
+      repraesentant = repraesentant + trenner + ce.value if ce.content_element_type.badge
     end
     
     repraesentant

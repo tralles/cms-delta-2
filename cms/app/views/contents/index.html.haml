@@ -30,7 +30,7 @@
       %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
           - if @branch
-            %th{:width => 10}
+            %th{:width => 5}
           
           %th Titel
           - unless @content_type
@@ -77,8 +77,9 @@
       - if @content_type
         = link_to new_project_content_type_content_path(@project, @content_type, params.merge(:branch => @branch)) do 
           %i.icon-plus
-          = @content_type.name
-          Inhalt anlegen
+          %strong
+            = @content_type.name
+          anlegen
       
 
 

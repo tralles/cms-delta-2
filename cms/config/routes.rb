@@ -39,6 +39,9 @@ Delta2::Application.routes.draw do
         end
       end  
 
+      member do 
+        post 'sort'
+      end
     end  
     
 

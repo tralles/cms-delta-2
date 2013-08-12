@@ -61,6 +61,26 @@ class ContentTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  
+  
+  
+  
+  
+  
+  def sort
+    nummer = 1
+    
+    if params[:content_element_type]
+      @content_type = ContentType.find(params[:id])
+
+      params[:content_element_type].each do |cet|
+        @content_type.reorder_content_element_type :cet => cet, :position => nummer
+        nummer = nummer + 1
+      end
+    
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

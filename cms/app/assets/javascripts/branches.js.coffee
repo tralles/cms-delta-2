@@ -21,8 +21,7 @@ jQuery ->
       handle: '.handle'
       opacity: 0.7
       helper: helper
-      forceHelperSize: true
-      forcePlaceholderSize: true
+      placeholder: 'placeholder'
       cursor: 'crosshair'
       items: 'tr'
       axis: 'y'
