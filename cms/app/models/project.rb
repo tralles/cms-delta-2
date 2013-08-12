@@ -10,6 +10,7 @@ class Project < ActiveRecord::Base
   has_many :content_types, :dependent => :destroy
   
   has_many :branches, :dependent => :destroy
+  has_many :contents, :dependent => :destroy
   
   validates_presence_of :name, :description
   

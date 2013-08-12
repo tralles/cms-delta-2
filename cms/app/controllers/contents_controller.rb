@@ -5,9 +5,6 @@ class ContentsController < ApplicationController
   # GET /contents
   # GET /contents.json
   def index
-    if params[:branch] && @branch = @project.branches.where('branches.id = ?', params[:branch]).first
-      @contents = @branch.contents
-    end
   end
 
   # GET /contents/1
@@ -113,12 +110,25 @@ class ContentsController < ApplicationController
     end
   
     def set_project
-      @project      = Project.find(params[:project_id])
-      @content_type = ContentType.find(params[:content_type_id])
-      @contents     = @content_type.contents
-      @branches     = @project.branches
+      @project        = Project.find(params[:project_id])
+      @branches       = @project.branches
+
+      if params[:content_type_id]
+        @content_type = ContentType.find(params[:content_type_id]) 
+        @contents     = @content_type.contents
+        puts 'content_type_id'
+        puts @contents
+      end
       
-      @branch = @project.branches.where('branches.id = ?', params[:branch]).first if params[:branch]
+      if params[:branch]
+        @branch       = @project.branches.where('branches.id = ?', params[:branch]).first 
+        @contents     = (@content_type) ? @branch.contents.where(:content_type => @content_type) : @branch.contents
+        puts 'branch'
+        puts @contents
+      else
+        @contents     = @project.contents
+      end
+      
     end
 
 

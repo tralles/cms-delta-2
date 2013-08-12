@@ -23,6 +23,11 @@
       - if @project.content_types
         %li.nav-header
           Redaktion
+          %li
+            = link_to project_contents_path(@project) do
+              %i.icon-file
+              Alle Inhalte
+
           -  @project.content_types.each do |ct|
             %li
               = link_to project_content_type_contents_path(@project, ct) do

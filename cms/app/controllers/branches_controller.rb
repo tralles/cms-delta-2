@@ -1,6 +1,29 @@
 class BranchesController < ApplicationController
   before_action :set_branch, only: [:show, :edit, :update, :destroy]
   before_action :set_project
+  
+  
+  
+  
+  def sort
+    nummer = 1
+    
+    if params[:content]
+      @branch = Branch.find(params[:id])
+
+      params[:content].each do |contentID|
+        @branch.reorder :content => contentID, :position => nummer
+        nummer = nummer + 1
+      end
+    
+    end
+  end
+
+
+
+
+
+
 
   # GET /branches
   # GET /branches.json

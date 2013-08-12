@@ -16,7 +16,15 @@ Delta2::Application.routes.draw do
     resources :branches do
       resources :branches do
       end  
+      
+      member do 
+        post 'sort'
+      end
     end  
+
+
+    resources :contents do
+    end
 
     resources :content_types do
       resources :content_element_types do

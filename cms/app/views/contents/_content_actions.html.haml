@@ -1,19 +1,19 @@
 - large = false if local_assigns[:large].nil?
-.btn-group
+.btn-group.pull-right
 
   - if content.user && (current_user.admin? || content.user == current_user )
-    = link_to close_project_content_type_content_path(@project, @content_type, content), :class => 'btn btn-inverse btn-mini' do
+    = link_to close_project_content_type_content_path(@project, content.content_type, content), :class => 'btn btn-inverse btn-mini' do
       %i.icon-unlock
       - if large
         Entsperren
 
   - if content.user.nil? || content.user == current_user || current_user.admin?
-    = link_to edit_project_content_type_content_path(@project, @content_type, content, params.merge(:locale => @locale)), :class => 'btn btn-mini btn-success' do
+    = link_to edit_project_content_type_content_path(@project, content.content_type, content, params.merge(:locale => @locale)), :class => 'btn btn-mini btn-success' do
       %i.icon-edit
       - if large
         Bearbeiten
     
-    = link_to project_content_type_content_path(@project, @content_type, content), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+    = link_to project_content_type_content_path(@project, content.content_type, content), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
       %i.icon-trash
       - if large
         Löschen

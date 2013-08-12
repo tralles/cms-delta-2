@@ -13,7 +13,7 @@ class Branch < ActiveRecord::Base
   has_many :content_types, :through => :cttb
 
 
-  has_many :ctbs, :class_name => "ContentToBranches", :dependent => :destroy
+  has_many :ctbs, :class_name => "ContentToBranches", :dependent => :destroy, :order => 'position ASC'
   has_many :contents, :through => :ctbs
   
   
@@ -37,6 +37,16 @@ class Branch < ActiveRecord::Base
     end
   end
   
+  
+  
+  
+  def reorder args = {}
+    
+    ctbs = self.ctbs.where(:content_id => args[:content]).first
+    ctbs.position = args[:position]
+    ctbs.save
+
+  end
   
   
   
