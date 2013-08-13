@@ -16,6 +16,20 @@ class ApplicationController < ActionController::Base
   
   
   
+  def search 
+    @contents = Content.where(:project_id => params[:project_id]).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%")
+    
+    puts @contents
+  
+  end
+  
+  
+  
+  
+  
+  
+  
+  
   # strong_attributes  
   def permitted_params
     @permitted_params ||= PermittedParams.new(params, current_user)

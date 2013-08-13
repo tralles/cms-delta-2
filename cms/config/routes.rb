@@ -63,6 +63,7 @@ Delta2::Application.routes.draw do
   root 'application#dashboard'
   
   get 'logout' => 'users#logout', :as => 'logout'
+  match 'search/:project_id/suggest' => 'application#search', :as => 'search_suggest', :via => :all
 
 
 

@@ -6,13 +6,14 @@
     .span9
 
       %h1
-        Neuer Inhalt
-        %small
-          »
+        Neu:
+        %strong
           = @content_type.name
-
-          = image_tag asset_path("flags/#{@locale}.png")
-          
+          %thin
+            
+            (
+            = image_tag asset_path("flags/#{@locale}.png")
+            )
       
       
       = render 'form'

@@ -9,12 +9,10 @@
         - if @content_type 
           = @content_type.name
         - else
-          Alle Inhalte
-        
-          
-          
+          Alles
+
         - if @branch
-          %small
+          %strong
             %i.icon-double-angle-right
             = @branch.route(@locale).name
         
