@@ -1,43 +1,106 @@
-#debug
-  %fieldset
-    %legend
-      Request
-  
-    %pre
-      = request.protocol
-      = request.host_with_port
-  
-    %pre
-      = request.original_url
-  
-    %pre
-      = params.to_yaml
-  
-  
-  %fieldset
-    %legend
-      Projekt
-    %pre
-      = @project.to_yaml
+
+
+
+.container
+  .row
+    
+    .span12
+      %fieldset
+        %legend
+          Pfad
       
-  
-  %fieldset
-    %legend
-      Branch
-    %pre
-      = @branch.to_yaml
+        %ul.breadcrumb
+          %li 
+            = link_to root_path do
+              = @project.name 
+            %span.divider
+              %i.icon-angle-right
       
-  
-  %fieldset
-    %legend
-      Route
-    %pre
-      = @route.to_yaml
-  
+          = breadcrump @branch
+
+  .row
+    
+    .span12
+      .row
+        .span6
+          %fieldset
+            %legend
+              Main-Navi
+            %ul
+              = menu @project.branches, false
+    
       
+        .span6
+          %fieldset
+            %legend
+              current Sub-Navi
+            %ul
+              = menu @branch.children, true
+              
+  .row
+    
+    .span12
+      %fieldset
+        %legend
+          Contents
+        
+        - @contents.each do |content|
+          - content.content_elements.lang(@locale).each do |ce|
+
+            %strong
+              = ce.content_element_type.name
+            %br
+            = ce.value
+            %br
+            
+
+          %hr        
+      
+          
+- if false
+  %hr
   
-  %fieldset
-    %legend
-      Contents
-    %pre
-      = @contents.to_yaml
+  .container
+  
+    %fieldset
+      %legend
+        Request
+    
+      %pre
+        = request.protocol
+        = request.host_with_port
+    
+      %pre
+        = request.original_url
+    
+      %pre
+        = params.to_yaml
+    
+    
+    %fieldset
+      %legend
+        Projekt
+      %pre
+        = @project.to_yaml
+        
+    
+    %fieldset
+      %legend
+        Branch
+      %pre
+        = @branch.to_yaml
+        
+    
+    %fieldset
+      %legend
+        Route
+      %pre
+        = @route.to_yaml
+    
+        
+    
+    %fieldset
+      %legend
+        Contents
+      %pre
+        = @contents.to_yaml

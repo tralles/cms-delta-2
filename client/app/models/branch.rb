@@ -30,10 +30,15 @@ class Branch < ActiveRecord::Base
     
 
 
-  def route args = {}
 
-    
-  
+  def route language
+    if route = self.branch_routes.where(:language => language).first
+      return route
+    elsif route = self.branch_routes.first
+      return route
+    else
+      return nil?
+    end
   end
   
   

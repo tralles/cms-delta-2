@@ -1,0 +1,70 @@
+
+
+$baseFontSize:          14px;
+$baseLineHeight:        21px;
+
+$baseFontFamily:        'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$altFontFamily:         'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+$headingsFontFamily:    'Source Sans Pro', 'Helvetica Neue', Helvetica, Arial, sans-serif !default;
+
+$headingsFontWeight:    200;    // instead of browser default, bold
+
+$headingsColor:         #000;
+$linkColor:             #3399ff;
+
+@import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,700,200italic');
+
+
+@import "bootstrap";
+@import "bootstrap-responsive";
+
+@import "font-awesome";
+
+
+header
+{
+  margin-bottom: 50px;
+}
+
+a.brand
+{
+  color: #444 !important;
+}
+
+.brand .small
+{
+  font-weight: 100  !important;
+}
+
+.well.navi
+{
+  padding: 0 0 8px 0;
+}
+
+.well.navi .nav-header
+{
+  background: #ddd;
+  color: #333;
+  letter-spacing: 1px;
+  text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
+}
+
+.well.navi .nav-header a:hover
+{
+  background: transparent;
+}
+
+thin
+{
+  font-weight: 100 !important;
+}
+
+.control-group.datetime select
+{
+  width: auto;
+}
+
+
+.typeahead {
+    z-index: 1100;
+}
