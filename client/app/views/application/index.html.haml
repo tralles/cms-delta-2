@@ -1,0 +1,43 @@
+#debug
+  %fieldset
+    %legend
+      Request
+  
+    %pre
+      = request.protocol
+      = request.host_with_port
+  
+    %pre
+      = request.original_url
+  
+    %pre
+      = params.to_yaml
+  
+  
+  %fieldset
+    %legend
+      Projekt
+    %pre
+      = @project.to_yaml
+      
+  
+  %fieldset
+    %legend
+      Branch
+    %pre
+      = @branch.to_yaml
+      
+  
+  %fieldset
+    %legend
+      Route
+    %pre
+      = @route.to_yaml
+  
+      
+  
+  %fieldset
+    %legend
+      Contents
+    %pre
+      = @contents.to_yaml
