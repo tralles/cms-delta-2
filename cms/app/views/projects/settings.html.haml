@@ -12,14 +12,14 @@
         = @project.description
 
 
-      = simple_form_for(@project, html: {class: 'form-horizontal' }) do |f|
 
-        %fieldset
-          %legend
-            %i.icon-flag
-            Internationalisierung
-            
-  
+      %fieldset
+        %legend
+          %i.icon-flag
+          Internationalisierung
+          
+        = simple_form_for(@project, html: {class: 'form-horizontal' }) do |f|
+
           = hidden_field_tag "project[languages][]"
           .row
             .span5
@@ -34,20 +34,31 @@
                       &nbsp;
                       = lng.name
             .span4
-              .alert.info
+              .alert.info                
+                %i.icon-warning-sign.icon-4x.pull-right
                 %strong
                   Achtung
                 %p
-                  Wenn Sie sprachen entfernen, bleiben die Texte in der Sprache bestehen, sind aber nicht mehr bearbeitbar.
-              
-  
+                  Wenn Sie sprachen entfernen, bleiben die Texte in der Sprache bestehen, sind aber nicht mehr bearbeitbar!
+
+          .form-actions
+            = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+            
+        
+        %br
+        %br
+        
         %fieldset
           %legend
             %i.icon-cloud
-            hosts
+            Hosts
+
+          #hosts
+            = render 'hosts/index'
             
-            
-                    
-  
-        .form-actions
-          = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+
+
+          .pull-right
+            = link_to new_project_host_path(@project), :class => 'btn btn-primary btn-small', :remote => true do
+              %i.icon-plus
+              Neuen Host anlegen

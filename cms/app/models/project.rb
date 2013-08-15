@@ -12,6 +12,9 @@ class Project < ActiveRecord::Base
   has_many :branches, :dependent => :destroy
   has_many :contents, :dependent => :destroy
   
+  has_many :hosts, :dependent => :destroy
+  accepts_nested_attributes_for :hosts, :allow_destroy => true
+  
   validates_presence_of :name, :description
   
   

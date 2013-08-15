@@ -1,0 +1,10 @@
+= simple_form_for([@host.project, @host], :remote => true, html: {class: 'form-horizontal' }) do |f|
+  = f.error_notification
+
+  .form-inputs
+    = f.input :protocol
+    = f.input :host
+    = f.input :primary
+
+  .form-actions
+    = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }

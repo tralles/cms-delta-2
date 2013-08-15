@@ -13,6 +13,9 @@ Delta2::Application.routes.draw do
 
 
   resources :projects do
+  
+    resources :hosts
+    
     resources :branches do
       resources :branches do
       end  

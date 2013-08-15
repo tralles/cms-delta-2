@@ -1,0 +1,24 @@
+%div{ :id => "host#{host.id}" }
+  %span
+  - if host.primary
+    %i.icon-check
+  - else
+    %i.icon-check-empty
+
+  %span.muted{ :style => 'margin-left: 15px;' }
+    = host.protocol
+
+  
+  = host.host
+    
+  %span.pull-right
+    .btn-group
+      = link_to edit_project_host_path(host.project, host), :remote => true, :class => 'btn btn-mini btn-success' do
+        %i.icon-edit
+        Bearbeiten
+  
+      = link_to project_host_path(host.project, host), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+        %i.icon-trash
+        Löschen
+
+  %hr
