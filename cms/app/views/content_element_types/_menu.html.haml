@@ -5,14 +5,14 @@
   %ul.nav.nav-list
     %li
       = link_to project_path(@project) do
-        %i.icon-home
+        %i.pull-right.icon-home
         = @project.name
     
     %li.divider
         
     %li
       = link_to project_content_types_path(@project) do
-        %i.icon-th-list
+        %i.pull-right.icon-th-list
         Inhalts Typen
       
         
@@ -20,7 +20,7 @@
       = @content_type.name
     %li
       = link_to new_project_content_type_content_element_type_path(@project, @content_type) do
-        %i.icon-plus
+        %i.pull-right.icon-plus
         Neues Datenfeld
       
     

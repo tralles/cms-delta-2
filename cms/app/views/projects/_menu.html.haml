@@ -8,7 +8,7 @@
   
       %li.nav-header
         = link_to projects_path(locale), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
-          %i.icon-chevron-up
+          %i.pull-right.icon-chevron-up
 
         = @project.name
         
@@ -17,23 +17,30 @@
       
       %li
         = link_to project_branches_path(@project) do
-          %i.icon-code-fork
+          %i.pull-right.icon-code-fork
           Baumstruktur
         
       - if @project.content_types
         %li.nav-header
           Redaktion
-          %li
-            = link_to project_contents_path(@project) do
-              %i.icon-file
-              Alle Inhalte
+        %li
+          = link_to project_contents_path(@project) do
+            %i.pull-right.icon-file
+            Alle Inhalte
 
-          -  @project.content_types.each do |ct|
-            %li
-              = link_to project_content_type_contents_path(@project, ct) do
-                %i.icon-file-text
-                = ct.name
-            
+        -  @project.content_types.each do |ct|
+          %li
+            = link_to project_content_type_contents_path(@project, ct) do
+              %i.pull-right.icon-file-text
+              = ct.name
+          
+      
+      %li.nav-header
+        Design
+      %li
+        = link_to project_documents_path(@project) do
+          %i.pull-right.icon-picture
+          Medienbibliothek
       
     
     
@@ -46,22 +53,22 @@
       - if @project && !@project.new_record?
         %li
           = link_to settings_project_path(@project) do
-            %i.icon-gear
+            %i.pull-right.icon-gear
             Einstellungen
         %li
           = link_to users_project_path(@project) do
-            %i.icon-group
+            %i.pull-right.icon-group
             Benutzer
   
         %li.divider
   
         %li
           = link_to project_content_types_path(@project) do
-            %i.icon-th-list
+            %i.pull-right.icon-th-list
             Inhalts Typen
   
       - else
         %li
           = link_to new_project_path do
-            %i.icon-plus
+            %i.pull-right.icon-plus
             Projekt anlegen

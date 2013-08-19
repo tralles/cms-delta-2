@@ -19,6 +19,8 @@
                   = cet.name
                 .controls
                   = cetform @content, cet
+
+
       %br
         
         
@@ -46,15 +48,6 @@
             
       %br
 
-
-      - unless @content.new_record?
-        %fieldset
-          %legend
-            Dokumente
-          %options
-
-        %br
-
     
       .form-actions
         = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
@@ -64,6 +57,28 @@
         - else
           = link_to project_content_type_contents_path(@project, @content_type), :class => 'btn btn-inverse pull-right', :data => { :confirm => 'Eingaben werden nicht gespeichert!' } do
             Abbrechen
+
+      %br
+
+
+      - unless @content.new_record?
+        %fieldset
+          %legend
+            %i.icon-picture
+            Dokumente
+          %options
+            = render @project.documents
+            
+
+          = render 'documents/button'
+            
+
+        
+        #docpoover{ :style => 'display: none;' }        
+          - @project.documents.each do |document|
+            = render :partial => 'documents/document_popover', :locals => { :document => document } 
+
+
         
         
         

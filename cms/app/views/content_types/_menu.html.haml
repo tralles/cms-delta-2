@@ -6,29 +6,29 @@
   
     %li.nav-header
       = link_to project_path(@project), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
-        %i.icon-chevron-left
+        %i.pull-right.icon-chevron-left
 
       = @project.name
 
         
     %li
       = link_to project_content_types_path(@project) do
-        %i.icon-th-list
+        %i.pull-right.icon-th-list
         Inhalts Typen
         
       
     %li
       = link_to new_project_content_type_path(@project) do
-        %i.icon-plus
+        %i.pull-right.icon-plus
         Neuer Inhalts Typ
       
-    - if @content_type
+    - if @content_type && !@content_type.new_record?
       %li.nav-header
-        %i.icon-file-text-alt
+        %i.pull-right.icon-file-text-alt
         = @content_type.name
       %li
         = link_to new_project_content_type_content_element_type_path(@project, @content_type) do
-          %i.icon-plus
+          %i.pull-right.icon-plus
           Neues Datenfeld
         
       

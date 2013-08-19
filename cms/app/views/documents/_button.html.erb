@@ -1,0 +1,33 @@
+<div id="bootstrapped-fine-uploader"></div>
+<% content_for :scripts do %>
+  <%= javascript_tag do %>
+    function createUploader() 
+    {
+      var uploader = new qq.FineUploader({
+        element: document.getElementById('bootstrapped-fine-uploader'),
+        request: {
+          endpoint: '<%= create_upload_path(@project, @content.class.name, @content.id) %>'
+        },
+        text: {
+          uploadButton: '<div><i class="icon-upload icon-white"></i> Datei hier her ziehen - oder klicken zum Upload</div>'
+        },
+        template: '<div class="qq-uploader ">' +
+                    '<pre class="qq-upload-drop-area"><span>{dragZoneText}</span></pre>' +
+                    '<div class="qq-upload-button btn btn-success" style="width: auto;">{uploadButtonText}</div>' +
+                    '<span class="qq-drop-processing"><span>{dropProcessingText}</span><span class="qq-drop-processing-spinner"></span></span>' +
+                    '<ul class="qq-upload-list" style="margin-top: 10px; text-align: center;"></ul>' +
+                  '</div>',
+        classes: {
+          success: 'alert alert-success',
+          fail: 'alert alert-error'
+        }
+      });
+    }
+
+    $(document).on('ready page:load', function() {
+      
+      createUploader();
+    
+    });
+  <% end %>
+<% end %>

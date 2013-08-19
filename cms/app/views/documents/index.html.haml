@@ -1,0 +1,22 @@
+.container
+  .row
+    .span3
+      = render 'projects/menu'  
+    
+    .span9
+
+      %h1
+        Medienbibliothek
+
+      
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
+        - @documents.each do |document|
+          %tr
+            %td{ :width => 50 }
+              = image_tag document.document.url(:thumb)
+            %td
+              = " #{document.width} x #{document.height} Pixel "
+              %br
+              = number_to_human_size document.document_file_size
+      
+

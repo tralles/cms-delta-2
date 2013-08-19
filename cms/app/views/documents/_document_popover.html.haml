@@ -1,0 +1,8 @@
+.line{ :rel => document.id }
+  .handle
+    = image_tag document.document.url(:thumb)
+    
+  .info
+    = " #{document.width} x #{document.height} Pixel "
+    %br
+    = number_to_human_size document.document_file_size

@@ -16,6 +16,8 @@ Delta2::Application.routes.draw do
   
     resources :hosts
     
+    resources :documents
+    
     resources :branches do
       resources :branches do
       end  
@@ -64,6 +66,9 @@ Delta2::Application.routes.draw do
 
   # You can have the root of your site routed with "root"
   root 'application#dashboard'
+  
+  
+  match '/upload/:project_id/:type/:id/create' => 'documents#create', :as => 'create_upload', :via => :all
   
   get 'logout' => 'users#logout', :as => 'logout'
   match 'search/:project_id/suggest' => 'application#search', :as => 'search_suggest', :via => :all

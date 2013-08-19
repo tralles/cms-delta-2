@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130815072133) do
+ActiveRecord::Schema.define(version: 20130819112710) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -72,6 +72,7 @@ ActiveRecord::Schema.define(version: 20130815072133) do
     t.text     "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "inline_documents"
   end
 
   add_index "content_element_types", ["badge"], name: "index_content_element_types_on_badge", using: :btree
@@ -142,8 +143,21 @@ ActiveRecord::Schema.define(version: 20130815072133) do
     t.datetime "updated_at"
   end
 
+  create_table "documents", force: true do |t|
+    t.integer  "project_id"
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.integer  "width"
+    t.integer  "height"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "hosts", force: true do |t|
     t.integer  "project_id"
+    t.string   "protocol"
     t.string   "host"
     t.boolean  "primary"
     t.datetime "created_at"
@@ -168,6 +182,7 @@ ActiveRecord::Schema.define(version: 20130815072133) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "intern"
   end
 
   add_index "projects", ["project_id"], name: "index_projects_on_project_id", using: :btree

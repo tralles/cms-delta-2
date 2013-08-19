@@ -41,7 +41,7 @@ class PermittedParams < Struct.new(:params, :current_user)
   end
 
   def content_element_type_attributes
-    [:ref_id, :name, :intern, :field_type, :mandatory, :badge, :meta, :position]
+    [:ref_id, :name, :intern, :field_type, :mandatory, :badge, :meta, :position, :inline_documents]
   end
 
 
@@ -86,7 +86,7 @@ class PermittedParams < Struct.new(:params, :current_user)
 
   def project_attributes
     if current_user.admin?
-      [:ref_id, :projects_id, :name, :description, :status]
+      [:ref_id, :projects_id, :intern, :name, :description, :status]
     else
       [:name, :description]
     end
