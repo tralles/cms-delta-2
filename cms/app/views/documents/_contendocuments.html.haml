@@ -1,0 +1,3 @@
+%table.table.table-condensed.table-bordered
+  %tbody.sortable{ :data => { :update => { :url => sort_project_content_documents_path(@project, @content) } } }
+    = render documents

@@ -1,0 +1,32 @@
+.container
+  .row
+    .span3
+      = render 'projects/menu'  
+    
+    .span6
+
+      %h1
+        Medienbibliothek
+        
+      
+      %table.table.table-condensed.table-bordered
+        %tr
+          %td{ :width => 200 }
+            = link_to image_tag( @document.document.url(:preview) ), @document.document.url(:original), :target => '_blank'
+          %td
+            = @document.document_file_name
+            %br
+            
+            = @document.document_content_type
+            %br
+
+            = "#{@document.width} x #{@document.height}"
+            %br
+
+            = number_to_human_size @document.document_file_size
+            
+
+
+    .span3
+      %h1
+        Filtern

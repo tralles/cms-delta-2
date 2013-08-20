@@ -128,7 +128,7 @@ class ContentsController < ApplicationController
         # puts 'branch'
         # puts @contents
       else
-        @contents     = @project.contents
+        @contents     = @project.contents unless @contents
       end
       
     end

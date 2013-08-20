@@ -83,3 +83,14 @@ thin
   border: 1px solid rgba(255, 255, 255, .5);
   box-shadow: 1px 1px 4px rgba(0, 0, 0, .25);
 }
+
+
+
+
+
+
+.ui-dialog *
+{
+  outline: none !important;
+  font-size: 11px !important;
+}

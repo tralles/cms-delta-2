@@ -9,7 +9,6 @@ Delta2::Application.routes.draw do
   
   resources :contents
   
-  
 
 
   resources :projects do
@@ -25,13 +24,21 @@ Delta2::Application.routes.draw do
       member do 
         post 'sort'
       end
-    end  
+    end
+    
 
 
     resources :contents do
       resources :documents do
+
+        member do 
+          get 'assign'
+          get 'remove'
+        end
+        
         collection do 
           post 'sort'
+          match 'search', :via => :all
         end
       end
     end

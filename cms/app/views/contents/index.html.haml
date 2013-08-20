@@ -51,11 +51,13 @@
                 - if content.user
                   %small.muted.pull-right{ :title => l( content.updated_at ) }
                     %i.icon-lock
+                    &nbsp;
                     = content.user.username if content.user
   
                 - unless content.branches.empty?
                   %strong.muted.pull-right
                     %i.icon-sitemap
+                    &nbsp;
                 
               - unless @content_type
                 %td= content.content_type.name

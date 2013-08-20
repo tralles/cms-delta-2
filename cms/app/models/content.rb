@@ -72,9 +72,8 @@ class Content < ActiveRecord::Base
   
     puts "recalulateimg(#{match},#{id},#{width})"
   
-    if (documentable = Documentable.find_by_id(id))
+    if document = Document.where('documents.id = ?', id).first
       if width.present?
-        document = documentable.document
         case document.document_content_type
           when /^image/
 
@@ -103,6 +102,7 @@ class Content < ActiveRecord::Base
 
       end # if width.present?
     else
+      puts 'remove match '
       match = ""    # Fundstelle [img...] kann weg, weil Documentable ist mehr existiert
     end
   

@@ -72,7 +72,7 @@
           %options
             .row
               .span2
-                = link_to '#', :class => 'btn input-block-level btn-large' do
+                = link_to search_project_content_documents_path(@project, @content), :remote => true, :class => 'btn input-block-level btn-large' do
                   %i.icon-search
                   &nbsp;
                   Suchen
@@ -81,9 +81,9 @@
                 = render 'documents/button'
             %hr
             
-            %table.table.table-condensed.table-bordered
-              %tbody.sortable{ :data => { :update => { :url => sort_project_content_documents_path(@project, @content) } } }
-                = render @content.documents
+            #contendocuments
+              = render :partial => 'documents/contendocuments', :locals => { :documents => @content.documents }
+              
             
 
 

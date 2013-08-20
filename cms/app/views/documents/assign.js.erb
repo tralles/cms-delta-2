@@ -1,0 +1,2 @@
+$("#document<%= @document.id %>.fxline").remove()
+$("#contendocuments").html('<%= j( render :partial => 'documents/contendocuments', :locals => { :documents => @content.documents } ) %>')

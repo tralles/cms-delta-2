@@ -43,9 +43,32 @@ class DocumentsController < ApplicationController
   
   
   def index
-    @documents = @project.documents
+    @documents = @project.documents.page(params[:page])
   end
 
+
+  def show
+    @document = Document.find(params[:id])
+  end
+  
+  def search 
+    @documents = @project.documents.search(params[:search])
+    
+    @documents = @documents - @content.documents
+    
+    @documents = Kaminari.paginate_array(@documents).page(params[:page])
+    render :index
+  end
+  
+  def assign
+    @document     = Document.find(params[:id])
+    @document.documentables.build(:project => @project, :documentable => @content).save
+  end
+  
+  def remove 
+    @document     = Document.find(params[:id])
+    @content.documentables.where(:document_id => @document).destroy_all
+  end
 
 
 
@@ -74,6 +97,7 @@ class DocumentsController < ApplicationController
     
     def set_project
       @project = Project.find(params[:project_id])
+      @content = Content.find(params[:content_id]) if params[:content_id]
     end
     
 end

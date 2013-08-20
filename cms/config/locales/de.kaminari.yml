@@ -1,0 +1,10 @@
+de:
+  views:
+    pagination:
+      first: '<i class="icon-double-angle-left"></i>'
+      previous: '<i class="icon-angle-left"></i>'
+
+      
+      next: '<i class="icon-angle-right"></i>'
+      last: '<i class="icon-double-angle-right"></i>'
+      truncate: "..."

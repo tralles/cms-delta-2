@@ -1,0 +1,30 @@
+.navbar
+  .navbar-inner
+    = form_tag search_project_content_documents_path(@project, @content), :remote => true, :class => 'navbar-search pull-left' do 
+      .input-append
+        = text_field_tag :search, params[:search], :class => 'span2'
+        %button.btn 
+          Go
+    
+
+%hr    
+
+%table.table.table-condensed.table-bordered.table-striped
+  - @documents.each do |document|
+    %tr.fxline{ :id => "document#{document.id}" }
+      %td{ :width => 50 }
+        = image_tag document.document.url(:thumb)
+    
+      %td
+        %strong
+          = document.filetype
+        %span.muted
+          = " #{document.width} x #{document.height} Pixel "
+        %br
+        = number_to_human_size document.document_file_size        
+      %td
+        = link_to assign_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-mini' do
+          Übernehmen
+        
+        
+= paginate @documents , :remote => true

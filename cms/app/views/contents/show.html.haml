@@ -27,7 +27,7 @@
             
             
 
-        %dl.dl-horizontal
+        %dl
           - @content.content_elements.lang(@locale).each do |ce|
             %dt
               = ce.content_element_type.name
@@ -64,13 +64,15 @@
       - unless @content.documents.empty?      
         %fieldset
           %legend
+            %i.icon-picture
+            &nbsp;
             Dokumente
 
           %table.table.table-condensed.table-striped.table-bordered.table-hover
             - @content.documents.each do |document|
               %tr
                 %td{ :width => 50 }
-                  = image_tag document.document.url(:thumb)
+                  = link_to image_tag( document.document.url(:thumb) ), [document.project, document]
                 %td
                   %strong
                     = document.filetype

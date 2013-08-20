@@ -57,11 +57,13 @@ class ContentElement < ActiveRecord::Base
     def replaceImage(id, width = false, align = false)
       doc = ''
 
-      if documentable = Documentable.find_by_id(id)
-        document = documentable.document
+      if document = Document.where('documents.id = ?', id).first
+
         case document.document_content_type
           when /\Aimage/
-            alt = documentable.title || ''
+            alt     = ''
+            popup   = document.document.url(:popup)
+
             if width
               url = "/uploads/#{document.project.intern}/documents/#{document.id}/width#{width}/#{File.basename(document.document.path(:original))}"
               # width (gesetzt)
@@ -70,10 +72,10 @@ class ContentElement < ActiveRecord::Base
               width = document.width
             end
             # siehe Client
-            doc = "<img src='#{url}' alt='#{alt}' width='#{width}' #{' class="img'+align+'" ' if align }  >"
+            doc = "<img src=\"#{url}\" alt=\"#{alt}\" width=\"#{width}\" data-popup=\"#{popup}\" #{' class="img'+align+'" ' if align } >"
 
           when /\Aapplication\/pdf\z/
-            alt = documentable.title || '&darr; PDF download'
+            alt = '&darr; PDF download'
 
             doc = "<a title=\"#{alt}\" href=\"#{document.document.url(:original)}\" type=\"application/pdf\"><strong>#{alt}</strong> (#{ number_to_human_size( document.document_file_size) })</a>"              
           else

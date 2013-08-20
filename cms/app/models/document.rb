@@ -10,7 +10,8 @@ class Document < ActiveRecord::Base
       :thumb => ["50x50#", :png],
       :icon => ["100x100#", :png],
       :preview => ["200x200>", :png],
-      :normal => ["640x400>", :png]
+      :normal => ["640x400>", :png],
+      :popup => ["800x600>", :png]
     },
     :convert_options => {
       :all => "-strip -colorspace RGB",
@@ -20,8 +21,15 @@ class Document < ActiveRecord::Base
 
 
 
+
+
     validates_attachment_presence :document
     validates_attachment_content_type :document, :content_type => ['image/jpeg', 'image/png', 'image/gif', 'application/pdf']
+
+
+
+    scope :search, ->(search) { where("document_file_name LIKE ?", "%#{search}%") }
+
 
 
     after_post_process :save_dimensions
