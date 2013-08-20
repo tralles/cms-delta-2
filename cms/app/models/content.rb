@@ -41,23 +41,24 @@ class Content < ActiveRecord::Base
   def proof_bracketcommands
     self.content_elements.each do |ce|
 
-      ce.value = ce.value.gsub(/\[img:(\d+)(?:\:(\d+))(?:\:(left|right))\]/).each do |doc|
-      
-        match,id,width,align = $&,$1,$2,$3
-
-        match = recalulateimg(match,id,width)
+      unless ce.new_record?
+        ce.value = ce.value.gsub(/\[img:(\d+)(?:\:(\d+))(?:\:(left|right))\]/).each do |doc|
+        
+          match,id,width,align = $&,$1,$2,$3
+  
+          match = recalulateimg(match,id,width)
+        end
+        ce.update_column( :value, ce.value ) if ce.value_changed?
+  
+  
+        ce.value = ce.value.gsub(/\[img:(\d+)(?:\:(\d+))\]/).each do |doc|
+        
+          match,id,width = $&,$1,$2
+  
+          match = recalulateimg(match,id,width)
+        end
+        ce.update_column( :value, ce.value ) if ce.value_changed?
       end
-      ce.update_column( :value, ce.value ) if ce.value_changed?
-
-
-      ce.value = ce.value.gsub(/\[img:(\d+)(?:\:(\d+))\]/).each do |doc|
-      
-        match,id,width = $&,$1,$2
-
-        match = recalulateimg(match,id,width)
-      end
-      ce.update_column( :value, ce.value ) if ce.value_changed?
-
 
     end
   end

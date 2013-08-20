@@ -45,7 +45,11 @@ class ContentElement < ActiveRecord::Base
     
       end
       
-      return value.html_safe
+      if self.content_element_type.markdown
+        return Kramdown::Document.new(value, :auto_ids => false).to_html.html_safe
+      else
+        return value.html_safe
+      end
     
     end
     
@@ -71,7 +75,7 @@ class ContentElement < ActiveRecord::Base
           when /\Aapplication\/pdf\z/
             alt = documentable.title || '&darr; PDF download'
 
-            doc = "<a title=\"#{alt}\" href=\"#{document.document.url(:original)}\" type=\"application/pdf\"><strong>#{alt}</strong> | #{ number_to_human_size( document.document_file_size) } </a>"              
+            doc = "<a title=\"#{alt}\" href=\"#{document.document.url(:original)}\" type=\"application/pdf\"><strong>#{alt}</strong> (#{ number_to_human_size( document.document_file_size) })</a>"              
           else
             doc = ''
         end

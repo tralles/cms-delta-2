@@ -39,6 +39,8 @@
 
       %fieldset
         %legend
+          %i.icon-sitemap
+          &nbsp;
           In folgenden Menüpunkten
         %options
           #tree.navi
@@ -65,17 +67,25 @@
         %fieldset
           %legend
             %i.icon-picture
+            &nbsp;
             Dokumente
           %options
             .row
-              .span3
-                %table.table.table-condensed.table-bordered
-                  %tbody.sortable{ :data => { :update => { :url => sort_project_content_documents_path(@project, @content) } } }
-                    = render @content.documents
-            
-              .span3
+              .span2
+                = link_to '#', :class => 'btn input-block-level btn-large' do
+                  %i.icon-search
+                  &nbsp;
+                  Suchen
+                  
+              .span4
                 = render 'documents/button'
+            %hr
             
+            %table.table.table-condensed.table-bordered
+              %tbody.sortable{ :data => { :update => { :url => sort_project_content_documents_path(@project, @content) } } }
+                = render @content.documents
+            
+
 
         - unless @content.documents.empty?
           #docpoover{ :style => 'display: none;' }        
@@ -91,6 +101,7 @@
   
     %fieldset
       %legend
+        %i.icon-sitemap
         Sitemap
 
       #sitemap.navi

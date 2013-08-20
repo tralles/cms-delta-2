@@ -18,12 +18,7 @@
     width: 100%;
 }
 .qq-upload-button {
-    display: block;
-    width: 105px;
-    padding: 7px 0;
-    text-align: center;
     background: #880000;
-    border-bottom: 1px solid #DDD;
     color: #FFF;
 }
 .qq-upload-button-hover {
@@ -68,11 +63,12 @@
     list-style: none;
 }
 .qq-upload-list li {
-    margin: 0;
+    margin: 0 0 5px 0;
     padding: 9px;
     line-height: 15px;
     font-size: 16px;
     background-color: #FFF0BD;
+    overflow: hidden;
 }
 .qq-upload-file, .qq-upload-spinner, .qq-upload-size, .qq-upload-cancel, .qq-upload-retry, .qq-upload-failed-text, .qq-upload-finished, .qq-upload-delete {
     margin-right: 12px;
