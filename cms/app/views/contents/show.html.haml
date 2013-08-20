@@ -7,9 +7,10 @@
 
       %h1
         Inhalt
-        %small
-          »
-          = @content_type.name
+        - if @content_type
+          %small
+            »
+            = @content_type.name
 
       
       
@@ -31,7 +32,7 @@
             %dt
               = ce.content_element_type.name
             %dd
-              = ce.value
+              = ce.html
             
       - if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega)
         %fieldset
@@ -57,6 +58,28 @@
                 Sichtbar bis
               %dd
                 = l @content.omega_datum unless @content.omega_datum.nil?
+      
+      
+
+      - unless @content.documents.empty?      
+        %fieldset
+          %legend
+            Dokumente
+
+          %table.table.table-condensed.table-striped.table-bordered.table-hover
+            - @content.documents.each do |document|
+              %tr
+                %td{ :width => 50 }
+                  = image_tag document.document.url(:thumb)
+                %td
+                  %strong
+                    = document.filetype
+                  %span.muted
+                    = " #{document.width} x #{document.height} Pixel "
+                  %br
+                  = number_to_human_size document.document_file_size
+         
+      
       
       .form-actions
         .pull-right

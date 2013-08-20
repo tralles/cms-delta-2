@@ -18,7 +18,7 @@ private
       self.route = URI::escape self.name
     end
     
-    puts self
+    # puts self
   end
 
 

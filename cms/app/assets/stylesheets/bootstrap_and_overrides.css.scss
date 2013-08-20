@@ -68,3 +68,18 @@ thin
 .typeahead {
     z-index: 1100;
 }
+
+
+.imgleft
+{
+  float: left;
+  margin: 0 15px 15px 0;
+}
+
+.imgright
+{
+  float: right;
+  margin: 0 0 15px 15px;
+  border: 1px solid rgba(255, 255, 255, .5);
+  box-shadow: 1px 1px 4px rgba(0, 0, 0, .25);
+}

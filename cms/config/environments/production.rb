@@ -77,4 +77,10 @@ Delta2::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+  
+  
+  
+
+
+  PAPERCLIP_COMMAND_PATH = "/usr/bin/"
 end

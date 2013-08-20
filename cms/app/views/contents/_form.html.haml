@@ -67,16 +67,20 @@
             %i.icon-picture
             Dokumente
           %options
-            = render @project.documents
+            .row
+              .span3
+                %table.table.table-condensed.table-bordered
+                  %tbody.sortable{ :data => { :update => { :url => sort_project_content_documents_path(@project, @content) } } }
+                    = render @content.documents
+            
+              .span3
+                = render 'documents/button'
             
 
-          = render 'documents/button'
-            
-
-        
-        #docpoover{ :style => 'display: none;' }        
-          - @project.documents.each do |document|
-            = render :partial => 'documents/document_popover', :locals => { :document => document } 
+        - unless @content.documents.empty?
+          #docpoover{ :style => 'display: none;' }        
+            - @content.documents.each do |document|
+              = render :partial => 'documents/document_popover', :locals => { :document => document } 
 
 
         

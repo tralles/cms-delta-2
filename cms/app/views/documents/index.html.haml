@@ -3,7 +3,7 @@
     .span3
       = render 'projects/menu'  
     
-    .span9
+    .span6
 
       %h1
         Medienbibliothek
@@ -15,8 +15,29 @@
             %td{ :width => 50 }
               = image_tag document.document.url(:thumb)
             %td
-              = " #{document.width} x #{document.height} Pixel "
+              %strong
+                = document.filetype
+              %span.muted
+                = " #{document.width} x #{document.height} Pixel "
               %br
               = number_to_human_size document.document_file_size
+              
+                
+            %td
+              - document.documentables.each do |documentable|
+                - if documentable.documentable_type == 'Content'
+                  = link_to documentable.parent.rep(@locale), [documentable.parent.project, documentable.parent]
+                  %br
+                  
+              
+              
       
+            %td{ :width => 65 }
+              - if current_user.admin?
+                = link_to project_document_path(@project, document), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                  %i.icon-trash
+                  Löschen
 
+    .span3
+      %h1
+        Filtern

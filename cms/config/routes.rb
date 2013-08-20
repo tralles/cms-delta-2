@@ -29,6 +29,11 @@ Delta2::Application.routes.draw do
 
 
     resources :contents do
+      resources :documents do
+        collection do 
+          post 'sort'
+        end
+      end
     end
 
     resources :content_types do
@@ -68,7 +73,7 @@ Delta2::Application.routes.draw do
   root 'application#dashboard'
   
   
-  match '/upload/:project_id/:type/:id/create' => 'documents#create', :as => 'create_upload', :via => :all
+  match '/upload/:project_id/:documentable_type/:documentable_id/create' => 'documents#create', :as => 'create_upload', :via => :all
   
   get 'logout' => 'users#logout', :as => 'logout'
   match 'search/:project_id/suggest' => 'application#search', :as => 'search_suggest', :via => :all

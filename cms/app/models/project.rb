@@ -64,9 +64,9 @@ class Project < ActiveRecord::Base
     lng_after = self.languages
     
     if lng_after != lng_before
-      puts 'Langues was changed!'
-      puts lng_before
-      puts lng_after
+      # puts 'Langues was changed!'
+      # puts lng_before
+      # puts lng_after
     end
     
   end

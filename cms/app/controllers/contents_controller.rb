@@ -48,6 +48,7 @@ class ContentsController < ApplicationController
             @content.content_elements.build(:content_element_type_id => content_element_type, :language => @locale, :value => value).save
           end
         end
+        @content.proof_bracketcommands
       
         format.html { redirect_to [@project, @content_type, @content], notice: 'Content was successfully created.' }
         format.json { render action: 'show', status: :created, location: [@project, @content_type, @content] }
@@ -82,7 +83,8 @@ class ContentsController < ApplicationController
             ce.save
           end
         end
-
+        
+        @content.proof_bracketcommands
       
         format.html { redirect_to project_content_type_content_path(@project, @content_type, @content, :locale => @locale), notice: 'Content was successfully updated.' }
         format.json { head :no_content }
@@ -116,15 +118,15 @@ class ContentsController < ApplicationController
       if params[:content_type_id]
         @content_type = ContentType.find(params[:content_type_id]) 
         @contents     = @content_type.contents
-        puts 'content_type_id'
-        puts @contents
+        # puts 'content_type_id'
+        # puts @contents
       end
       
       if params[:branch]
         @branch       = @project.branches.where('branches.id = ?', params[:branch]).first 
         @contents     = (@content_type) ? @branch.contents.where(:content_type => @content_type) : @branch.contents
-        puts 'branch'
-        puts @contents
+        # puts 'branch'
+        # puts @contents
       else
         @contents     = @project.contents
       end

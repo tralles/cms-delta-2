@@ -24,9 +24,31 @@ de:
   
     models:
       user: 'User'
+      branch: 'Menüpunkt'
+      content: 'Inhalt'
+      content_type: 'Inhaltstyp'
+      content_element_type: 'Datenfeld'
 
 
     attributes:
+      constant:
+        category: 'Kategorie'
+        name: 'Name'
+        value: 'Inhalt'
+        art: 'Typ'
+        
+      branch:
+        name: 'Bezeichnung'
+        ref: 'Referenz'
+        hidden: 'Ausgeblendet'
+        unattached: 'Losgelöst'
+
+      branch_route:
+        language: 'Sprache'
+        name: 'Titel'
+        route: 'Route'
+        jump: 'Sprung-Ziel'
+        
       user:
         name: 'Vorname' 
         surname: 'Nachname' 
@@ -34,6 +56,35 @@ de:
         password: 'Passwort'
         password_confirmation: 'Passwort Wiederholung'
         remember_me: 'Angemeldet bleiben'
+      
+      content_type: 
+        name: 'Name'
+        intern: 'Intern'
+        editor: 'Editor'
+        meta: 'Meta'
+        ref: 'Referenz'
+      
+      content_element_type: 
+        name: 'Name'
+        intern: 'Intern'
+        field_type: 'Feld-Typ'
+        mandatory: 'Pflichtfeld'
+        badge: 'Repräsentant'
+        inline_documents: 'Enthält Dokumente'
+        meta: 'Meta'
+        ref: 'Referenz'
+
+      host:
+        protocoll: 'Protokoll' 
+        host: 'Domain-Name' 
+        primary: 'Primär-Host' 
+
+      project: 
+        name: 'Name'
+        description: 'Beschreibung'
+        intern: 'Intern'
+        status: 'Status'
+        ref: 'Referenz'
         
   
     errors:

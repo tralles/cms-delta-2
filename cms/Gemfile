@@ -79,5 +79,5 @@ gem 'acts_as_list' # reihenfolge
 gem 'cancan'
 
 
-
+gem 'cocaine'
 gem 'paperclip'

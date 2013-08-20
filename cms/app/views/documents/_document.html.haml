@@ -1,12 +1,14 @@
-.row
-  .span1
-    = image_tag document.document.url(:preview), :class => 'img-polaroid'
-    
-  .span2
-    = " #{document.width} x #{document.height} Pixel "
+%tr{ :id => "document_#{document.id}", :width => '100%' }
+  %td.handle
+
+  %td{ :width => 50 }
+    = image_tag document.document.url(:thumb)
+
+  %td
+    %strong
+      = document.filetype
+    %span.muted
+      = " #{document.width} x #{document.height} Pixel "
     %br
     = number_to_human_size document.document_file_size
-  .span3
-    
-    
-%hr
+
