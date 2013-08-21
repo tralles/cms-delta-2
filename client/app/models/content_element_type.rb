@@ -20,12 +20,16 @@ class ContentElementType < ActiveRecord::Base
   def method_missing(name, args = nil)
     ausgabe = nil 
 
-    meta = YAML::load(self.meta)
-
-    if meta && meta.send(name.to_sym)
-      ausgabe = meta.send(name.to_sym)
-    else
-      ausgabe = 2 if name == 'rows'
+    begin
+      meta = YAML::load(self.meta)
+  
+      if meta && meta.send(name.to_sym)
+        ausgabe = meta.send(name.to_sym)
+      else
+        ausgabe = 2 if name == 'rows'
+        ausgabe = false if name == 'markdown'
+      end
+    rescue 
     end
       
     return ausgabe

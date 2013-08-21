@@ -17,6 +17,8 @@ class Content < ActiveRecord::Base
   has_many :branches, :through => :ctbs
 
 
+  has_many :documentables, :as => :documentable, :dependent => :destroy
+  has_many :documents, :through => :documentables
 
 
   def value content_element_type, language
@@ -25,7 +27,102 @@ class Content < ActiveRecord::Base
 
 
 
-  def rep language
+
+
+
+
+
+
+
+
+
+
+
+  def proof_bracketcommands
+    self.content_elements.each do |ce|
+
+      unless ce.new_record?
+        ce.value = ce.value.gsub(/\[img:(\d+)(?:\:(\d+))(?:\:(left|right))\]/).each do |doc|
+        
+          match,id,width,align = $&,$1,$2,$3
+  
+          match = recalulateimg(match,id,width)
+        end
+        ce.update_column( :value, ce.value ) if ce.value_changed?
+  
+  
+        ce.value = ce.value.gsub(/\[img:(\d+)(?:\:(\d+))\]/).each do |doc|
+        
+          match,id,width = $&,$1,$2
+  
+          match = recalulateimg(match,id,width)
+        end
+        ce.update_column( :value, ce.value ) if ce.value_changed?
+      end
+
+    end
+  end
+  # http://jimneath.org/2010/01/04/cryptic-ruby-global-variables-and-their-meanings.html
+
+
+
+
+
+  def recalulateimg(match,id,width)
+  
+    puts "recalulateimg(#{match},#{id},#{width})"
+  
+    if document = Document.where('documents.id = ?', id).first
+      if width.present?
+        case document.document_content_type
+          when /^image/
+
+            unless File.exists?(document.document.path("width#{width}"))
+
+              dst_dir_name = "#{Rails.root}/public/uploads/#{document.project.intern}/documents/#{document.id}/width#{width}/"
+              FileUtils.mkdir_p( dst_dir_name )
+
+              src_file_name = document.document.path(:original)
+              dst_file_name = "#{dst_dir_name}#{File.basename(src_file_name)}"
+
+
+              command_line = Cocaine::CommandLine.new( "#{PAPERCLIP_COMMAND_PATH}convert", "#{src_file_name} -resize #{width} #{dst_file_name}" )
+
+              begin
+                command_line.run
+              rescue Cocaine::ExitStatusError => e
+                puts e.message # => "Command 'git commit' returned 1. Expected 0"
+              end
+
+              # Quelle: https://github.com/thoughtbot/cocaine
+
+            end
+          # end "when /^image/"
+        end
+
+      end # if width.present?
+    else
+      puts 'remove match '
+      match = ""    # Fundstelle [img...] kann weg, weil Documentable ist mehr existiert
+    end
+  
+    return match
+  
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+  def rep(language)
 
     repraesentant = ''
     self.content_elements.where('content_elements.language = ?', language).each do |ce|
@@ -63,6 +160,22 @@ class Content < ActiveRecord::Base
     return ausgabe
 
   end
+  
+  
+  
+  
+  
+  
+  
+  
+  def reorder_documents(args = {})
+    
+    documentable = self.documentables.where(:document_id => args[:document]).first
+    documentable.position = args[:position]
+    documentable.save
+
+  end
+  
   
   
   def method_missing(name, args = nil)

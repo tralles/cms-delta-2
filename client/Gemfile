@@ -77,3 +77,15 @@ gem 'acts_as_list' # reihenfolge
 
 
 gem 'cancan'
+
+
+gem 'cocaine'
+gem 'paperclip'
+
+
+gem 'kaminari'
+gem 'kaminari-bootstrap'
+
+
+
+gem 'dalli'
