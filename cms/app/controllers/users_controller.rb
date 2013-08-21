@@ -50,6 +50,8 @@ class UsersController < ApplicationController
   def logout
     current_user.releaseContents
     
+    sign_out current_user
+    
     session[:user_id] = nil
     reset_session
     
