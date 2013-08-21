@@ -88,8 +88,9 @@
                         = link_to project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
                           %i.icon-trash
             
-            = link_to new_project_content_type_content_element_type_path(@project, @content_type), :class => 'btn btn-mini btn-primary' do
+            = link_to new_project_content_type_content_element_type_path(@project, @content_type), :class => 'btn btn-mini btn-primary pull-right' do
               %i.icon-plus
+              &nbsp;
               Neues Datenfeld
                     
               

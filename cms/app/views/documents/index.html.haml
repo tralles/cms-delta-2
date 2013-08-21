@@ -29,14 +29,22 @@
                   = link_to documentable.parent.rep(@locale), [documentable.parent.project, documentable.parent]
                   %br
                   
-            %td{ :width => 65 }
+            %td{ :width => 100 }
               - if current_user.admin? && document.documentables.empty?
                 = link_to project_document_path(@project, document), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
                   %i.icon-trash
-                  Löschen
+                  &nbsp;
+                  Datei Löschen
+              - else
+                %small.muted.btn.btn-mini{ :disabled => 'disabled' }
+                  %i.icon-ban-circle
+                  &nbsp;
+                  in verwendung
+              
 
       = paginate @documents
 
     .span3
       %h1
         Filtern
+      = render 'documents/search'  

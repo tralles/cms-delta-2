@@ -58,7 +58,7 @@
             
 
 
-          .pull-right
-            = link_to new_project_host_path(@project), :class => 'btn btn-primary btn-small', :remote => true do
-              %i.icon-plus
-              Neuen Host anlegen
+          = link_to new_project_host_path(@project), :class => 'btn btn-primary btn-mini pull-right', :remote => true do
+            %i.icon-plus
+            &nbsp;
+            Neuen Host anlegen

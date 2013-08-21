@@ -5,6 +5,7 @@ class BranchRoute < ActiveRecord::Base
   validates_presence_of :name
   
   before_save :build_path
+  before_save :normalize_route
 
 
 
@@ -17,8 +18,20 @@ private
     else
       self.route = URI::escape self.name
     end
+  end
+  
+  
+  
+  
+  def normalize_route
+  
+    path = self.route
+    ausgabe = ''
+    path.split('/').each do |chunk|
+      ausgabe = ausgabe + '/' + chunk unless chunk.blank?
+    end
     
-    # puts self
+    self.route = ausgabe
   end
 
 

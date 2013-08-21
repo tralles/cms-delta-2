@@ -54,9 +54,13 @@ class DocumentsController < ApplicationController
   def search 
     @documents = @project.documents.search(params[:search])
     
-    @documents = @documents - @content.documents
+    if @content
+      @documents = @documents - @content.documents
+      @documents = Kaminari.paginate_array(@documents).page(params[:page]).per(10)
+    else
+      @documents = Kaminari.paginate_array(@documents).page(params[:page])
+    end
     
-    @documents = Kaminari.paginate_array(@documents).page(params[:page])
     render :index
   end
   

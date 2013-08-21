@@ -50,7 +50,7 @@ class ContentsController < ApplicationController
         end
         @content.proof_bracketcommands
       
-        format.html { redirect_to [@project, @content_type, @content], notice: 'Content was successfully created.' }
+        format.html { redirect_to project_content_type_content_path(@project, @content_type, @content, :locale => @locale), notice: 'Content was successfully created.' }
         format.json { render action: 'show', status: :created, location: [@project, @content_type, @content] }
       else
         format.html { render action: 'new' }

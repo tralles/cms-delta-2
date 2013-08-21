@@ -15,7 +15,11 @@ Delta2::Application.routes.draw do
   
     resources :hosts
     
-    resources :documents
+    resources :documents do
+      collection do 
+        match 'search', :via => :all
+      end
+    end
     
     resources :branches do
       resources :branches do

@@ -22,6 +22,7 @@ class Branch < ActiveRecord::Base
 
   
   before_destroy :cleanup
+  after_save :renewpath
   
   
   
@@ -54,6 +55,12 @@ private
 
   def cleanup
   
+  end
+  
+  def renewpath
+    self.branch_routes.each do |route|
+      route.save
+    end
   end
   
   

@@ -72,11 +72,11 @@
 
                 
       
-      %br
-      
       - if @content_type
-        = link_to new_project_content_type_content_path(@project, @content_type, params.merge(:branch => @branch)) do 
+        = link_to new_project_content_type_content_path(@project, @content_type, params.merge(:branch => @branch)), :class => 'btn btn-mini btn-primary pull-right' do 
           %i.icon-plus
+          &nbsp;
+          Neuen
           %strong
             = @content_type.name
           anlegen

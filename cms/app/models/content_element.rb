@@ -57,6 +57,9 @@ class ContentElement < ActiveRecord::Base
     def replaceImage(id, width = false, align = false)
       doc = ''
 
+      width = false if width == 0 || width == '0'
+      align = false if align == 'none'
+
       if document = Document.where('documents.id = ?', id).first
 
         case document.document_content_type
