@@ -101,7 +101,7 @@ class PermittedParams < Struct.new(:params, :current_user)
 
   def user_attributes
     if current_user.admin?
-      [:name, :surname, :email, :password, :password_confirmation, :remember_me, :admin]
+      [:name, :surname, :email, :password, :password_confirmation, :remember_me, :admin, :project_ids => []]
     else
       [:name, :surname, :email, :password, :password_confirmation, :remember_me]
     end

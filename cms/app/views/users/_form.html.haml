@@ -18,6 +18,18 @@
 
     - if current_user.admin?          
       = f.input :admin         if permitted_params.user_attributes.include?(:admin)
+        
+
+      %label_tag.control-label
+        Projekte
+      .controls
+        - Project.all.each do |project|
+          
+          %label.checkbox
+            = check_box_tag :projects_ids, project.id, @user.projects.include?(project), :name => 'user[project_ids][]'
+            = project.name
+
+      
             
 
 

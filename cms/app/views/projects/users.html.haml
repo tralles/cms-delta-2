@@ -16,3 +16,20 @@
       %fieldset
         %legend
           Benutzerverwaltung
+        
+        %table.table.table-condensed.table-striped.table-bordered
+          %tr
+            %th{ :colspan => 2 } User
+            %th Rolle
+            %th Individuelle Berechtigungen
+
+          - @project.users.each do |user|
+            %tr
+              %td
+                = link_to user.username, user
+              %td.muted
+                = user.email
+                
+              %td
+                = (user.admin?) ? 'Admin' : 'Redakteur'
+              %td

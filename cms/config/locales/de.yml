@@ -20,6 +20,8 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 de:
+
+
   activerecord:
   
     models:
@@ -109,7 +111,18 @@ de:
    
    
    
-   
+  ransack:
+    asc: "Aufsteigend"
+    desc: "Absteigend"
+    or: "oder"   
+    predicates:
+      cont: "enthält"
+      not_cont: "enthält nicht"
+      start: "beginnt mit"
+      end: "endet mit"
+      gt: "größer als"
+      lt: "kleiner als"   
+      eq: "kleiner als"   
    
    
    

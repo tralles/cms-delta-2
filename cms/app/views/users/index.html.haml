@@ -4,7 +4,7 @@
       = render 'menu'  
 
       
-    .span9
+    .span6
       %h1
         Benutzer
         
@@ -13,14 +13,20 @@
           %th
             Name
           %th
-            email
+            Projekt-Zuweisung
           %th{width: 100}
             Action
       
         - @users.each do |user|
           %tr
-            %td= link_to user.name, user
-            %td= user.email
+            %td= link_to user.username, user
+            %td
+              - user.projects.each do |project|
+                = link_to project.name, project
+                %br
+                
+              
+            
             %td
               .btn-group
                 = link_to edit_user_path(user), :class => 'btn btn-mini btn-success' do
@@ -30,4 +36,29 @@
                 = link_to user_path(user), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
                   %i.icon-trash
                   Löschen
-          
+
+    .span3
+      %h1 Filter
+
+
+
+      = search_form_for @search do |f|
+        = f.label :name_or_surname_cont
+        = f.text_field :name_or_surname_cont
+
+        %br
+        %br
+        
+        = f.label :email_cont
+        = f.text_field :email_cont
+
+        %br
+        %br
+        
+        = f.label :project
+        = f.select :projects_id_eq, options_from_collection_for_select(Project.all, "id", "name", @search.projects_id_eq) 
+
+
+        %hr
+        
+        = f.submit 'Filtern', :class => 'btn'

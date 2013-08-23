@@ -10,7 +10,7 @@ class ContentElement < ActiveRecord::Base
   scope :lang, ->(lang) { where(:language => lang) unless lang.nil? }
   
   
-  validates_presence_of :value
+#  validates_presence_of :value
 
 
 
