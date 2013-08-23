@@ -20,7 +20,7 @@ module BranchesHelper
 
 
 
-  def menu( branches, nesting = true )
+  def menu( branches, nesting = true, showactive = true )
 
     branches = branches.arrange(:order => :position)
 
@@ -29,7 +29,9 @@ module BranchesHelper
 
     branches.each do |branch, sub_branches|
 
-      html << '<li>'
+      css = (showactive) ? ((branch == @branch) ? 'active' : '') : ''
+
+      html << "<li class='#{css}'>"
 
         route = branch.route(@language)
         html << link_to(route.name, "/#{@language}#{route.route}")
@@ -38,7 +40,7 @@ module BranchesHelper
         if nesting
           unless branch.children.empty?
             html << '<ul class="level">'
-            html << menu(branch.children, nesting)
+            html << menu(branch.children, nesting, showactive)
             html << '</ul>'
           end
         end

@@ -1,106 +1,35 @@
 
 
+.navbar-wrapper
+  #navigation.navbar.navbar-static-top.navbar-inverse
+    .navbar-inner
+      .container
+        %button.btn.btn-navbar{ :type => "button", :data => { :toggle => "collapse", :target => ".nav-collapse" } }
+          %span.icon-bar
+          %span.icon-bar
+          %span.icon-bar
+        = link_to '/', :class=> "brand" do
+          = @project.name
+        .nav-collapse.collapse
+          %ul.nav.pull-right.page
+            %li.dropdown
+              = link_to '#', :class => "dropdown-toggle", :data => { :toggle => "dropdown" } do
+                Home
+                %b.caret
+              
+              %ul.dropdown-menu
+                = menu @project.branches, false, false
+     
+            = menu @branch.path.first.children, true
+
+
+%header.page-title
+  .container
+    %h1
+      = @branch.route(@language).name
 
 .container
   .row
-    
-    .span12
-      %fieldset
-        %legend
-          Pfad
-      
-        %ul.breadcrumb
-          %li 
-            = link_to root_path do
-              = @project.name 
-            %span.divider
-              %i.icon-angle-right
-      
-          = breadcrump @branch
+    - @contents.each do |content|
+      = render :partial => "application/templates/#{content.content_type.intern}", :locals => { :content => content } rescue render :partial => 'application/templates/fallback', :locals => { :content => content } 
 
-  .row
-    
-    .span12
-      .row
-        .span6
-          %fieldset
-            %legend
-              Main-Navi
-            %ul
-              = menu @project.branches, false
-    
-      
-        .span6
-          %fieldset
-            %legend
-              current Sub-Navi
-            %ul
-              = menu @branch.children, true
-              
-  .row
-    
-    .span12
-      %fieldset
-        %legend
-          Contents
-        
-        - @contents.each do |content|
-          - content.content_elements.lang(@locale).each do |ce|
-
-            %strong
-              = ce.content_element_type.name
-            %br
-            = ce.html
-            %br
-            
-
-          %hr        
-      
-          
-- if false
-  %hr
-  
-  .container
-  
-    %fieldset
-      %legend
-        Request
-    
-      %pre
-        = request.protocol
-        = request.host_with_port
-    
-      %pre
-        = request.original_url
-    
-      %pre
-        = params.to_yaml
-    
-    
-    %fieldset
-      %legend
-        Projekt
-      %pre
-        = @project.to_yaml
-        
-    
-    %fieldset
-      %legend
-        Branch
-      %pre
-        = @branch.to_yaml
-        
-    
-    %fieldset
-      %legend
-        Route
-      %pre
-        = @route.to_yaml
-    
-        
-    
-    %fieldset
-      %legend
-        Contents
-      %pre
-        = @contents.to_yaml
