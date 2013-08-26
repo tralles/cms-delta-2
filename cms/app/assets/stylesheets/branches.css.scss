@@ -61,6 +61,13 @@ td.handle
   background: rgba(0, 0, 255, .1) !important;
 }
 
+td.handledisabled
+{
+  width: 10px;
+  padding: 0px;
+  background: rgba(150, 150, 150, .1) !important;
+}
+
 
 #sitemap ul
 {
