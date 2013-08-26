@@ -1,0 +1,11 @@
+- if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega)
+  %fieldset
+    %legend
+      Metadaten
+        
+    %options
+      .form-inputs
+        = f.input :ref_id                                 if @content.option 'ref'
+        = f.input :alpha_datum, :include_blank => true    if @content.option 'alpha'
+        = f.input :omega_datum, :include_blank => true    if @content.option 'omega'
+  %br

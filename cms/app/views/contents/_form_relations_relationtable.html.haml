@@ -1,0 +1,12 @@
+%table.table.table-bordered.table-striped{ :id => content_relation_type.intern }
+  %tr
+    %th
+    %th
+    %th
+  
+  - @content.relations(content_relation_type.intern).each do |relative|
+    %tr
+      %td.handle
+      %td
+        = relative.relative.rep(@locale)
+      %td

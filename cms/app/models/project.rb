@@ -13,6 +13,8 @@ class Project < ActiveRecord::Base
   has_many :branches, :dependent => :destroy
   has_many :contents, :dependent => :destroy
   
+  has_many :content_relation_types, :dependent => :destroy
+  
   has_many :hosts, :dependent => :destroy
   accepts_nested_attributes_for :hosts, :allow_destroy => true
   
@@ -26,7 +28,6 @@ class Project < ActiveRecord::Base
   
   
   # Virtual attributes
-  
   def languages
     languages = []
     
@@ -35,6 +36,13 @@ class Project < ActiveRecord::Base
     end
     
     languages
+  end
+
+
+  def base 
+    base = self.hosts.primary
+    
+    return "#{base.protocol}#{base.host}"
   end
   
   
@@ -69,6 +77,22 @@ class Project < ActiveRecord::Base
       # puts lng_after
     end
     
+  end
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  def reorder_content_relation_type args = {}
+  
+    if crt = self.content_relation_types.where(:id => args.crt).first
+      crt.position = args.position
+      crt.save
+    end
   end
 
 end

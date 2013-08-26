@@ -21,6 +21,11 @@ class Content < ActiveRecord::Base
   has_many :documents, :through => :documentables
 
 
+  has_many :content_relations, :dependent => :destroy
+  has_many :inverse_content_relations, :class_name => "ContentRelation", :foreign_key => "relative_id", :dependent => :destroy
+#  has_many :owned_content_relations, :class_name => "ContentRelation", :foreign_key => "owner_id", :dependent => :destroy
+
+
   def value content_element_type, language
     self.content_elements.where('content_elements.content_element_type_id = ?', content_element_type).where('content_elements.language = ?', language).first
   end
@@ -114,6 +119,15 @@ class Content < ActiveRecord::Base
 
 
 
+  def relations(crt)
+    ausgabe = []
+
+    self.content_relations.by_content_relation_type(crt).each do |cr|
+      ausgabe << cr
+    end
+    
+    return ausgabe
+  end
 
 
 
@@ -179,7 +193,7 @@ class Content < ActiveRecord::Base
   
   
   def method_missing(name, args = nil)
-    ausgabe = nil 
+    ausgabe = nil
 
     ce = self.content_elements.includes(:content_element_type).where('content_element_types.intern = ?', name).references(:content_element_types)
 

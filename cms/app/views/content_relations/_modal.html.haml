@@ -1,0 +1,26 @@
+#contentrelationwindow.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel
+      = raw "<strong>#{@content_relation_type.name}</strong> | #{ excerpt @content.rep(@locale), '', :radius => 20 } "
+
+  = simple_form_for( [@project, @content, @content_relation_type, @content_relation], :remote => true, html: {class: 'form-horizontal' }) do |f|
+    .modal-body
+      = f.error_notification
+
+      - if @locale
+        = hidden_field_tag :locale, @locale
+
+      .form-inputs
+        - @content_type.content_element_types.each do |cet|
+          .control-group
+            %label.control-label
+              = cet.name
+            .controls
+              = cetform @content, cet
+
+    .modal-footer
+      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' } 
+        
+      
+      %button.btn.btn-inverse{"aria-hidden" => "true", "data-dismiss" => "modal"} Abbrehen

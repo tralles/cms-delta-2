@@ -1,9 +1,6 @@
 = simple_form_for(@constant, html: {class: 'form-horizontal' }) do |f|
   = f.error_notification
     
-  = @constant.inspect 
-  
-
   .form-inputs
     = f.input :category
     = f.input :name

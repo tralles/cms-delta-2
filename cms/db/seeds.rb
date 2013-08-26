@@ -8,9 +8,16 @@
 
 admin = User.create!({:email => "tralles@qb-it.de", :name => 'Marco', :surname => 'Tralles', :admin => true, :password => "initialp4ssword", :password_confirmation => "initialp4ssword" })
 
-languages = Constant.create!({ :category => 'languages', :name => 'Deutsch', :value => 'de', :art => 'String' })
-languages = Constant.create!({ :category => 'languages', :name => 'Englisch', :value => 'en', :art => 'String' })
+languages = Constant.create!({ :category => 'languages', :name => 'Deutsch', :value => 'de', :art => 'String', :sys => true })
+languages = Constant.create!({ :category => 'languages', :name => 'Englisch', :value => 'en', :art => 'String', :sys => false })
 
-fields = Constant.create!({ :category => 'fields', :name => 'Text : Einzeilig', :value => 1, :art => 'String' })
-fields = Constant.create!({ :category => 'fields', :name => 'Text : Mehrzeilig', :value => 2, :art => 'String' })
+fields = Constant.create!({ :category => 'fields', :name => 'Text : Einzeilig', :value => 'textfield', :art => 'String', :sys => true })
+fields = Constant.create!({ :category => 'fields', :name => 'Text : Mehrzeilig', :value => 'textarea', :art => 'Text', :sys => true })
+
+fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Datum', :value => 'date', :art => 'Date', :sys => true })
+fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Uhrzeit', :value => 'time', :art => 'Text', :sys => true })
+
+fields = Constant.create!({ :category => 'fields', :name => 'Ziel : Inhalts Typ (matches intern)', :value => 'ContentType', :art => 'reference', :sys => true })
+
+fields = Constant.create!({ :category => 'relations', :name => 'n:m', :value => 'n:m', :art => 'relation', :sys => true })
 

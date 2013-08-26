@@ -30,7 +30,7 @@ class PermittedParams < Struct.new(:params, :current_user)
   end
 
   def content_type_attributes
-    [:ref_id, :name, :intern, :editor, :meta]
+    [:ref_id, :name, :intern, :editor, :meta, :direct_edit]
   end
   
   
@@ -42,6 +42,17 @@ class PermittedParams < Struct.new(:params, :current_user)
 
   def content_element_type_attributes
     [:ref_id, :name, :intern, :field_type, :mandatory, :badge, :meta, :position, :inline_documents]
+  end
+  
+  
+  
+  # ContentRelationType
+  def content_relation_type
+    params.require(:content_relation_type).permit(*content_relation_type_attributes)
+  end
+
+  def content_relation_type_attributes
+    [:name, :intern, :content_type_id, :relative_type_id, :relation_type]
   end
 
 

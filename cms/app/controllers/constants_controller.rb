@@ -28,7 +28,7 @@ class ConstantsController < ApplicationController
 
     respond_to do |format|
       if @constant.save
-        format.html { redirect_to constant_path(@constant), notice: 'Constant was successfully created.' }
+        format.html { redirect_to constants_path, notice: 'Constant was successfully created.' }
         format.json { render action: 'show', status: :created, location: @constant }
       else
         format.html { render action: 'new' }
@@ -42,7 +42,7 @@ class ConstantsController < ApplicationController
   def update
     respond_to do |format|
       if @constant.update(constant_params)
-        format.html { redirect_to constant_path(@constant), notice: 'Constant was successfully updated.' }
+        format.html { redirect_to constants_path, notice: 'Constant was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

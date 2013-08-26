@@ -78,7 +78,7 @@
                     %td
                       = cet.intern
                     %td
-                      = Constant.fields(:id => cet.field_type).name
+                      = Constant.fields(:id => cet.field_type).name unless Constant.fields(:id => cet.field_type).nil?
                       
                     %td{ :style => 'width: 50px;' }
                       .btn-group

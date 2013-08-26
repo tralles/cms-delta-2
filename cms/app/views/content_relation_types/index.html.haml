@@ -1,0 +1,39 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+
+      
+    .span9
+      %h1
+        Inhalts Typen Relationen
+        
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
+        %tr
+          %th{:width => 5}
+          %th Name
+          %th Intern
+          %th Content Type
+          %th Relation
+          %th Content Type
+          %th
+
+        %tbody{ :class => 'sortable', :data => { :update => { :url => sort_project_content_relation_types_path(@project) } } }
+          - @content_relation_types.each do |content_relation_type|
+            %tr{ :id => "content_relation_type_#{content_relation_type.id}", :width => '100%' }     
+              %td.handle   
+              %td= content_relation_type.name
+              %td= content_relation_type.intern
+              %td= content_relation_type.content_type.name
+              %td= content_relation_type.relation_type
+              %td= content_relation_type.relative_type.name
+  
+              %td{ :width => 100 }
+                .btn-group
+                  = link_to edit_project_content_relation_type_path(content_relation_type.project, content_relation_type), :class => 'btn btn-mini btn-success' do
+                    %i.icon-edit
+                    Bearbeiten
+  
+                  = link_to [content_relation_type.project, content_relation_type], :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                    %i.icon-trash
+                    Löschen

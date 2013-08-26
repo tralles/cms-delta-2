@@ -1,0 +1,12 @@
+%fieldset
+  %legend
+    %i.icon-sitemap
+    &nbsp;
+    In folgenden Menüpunkten
+  %options
+    #tree.navi
+      = hidden_field_tag 'content[branch_ids][]', ''
+      %ul.nested_branches.contents
+        = content_in_branches @branches.arrange(:order => :position) 
+      
+%br

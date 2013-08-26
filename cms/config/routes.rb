@@ -1,5 +1,6 @@
 Delta2::Application.routes.draw do
 
+
   devise_for :users # , :path => "/", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'join' }
 
   resources :users
@@ -7,7 +8,6 @@ Delta2::Application.routes.draw do
   resources :permissions
     
   
-  resources :contents
   
 
 
@@ -20,7 +20,7 @@ Delta2::Application.routes.draw do
         match 'search', :via => :all
       end
     end
-    
+
     resources :branches do
       resources :branches do
       end  
@@ -29,8 +29,6 @@ Delta2::Application.routes.draw do
         post 'sort'
       end
     end
-    
-
 
     resources :contents do
       resources :documents do
@@ -44,6 +42,19 @@ Delta2::Application.routes.draw do
           post 'sort'
           match 'search', :via => :all
         end
+      end
+      
+      resources :content_relation_types do
+        resources :content_relations do 
+          resources :contents
+        end
+      end
+    end
+
+    resources :content_relation_types do
+      
+      collection do 
+        post 'sort'
       end
     end
 
@@ -64,9 +75,7 @@ Delta2::Application.routes.draw do
         post 'sort'
       end
     end  
-    
 
-    
     member do
       match 'settings', :via => :all
       match 'users', :via => :all

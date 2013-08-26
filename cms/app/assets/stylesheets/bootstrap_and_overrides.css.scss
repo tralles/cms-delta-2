@@ -99,3 +99,14 @@ thin
 {
   box-shadow: 4px 4px 8px rgba(0, 0, 0, .25) !important;
 }
+
+.controls select
+{
+  width: auto !important;
+}
+
+.modal .simple_form
+{
+  margin: 0;
+  padding: 0;
+}

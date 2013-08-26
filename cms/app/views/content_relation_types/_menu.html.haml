@@ -1,0 +1,23 @@
+%h1
+  &nbsp;
+
+.well.navi
+  %ul.nav.nav-list
+  
+    %li.nav-header
+      = link_to project_path(@project), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
+        %i.pull-right.icon-chevron-left
+
+      = @project.name
+
+        
+    %li
+      = link_to project_content_relation_types_path(@project) do
+        %i.pull-right.icon-magnet
+        Inhalts Typen Relationen
+        
+      
+    %li
+      = link_to new_project_content_relation_type_path(@project) do
+        %i.pull-right.icon-plus
+        Neuer Inhalts Typ

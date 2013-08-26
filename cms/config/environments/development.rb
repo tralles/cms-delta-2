@@ -28,7 +28,7 @@ Delta2::Application.configure do
   config.assets.debug = true
   
   
-  
+  BetterErrors::Middleware.allow_ip! '192.168.0.110'
 
 
   PAPERCLIP_COMMAND_PATH = "/usr/local/bin/"

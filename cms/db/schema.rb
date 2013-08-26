@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130820081006) do
+ActiveRecord::Schema.define(version: 20130826143823) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -58,6 +58,7 @@ ActiveRecord::Schema.define(version: 20130820081006) do
     t.string   "art"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "sys"
   end
 
   create_table "content_element_types", force: true do |t|
@@ -65,7 +66,7 @@ ActiveRecord::Schema.define(version: 20130820081006) do
     t.integer  "ref_id"
     t.string   "name"
     t.string   "intern"
-    t.integer  "field_type"
+    t.string   "field_type"
     t.integer  "position"
     t.boolean  "mandatory"
     t.boolean  "badge"
@@ -96,6 +97,28 @@ ActiveRecord::Schema.define(version: 20130820081006) do
   add_index "content_elements", ["content_id"], name: "index_content_elements_on_content_id", using: :btree
   add_index "content_elements", ["language"], name: "index_content_elements_on_language", using: :btree
 
+  create_table "content_relation_types", force: true do |t|
+    t.integer  "project_id"
+    t.string   "name"
+    t.string   "intern"
+    t.integer  "content_type_id"
+    t.integer  "relative_type_id"
+    t.string   "relation_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+    t.integer  "position"
+  end
+
+  create_table "content_relations", force: true do |t|
+    t.integer  "content_relation_type_id"
+    t.integer  "content_id"
+    t.integer  "relative_id"
+    t.integer  "position"
+    t.string   "label"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "content_to_branches", force: true do |t|
     t.integer  "branch_id"
     t.integer  "content_id"
@@ -117,6 +140,7 @@ ActiveRecord::Schema.define(version: 20130820081006) do
     t.text     "meta"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "direct_edit"
   end
 
   add_index "content_types", ["editor"], name: "index_content_types_on_editor", using: :btree

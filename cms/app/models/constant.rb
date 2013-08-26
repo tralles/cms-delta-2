@@ -2,10 +2,12 @@ class Constant < ActiveRecord::Base
 
 
   default_scope { order('category ASC, value ASC') }
-
-
+  
   scope :category, ->(category) { where('constants.category = ?', category) unless category.nil? }
   
+
+  validates_presence_of :category, :name, :value, :art
+
 
   def self.method_missing(name, args = nil)
 
