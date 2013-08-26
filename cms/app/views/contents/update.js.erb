@@ -1,0 +1,7 @@
+<% if @errors %>
+  alert('errors');
+<% else %>
+  $('#contentrelationwindow').modal('hide');
+  $('#contentrelationwindow').remove();
+  $('#<%= @content_relation_type.intern %> #relative_<%= @content.id %>').replaceWith("<%= j( render :partial => 'contents/form_relations_relationtable_line', :locals => { :relative => @content } )  %>");
+<% end %>

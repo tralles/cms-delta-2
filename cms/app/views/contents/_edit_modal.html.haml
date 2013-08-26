@@ -2,11 +2,14 @@
   .modal-header
     %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
     %h3#myModalLabel
-      = raw "<strong>#{@content_relation_type.name}</strong> | #{ excerpt @content.rep(@locale), '', :radius => 20 } "
+      Bearbeiten
 
-  = simple_form_for( [@project, @content, @content_relation_type, @content_relation], :remote => true, html: {class: 'form-horizontal' }) do |f|
+  = simple_form_for([@project, @content_type, @content], :remote => true, html: {class: 'form-horizontal' }) do |f|
     .modal-body
       = f.error_notification
+      
+      - if @crt
+        = hidden_field_tag :crt, @crt
 
       - if @locale
         = hidden_field_tag :locale, @locale
@@ -19,7 +22,10 @@
             .controls
               = cetform @content, cet
 
+
+      = f.input :ref_id
       
+    
     .modal-footer
       = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' } 
         

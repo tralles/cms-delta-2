@@ -47,6 +47,10 @@ Delta2::Application.routes.draw do
       resources :content_relation_types do
         resources :content_relations do 
           resources :contents
+      
+          collection do 
+            post 'sort'
+          end
         end
       end
     end

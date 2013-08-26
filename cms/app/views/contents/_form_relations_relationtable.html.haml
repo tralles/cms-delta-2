@@ -1,12 +1,23 @@
-%table.table.table-bordered.table-striped{ :id => content_relation_type.intern }
+%table.table.table-condensed.table-striped.table-bordered.table-hover{ :id => content_relation_type.intern }
   %tr
     %th
     %th
+      = content_relation_type.relative_type.name
     %th
   
-  - @content.relations(content_relation_type.intern).each do |relative|
-    %tr
-      %td.handle
-      %td
-        = relative.relative.rep(@locale)
-      %td
+  %tbody{ :class => 'sortable', :data => { :update => { :url => sort_project_content_content_relation_type_content_relations_path(@project, @content, content_relation_type) } } }
+    - @content.relations(content_relation_type.intern).each do |relative|
+      %tr{ :id => "relative_#{relative.relative.id}", :width => '100%' }
+        %td.handle
+        %td
+          = relative.relative.rep(@locale)
+        %td
+          .btn-group.pull-right
+            = link_to edit_project_content_type_content_path(@project, relative.relative.content_type, relative.relative, :locale => @locale, :crt => relative.content_relation_type.intern), :remote => true, :class => 'btn btn-mini btn-success' do
+              %i.icon-edit
+              Bearbeiten
+            
+            = link_to [@project, relative.relative, content_relation_type, relative ], :remote => true, :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+              %i.icon-trash
+              Löschen   
+          

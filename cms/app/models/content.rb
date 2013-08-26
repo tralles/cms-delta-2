@@ -22,7 +22,7 @@ class Content < ActiveRecord::Base
 
 
   has_many :content_relations, :dependent => :destroy
-  has_many :inverse_content_relations, :class_name => "ContentRelation", :foreign_key => "relative_id", :dependent => :destroy
+  has_many :inverse_content_relations, :class_name => "ContentRelation", :foreign_key => "relative_id"
 #  has_many :owned_content_relations, :class_name => "ContentRelation", :foreign_key => "owner_id", :dependent => :destroy
 
 

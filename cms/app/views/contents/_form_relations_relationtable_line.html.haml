@@ -1,0 +1,9 @@
+%tr{ :id => "relative_#{relative.id}", :width => '100%' }
+  %td.handle
+  %td
+    = relative.rep(@locale)
+  %td
+    .btn-group.pull-right
+      = link_to edit_project_content_type_content_path(@project, relative.content_type, relative, :locale => @locale, :crt => @content_relation_type  .intern), :remote => true, :class => 'btn btn-mini btn-success' do
+        %i.icon-edit
+        Bearbeiten

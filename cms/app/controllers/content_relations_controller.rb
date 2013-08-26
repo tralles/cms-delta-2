@@ -58,6 +58,34 @@ class ContentRelationsController < ApplicationController
 
 
 
+  def destroy 
+  
+#    @project = Project.find(params[:project_id])
+#    @content = Content.find(params[:content_id])
+#    @crt     = ContentRelationType.find(params[:content_relation_type_id])
+    @cr      = ContentRelation.find(params[:id])
+    
+    @relative_id  = @cr.relative.id
+    if @relative_id
+      @cr.destroy
+    end
+  end # destroy
+
+
+
+  def sort
+    nummer = 1
+    
+
+    params[:relative].each do |content|
+#      @project.reorder_content_relation_type :crt => crt, :position => nummer
+      nummer = nummer + 1
+    end
+    
+    render json: {:success => true }
+  end
+
+
 def wrap_in_transaction
   ActiveRecord::Base.transaction do
     yield

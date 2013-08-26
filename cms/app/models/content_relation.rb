@@ -6,8 +6,19 @@ class ContentRelation < ActiveRecord::Base
   
   belongs_to :content_relation_type
   
+  before_destroy :cleanup
+  
   
   
   scope :by_content_relation_type, ->(crt) { includes(:content_relation_type).where('content_relation_types.intern = ?', crt) unless crt.nil? }
+
+
+
+
+
+  def cleanup
+    self.relative.destroy
+  end
+
 
 end

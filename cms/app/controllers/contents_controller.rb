@@ -30,6 +30,8 @@ class ContentsController < ApplicationController
   def edit
     @content.user = current_user
     @content.save
+    
+    @crt = params[:crt]
   end
 
   # POST /contents
@@ -62,6 +64,9 @@ class ContentsController < ApplicationController
   # PATCH/PUT /contents/1
   # PATCH/PUT /contents/1.json
   def update
+    
+    @content_relation_type = @project.content_relation_types.where(:intern => params[:crt]).first if params[:crt]
+    
     respond_to do |format|
       if @content.update(permitted_params.content)
       
@@ -87,9 +92,11 @@ class ContentsController < ApplicationController
         @content.proof_bracketcommands
       
         format.html { redirect_to project_content_type_content_path(@project, @content_type, @content, :locale => @locale), notice: 'Content was successfully updated.' }
+        format.js {}
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
+        format.js {}
         format.json { render json: @content.errors, status: :unprocessable_entity }
       end
     end
