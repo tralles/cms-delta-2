@@ -26,6 +26,35 @@ class ApplicationController < ActionController::Base
     
     if @project.base == "#{request.protocol}#{request.host_with_port}"
 
+
+
+      if params[:format].present?
+
+        path            = ("#{params[:route]}.#{params[:format]}").split('/')
+        @file           = path.last
+        params[:file]   = @file
+        params[:action] = 'show'
+        params[:route]  = (path - [@file]).join("/")
+
+      end
+
+
+#      if params[:format].present?
+#        params[:format] = 'htm' if params[:format] == "html"
+#        @path = ("#{params[:route]}.#{params[:format]}").split('/')
+#        @file  = @path.pop
+#        @file_name, @file_extension = @file.split('.',2)
+#        @action = @file == STANDARD_FILE ? "index" : "show"
+#      else
+#        @path = params[:route].split('/')
+#        @file  = STANDARD_FILE
+#        @file_name, @file_extension = @file.split('.',2)
+#        @action = "index"
+#      end
+#      @params = params
+
+
+
       if params[:route]
         @route  = @project.routes.by_path(@language, '/'+params[:route])
         @route  = @route.first
@@ -54,6 +83,7 @@ class ApplicationController < ActionController::Base
     if params[:locale]
       I18n.locale = params[:locale]
       @language = I18n.locale
+      @locale = @language
     else
       redirect_to "/#{I18n.default_locale}/"
     end

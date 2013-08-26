@@ -10,17 +10,24 @@ class ContentElement < ActiveRecord::Base
   scope :lang, ->(lang) { where(:language => lang) unless lang.nil? }
   
   
-  validates_presence_of :value
+#  validates_presence_of :value
 
 
 
 
 
 
-    def html
+    def html(language = 'de')
     
-      value = self.value
+      ## Value Bereitstellen
+      if self.content_element_type.field_type == 'ContentType'
+        content = self.content.project.contents.where(:id => self.value).first
+        value = (content) ? content.rep(language) : self.value
+      else
+        value = self.value
+      end
     
+      ## Bilder Ersetzen
       value.gsub!(/\[img:(\d+)(?:\:(\d+))(?:\:(left|right))\]/).each do |doc|
         
         match,id,width,align = $&,$1,$2,$3
@@ -45,6 +52,10 @@ class ContentElement < ActiveRecord::Base
     
       end
       
+      
+      
+      
+      ## Ausgabe
       if self.content_element_type.markdown
         return Kramdown::Document.new(value, :auto_ids => false).to_html.html_safe
       else

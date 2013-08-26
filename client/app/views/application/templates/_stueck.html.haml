@@ -1,0 +1,11 @@
+%strong
+  = content.title
+  
+%br
+= content.location
+  
+- if content.dates
+  %pre
+    = content.dates.to_yaml
+
+%hr

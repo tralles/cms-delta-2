@@ -21,6 +21,10 @@ class Content < ActiveRecord::Base
   has_many :documents, :through => :documentables
 
 
+  has_many :content_relations, :dependent => :destroy
+  has_many :inverse_content_relations, :class_name => "ContentRelation", :foreign_key => "relative_id"
+
+
   def value content_element_type, language
     self.content_elements.where('content_elements.content_element_type_id = ?', content_element_type).where('content_elements.language = ?', language).first
   end
@@ -179,19 +183,42 @@ class Content < ActiveRecord::Base
   
   
   def method_missing(name, args = nil)
-    ausgabe = nil 
+    ausgabe = nil
 
     ce = self.content_elements.includes(:content_element_type).where('content_element_types.intern = ?', name).references(:content_element_types)
 
-    if @locale
-      ce = ce.where('content_elements.language = ?', @locale).first
-    elsif args && args[:locale]
+    if args && args[:locale]
       ce = ce.where('content_elements.language = ?', args[:locale]).first
+    elsif I18n.locale
+      ce = ce.where('content_elements.language = ?', I18n.locale).first
     else
       ce = ce.first
     end
+    
+    if ce
+      if ce.content_element_type.field_type == 'ContentType'
+        reference = self.project.contents.where(:id => ce.value ).first
+        if reference
+          ausgabe = reference.rep(I18n.locale)
+        end
+      else
+        ausgabe = ce.value 
+      end
+    end
 
-    ausgabe = ce.value if ce 
+    unless ausgabe
+    
+      content_relations = self.content_relations.includes(:content_relation_type).where('content_relation_types.intern = ?', name).references(:content_relation_type)
+      unless content_relations.empty?
+        ausgabe = []
+        content_relations.each do |cr|        
+          ausgabe << { :id => cr.relative.id, :repraesentant => cr.relative.rep(I18n.locale), :content => cr.relative }
+        end
+      
+      end
+      
+    
+    end
 
     return ausgabe
   end

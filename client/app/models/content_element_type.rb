@@ -7,11 +7,12 @@ class ContentElementType < ActiveRecord::Base
   
   
   def simple_form 
-    if self.field_type == 2
-      'text'
-    else
-      'string'
-    end 
+    
+    unless ausgabe = Constant.fields(:id => self.field_type).value
+      ausgabe = 'textfield'
+    end
+    
+    return ausgabe
   end
   
   
