@@ -30,8 +30,9 @@ class ApplicationController < ActionController::Base
 
       if params[:format].present?
 
-        path            = ("#{params[:route]}.#{params[:format]}").split('/')
+        path            = ("#{params[:route]}").split('/')
         @file           = path.last
+        @content        = @project.contents.by_filename(@file)
         params[:file]   = @file
         params[:action] = 'show'
         params[:route]  = (path - [@file]).join("/")

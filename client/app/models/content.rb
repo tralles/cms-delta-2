@@ -25,6 +25,14 @@ class Content < ActiveRecord::Base
   has_many :inverse_content_relations, :class_name => "ContentRelation", :foreign_key => "relative_id"
 
 
+
+
+  scope :direct, -> { joins(:content_type).where('content_types.direct_edit = 1') }
+  scope :by_filename, ->(filename) { joins(:content_elements).where("REPLACE(URLENCODE(VALUE) COLLATE utf8_unicode_ci, '%20', '+') = ?", filename) unless filename.nil? }
+
+
+
+
   def value content_element_type, language
     self.content_elements.where('content_elements.content_element_type_id = ?', content_element_type).where('content_elements.language = ?', language).first
   end
@@ -136,6 +144,11 @@ class Content < ActiveRecord::Base
     
     repraesentant
 
+  end
+  
+  def filename(language)
+    branch = self.branches.first
+    filename = '/' + language.to_s + branch.route(language).route + '/' + CGI::escape(self.rep(language)) + '.htm'
   end
   
   
