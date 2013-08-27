@@ -1,0 +1,13 @@
+
+.container
+  .row
+    .span12
+      - content.content_elements.lang(@locale).each do |ce|
+        - if ce.content_element_type.badge
+          %h2
+            = ce.html
+        - else
+          = ce.html      
+
+
+      %hr
