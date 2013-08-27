@@ -38,5 +38,5 @@
 .container
   .row
     - @contents.each do |content|
-      = render :partial => "application/templates/#{content.content_type.intern}", :locals => { :content => content } # rescue render :partial => 'application/templates/fallback', :locals => { :content => content } 
+      = render :partial => "application/templates/#{content.content_type.intern}", :locals => { :content => content } rescue render :partial => 'application/templates/fallback', :locals => { :content => content } 
 

@@ -1,11 +1,28 @@
-%strong
+%h2
   = content.title
   
+
+= content.teaser
+
 %br
-= content.location
+%strong= content.location
   
 - if content.dates
-  %pre
-    = content.dates.to_yaml
+  %table.table.table-striped.table-bordered
+    - content.dates.each do |date|
+      %tr
+        %td
+          = l Date.parse(date.content.date), :format => :long
+        %td
+          = date.content.begin
+        %td
+          = date.content.location
+        %td
+          = date.content.art
+  
+    
+  
+-#  %pre
+-#    = content.dates.to_yaml
 
 %hr

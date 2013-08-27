@@ -51,10 +51,8 @@ class ContentElement < ActiveRecord::Base
         doc = replaceImage(id)
     
       end
-      
-      
-      
-      
+
+
       ## Ausgabe
       if self.content_element_type.markdown
         return Kramdown::Document.new(value, :auto_ids => false).to_html.html_safe
