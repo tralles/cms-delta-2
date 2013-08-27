@@ -2,6 +2,8 @@
   %td.handledisabled
   %td
     = relative.rep(@locale)
+  %td.muted
+    = relative.ref_id
   %td
     .btn-group.pull-right
       = link_to edit_project_content_type_content_path(@project, relative.content_type, relative, :locale => @locale, :crt => @content_relation_type  .intern), :remote => true, :class => 'btn btn-mini btn-success' do

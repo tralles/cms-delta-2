@@ -5,8 +5,8 @@
     = f.input :name
     = f.input :intern
     = f.input :content_type_id, :collection => @project.content_types
-    = f.input :relative_type_id, :collection => @project.content_types
     = f.input :relation_type, :as => :select, :collection => Constant.relations.collect {|p| [ p.name, p.value ] }, :include_blank => false
+    = f.input :relative_type_id, :collection => @project.content_types
 
   .form-actions
     = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }

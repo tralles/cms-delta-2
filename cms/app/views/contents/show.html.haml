@@ -58,10 +58,41 @@
                 Sichtbar bis
               %dd
                 = l @content.omega_datum unless @content.omega_datum.nil?
+
+
+
+
+      - unless @content.content_type.content_relation_types.empty?
+        %br
+        %hr
+        %br
+        %fieldset
+          %legend
+            %i.icon-magnet
+            &nbsp;
+            Verbundene Daten
+          %options
+          
+            .tabbable
+              %ul.nav.nav-tabs
+                - @content.content_type.content_relation_types.each do |content_relation_type|
+                  %li{ :class => "#{'active' if content_relation_type == @content.content_type.content_relation_types.first} " }
+                    %a{"data-toggle" => "tab", :href => "##{content_relation_type.intern}"} 
+                      = content_relation_type.name
       
-      
+              .tab-content
+                - @content.content_type.content_relation_types.each do |content_relation_type|
+                  %div{ :id => content_relation_type.intern, :class => "tab-pane #{'active' if content_relation_type == @content.content_type.content_relation_types.first} " }
+                    
+                    = render :partial => 'contents/show_relations_relationtable', :locals => { :content_relation_type => content_relation_type, :content => @content } 
+
+
+
 
       - unless @content.documents.empty?      
+        %br
+        %hr
+        %br
         %fieldset
           %legend
             %i.icon-picture

@@ -36,6 +36,8 @@ class ContentRelationsController < ApplicationController
       
       @relative.project        = @project
       @relative.content_type   = @content_type
+      
+      @relative.ref_id         = params[:ref]
   
       if @relative.save
       
@@ -76,9 +78,10 @@ class ContentRelationsController < ApplicationController
   def sort
     nummer = 1
     
+    @content = Content.find(params[:content_id])
 
-    params[:relative].each do |content|
-#      @project.reorder_content_relation_type :crt => crt, :position => nummer
+    params[:relative].each do |relative|
+      @content.reorder_content_relations :relative => relative, :position => nummer
       nummer = nummer + 1
     end
     

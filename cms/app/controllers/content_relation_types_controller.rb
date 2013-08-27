@@ -54,7 +54,7 @@ class ContentRelationTypesController < ApplicationController
   def destroy
     @content_relation_type.destroy
     respond_to do |format|
-      format.html { redirect_to content_relation_types_url }
+      format.html { redirect_to project_content_relation_types_path(@project) }
       format.json { head :no_content }
     end
   end

@@ -1,0 +1,14 @@
+%table.table.table-condensed.table-striped.table-bordered.table-hover
+  %tr
+    %th
+      = content_relation_type.relative_type.name
+    %th.muted{ :width => 100}
+      Referenz
+  
+  %tbody
+    - @content.relations(content_relation_type.intern).each do |relative|
+      %tr{ :id => "relative_#{relative.relative.id}", :width => '100%' }
+        %td
+          = relative.relative.rep(@locale)  
+        %td.muted
+          = relative.relative.ref_id

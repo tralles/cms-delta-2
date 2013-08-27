@@ -190,6 +190,14 @@ class Content < ActiveRecord::Base
 
   end
   
+  def reorder_content_relations(args = {})
+    
+    relation = self.content_relations.where(:relative_id => args[:relative]).first
+    relation.position = args[:position]
+    relation.save
+
+  end
+  
   
   
   def method_missing(name, args = nil)

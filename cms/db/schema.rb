@@ -194,7 +194,7 @@ ActiveRecord::Schema.define(version: 20130826143823) do
 
   create_table "hosts", force: true do |t|
     t.integer  "project_id"
-    t.string   "protocol"
+    t.string   "protocol",   default: "http://"
     t.string   "host"
     t.boolean  "primary"
     t.datetime "created_at"
