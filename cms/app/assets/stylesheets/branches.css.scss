@@ -3,7 +3,8 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 
-#tree ul
+#tree ul,
+#tree ol
 {
   list-style: none;
   clear: both;
@@ -13,7 +14,8 @@
   
 }
 
-#tree ul li
+#tree ul li,
+#tree ol li
 {
   padding: 0;
   margin: 0;
@@ -26,21 +28,34 @@
   padding-left: 15px;
 }
 
-#tree ul li:hover
+#tree ul li:hover,
+#tree ol li:hover
 {
-  background: rgba(50, 100, 0, .025);
+  background: rgba(50, 100, 0, .05);
 }
 
-#tree ul li.disabled
+#tree .btn-group
+{
+  opacity: .1;
+}
+
+#tree ul .btn-group:hover ,
+#tree ol .btn-group:hover 
+{
+  opacity: 1;
+}
+
+#tree ul li.disabled,
+#tree ol li.disabled
 {
   color: #999;
 }
 
-#tree ul li input
+#tree ul li input,
+#tree ol li input
 {
   margin: -2px 5px 0 0;
 }
-
 
 #tree li .handle
 {
@@ -69,7 +84,8 @@ td.handledisabled
 }
 
 
-#sitemap ul
+#sitemap ul,
+#sitemap ol
 {
   list-style: none;
   clear: both;
@@ -79,14 +95,16 @@ td.handledisabled
   
 }
 
-#sitemap ul ul
+#sitemap ul ul,
+#sitemap ol ol
 {
   padding-left: 10px;
   margin: 0 0 0 5px;
   border-left: 1px dotted #000;
 }
 
-#sitemap ul li
+#sitemap ul li,
+#sitemap ol li
 {
   padding: 1px 0 1px 5px;
   margin: 0;
@@ -97,13 +115,19 @@ td.handledisabled
 }
 
 #tree ul li.disabled,
-#sitemap ul li.disabled
+#sitemap ul li.disabled,
+#tree ol li.disabled,
+#sitemap ol li.disabled
+
 {
   color: #999;
 }
 
 #tree ul li.enabled,
-#sitemap ul li.enabled
+#sitemap ul li.enabled,
+#tree ol li.enabled,
+#sitemap ol li.enabled
+
 {
   color: #000;
 }
@@ -112,17 +136,20 @@ td.handledisabled
 
 
 
-ul.contents .line.even
+ul.contents .line.even,
+ol.contents .line.even
 {
   background: rgba(255, 255, 255, .5);
 }
 
-ul.contents .line.odd
+ul.contents .line.odd,
+ol.contents .line.odd
 {
   background: rgba(255, 255, 255, .25);
 }
 
-ul.contents .line .pull-right
+ul.contents .line .pull-right,
+ol.contents .line .pull-right
 {
   margin: 4px 4px 0 0;
 }
@@ -131,4 +158,20 @@ ul.contents .line .pull-right
 .placeholder *
 {
   background: #eec !important;
+}
+
+
+.dragged {
+  position: absolute;
+  opacity: 0.5;
+  z-index: 2000;
+}
+
+ul li.placeholder,
+ol li.placeholder 
+{
+  background: #f0f0f0 !important;
+  border: 1px dotted #ccc !important;
+  display: block !important;
+  height: 21px !important;
 }

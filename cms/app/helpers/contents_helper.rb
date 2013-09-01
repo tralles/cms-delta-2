@@ -20,9 +20,8 @@ module ContentsHelper
 
 
       
-    if content_element_type.inline_documents && !content.documents.empty?
-      css = 'inline_documents'
-    end
+    
+    css << ' inline_documents' if content_element_type.inline_documents && !content.documents.empty?
 
     
 
@@ -40,7 +39,15 @@ module ContentsHelper
 
 
       when 'textarea'
+        css << ' redactor' if content_element_type.wysiwyg
+        css << ' html' if content_element_type.html
         ausgabe = text_area_tag identifier, value, :rows => content_element_type.rows, :class => "input-block-level #{css}"
+
+
+      when 'boolean'
+        ausgabe = ausgabe + hidden_field_tag( identifier, 'false') 
+        ausgabe = ausgabe + check_box_tag( identifier, 'true', ((value.blank? || value == 'false') ? false : true) )
+        ausgabe = raw ausgabe
 
 
       when 'date'

@@ -5,15 +5,21 @@
     = link_to image_tag( document.document.url(:thumb) ), [document.project, document], :target => '_blank'
 
   %td
+    = "[img:#{document.id}]"
+
+  %td
     %strong
       = document.filetype
     %span.muted
       = " #{document.width} x #{document.height} Pixel "
     %br
     = number_to_human_size document.document_file_size
+
+  %td
+
   %td{ :width => 75 }
     = link_to remove_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-danger btn-mini' do
-      %i.icon-trash
+      %i.icon-remove
       &nbsp;
       Entfernen
     

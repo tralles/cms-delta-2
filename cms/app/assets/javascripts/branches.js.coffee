@@ -27,3 +27,18 @@ jQuery ->
       axis: 'y'
       update: ->
         $.post($(this).data('update-url'), $(this).sortable('serialize'))
+
+
+
+    $("ol.sortable").nestedSortable
+      handle: '.handle'
+      tolerance: 'intersect'
+      placeholder: 'placeholder'
+      items: "li"
+      opacity: 0.7
+      cursor: 'crosshair'
+      nested: 'ol'
+      axis: 'y'
+      update: ->
+        console.log( $(this).nestedSortable('toHierarchy') )
+        $.post( $(this).data('update-url'), 'tree' : JSON.stringify( $(this).nestedSortable('toHierarchy') ) )

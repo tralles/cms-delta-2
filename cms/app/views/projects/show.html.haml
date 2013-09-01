@@ -3,7 +3,7 @@
     .span3
       = render 'menu'     
 
-    .span9
+    .span6
 
       %h1 
         = @project.name
@@ -12,3 +12,89 @@
         = @project.description
 
 
+      %table.table.table-bordered.table-condensed.table-hover.table-striped
+        %thead
+          %tr
+            %th.text-right{ :colspan => 2 }
+              Projekt-Einstellungen
+      
+        %tr
+          %th.text-right{ :width => 150 }
+            Intern
+          %td
+            = @project.intern
+
+        - if @project.ref_id && !@project.ref_id.blank?
+          %tr
+            %th.text-right
+              Referenz
+            %td
+              = @project.ref_id
+
+        - if @project.analytics && !@project.analytics.blank?
+          %tr
+            %th.text-right
+              Analytics
+            %td
+              = @project.analytics
+
+        %tr
+          %th.text-right
+            Sprachen
+          %td
+            - @project.languages.each do |language|
+              = language
+              %br
+
+        %tr
+          %th.text-right
+            Hosts
+          %td
+            - @project.hosts.each do |host|
+              - if host.primary
+                %span.label.label-important.pull-right
+                  primary
+                %strong
+                  = "#{host.protocol}#{host.host}"
+              - else
+                = "#{host.protocol}#{host.host}"
+              %br
+
+      %table.table.table-bordered.table-condensed.table-hover.table-striped
+        %thead
+          %tr
+            %th.text-right{ :colspan => 2 }
+              Projekt-Details
+            
+        %tr
+          %th.text-right{ :width => 150 }
+            Menüpunkte
+          %td
+            = @project.branches.size
+
+        %tr
+          %th.text-right
+            Inhalts-Typen
+          %td
+            = @project.content_types.size
+
+        %tr
+          %th.text-right
+            Inhalte
+          %td
+            = @project.contents.size
+            
+        %tr
+          %th.text-right
+            Dokumente
+          %td
+            = @project.documents.size
+
+    .span3
+      %h1.muted
+        Redakteure
+      
+      %ul.muted
+        - @project.users.each do |user|
+          %li
+            = user.username

@@ -13,13 +13,40 @@
 
 
 
-      %fieldset
-        %legend
-          %i.icon-flag
-          Internationalisierung
-          
-        = simple_form_for(@project, html: {class: 'form-horizontal' }) do |f|
+      
+      = simple_form_for(@project, html: {class: 'form-horizontal' }) do |f|
+        %fieldset
+          %legend
+            %i.icon-gear
+            &nbsp;
+            Basics
+      
+          .row
+            .span5
+              = f.input :intern         if permitted_params.project_attributes.include?(:intern)
+              = f.input :ref_id         if permitted_params.project_attributes.include?(:ref_id)
+              = f.input :status         if permitted_params.project_attributes.include?(:status)
+              = f.input :analytics      if permitted_params.project_attributes.include?(:analytics)
 
+            .span4
+              - if permitted_params.project_attributes.include?(:analytics)
+                .alert.alert-info                
+                  %strong
+                    Hinweis
+                  %p
+                    Das Analytics-Feld benötigt nur ein google-Analytics-Tracking-Code:
+                    %strong
+                      UA-12345678-9
+
+        %br
+        %br
+  
+        %fieldset
+          %legend
+            %i.icon-flag
+            &nbsp;
+            Internationalisierung
+  
           = hidden_field_tag "project[languages][]"
           .row
             .span5
@@ -40,25 +67,30 @@
                   Achtung
                 %p
                   Wenn Sie sprachen entfernen, bleiben die Texte in der Sprache bestehen, sind aber nicht mehr bearbeitbar!
-
-          .form-actions
-            = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+  
+        .form-actions
+          = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+          = link_to @project, :class => 'btn btn-inverse pull-right' do
+            Abbrechen
+          
+          
             
         
         %br
         %br
         
-        %fieldset
-          %legend
-            %i.icon-cloud
-            Hosts
+      %fieldset
+        %legend
+          %i.icon-cloud
+          &nbsp;
+          Hosts
 
-          #hosts
-            = render 'hosts/index'
-            
+        #hosts
+          = render 'hosts/index'
+          
 
 
-          = link_to new_project_host_path(@project), :class => 'btn btn-primary btn-mini pull-right', :remote => true do
-            %i.icon-plus
-            &nbsp;
-            Neuen Host anlegen
+        = link_to new_project_host_path(@project), :class => 'btn btn-primary btn-mini pull-right', :remote => true do
+          %i.icon-plus
+          &nbsp;
+          Neuen Host anlegen

@@ -63,14 +63,14 @@ module BranchesHelper
     html = ''
 
     branches.map do |branch, sub_branches|
-      html << "<li class='#{ 'disabled' if form && (branch == form.object || form.object.children.include?(branch)) }'>"
+      html << "<li class='#{ 'disabled' if form && (branch == form.object || form.object.children.include?(branch)) }' id='branch_#{branch.id}'>"
 
         html << render(:partial => 'branches/branch', :locals => { :branch => branch, :form => form }) 
                 
         unless sub_branches.empty?
-          html << '<ul class="level">'
+          html << '<ol class="level" >'
           html << nested_branches(sub_branches, form)
-          html << '</ul>'
+          html << '</ol>'
         end
 
       html << '</li>' 

@@ -3,13 +3,13 @@
     .span3
       = render 'projects/menu'  
     
-    .span9
+    .span6
 
       %h1
         Baumstruktur
       
       #tree
-        %ul.nested_branches
+        %ol.nested_branches.sortable{ :data => { :update => { :url => nestedsort_project_branches_path(@project) } } }
           = nested_branches @branches.arrange(:order => :position) 
         
 
@@ -21,3 +21,50 @@
         Neuen Hauptmenüpunkt anlegen
       
       
+    .span3
+      %h1= raw "&nbsp;"
+      .well
+        %table
+          %tr
+            %td{:width => 35}
+              %button.btn.btn-mini.btn-success
+                %i.icon-edit
+            %td
+              Bearbeiten
+            
+          %tr
+            %td
+              %button.btn.btn-mini.btn-primary
+                %i.icon-plus
+            %td
+              Untermenüpunkt anlegen
+              
+          %tr
+            %td
+              %button.btn.btn-mini.btn-danger
+                %i.icon-trash        
+            %td
+              Löschen
+        
+      .alert.alert-error
+        %i.icon-warning-sign.icon-4x.pull-right
+        %strong
+          Achtung
+        %p
+          Wenn ein Menüpunkt gelöscht wird, werden auch alle Untermenüpunkte rekursiv gelöscht, Inhalte in den Menüpunkten bleiben sicherheitshalber bestehen und können unter „Alle Inhalte” gefunden und neu zugeordnet werden.
+          
+      
+      .alert.alert-info                
+        %strong
+          Hinweise
+        %p
+          Action-Buttons sind für eine bessere Übersichtlichkeit semi-transparent. 
+          Wenn sich der Mouse-Cursor über einer Action-Button-Gruppe befindet, wird die Zeile hervorgehoben und die Buttons erscheinen vollfarbig.
+          
+          
+      .alert.alert-block                
+        %strong
+          Drag & Drop sortieren
+        %p
+          Mit dem Handle zu beginn jeder Zeile kann der Baum neu sortiert werden. 
+          Sobald ein Element losgelassen wird, wird der gesamte Baum neu gespeichert.

@@ -3,8 +3,7 @@
     .span3
       = render 'menu'  
 
-      
-    .span9
+    .span6
       %h1
         Datenfeld
         %small
@@ -12,3 +11,6 @@
           = @content_type.name
         
       = render 'form'
+
+    .span3
+      = render 'meta_hints'  

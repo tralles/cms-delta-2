@@ -1,0 +1,63 @@
+.container
+  .row
+    .span3
+      = render 'projects/menu'  
+    
+    .span6
+
+      %h1
+        Dokument bearbeiten
+        
+      
+      
+      = form_for([@project, @document]) do |f|
+        .fileupload.fileupload-new{"data-provides" => "fileupload"}
+          .fileupload-preview.thumbnail{:style => "width: 200px; height: 150px;"}
+          %div
+            %span.btn.btn-file
+              %span.fileupload-new Auswählen
+              %span.fileupload-exists Ändern
+              = f.file_field :document
+            %a.btn.fileupload-exists{"data-dismiss" => "fileupload", :href => "#"} Entfernen        
+      
+        
+      
+
+        .form-actions
+          = submit_tag 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+          = link_to project_documents_path(@project), :class => 'btn btn-inverse pull-right' do
+            Abbrechen
+          
+          
+
+
+
+
+    .span3
+      - unless @document.new_record?
+        %h1
+          Aktuell
+
+
+        = link_to image_tag( @document.document.url(:normal), :class => 'img-polaroid' ), @document.document.url(:original), :target => '_blank'
+
+        %br
+        %br
+
+        %p
+          = @document.document_file_name
+          %br
+          
+          = @document.document_content_type
+          %br
+  
+          = "#{@document.width} x #{@document.height}"
+          %br
+  
+          = number_to_human_size @document.document_file_size
+
+          
+        - @document.documentables.each do |documentable|
+          - if documentable.documentable_type == 'Content'
+            = link_to documentable.parent.rep(@locale), [documentable.parent.project, documentable.parent]
+            %br

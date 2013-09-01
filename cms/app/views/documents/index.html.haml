@@ -29,17 +29,24 @@
                   = link_to documentable.parent.rep(@locale), [documentable.parent.project, documentable.parent]
                   %br
                   
-            %td{ :width => 100 }
-              - if current_user.admin? && document.documentables.empty?
-                = link_to project_document_path(@project, document), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
-                  %i.icon-trash
+            %td{ :width => 150 }
+              .btn-group.pull-right
+              
+                = link_to edit_project_document_path(@project, document), :class => 'btn btn-mini btn-success' do
+                  %i.icon-edit
                   &nbsp;
-                  Datei Löschen
-              - else
-                %small.muted.btn.btn-mini{ :disabled => 'disabled' }
-                  %i.icon-ban-circle
-                  &nbsp;
-                  in verwendung
+                  Bearbeiten
+                
+                - if current_user.admin? && document.documentables.empty?
+                  = link_to project_document_path(@project, document), :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                    %i.icon-trash
+                    &nbsp;
+                    Löschen
+                - else
+                  %button.muted.btn.btn-mini{ :disabled => 'disabled' }
+                    %i.icon-ban-circle
+                    &nbsp;
+                    Löschen
               
 
       = paginate @documents

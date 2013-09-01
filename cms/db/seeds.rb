@@ -17,6 +17,8 @@ fields = Constant.create!({ :category => 'fields', :name => 'Text : Mehrzeilig',
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Datum', :value => 'date', :art => 'Date', :sys => true })
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Uhrzeit', :value => 'time', :art => 'Text', :sys => true })
 
+fields = Constant.create!({ :category => 'fields', :name => 'Checkbox', :value => 'boolean', :art => 'Checkbox', :sys => true })
+
 fields = Constant.create!({ :category => 'fields', :name => 'Ziel : Inhalts Typ (matches intern)', :value => 'ContentType', :art => 'reference', :sys => true })
 
 fields = Constant.create!({ :category => 'relations', :name => 'n:m', :value => 'n:m', :art => 'relation', :sys => true })

@@ -18,7 +18,55 @@ class BranchesController < ApplicationController
     
     end
   end
+  
+  def nestedsort
 
+    position = 1
+
+    tree = ActiveSupport::JSON.decode params[:tree]
+    
+    tree.each do |root|
+      
+      branch = @project.branches.where(:id => root.id).first
+      branch.parent = nil
+      branch.position = position
+      branch.save
+      
+      position = position + 1
+      
+      begin 
+        if root.children
+          self.nestedsort_reorder(branch, root.children) 
+        end
+      rescue 
+      end
+    end
+
+
+    render :inline => '', :layout => false
+    
+  end
+
+  def nestedsort_reorder(parent, children)
+    position = 1
+    children.each do |child|
+
+      branch = @project.branches.where(:id => child.id).first
+      branch.parent = parent
+      branch.position = position
+      branch.save
+      
+      position = position + 1
+
+      begin 
+        if child.children
+          branch = @project.branches.where(:id => child.id).first
+          nestedsort_reorder(branch, child.children)
+        end
+      rescue 
+      end
+    end
+  end
 
 
 

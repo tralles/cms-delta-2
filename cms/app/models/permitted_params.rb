@@ -87,6 +87,14 @@ class PermittedParams < Struct.new(:params, :current_user)
 
 
 
+  # Document
+  def document
+    params.require(:document).permit(*document_attributes)
+  end
+
+  def document_attributes
+    [:document]
+  end
 
 
 
@@ -97,7 +105,7 @@ class PermittedParams < Struct.new(:params, :current_user)
 
   def project_attributes
     if current_user.admin?
-      [:ref_id, :projects_id, :intern, :name, :description, :status]
+      [:ref_id, :projects_id, :intern, :name, :description, :status, :analytics]
     else
       [:name, :description]
     end

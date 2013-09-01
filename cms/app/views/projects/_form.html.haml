@@ -9,6 +9,7 @@
       = f.input :intern         if permitted_params.project_attributes.include?(:intern)
       = f.input :ref_id         if permitted_params.project_attributes.include?(:ref_id)
       = f.input :status         if permitted_params.project_attributes.include?(:status)
+      = f.input :analytics      if permitted_params.project_attributes.include?(:analytics)
     
   
   %fieldset

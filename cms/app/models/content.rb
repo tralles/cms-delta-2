@@ -225,15 +225,40 @@ class Content < ActiveRecord::Base
 
     ce = self.content_elements.includes(:content_element_type).where('content_element_types.intern = ?', name).references(:content_element_types)
 
-    if @locale
-      ce = ce.where('content_elements.language = ?', @locale).first
-    elsif args && args[:locale]
+    if args && args[:locale]
       ce = ce.where('content_elements.language = ?', args[:locale]).first
+    elsif I18n.locale
+      ce = ce.where('content_elements.language = ?', I18n.locale).first
     else
       ce = ce.first
     end
+    
+    if ce
+      if ce.content_element_type.field_type == 'ContentType'
+        reference = self.project.contents.where(:id => ce.value ).first
+        if reference
+          ausgabe = reference.rep(I18n.locale)
+        end
+      elsif ce.content_element_type.field_type == 'boolean'
+        ausgabe = ( ce.value == 'true' ) ? true : false
+      else
+        ausgabe = ce.value 
+      end
+    end
 
-    ausgabe = ce.value if ce 
+    unless ausgabe
+    
+      content_relations = self.content_relations.includes(:content_relation_type).where('content_relation_types.intern = ?', name).references(:content_relation_type)
+      unless content_relations.empty?
+        ausgabe = []
+        content_relations.each do |cr|        
+          ausgabe << { :id => cr.relative.id, :repraesentant => cr.relative.rep(I18n.locale), :content => cr.relative }
+        end
+      
+      end
+      
+    
+    end
 
     return ausgabe
   end

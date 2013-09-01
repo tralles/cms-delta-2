@@ -3,6 +3,19 @@ class DocumentsController < ApplicationController
   before_action :set_project
   skip_before_filter :verify_authenticity_token, :only => [:create]
 
+  def edit
+    @document = Document.find(params[:id])
+  end
+  
+  def update
+    @document = Document.find(params[:id])
+    
+    if params[:document]
+      @document.update(permitted_params.document)
+    end
+    redirect_to project_documents_path(@project)
+  end
+
 
   def create
     if @project

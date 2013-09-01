@@ -25,7 +25,12 @@
 
             = number_to_human_size @document.document_file_size
             
-
+          %td{ :width => 85 }
+    
+            = link_to edit_project_document_path(@project, @document), :class => 'btn btn-mini btn-success pull-right' do
+              %i.icon-edit
+              &nbsp;
+              Bearbeiten
 
     .span3
       %h1

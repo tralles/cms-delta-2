@@ -32,7 +32,15 @@
             %dt
               = ce.content_element_type.name
             %dd
-              = ce.html(@locale)
+              - if ce.content_element_type.html
+                %pre.code.html
+                  = preserve do
+                    = ce.html(@locale).gsub('<', '<')
+              
+              - else
+                = ce.html(@locale)
+              
+              
             
       - if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega)
         %fieldset

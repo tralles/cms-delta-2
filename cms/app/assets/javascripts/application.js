@@ -50,3 +50,25 @@ insertAtCaret: function(myValue){
   })
 }
 });
+
+
+
+
+
+$(document).on('ready page:load', function() {
+
+
+  $('textarea.redactor').redactor({ lang: 'de', 
+                          buttons: ['html', '|', 
+                                    'bold', 'italic', 'deleted', '|', 
+                                    'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
+                                    'table', 'link', '|',
+                                    'fontcolor', 'backcolor', '|', 
+                                    'horizontalrule'],
+                          minHeight: 200,
+                          autoresize: false
+                        });
+                        
+
+                        
+});

@@ -28,6 +28,10 @@ Delta2::Application.routes.draw do
       member do 
         post 'sort'
       end
+
+      collection do 
+        post 'nestedsort'
+      end
     end
 
     resources :contents do
