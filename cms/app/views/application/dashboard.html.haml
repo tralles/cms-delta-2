@@ -7,5 +7,102 @@
         %i.icon-dashboard
         Dashboard
         
-      
 
+  %br
+  
+.container
+  .row
+    .span3
+      .box.alternate
+        .box-title
+          = current_user.username
+        .box-content.nopadding.condensed
+          %table.table.table-bordered.table-condensed.table-hover.table-striped
+            %tr
+              %th
+                E-Mail
+              %td
+                = current_user.email
+            %tr
+              %th
+                Login
+              %td
+                = l current_user.current_sign_in_at, :format => :short
+            %tr
+              %th
+                Logins
+              %td
+                = current_user.sign_in_count
+
+    .span9
+      - current_user.projects.each do |project|
+        .row
+
+          .span6
+
+            .box.alternate
+              .box-title
+                = project.name
+              .box-content.nopadding.condensed
+                %table.table.table-bordered.table-condensed.table-hover.table-striped
+                  %tr
+                    %th.text-right{ :width => 150 }
+                      Intern
+                    %td
+                      = project.intern
+                  %tr
+                    %th.text-right{ :width => 150 }
+                      Beschreibung
+                    %td
+                      = project.description
+    
+                  - if project.ref_id && !project.ref_id.blank?
+                    %tr
+                      %th.text-right
+                        Referenz
+                      %td
+                        = project.ref_id      
+          
+                  %tr
+                    %th.text-right
+                      Hosts
+                    %td
+                      - project.hosts.each do |host|
+                        - if host.primary
+                          %span.label.label-important.pull-right
+                            primary
+                          %strong
+                            = "#{host.protocol}#{host.host}"
+                        - else
+                          = "#{host.protocol}#{host.host}"
+                        %br          
+                        
+          .span3
+            .box
+              .box-title
+                Statistik
+              .box-content.nopadding.condensed
+                %table.table.table-bordered.table-condensed.table-hover.table-striped
+                  %tr
+                    %th.text-right{ :width => 150 }
+                      Menüpunkte
+                    %td
+                      = project.branches.size
+          
+                  %tr
+                    %th.text-right
+                      Inhalts-Typen
+                    %td
+                      = project.content_types.size
+          
+                  %tr
+                    %th.text-right
+                      Inhalte
+                    %td
+                      = project.contents.size
+                      
+                  %tr
+                    %th.text-right
+                      Dokumente
+                    %td
+                      = project.documents.size

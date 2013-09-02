@@ -6,7 +6,12 @@
 
     .span9
       %h1 Inhalts Typ bearbeiten
-      
-      
-      = render 'form'
+
+          
+        
+      .box.alternate
+        .box-title
+          = "„#{@content_type.name}” bearbeiten"
+        .box-content.nopadding      
+          = render 'form'
       

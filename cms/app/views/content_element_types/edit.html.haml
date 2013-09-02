@@ -12,7 +12,12 @@
           %i.icon-angle-right
           Datenfeld bearbeiten  
         
-      = render 'form'
+
+      .box.alternate
+        .box-title
+          = "„#{@content_element_type.name}” bearbeiten"
+        .box-content.nopadding          
+          = render 'form'
 
     .span3
       = render 'meta_hints'  

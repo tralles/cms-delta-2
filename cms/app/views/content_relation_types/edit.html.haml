@@ -10,7 +10,10 @@
 
           
         
-      
-      = render 'form'
+      .box.alternate
+        .box-title
+          = "„#{@content_relation_type.name}” bearbeiten"
+        .box-content.nopadding      
+          = render 'form'
       
 

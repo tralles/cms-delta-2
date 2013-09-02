@@ -1,20 +1,20 @@
 = simple_form_for([@project, @content_type, @content_element_type], html: {class: 'form-horizontal' }) do |f|
-  = f.error_notification
+  -# = f.error_notification
 
   .form-inputs
     = f.input :name
     = f.input :intern
 
-    %hr  
+    -#  %hr  
     = f.input :field_type, :as => :select, :collection => Constant.fields.collect {|p| [ p.name, p.value ] }, :include_blank => false
 
-    %hr  
+    -#  %hr  
     = f.input :mandatory
     = f.input :badge
     = f.input :inline_documents
     
   
-    %hr  
+    -#  %hr  
     = f.input :meta
     = f.input :ref_id
 

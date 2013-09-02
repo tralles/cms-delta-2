@@ -1,37 +1,37 @@
 
-= simple_form_for(@user, html: {class: 'form-horizontal' }) do |f|
-  = f.error_notification
-
-  
-  %fieldset
-    %legend
-      Einstellungen
-
-    = f.input :email           if permitted_params.user_attributes.include?(:email)
-    = f.input :name           if permitted_params.user_attributes.include?(:name)
-    = f.input :surname        if permitted_params.user_attributes.include?(:surname)
-      
+.box
+  .box-title
+    User-Daten
+  .box-content.nopadding
+    = simple_form_for(@user, html: {class: 'form-horizontal' }) do |f|
+      -# = f.error_notification
     
-    = f.input :password    if permitted_params.user_attributes.include?(:password)
-    = f.input :password_confirmation    if permitted_params.user_attributes.include?(:password_confirmation)
-
-
-    - if current_user.admin?          
-      = f.input :admin         if permitted_params.user_attributes.include?(:admin)
-        
-
-      %label_tag.control-label
-        Projekte
-      .controls
-        - Project.all.each do |project|
-          
-          %label.checkbox
-            = check_box_tag :projects_ids, project.id, @user.projects.include?(project), :name => 'user[project_ids][]'
-            = project.name
-
       
+      = f.input :email           if permitted_params.user_attributes.include?(:email)
+      = f.input :name           if permitted_params.user_attributes.include?(:name)
+      = f.input :surname        if permitted_params.user_attributes.include?(:surname)
+        
+      
+      = f.input :password    if permitted_params.user_attributes.include?(:password)
+      = f.input :password_confirmation    if permitted_params.user_attributes.include?(:password_confirmation)
+  
+  
+      - if current_user.admin?          
+        = f.input :admin         if permitted_params.user_attributes.include?(:admin)
+          
+  
+        %label_tag.control-label
+          Projekte
+        .controls
+          - Project.all.each do |project|
             
-
-
-  .form-actions
-    = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+            %label.checkbox
+              = check_box_tag :projects_ids, project.id, @user.projects.include?(project), :name => 'user[project_ids][]'
+              = project.name
+    
+          
+                
+    
+    
+      .form-actions
+        = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }

@@ -1,11 +1,16 @@
-= simple_form_for(@constant, html: {class: 'form-horizontal' }) do |f|
-  = f.error_notification
-    
-  .form-inputs
-    = f.input :category
-    = f.input :name
-    = f.input :value
-    = f.input :art
 
-  .form-actions
-    = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+.box
+  .box-title
+    Konfiguration
+  .box-content.nopadding   
+    = simple_form_for(@constant, html: {class: 'form-horizontal' }) do |f|
+      -# = f.error_notification
+        
+      .form-inputs
+        = f.input :category
+        = f.input :name
+        = f.input :value
+        = f.input :art
+    
+      .form-actions
+        = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }

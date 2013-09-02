@@ -3,12 +3,11 @@
 
 .well.navi
   %ul.nav.nav-list
-    %li
-      = link_to project_path(@project) do
-        %i.pull-right.icon-home
-        = @project.name
-    
-    %li.divider
+    %li.nav-header
+      = link_to project_path(@project), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
+        %i.pull-right.icon-chevron-left
+
+      = @project.name
         
     %li
       = link_to project_content_types_path(@project) do

@@ -6,7 +6,7 @@
 
   = simple_form_for([@project, @content_type, @content], :remote => true, html: {class: 'form-horizontal' }) do |f|
     .modal-body
-      = f.error_notification
+      -# = f.error_notification
       
       - if @crt
         = hidden_field_tag :crt, @crt

@@ -10,7 +10,12 @@
           %i.icon-angle-right
           = @content_type.name
         
-      = render 'form'
+
+      .box.alternate
+        .box-title
+          = "#{@content_type.name} :: Datenfeld anlegen"
+        .box-content.nopadding          
+          = render 'form'
 
     .span3
       = render 'meta_hints'  
