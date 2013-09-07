@@ -65,7 +65,7 @@
   bottom: 0px;
   width: 10px;
   display: block;
-  background: rgba(0, 0, 255, .1);
+  background: rgba(200, 200, 200, .2);
 }
 
 
@@ -73,14 +73,19 @@ td.handle
 {
   width: 10px;
   padding: 0px;
-  background: rgba(0, 0, 255, .1) !important;
+  background: rgba(200, 200, 200, .2);
 }
 
 td.handledisabled
 {
   width: 10px;
   padding: 0px;
-  background: rgba(150, 150, 150, .1) !important;
+  background: rgba(200, 200, 200, .2);
+}
+
+.ui-sortable .handle
+{
+  background: rgba(0, 0, 255, .1) !important;
 }
 
 

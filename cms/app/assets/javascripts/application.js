@@ -57,7 +57,6 @@ insertAtCaret: function(myValue){
 
 $(document).on('ready page:load', function() {
 
-
   $('textarea.redactor').redactor({ lang: 'de', 
                           buttons: ['html', '|', 
                                     'bold', 'italic', 'deleted', '|', 
@@ -70,5 +69,10 @@ $(document).on('ready page:load', function() {
                         });
                         
 
-                        
+
+	$('form').on('submit',   function() { NProgress.start(); NProgress.set(0.8); });
 });
+
+$(document).on('page:fetch',   function() { NProgress.start(); NProgress.set(0.8); });
+$(document).on('page:change',  function() { NProgress.done(); });
+$(document).on('page:restore', function() { NProgress.remove(); });
