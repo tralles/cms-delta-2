@@ -33,7 +33,7 @@
                   %i.icon-edit
                   Bearbeiten
                 
-                = link_to user_path(user), :method => :delete, :data => { :confirm => t('confirmation.delete.user') }, :class => 'btn btn-mini btn-danger' do
+                = link_to user_path(user), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.user') }, :class => 'btn btn-mini btn-danger' do
                   %i.icon-trash
                   Löschen
 

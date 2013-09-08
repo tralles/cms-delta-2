@@ -1,6 +1,9 @@
 <div id="bootstrapped-fine-uploader"></div>
 <% content_for :scripts do %>
   <%= javascript_tag do %>
+    var fileCount = 0;
+    var addedFiles = 0;
+
     function createUploader() 
     {
       var uploader = new qq.FineUploader({
@@ -22,17 +25,30 @@
           fail: 'alert alert-error'
         },
         callbacks: {
-          onUpload: function() { NProgress.start(); },
+          onUpload: function() { 
+              NProgress.start(); 
+              $('#contendocuments').attr('style', 'opacity:.15');
+          },
           onUploadChunk: function() { NProgress.inc(); },
+          onSubmit: function(id, fileName) {
+            fileCount ++;
+            return true;
+          },
           onComplete: function(id, fileName, responseJSON) {
             if (responseJSON.success) {
               $('#thumbnail-fine-uploader').append('<img src="img/success.jpg" alt="' + fileName + '">');
             }
-
-            $('#contendocuments').attr('style', 'opacity:.15');
-            NProgress.inc();
-            NProgress.done();
-            $('#documents').load('<%= uploaded_path(@project, @content.class.name, @content.id) %>');
+            
+            addedFiles ++;
+            
+            console.log(addedFiles / fileCount);
+            NProgress.set( addedFiles / fileCount );
+            if( fileCount == addedFiles)
+            {
+              NProgress.done();
+              $('#documents').load('<%= uploaded_path(@project, @content.class.name, @content.id) %>');
+              NProgress.remove();
+            }
           }
         }
       });

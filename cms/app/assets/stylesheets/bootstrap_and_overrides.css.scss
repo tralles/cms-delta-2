@@ -89,6 +89,14 @@ th.text-right
   text-align: right;
 }
 
+.error input,
+.error textarea,
+.error .muted
+{
+  color: #900;
+  border: 1px solid #999;
+  background: #fee;
+}
 
 textarea.html,
 pre.html

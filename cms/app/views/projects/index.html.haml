@@ -28,7 +28,7 @@
                     %i.icon-edit
                     Bearbeiten
                   
-                  = link_to project_path(project), :method => :delete, :data => { :confirm => t('confirmation.delete.project') }, :class => 'btn btn-mini btn-danger' do
+                  = link_to project_path(project), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.project') }, :class => 'btn btn-mini btn-danger' do
                     %i.icon-trash
                     Löschen
             

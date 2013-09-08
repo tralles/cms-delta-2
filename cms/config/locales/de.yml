@@ -23,13 +23,14 @@ de:
 
   confirmation:
     delete:
+      title: 'Datensatz löschen'
       branch_route: 'Soll diese Route wirklich gelöscht werden?'
       user: 'Soll dieser User wirklich gelöscht werden?'
       project: 'Soll dieses Projekt und alle seine Daten wirklich gelöscht werden?'
       permission: 'Soll diese Berechtigung wirklich entfernt werden?'
       host: 'Soll dieser host wirklich gelöscht werden? Die Webseite ist dann unter der URL nicht mehr erreichbar.'
       document: 'Soll dieses Dokument wirklich gelöscht werden? Eventuelle Verweise auf dieses Dokument sind dann ebenfalls nicht mehr erreichbar.'
-      relation: 'Soll diese Beziehung wirklich aufgehoben werden?'
+      relation: 'Soll diese Beziehung wirklich aufgehoben werden? Der Verbundene Datensatz wird gelöscht.'
       content: 'Soll dieser Inhalt wirklich gelöscht werden?'
       content_type: 'Soll dieser Inhalts-Typ wirklich gelöscht werden? Alle Inhalte dieses Types werden ebenfalls vernichtet!'
       content_relation_type: 'Soll diese Inhalts-Typen-Relation wirklich gelöscht werden?'

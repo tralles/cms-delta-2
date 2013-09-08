@@ -13,7 +13,7 @@
       - if large
         Bearbeiten
     
-    = link_to project_content_type_content_path(@project, content.content_type, content), :method => :delete, :data => { :confirm => t('confirmation.delete.content') }, :class => 'btn btn-mini btn-danger' do
+    = link_to project_content_type_content_path(@project, content.content_type, content), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content') }, :class => 'btn btn-mini btn-danger' do
       %i.icon-trash
       - if large
         Löschen

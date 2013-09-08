@@ -41,11 +41,12 @@ class DocumentsController < ApplicationController
   
   def destroy
     @document = Document.find(params[:id])
+    @documentID = @document.id
     
     if @document.destroy 
-      redirect_to project_documents_path(@project)
+#      redirect_to project_documents_path(@project)
     else
-      redirect_to [@document.project, @document]
+#      redirect_to [@document.project, @document]
     end
   end
   

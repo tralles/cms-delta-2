@@ -16,7 +16,11 @@
             - @content_type.content_element_types.each do |cet|
               .control-group
                 %label.control-label
+                  - if cet.mandatory
+                    %abbr{ :title => "Pflichfeld" } *
                   = cet.name
+                  
+                  
                 .controls
                   = cetform @content, cet
 

@@ -1,2 +1,32 @@
 $("#document<%= @document.id %>.fxline").remove()
 $("#contendocuments").html('<%= j( render :partial => 'documents/contendocuments', :locals => { :documents => @content.documents } ) %>')
+$("#docpoover").html('<%= j( render :partial => 'documents/contendocuments_docpoover', :locals => { :documents => @content.documents } ) %>')
+
+
+if ($("textarea.inline_documents").length > 0) {
+  $("textarea.inline_documents").each(function(index) {
+    $(".documentactions").remove();
+    if ($("#docpoover .line").length > 0) {
+      return $(this).after("<div class=\"documentactions\"><span class=\"documentaction btn btn-mini btn-info\" rel=\"" + $(this).attr("id") + "\"><i class=\"icon-picture\" /> Dokumente</span></div>");
+    }
+  });
+  $('.documentaction').popover({
+    trigger: 'manual',
+    title: 'Dokumente',
+    html: true,
+    content: $('#docpoover').html()
+  });
+  $('.documentaction').click(function() {
+    $(this).popover('toggle');
+    $('.popover-content .line').draggable({
+      cursor: 'move',
+      revert: "invalid",
+      containment: "document",
+      helper: "clone"
+    });
+    return false;
+  });
+}
+
+
+NProgress.done();

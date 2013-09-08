@@ -20,7 +20,7 @@
       %td= branch_route.jump
       %td= link_to 'Show', branch_route
       %td= link_to 'Edit', edit_branch_route_path( branch_route)
-      %td= link_to 'Destroy', branch_route_path( branch_route), :method => :delete, :data => { :confirm => t('confirmation.delete.branch_route') }
+      %td= link_to 'Destroy', branch_route_path( branch_route), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.branch_route') }
 
 %br
 

@@ -11,7 +11,7 @@
       
       %table.table.table-condensed.table-striped.table-bordered.table-hover
         - @documents.each do |document|
-          %tr
+          %tr{ :id => "document#{document.id}" }
             %td{ :width => 50 }
               = link_to image_tag( document.document.url(:thumb) ), [document.project, document]
             %td
@@ -38,7 +38,7 @@
                   Bearbeiten
                 
                 - if current_user.admin? && document.documentables.empty?
-                  = link_to project_document_path(@project, document), :method => :delete, :data => { :confirm => t('confirmation.delete.document') }, :class => 'btn btn-mini btn-danger' do
+                  = link_to project_document_path(@project, document), :remote => true, :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.document') }, :class => 'btn btn-mini btn-danger' do
                     %i.icon-trash
                     &nbsp;
                     Löschen

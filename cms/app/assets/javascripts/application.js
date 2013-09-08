@@ -70,9 +70,42 @@ $(document).on('ready page:load', function() {
                         
 
 
-	$('form').on('submit',   function() { NProgress.start(); NProgress.set(0.8); });
+	$('form').on('submit',   function() { 
+	  allok = true;
+
+	  if($(this).find('.required').length > 0)
+	  {
+  	  $(this).find('.required').each(function(){ 
+          if($(this).val().length == 0 && ($(this).is('input') || $(this).is('textarea') ))
+          {
+      	    allok = false;  
+            $(this).parent().parent().addClass('error');
+            $(this).parent().addClass('error');
+          }
+          else
+          {
+            $(this).parent().parent().removeClass('error');
+            $(this).parent().removeClass('error');
+          }
+        });
+      }
+
+    if(allok)
+    {
+	    NProgress.start(); NProgress.set(0.8); 
+	  }
+	  else
+	  {
+      return false;
+	  }
+  
+  });
 });
 
 $(document).on('page:fetch',   function() { NProgress.start(); NProgress.set(0.8); });
 $(document).on('page:change',  function() { NProgress.done(); });
 $(document).on('page:restore', function() { NProgress.remove(); });
+
+
+
+

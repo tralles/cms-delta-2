@@ -1,1 +1,5 @@
-$('#relative_<%= @relative_id %>').remove();
+<% if @relative_id %>
+  $('#relative_<%= @relative_id %>').remove();
+<% end %>
+
+NProgress.done();

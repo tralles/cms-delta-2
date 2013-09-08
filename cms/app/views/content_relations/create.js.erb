@@ -6,3 +6,5 @@
   $('#<%= @content_relation_type.intern %>.table').replaceWith("<%= j( render :partial => 'contents/form_relations_relationtable', :locals => { :content_relation_type => @content_relation_type, :content => @content } )  %>");
   $('#<%= @content_relation_type.intern %> .handle').addClass('handledisabled').removeClass('handle');
 <% end %>
+
+NProgress.done();

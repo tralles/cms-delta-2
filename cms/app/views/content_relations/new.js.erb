@@ -19,3 +19,34 @@ $(".timepicker").timepicker({
   defaultTime: false,
   minuteStep: 15
 });
+
+$('#contentrelationwindow form').on('submit',   function() { 
+  allok = true;
+
+  if($(this).find('.required').length > 0)
+  {
+	  $(this).find('.required').each(function(){ 
+        if($(this).val().length == 0 && ($(this).is('input') || $(this).is('textarea') ))
+        {
+    	    allok = false;  
+          $(this).parent().parent().addClass('error');
+        }
+        else
+        {
+          $(this).parent().parent().removeClass('error');
+        }
+      });
+    }
+
+  if(allok)
+  {
+    NProgress.start(); NProgress.set(0.8); 
+  }
+  else
+  {
+    return false;
+  }
+
+});
+
+NProgress.done();

@@ -89,10 +89,10 @@ class ContentRelationsController < ApplicationController
   end
 
 
-def wrap_in_transaction
-  ActiveRecord::Base.transaction do
-    yield
+  def wrap_in_transaction
+    ActiveRecord::Base.transaction do
+      yield
+    end
   end
-end
 
 end

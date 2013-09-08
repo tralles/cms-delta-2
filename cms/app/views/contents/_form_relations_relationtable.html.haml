@@ -22,7 +22,6 @@
               %i.icon-edit
               Bearbeiten
             
-            = link_to [@project, relative.relative, content_relation_type, relative ], :remote => true, :method => :delete, :data => { :confirm => t('confirmation.delete.relation') }, :class => 'btn btn-mini btn-danger' do
+            = link_to [@project, relative.relative, content_relation_type, relative ], :remote => true, :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.relation') }, :class => 'btn btn-mini btn-danger' do
               %i.icon-trash
               Löschen   
-          

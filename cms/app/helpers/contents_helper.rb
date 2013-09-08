@@ -23,6 +23,7 @@ module ContentsHelper
     
     css << ' inline_documents' if content_element_type.inline_documents
 
+    css << ' required' if content_element_type.mandatory
     
 
 
@@ -35,13 +36,13 @@ module ContentsHelper
           collection << [content.rep(@locale), content.id]
         end
 
-        ausgabe = select_tag identifier, options_for_select(collection, value), :include_blank => true, :class => "input-block-level"
+        ausgabe = select_tag identifier, options_for_select(collection, value), :include_blank => true, :class => "input-block-level#{css}"
 
 
       when 'textarea'
         css << ' redactor' if content_element_type.wysiwyg
         css << ' html' if content_element_type.html
-        ausgabe = text_area_tag identifier, value, :rows => content_element_type.rows, :class => "input-block-level #{css}"
+        ausgabe = text_area_tag identifier, value, :rows => content_element_type.rows, :class => "input-block-level#{css}"
 
 
       when 'boolean'
@@ -51,15 +52,15 @@ module ContentsHelper
 
 
       when 'date'
-        ausgabe = raw "<div class='input-append date' data-date='#{value}' data-date-format='dd-mm-yyyy'>#{ text_field_tag identifier, value, :class =>  "span2 datepicker" }<span class='add-on muted'>#{Time.zone.now.to_date}</span></div>" 
+        ausgabe = raw "<div class='input-append date' data-date='#{value}' data-date-format='dd-mm-yyyy'>#{ text_field_tag identifier, value, :class =>  "span2 datepicker#{css}" }<span class='add-on muted'>#{Time.zone.now.to_date}</span></div>" 
 
 
       when 'time'
-        ausgabe = raw "<div class='input-append time'>#{ text_field_tag identifier, value, :class =>  "span2 timepicker" }<span class='add-on muted'>#{Time.zone.now.strftime('%H:%M')}</span></div>" 
+        ausgabe = raw "<div class='input-append time'>#{ text_field_tag identifier, value, :class =>  "span2 timepicker#{css}" }<span class='add-on muted'>#{Time.zone.now.strftime('%H:%M')}</span></div>" 
 
 
       else
-        ausgabe = text_field_tag identifier, value, :class =>  "input-block-level"
+        ausgabe = text_field_tag identifier, value, :class =>  "input-block-level#{css}"
 
 
     end
