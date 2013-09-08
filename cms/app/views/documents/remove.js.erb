@@ -1,1 +1,8 @@
 $("#document_<%= @document.id %>").remove();
+
+$('.line[rel="<%= @document.id %>"]').remove();
+
+if( $('#docpoover .line').length == 0 )
+{
+  $(".documentactions").remove();
+}

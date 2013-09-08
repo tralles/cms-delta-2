@@ -6,7 +6,8 @@ jQuery ->
       if $("textarea.inline_documents").length > 0 
   
         $("textarea.inline_documents").each (index) ->
-          $(this).after('<div class="documentactions"><span class="documentaction btn btn-mini btn-info" rel="'+$(this).attr('id')+'"><i class="icon-picture" /> Dokumente</span></div>')
+          $(".documentactions").remove();
+          $(this).after "<div class=\"documentactions\"><span class=\"documentaction btn btn-mini btn-info\" rel=\"" + $(this).attr("id") + "\"><i class=\"icon-picture\" /> Dokumente</span></div>"  if $("#docpoover .line").length > 0
   
         $('.documentaction').popover( { trigger: 'manual', title: 'Dokumente', html: true, content: $('#docpoover').html() } )
         $('.documentaction').click ->

@@ -1,27 +1,28 @@
-%fieldset
-  %legend
-    %i.icon-picture
-    &nbsp;
-    Dokumente
-  %options
-    .row
-      .span2
-        = link_to search_project_content_documents_path(@project, @content), :remote => true, :class => 'btn input-block-level btn-large' do
-          %i.icon-search
-          &nbsp;
-          Suchen
-          
-      .span4
-        = render 'documents/button'
-    %hr
-    
-    #contendocuments
-      = render :partial => 'documents/contendocuments', :locals => { :documents => @content.documents }
+#documents
+  %fieldset
+    %legend
+      %i.icon-picture
+      &nbsp;
+      Dokumente
+    %options
+      .row
+        .span2
+          = link_to search_project_content_documents_path(@project, @content), :remote => true, :class => 'btn input-block-level btn-large' do
+            %i.icon-search
+            &nbsp;
+            Suchen
+            
+        .span4
+          = render 'documents/button'
+      %hr
       
-    
-
-
-- unless @content.documents.empty?
-  #docpoover{ :style => 'display: none;' }        
-    - @content.documents.each do |document|
-      = render :partial => 'documents/document_popover', :locals => { :document => document } 
+      #contendocuments
+        = render :partial => 'documents/contendocuments', :locals => { :documents => @content.documents }
+        
+      
+  
+  
+  #docpoover{ :style => 'display: none;' }
+    - unless @content.documents.empty?
+      - @content.documents.each do |document|
+        = render :partial => 'documents/document_popover', :locals => { :document => document } 

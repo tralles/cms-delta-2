@@ -34,6 +34,6 @@
                     %i.icon-edit
                     Bearbeiten
   
-                  = link_to [content_relation_type.project, content_relation_type], :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
+                  = link_to [content_relation_type.project, content_relation_type], :method => :delete, :data => { :confirm => t('confirmation.delete.content_relation_type') }, :class => 'btn btn-mini btn-danger' do
                     %i.icon-trash
                     Löschen

@@ -20,6 +20,20 @@
         classes: {
           success: 'alert alert-success',
           fail: 'alert alert-error'
+        },
+        callbacks: {
+          onUpload: function() { NProgress.start(); },
+          onUploadChunk: function() { NProgress.inc(); },
+          onComplete: function(id, fileName, responseJSON) {
+            if (responseJSON.success) {
+              $('#thumbnail-fine-uploader').append('<img src="img/success.jpg" alt="' + fileName + '">');
+            }
+
+            $('#contendocuments').attr('style', 'opacity:.15');
+            NProgress.inc();
+            NProgress.done();
+            $('#documents').load('<%= uploaded_path(@project, @content.class.name, @content.id) %>');
+          }
         }
       });
     }

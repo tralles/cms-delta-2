@@ -31,10 +31,10 @@
       .form-actions
         = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
         - unless @content.new_record?
-          = link_to close_project_content_type_content_path(@project, @content_type, @content), :class => 'btn btn-inverse pull-right', :data => { :confirm => 'Eingaben sind ggf. nicht gespeichert!' } do
+          = link_to close_project_content_type_content_path(@project, @content_type, @content), :class => 'btn btn-inverse pull-right' do
             Schließen
         - else
-          = link_to project_content_type_contents_path(@project, @content_type), :class => 'btn btn-inverse pull-right', :data => { :confirm => 'Eingaben werden nicht gespeichert!' } do
+          = link_to project_content_type_contents_path(@project, @content_type), :class => 'btn btn-inverse pull-right' do
             Abbrechen
 
 

@@ -21,7 +21,7 @@
     = link_to new_project_branch_branch_path(branch.project, branch), :class=> 'btn btn-mini btn-primary' do
       %i.icon-plus
     
-    = link_to [@project, branch], :method => :delete, :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do 
+    = link_to [@project, branch], :method => :delete, :data => { :confirm => t('confirmation.delete.branch') }, :class => 'btn btn-mini btn-danger' do 
       %i.icon-trash
   
 - else

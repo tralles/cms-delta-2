@@ -21,7 +21,7 @@ module ContentsHelper
 
       
     
-    css << ' inline_documents' if content_element_type.inline_documents && !content.documents.empty?
+    css << ' inline_documents' if content_element_type.inline_documents
 
     
 

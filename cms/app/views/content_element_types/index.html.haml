@@ -38,5 +38,5 @@
               .btn-group
                 = link_to 'Show', content_element_type_path(content_element_type)
                 = link_to 'Edit', edit_content_element_type_path(content_element_type)
-                = link_to 'Destroy', content_element_type_path(content_element_type), :method => :delete, :data => { :confirm => 'Are you sure?' }
+                = link_to 'Destroy', content_element_type_path(content_element_type), :method => :delete, :data => { :confirm => t('confirmation.delete.content_element_type') }
       
