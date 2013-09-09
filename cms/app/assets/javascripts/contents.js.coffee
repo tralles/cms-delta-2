@@ -38,7 +38,7 @@ jQuery ->
       </div>
       
       <div class="control-group">
-        <label class="control-label" for="align">Bild-Breite</label>
+        <label class="control-label" for="align">Bild-Ausrichtung</label>
         <div class="controls">
           <select id="align">
             <option value="">Ohne</option>

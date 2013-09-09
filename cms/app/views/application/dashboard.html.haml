@@ -40,9 +40,16 @@
 
           .span6
 
-            .box.alternate
+            .box
               .box-title
-                = project.name
+                = link_to project, :class => 'btn btn-small' do
+                  %i.icon-paperclip
+                  &nbsp;
+                  = project.name
+                  
+                
+                
+                
               .box-content.nopadding.condensed
                 %table.table.table-bordered.table-condensed.table-hover.table-striped
                   %tr

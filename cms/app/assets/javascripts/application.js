@@ -100,6 +100,19 @@ $(document).on('ready page:load', function() {
 	  }
   
   });
+  
+  
+  $( document ).ajaxStart(function() {
+    NProgress.start();
+    NProgress.set(0.5);
+  });
+  
+  
+  $( document ).ajaxStop(function() {
+    NProgress.done();
+    NProgress.remove();
+  });
+
 });
 
 $(document).on('page:fetch',   function() { NProgress.start(); NProgress.set(0.8); });

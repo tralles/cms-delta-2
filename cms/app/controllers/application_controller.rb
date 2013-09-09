@@ -5,7 +5,8 @@ class ApplicationController < ActionController::Base
   
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
- 
+ before_filter :set_start_time
+
   
   def dashboard
     redirect_to new_session_path('user') unless current_user
@@ -51,7 +52,10 @@ protected
   def set_locale
     I18n.locale = params[:locale] || I18n.default_locale
     @locale = I18n.locale
-    
+  end
+
+  def set_start_time
+    @start_time = Time.now.usec
   end
   
 end

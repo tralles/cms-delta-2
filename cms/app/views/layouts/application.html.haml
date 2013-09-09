@@ -29,7 +29,9 @@
       %content
         = yield
       
-      %footer
+      %footer.footer
+        = render :partial => 'layouts/footer'
+        
 
     = yield :scripts
     
