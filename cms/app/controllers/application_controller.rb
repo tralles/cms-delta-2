@@ -5,7 +5,7 @@ class ApplicationController < ActionController::Base
   
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
- before_filter :set_start_time
+  before_filter :set_start_time
 
   
   def dashboard
@@ -18,8 +18,8 @@ class ApplicationController < ActionController::Base
   
   
   def search 
-    @contents = Content.where(:project_id => params[:project_id]).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%")    
-#    puts @contents
+    @contents = Content.where(:project_id => params[:project_id]).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%").group('contents.id')
+    puts @contents
   end
   
   

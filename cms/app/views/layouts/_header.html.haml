@@ -65,9 +65,9 @@
           %ul.nav.pull-right
             - if @project
               
-              %li{ :style => ' display: none; ' }
+              %li
                 %form.navbar-search
-                  %input{ :id => 'search', :type => "text", :class => "search-query", :placeholder => "Inhalte suchen", :rel => "#{search_suggest_path(@project)}", :autocomplete => "off" }
+                  %input{ :id => 'search', :type => "text", :class => "search-query", :rel => "#{search_suggest_path(@project)}", :autocomplete => "off", :placeholder => 'Suche …' }
 
             
             %li.divider-vertical

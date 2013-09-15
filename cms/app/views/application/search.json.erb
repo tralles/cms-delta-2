@@ -1,0 +1,8 @@
+[
+  <% @contents.each do |content| %>
+    {
+      "title":"<%= content.rep @locale %>",
+      "href":"<%= project_content_path(content.project, content) %>"
+    }<%= ', ' unless content == @contents.last %>
+  <% end %>
+]
