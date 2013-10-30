@@ -9,7 +9,11 @@
       var uploader = new qq.FineUploader({
         element: document.getElementById('bootstrapped-fine-uploader'),
         request: {
+          <% if @content %>
           endpoint: '<%= create_upload_path(@project, @content.class.name, @content.id) %>'
+          <% else %>
+          endpoint: '<%= create_upload_path(@project, '-', 0) %>'
+          <% end %>
         },
         text: {
           uploadButton: '<div><i class="icon-hdd icon-white"></i> &nbsp; Datei(en) hochladen</div>'
@@ -46,7 +50,9 @@
             if( fileCount == addedFiles)
             {
               NProgress.done();
-              $('#documents').load('<%= uploaded_path(@project, @content.class.name, @content.id) %>');
+              <% if @content %>
+                $('#documents').load('<%= uploaded_path(@project, @content.class.name, @content.id) %>');
+              <% end %>
               NProgress.remove();
             }
           }

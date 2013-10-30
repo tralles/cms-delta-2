@@ -42,7 +42,7 @@ li.alert-error {
 
 
 
-#search
+header #search
 {
   width: 55px;
   -webkit-transition: width 1s ease-in-out;
@@ -51,7 +51,7 @@ li.alert-error {
   transition: width 1s ease-in-out;
 }
 
-#search:focus
+header #search:focus
 {
   width: 175px;
 }
