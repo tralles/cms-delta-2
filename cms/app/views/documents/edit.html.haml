@@ -10,18 +10,22 @@
         
       
       
-      = form_for([@project, @document]) do |f|
-        .fileupload.fileupload-new{"data-provides" => "fileupload"}
-          .fileupload-preview.thumbnail{:style => "width: 200px; height: 150px;"}
-          %div
-            %span.btn.btn-file
-              %span.fileupload-new Auswählen
-              %span.fileupload-exists Ändern
-              = f.file_field :document
-            %a.btn.fileupload-exists{"data-dismiss" => "fileupload", :href => "#"} Entfernen        
+      = simple_form_for([@project, @document]) do |f|
+        .row
+          .span3
       
-        
+            .fileupload.fileupload-new{"data-provides" => "fileupload"}
+              .fileupload-preview.thumbnail{:style => "width: 200px; height: 150px;"}
+              %div
+                %span.btn.btn-file
+                  %span.fileupload-new Auswählen
+                  %span.fileupload-exists Ändern
+                  = f.file_field :document
+                %a.btn.fileupload-exists{"data-dismiss" => "fileupload", :href => "#"} Entfernen        
       
+          .span3            
+            - if doctypes = @project.constant(:doctype)
+              = f.input :doctype, :as => :select, :collection => doctypes
 
         .form-actions
           = submit_tag 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }

@@ -20,10 +20,15 @@
             = @document.document_content_type
             %br
 
-            = "#{@document.width} x #{@document.height}"
+            = "#{@document.width} x #{@document.height} Pixel"
             %br
 
             = number_to_human_size @document.document_file_size
+            
+            %br
+            %br
+            = @document.doctype_name
+            
             
           %td{ :width => 85 }
     

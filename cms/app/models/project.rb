@@ -18,6 +18,9 @@ class Project < ActiveRecord::Base
   has_many :hosts, :dependent => :destroy
   accepts_nested_attributes_for :hosts, :allow_destroy => true
   
+  has_many :constants, :dependent => :destroy
+  accepts_nested_attributes_for :constants, :allow_destroy => true
+  
   validates_presence_of :name, :description
   
   
@@ -38,20 +41,14 @@ class Project < ActiveRecord::Base
     languages
   end
 
-
   def base 
     base = self.hosts.primary
     
     return "#{base.protocol}#{base.host}"
   end
-  
-  
-  
-  
-  
-  
+
+
   ##
-  
   def set_languages languages
   
     lng_before = self.languages
@@ -78,21 +75,17 @@ class Project < ActiveRecord::Base
     end
     
   end
-  
-  
-  
-  
-  
-  
-  
-  
-  
+
   def reorder_content_relation_type args = {}
   
     if crt = self.content_relation_types.where(:id => args.crt).first
       crt.position = args.position
       crt.save
     end
+  end
+
+  def constant(category)
+    Constant.all.where(:project_id => self.id).where(:category => category)
   end
 
 end

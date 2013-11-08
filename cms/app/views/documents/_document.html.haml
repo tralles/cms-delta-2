@@ -1,3 +1,4 @@
+- documentable = Documentable.where(:project => @project).where(:documentable_type => 'Content').where(:documentable_id => @content.id).where(:document_id => document.id).first
 %tr{ :id => "document_#{document.id}", :width => '100%' }
   %td.handle
 
@@ -10,16 +11,35 @@
   %td
     %strong
       = document.filetype
-    %span.muted
-      = " #{document.width} x #{document.height} Pixel "
-    %br
+    |
     = number_to_human_size document.document_file_size
+    %span.muted
+      = "| #{document.width} x #{document.height} Pixel "
+
+    - if documentable.doctype_name
+      %br
+      %strong Doctype:
+      = documentable.doctype_name
+
+    - unless documentable.title.blank?
+      %br
+      = documentable.title
+
+    - unless documentable.info.blank?
+      %br
+      = documentable.info
+
 
   %td
-
-  %td{ :width => 75 }
-    = link_to remove_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-danger btn-mini' do
-      %i.icon-remove
-      &nbsp;
-      Entfernen
-    
+    %nobr.pull-right
+      .btn-group
+        = link_to edit_project_documentable_path(@project, documentable), :remote => true, :class => 'btn btn-success btn-mini' do
+          %i.icon-cogs
+          &nbsp;
+          Einstellung
+        
+        = link_to remove_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
+          %i.icon-remove
+          &nbsp;
+          Entfernen
+        

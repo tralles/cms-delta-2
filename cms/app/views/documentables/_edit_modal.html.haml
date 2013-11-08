@@ -1,0 +1,19 @@
+#documentableswindow.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel
+      Bearbeiten
+
+  = simple_form_for([@project, @documentable], :remote => true, html: {class: 'form-horizontal' }) do |f|
+    .modal-body
+      - if doctypes = @project.constant(:doctype)
+        = f.input :doctype, :as => :select, :collection => doctypes
+      = f.input :title
+      = f.input :info
+      
+    
+    .modal-footer
+      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' } 
+        
+      
+      %button.btn.btn-inverse{"aria-hidden" => "true", "data-dismiss" => "modal"} Abbrehen

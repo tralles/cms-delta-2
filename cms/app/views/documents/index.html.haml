@@ -10,18 +10,37 @@
 
       
       %table.table.table-condensed.table-striped.table-bordered.table-hover
+        %tr
+          %th
+          %th
+            Metadaten
+          %th
+            Inhalt
+          %th
+            Actions
+
         - @documents.each do |document|
           %tr{ :id => "document#{document.id}" }
             %td{ :width => 50 }
               = link_to image_tag( document.document.url(:thumb) ), [document.project, document]
+            
             %td
+            
+            
               %strong
                 = document.filetype
+              |
+              = number_to_human_size document.document_file_size
+              |
               %span.muted
                 = " #{document.width} x #{document.height} Pixel "
+
               %br
-              = number_to_human_size document.document_file_size
-              
+              %span.muted
+                = document.document_file_name
+            
+              %br
+              = document.doctype_name
                 
             %td
               - document.documentables.each do |documentable|
@@ -52,12 +71,11 @@
       = paginate @documents
         
       %hr
-      
-      
+
       = render 'documents/button'
 
     .span3
       %h1
-        Filtern
+        Suche
+
       = render 'documents/search'  
-      

@@ -1,0 +1,7 @@
+
+$('#contendocuments').html("<%= j( render :partial => 'documents/contendocuments', :locals => { :documents => @content.documents } )  %>");
+
+$('#documentableswindow').modal('hide');
+$('#documentableswindow').remove();
+
+NProgress.done();

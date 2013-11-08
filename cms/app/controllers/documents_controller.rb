@@ -66,7 +66,7 @@ class DocumentsController < ApplicationController
   end
   
   def search 
-    @documents = @project.documents.search(params[:search])
+    @documents = @project.documents.search(params[:search]).doctype(params[:doctype])
     
     if @content
       @documents = @documents - @content.documents

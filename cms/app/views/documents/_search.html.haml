@@ -1,5 +1,9 @@
 = form_tag search_project_documents_path(@project), :class => 'navbar-search pull-left' do 
-  .input-append
-    = text_field_tag :search, params[:search], :class => 'input-block-level', :placeholder => 'Suchbegriff'
-    %button.btn 
-      Suchen
+  - if doctypes = @project.constant(:doctype)
+    = select_tag :doctype, options_from_collection_for_select(doctypes, :id, :name, params[:doctype]), include_blank: true
+
+
+  = text_field_tag :search, params[:search], :class => 'input-block-level', :placeholder => 'Dateiname'
+    
+  %button.btn 
+    Filtern

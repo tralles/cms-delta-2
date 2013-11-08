@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20130831174704) do
+ActiveRecord::Schema.define(version: 20131105205440) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -59,6 +59,7 @@ ActiveRecord::Schema.define(version: 20130831174704) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.boolean  "sys"
+    t.integer  "project_id"
   end
 
   create_table "content_element_types", force: true do |t|
@@ -190,6 +191,7 @@ ActiveRecord::Schema.define(version: 20130831174704) do
     t.integer  "height"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "doctype"
   end
 
   create_table "hosts", force: true do |t|

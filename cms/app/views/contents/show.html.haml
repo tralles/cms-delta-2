@@ -109,17 +109,33 @@
 
           %table.table.table-condensed.table-striped.table-bordered.table-hover
             - @content.documents.each do |document|
+              - documentable = Documentable.where(:project => @project).where(:documentable_type => 'Content').where(:documentable_id => @content.id).where(:document_id => document.id).first
+            
               %tr
                 %td{ :width => 50 }
                   = link_to image_tag( document.document.url(:thumb) ), [document.project, document]
                 %td
                   %strong
                     = document.filetype
+                  |
+                  = number_to_human_size document.document_file_size
+                  |
                   %span.muted
                     = " #{document.width} x #{document.height} Pixel "
-                  %br
-                  = number_to_human_size document.document_file_size
-         
+
+                  - if documentable.doctype_name
+                    %br
+                    %strong Doctype:
+                    = documentable.doctype_name
+              
+                  - unless documentable.title.blank?
+                    %br
+                    = documentable.title
+              
+                  - unless documentable.info.blank?
+                    %br
+                    = documentable.info
+           
       
       
       .form-actions

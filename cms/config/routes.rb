@@ -14,6 +14,9 @@ Delta2::Application.routes.draw do
   resources :projects do
   
     resources :hosts
+    resources :constants
+
+    resources :documentables
     
     resources :documents do
       collection do 

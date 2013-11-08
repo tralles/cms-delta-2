@@ -93,7 +93,18 @@ class PermittedParams < Struct.new(:params, :current_user)
   end
 
   def document_attributes
-    [:document]
+    [:doctype, :document]
+  end
+
+
+
+  # Documentable
+  def documentable
+    params.require(:documentable).permit(*documentable_attributes)
+  end
+
+  def documentable_attributes
+    [:doctype, :title, :info]
   end
 
 

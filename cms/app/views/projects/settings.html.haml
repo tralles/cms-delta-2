@@ -96,3 +96,23 @@
           %i.icon-plus
           &nbsp;
           Neuen Host anlegen
+            
+        
+        %br
+        %br
+        
+      %fieldset
+        %legend
+          %i.icon-cogs
+          &nbsp;
+          Projekt-Konstanten
+
+        #hosts
+          = render 'constants/project_index'
+          
+
+
+        = link_to new_project_constant_path(@project), :class => 'btn btn-primary btn-mini pull-right' do
+          %i.icon-plus
+          &nbsp;
+          Neue Konstante anlegen

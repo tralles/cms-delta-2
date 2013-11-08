@@ -29,6 +29,7 @@ class Document < ActiveRecord::Base
 
 
     scope :search, ->(search) { where("document_file_name LIKE ?", "%#{search}%") }
+    scope :doctype, ->(doctype) { where(:doctype => doctype) unless doctype.blank? }
 
 
 
@@ -52,5 +53,10 @@ class Document < ActiveRecord::Base
   end 
 
 
+  def doctype_name
+    if self.doctype
+      self.project.constant(:doctype).where(:id => self.doctype).first.name
+    end
+  end
 
 end

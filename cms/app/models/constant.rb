@@ -1,9 +1,11 @@
 class Constant < ActiveRecord::Base
 
+  belongs_to :project
 
   default_scope { order('category ASC, value ASC') }
   
   scope :category, ->(category) { where('constants.category = ?', category) unless category.nil? }
+  scope :global, ->{ where(:project_id => nil) }
   
 
   validates_presence_of :category, :name, :value, :art

@@ -17,4 +17,13 @@ class Documentable < ActiveRecord::Base
     rescue 
     end
   end
+  
+  
+  
+  def doctype_name
+    if self.doctype
+      self.project.constant(:doctype).where(:id => self.doctype).first.name
+    end
+  end
+  
 end

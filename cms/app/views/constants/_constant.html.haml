@@ -1,0 +1,20 @@
+%tr
+  %td= constant.category
+  %td= constant.name
+  %td= constant.value
+  %td= constant.art
+  %td
+    .btn-group
+      - if constant.sys
+        %button.btn.btn-mini{ :disabled => 'disabled' }
+          %i.icon-cogs
+          System-Konstante
+      
+      - else
+        = link_to edit_constant_path(constant), :class => 'btn btn-mini btn-success' do
+          %i.icon-edit
+          Bearbeiten
+      
+        = link_to constant, :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.constant') }, :class => 'btn btn-mini btn-danger' do
+          %i.icon-trash
+          Löshen

@@ -1,0 +1,5 @@
+$('#documentableswindow').remove();
+
+$('body').append("<%= j( render :partial => 'documentables/edit_modal' )  %>");
+
+$('#documentableswindow').modal({ backdrop: true, keyboard: false });

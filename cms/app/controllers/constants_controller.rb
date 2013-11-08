@@ -4,7 +4,7 @@ class ConstantsController < ApplicationController
   # GET /constants
   # GET /constants.json
   def index
-    @constants = Constant.all
+    @constants = Constant.global
   end
 
   # GET /constants/1
@@ -69,6 +69,6 @@ class ConstantsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def constant_params
-      params.require(:constant).permit(:category, :name, :value, :art)
+      params.require(:constant).permit(:category, :name, :value, :art, :project_id)
     end
 end

@@ -1,0 +1,10 @@
+%table.table.table-condensed.table-striped.table-bordered.table-hover
+  %tr
+    %th Category
+    %th Name
+    %th Value
+    %th Type
+    %th{ :width => 50 }
+
+  - @project.constants.each do |constant| 
+    = render constant
