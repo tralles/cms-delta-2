@@ -27,7 +27,7 @@
             
             %label.checkbox
               = check_box_tag :projects_ids, project.id, @user.projects.include?(project), :name => 'user[project_ids][]'
-              = project.name
+              = project.name.html_safe
     
           
                 

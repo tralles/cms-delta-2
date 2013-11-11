@@ -35,7 +35,7 @@
               %ul.unstyled
                 - @user.projects.each do |project|
                   %li
-                    = link_to project.name, project
+                    = link_to project.name.html_safe, project
                 
     
         .span5

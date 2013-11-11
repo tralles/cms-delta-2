@@ -7,7 +7,7 @@
       = link_to project_path(@project), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
         %i.pull-right.icon-chevron-left
 
-      = @project.name
+      = @project.name.html_safe
         
     %li
       = link_to project_content_types_path(@project) do

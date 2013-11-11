@@ -6,10 +6,10 @@
     .span6
 
       %h1 
-        = @project.name
+        = @project.name.html_safe
 
       %p.lead
-        = @project.description
+        = @project.description.html_safe
 
 
 

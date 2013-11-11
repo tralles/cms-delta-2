@@ -10,7 +10,7 @@
         = link_to projects_path(locale), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
           %i.pull-right.icon-chevron-up
 
-        = @project.name
+        = @project.name.html_safe
         
         
   

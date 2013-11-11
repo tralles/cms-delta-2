@@ -5,7 +5,7 @@
         
     %options
       .form-inputs
-        = f.input :ref_id                                 if @content.option 'ref'
-        = f.input :alpha_datum, :include_blank => true    if @content.option 'alpha'
-        = f.input :omega_datum, :include_blank => true    if @content.option 'omega'
+        = f.input :ref_id                                 if @content.option(:ref)
+        = f.input :alpha_datum, :include_blank => true    if @content.option(:alpha)
+        = f.input :omega_datum, :include_blank => true    if @content.option(:omega)
   %br

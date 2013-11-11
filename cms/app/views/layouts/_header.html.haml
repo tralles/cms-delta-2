@@ -37,7 +37,7 @@
                   - current_user.projects.each do |project|
                     %li
                       = link_to project do  
-                        = project.name
+                        = project.name.html_safe
 
 
                 

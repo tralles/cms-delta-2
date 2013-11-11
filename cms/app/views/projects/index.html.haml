@@ -20,7 +20,7 @@
           %tr
             %td
               = project.id
-            %td= link_to project.name, project_path(project)
+            %td= link_to project.name.html_safe, project_path(project)
             %td
               - if current_user.admin?
                 .btn-group
