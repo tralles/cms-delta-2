@@ -2,14 +2,13 @@
 #
 # =================================================
 
-ActionMailer::Base.default_url_options = { :host => "qb-portable.local:3000" }
+ActionMailer::Base.default_url_options = { :host => "qb-it.de" }
 ActionMailer::Base.delivery_method = :smtp
 ActionMailer::Base.smtp_settings = {
-                                      :address              => "mail.qb-publish.de",
-                                      :port                 => 25,
-                                      :domain               => 'qb-publish.de',
-                                      :user_name            => 'no-reply@qb-publish.de',
-                                      :password             => 'n0r3ply#qbp',
-                                      :authentication       => 'plain',
-                                      :enable_starttls_auto => false  
-                                   }  
+  :address              => "mail.qb-it.de",
+  :port                 => 25,
+  :domain               => 'qb-it.de',
+  :user_name            => 'no-reply@qb-it.de',
+  :password             => 'n0-r3ply',
+  :authentication       => 'plain',
+  :enable_starttls_auto => false  }  

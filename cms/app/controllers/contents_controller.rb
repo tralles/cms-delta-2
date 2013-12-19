@@ -47,7 +47,12 @@ class ContentsController < ApplicationController
       
         if params[:content_elements][:add]
           params[:content_elements][:add].each do |content_element_type, value|
-            @content.content_elements.build(:content_element_type_id => content_element_type, :language => @locale, :value => value).save
+            begin
+              @content.content_elements.build(:content_element_type_id => content_element_type, :language => @locale, :value => value).save
+            rescue 
+              flash[:error] = t('fehler.ascii')
+              @content.content_elements.build(:content_element_type_id => content_element_type, :language => @locale, :value => cleanup(value)).save
+            end
           end
         end
         @content.proof_bracketcommands
@@ -76,7 +81,12 @@ class ContentsController < ApplicationController
       
         if params[:content_elements][:add]
           params[:content_elements][:add].each do |content_element_type, value|
-            @content.content_elements.build(:content_element_type_id => content_element_type, :language => locale, :value => value).save
+            begin
+              @content.content_elements.build(:content_element_type_id => content_element_type, :language => locale, :value => value).save
+            rescue
+              flash[:error] = t('fehler.ascii')
+              @content.content_elements.build(:content_element_type_id => content_element_type, :language => locale, :value => cleanup(value)).save
+            end
           end
         end
 
@@ -84,8 +94,15 @@ class ContentsController < ApplicationController
         if params[:content_elements][:update]
           params[:content_elements][:update].each do |content_element_id, value|
             ce = @content.content_elements.where('content_elements.id = ?', content_element_id).first
-            ce.value = value
-            ce.save
+            
+            begin 
+              ce.value = value
+              ce.save
+            rescue 
+              flash[:error] = t('fehler.ascii')
+              ce.value = cleanup(value)
+              ce.save
+            end
           end
         end
         
@@ -138,6 +155,19 @@ class ContentsController < ApplicationController
         @contents     = @project.contents.direct unless @contents
       end
       
+    end
+
+
+    def cleanup(input)
+     encoding_options = {
+        :invalid           => :replace,  # Replace invalid byte sequences
+        :undef             => :replace,  # Replace anything not defined in ASCII
+        :replace           => '[?]',        # Use a blank for those replacements
+        :universal_newline => true       # Always break lines with \n
+      }
+      input = input.encode Encoding.find('ISO-8859-1'), encoding_options
+      
+      return input
     end
 
 

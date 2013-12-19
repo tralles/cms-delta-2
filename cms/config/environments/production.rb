@@ -77,7 +77,15 @@ Delta2::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
-  
+
+
+  config.middleware.use ExceptionNotification::Rack,
+    :email => {
+      :email_prefix => "CMS|delta II : ",
+      :sender_address => %{"notifier" <no-reply@qb-it.de>},
+      :exception_recipients => %w{tralles@qb-it.de}
+    }
+
   
   
 

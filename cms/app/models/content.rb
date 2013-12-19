@@ -30,7 +30,6 @@ class Content < ActiveRecord::Base
 
   
   scope :direct, -> { joins(:content_type).where('content_types.direct_edit = 1') }
-  scope :by_filename, ->(filename) { joins(:content_elements).where("REPLACE(URLENCODE(VALUE) COLLATE utf8_unicode_ci, '%20', '+') = ?", filename) unless filename.nil? }
 
 
 #       SELECT 		contents.id 														AS content_id,
@@ -166,6 +165,16 @@ class Content < ActiveRecord::Base
     
     repraesentant
 
+  end
+  
+  def filename(language)
+  
+    unless self.branches.empty?
+      branch = self.branches.first
+      filename = '/' + language.to_s + branch.route(language).route + '/' + CGI::escape(self.rep(language)) + '.htm'
+      
+      filename = filename.downcase
+    end
   end
   
   

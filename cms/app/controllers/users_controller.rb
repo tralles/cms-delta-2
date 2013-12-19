@@ -51,7 +51,7 @@ class UsersController < ApplicationController
   
   
   def logout
-    current_user.releaseContents
+    current_user.releaseContents if current_user
     
     sign_out current_user
     
