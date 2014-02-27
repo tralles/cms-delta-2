@@ -6,18 +6,18 @@
   
     %li.nav-header
       = link_to project_path(@project), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
-        %i.pull-right.icon-chevron-left
+        %i.pull-right.fa-fw.fa.fa-chevron-left
 
       = @project.name.html_safe
 
         
     %li
       = link_to project_content_relation_types_path(@project) do
-        %i.pull-right.icon-magnet
+        %i.pull-right.fa-fw.fa.fa-magnet
         Inhalts Typen Relationen
         
       
     %li
       = link_to new_project_content_relation_type_path(@project) do
-        %i.pull-right.icon-plus
+        %i.pull-right.fa-fw.fa.fa-plus
         Neue Inhalts Typen Relation

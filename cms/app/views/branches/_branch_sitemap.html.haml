@@ -1,6 +1,6 @@
 .line{ :class => cycle('even', 'odd') }
   - if @content && branch.contents.include?(@content) || (@branch && @branch == branch)
-    %i.icon-check.pull-right
+    %i.fa.fa-check.pull-right
   
   - if @content_type && branch.content_types.include?(@content_type)
     = link_to branch.route(@locale).name, project_content_type_contents_path( @project, @content_type, params.merge(:branch => branch) )

@@ -112,7 +112,6 @@ class DocumentsController < ApplicationController
 
 
   def uploaded
-      @project = Project.find(params[:project_id])
       if params["documentable_type"] == "Content"
         @content = Content.find(params[:documentable_id])
       end
@@ -125,7 +124,6 @@ class DocumentsController < ApplicationController
   private
     
     def set_project
-      @project = Project.find(params[:project_id])
       @content = Content.find(params[:content_id]) if params[:content_id]
     end
     

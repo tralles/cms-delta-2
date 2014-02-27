@@ -5,7 +5,7 @@ class ContentRelationTypesController < ApplicationController
   # GET /content_relation_types
   # GET /content_relation_types.json
   def index
-    @content_relation_types = ContentRelationType.all
+    @content_relation_types = ContentRelationType.by_project(@project)
   end
 
 
@@ -87,7 +87,6 @@ class ContentRelationTypesController < ApplicationController
     end
     
     def set_project
-      @project = Project.find(params[:project_id])
       @content_relation_types = @project.content_relation_types
     end
 

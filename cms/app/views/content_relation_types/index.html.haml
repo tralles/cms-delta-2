@@ -31,9 +31,9 @@
               %td{ :width => 100 }
                 .btn-group
                   = link_to edit_project_content_relation_type_path(content_relation_type.project, content_relation_type), :class => 'btn btn-mini btn-success' do
-                    %i.icon-edit
+                    %i.fa.fa-edit
                     Bearbeiten
   
                   = link_to [content_relation_type.project, content_relation_type], :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content_relation_type') }, :class => 'btn btn-mini btn-danger' do
-                    %i.icon-trash
+                    %i.fa.fa-trash-o
                     Löschen

@@ -25,10 +25,10 @@
               - if current_user.admin?
                 .btn-group
                   = link_to edit_project_path(project), :class => 'btn btn-mini btn-success' do
-                    %i.icon-edit
+                    %i.fa.fa-edit
                     Bearbeiten
                   
                   = link_to project_path(project), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.project') }, :class => 'btn btn-mini btn-danger' do
-                    %i.icon-trash
+                    %i.fa.fa-trash-o
                     Löschen
             

@@ -3,9 +3,9 @@
   .navbar-inner
     .container
       %a.btn.btn-navbar{:data => {:toggle=>"collapse", :target=>".nav-collapse"} }
-        %span.icon-bar
-        %span.icon-bar
-        %span.icon-bar
+        %span.fa.fa-bar
+        %span.fa.fa-bar
+        %span.fa.fa-bar
 
     
       = link_to 'http://www.artemisium.de', :target => '_blank', :class=>"brand" do
@@ -16,14 +16,14 @@
           %ul.nav
             %li
               = link_to '/' do 
-                %i.icon-dashboard
+                %i.fa.fa-dashboard
                 Dashboard
                 
                 
               
             %li.dropdown
               = link_to '#', :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do
-                %i.icon-list
+                %i.fa.fa-list
                 Projekte
                 %b.caret
             
@@ -44,19 +44,19 @@
             - if current_user.admin?
               %li.dropdown
                 = link_to '#', :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do
-                  %i.icon-fire
+                  %i.fa.fa-fire
                   Administration
                   %b.caret
               
                 %ul.dropdown-menu
                   %li
                     = link_to users_path do
-                      %i.icon-group
+                      %i.fa.fa-group
                       Alle User
                   %li.divider
                   %li
                     = link_to constants_path do
-                      %i.icon-cogs
+                      %i.fa.fa-cogs
                       Konstanten
 
                   
@@ -76,13 +76,13 @@
           
             %li.dropdown
               %a#drop1{:href => "#", :class => "dropdown-toggle", "data-toggle" => "dropdown", :role => "button"}
-                %i.icon-user
+                %i.fa.fa-user
                 = current_user.email
                 %b.caret
               %ul.dropdown-menu
                 %li
                   = link_to edit_user_path(current_user) do
-                    %i.icon-wrench
+                    %i.fa.fa-wrench
                     Einstellungen
           
           
@@ -90,12 +90,12 @@
                   = ''
                 %li
                   = link_to logout_path do
-                    %i.icon-off
+                    %i.fa.fa-off
                     Logout
     
       - else
         %ul.nav.pull-right
           %li
             = link_to new_session_path('user') do 
-              %i.icon-signin
+              %i.fa.fa-signin
               Login

@@ -52,18 +52,18 @@
               .btn-group.pull-right
               
                 = link_to edit_project_document_path(@project, document), :class => 'btn btn-mini btn-success' do
-                  %i.icon-edit
+                  %i.fa.fa-edit
                   &nbsp;
                   Bearbeiten
                 
                 - if current_user.admin? && document.documentables.empty?
                   = link_to project_document_path(@project, document), :remote => true, :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.document') }, :class => 'btn btn-mini btn-danger' do
-                    %i.icon-trash
+                    %i.fa.fa-trash-o
                     &nbsp;
                     Löschen
                 - else
                   %button.muted.btn.btn-mini{ :disabled => 'disabled' }
-                    %i.icon-ban-circle
+                    %i.fa.fa-ban-circle
                     &nbsp;
                     Löschen
               

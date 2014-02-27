@@ -1,0 +1,28 @@
+.container
+  .row
+    .span3
+      = render 'workspaces/menu'  
+    
+    .span6
+      %h1 Workspaces
+      
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
+        %tr
+          %th Intern
+          %th Name
+          %th Gruppe
+          %th{width: 100} Action
+      
+        - @workspaces.each do |workspace|
+          %tr
+            %td= link_to workspace.intern, [@project, workspace]
+            %td= workspace.name
+            %td= workspace.constellation
+            %td
+              .btn-group
+                = link_to edit_project_workspace_path(@project, workspace), :class => 'btn btn-mini btn-success' do
+                  %i.fa.fa-edit
+                  Bearbeiten
+                = link_to [@project, workspace], :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content_type') }, :class => 'btn btn-mini btn-danger' do
+                  %i.fa.fa-trash-o
+                  Löschen

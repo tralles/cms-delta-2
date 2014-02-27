@@ -17,7 +17,7 @@
       = simple_form_for(@project, html: {class: 'form-horizontal' }) do |f|
         %fieldset
           %legend
-            %i.icon-gear
+            %i.fa.fa-gear
             &nbsp;
             Basics
       
@@ -45,7 +45,7 @@
   
         %fieldset
           %legend
-            %i.icon-flag
+            %i.fa.fa-flag
             &nbsp;
             Internationalisierung
   
@@ -64,7 +64,7 @@
                       = lng.name
             .span4
               .alert.info                
-                %i.icon-warning-sign.icon-4x.pull-right
+                %i.fa.fa-warning-sign.fa.fa-4x.pull-right
                 %strong
                   Achtung
                 %p
@@ -83,7 +83,7 @@
         
       %fieldset
         %legend
-          %i.icon-cloud
+          %i.fa.fa-cloud
           &nbsp;
           Hosts
 
@@ -93,7 +93,7 @@
 
 
         = link_to new_project_host_path(@project), :class => 'btn btn-primary btn-mini pull-right', :remote => true do
-          %i.icon-plus
+          %i.fa.fa-plus
           &nbsp;
           Neuen Host anlegen
             
@@ -103,7 +103,7 @@
         
       %fieldset
         %legend
-          %i.icon-cogs
+          %i.fa.fa-cogs
           &nbsp;
           Projekt-Konstanten
 
@@ -113,6 +113,6 @@
 
 
         = link_to new_project_constant_path(@project), :class => 'btn btn-primary btn-mini pull-right' do
-          %i.icon-plus
+          %i.fa.fa-plus
           &nbsp;
           Neue Konstante anlegen

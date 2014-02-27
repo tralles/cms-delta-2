@@ -1,0 +1,19 @@
+.container
+  .row
+    .span3
+      = render 'workspaces/menu'  
+    
+    .span6
+      %h1 Workspace
+      
+      %p#notice= notice
+      
+      %p
+        %b Project:
+        = @workspace.project_id
+      %p
+        %b Intern:
+        = @workspace.intern
+      %p
+        %b Name:
+        = @workspace.name

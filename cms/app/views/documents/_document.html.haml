@@ -34,12 +34,12 @@
     %nobr.pull-right
       .btn-group
         = link_to edit_project_documentable_path(@project, documentable), :remote => true, :class => 'btn btn-success btn-mini' do
-          %i.icon-cogs
+          %i.fa.fa-cogs
           &nbsp;
           Einstellung
         
         = link_to remove_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
-          %i.icon-remove
+          %i.fa.fa-trash-o
           &nbsp;
           Entfernen
         

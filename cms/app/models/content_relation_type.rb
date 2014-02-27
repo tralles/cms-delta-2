@@ -11,4 +11,6 @@ class ContentRelationType < ActiveRecord::Base
   
   default_scope { order('position ASC') }
   
+  scope :by_project, lambda { |project| joins(:content_type).where('content_types.project_id = ?', project.id) unless project.nil? }
+  
 end

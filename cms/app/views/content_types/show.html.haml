@@ -50,11 +50,11 @@
           .form-actions
             .btn-group.pull-right
               = link_to edit_project_content_type_path(@project, @content_type), :class => 'btn btn-mini btn-success' do
-                %i.icon-edit
+                %i.fa.fa-edit
                 Bearbeiten
               
               = link_to project_content_type_path(@project, @content_type), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content_type') }, :class => 'btn btn-mini btn-danger' do
-                %i.icon-trash
+                %i.fa.fa-trash-o
                 Löschen
     
         .span9
@@ -83,13 +83,13 @@
                     %td{ :style => 'width: 50px;' }
                       .btn-group
                         = link_to edit_project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :class => 'btn btn-mini btn-success' do
-                          %i.icon-edit
+                          %i.fa.fa-edit
                         
                         = link_to project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
-                          %i.icon-trash
+                          %i.fa.fa-trash-o
             
             = link_to new_project_content_type_content_element_type_path(@project, @content_type), :class => 'btn btn-mini btn-primary pull-right' do
-              %i.icon-plus
+              %i.fa.fa-plus
               &nbsp;
               Neues Datenfeld
                     

@@ -1,7 +1,6 @@
 class DocumentablesController < ApplicationController
 
   def edit
-    @project        = Project.find(params[:project_id])
     @documentable   = Documentable.find(params[:id])
   end
 

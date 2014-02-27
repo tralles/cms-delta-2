@@ -16,7 +16,7 @@
       %br
       
       = link_to new_project_branch_path(@project), :class => 'btn btn-mini btn-primary pull-right' do
-        %i.icon-plus
+        %i.fa.fa-plus
         &nbsp;
         Neuen Hauptmenüpunkt anlegen
       
@@ -28,26 +28,26 @@
           %tr
             %td{:width => 35}
               %button.btn.btn-mini.btn-success
-                %i.icon-edit
+                %i.fa.fa-edit
             %td
               Bearbeiten
             
           %tr
             %td
               %button.btn.btn-mini.btn-primary
-                %i.icon-plus
+                %i.fa.fa-plus
             %td
               Untermenüpunkt anlegen
               
           %tr
             %td
-              %button.btn.btn-mini.btn-danger
-                %i.icon-trash        
+              %button.btn.btn-mini.fa.fa-trash-o
+                %i.fa.fa-trash-o        
             %td
               Löschen
         
       .alert.alert-error
-        %i.icon-warning-sign.icon-4x.pull-right
+        %i.fa.fa-warning-sign.fa.fa-4x.pull-right
         %strong
           Achtung
         %p

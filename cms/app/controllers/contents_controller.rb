@@ -136,7 +136,6 @@ class ContentsController < ApplicationController
     end
   
     def set_project
-      @project        = Project.find(params[:project_id])
       @branches       = @project.branches
 
       if params[:content_type_id]

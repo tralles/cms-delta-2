@@ -70,7 +70,6 @@ class ContentElementTypesController < ApplicationController
     end
     
     def set_project
-      @project = Project.find(params[:project_id])
       @content_type = ContentType.find(params[:content_type_id])
       @content_element_types = @content_type.content_element_types
     end

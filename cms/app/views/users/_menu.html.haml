@@ -11,12 +11,12 @@
         = @user.id
       %li
         = link_to @user do
-          %i.icon-user.pull-right
+          %i.fa.fa-user.pull-right
           Anzeigen
             
       %li
         = link_to edit_user_path(@user) do
-          %i.icon-edit.pull-right
+          %i.fa.fa-edit.pull-right
           Bearbeiten
   
     - if current_user.admin?
@@ -25,5 +25,5 @@
         
       %li
         = link_to new_user_path do
-          %i.icon-plus.pull-right
+          %i.fa.fa-plus.pull-right
           User anlegen

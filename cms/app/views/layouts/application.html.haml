@@ -26,15 +26,17 @@
       %header
         = render :partial => 'layouts/header'
 
+
       %content
         = render :partial => 'layouts/errors'
         = yield
-      
+
+
       %footer.footer
         = render :partial => 'layouts/footer'
-        
+
 
     = yield :scripts
-    
+
     :javascript
       NProgress.done();

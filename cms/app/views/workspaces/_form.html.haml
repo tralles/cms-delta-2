@@ -1,0 +1,11 @@
+= simple_form_for([@project, @workspace], html: {class: 'form-horizontal' }) do |f|
+
+  -# = f.error_notification
+
+  .form-inputs
+    = f.input :intern
+    = f.input :constellation
+    = f.input :name
+
+  .form-actions
+    = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }

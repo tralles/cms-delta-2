@@ -60,7 +60,6 @@ class HostsController < ApplicationController
     end
     
     def set_project
-      @project = Project.find(params[:project_id])
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

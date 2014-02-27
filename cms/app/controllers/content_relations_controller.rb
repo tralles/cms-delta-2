@@ -7,7 +7,6 @@ class ContentRelationsController < ApplicationController
   def new 
     @content_relation                         = ContentRelation.new
     
-    @project                                  = Project.find(params[:project_id])
     @content                                  = @project.contents.where(:id => params[:content_id]).first
     @content_relation_type                    = @project.content_relation_types.where(:id => params[:content_relation_type_id]).first
     @content_type                             = @content_relation_type.relative_type
@@ -22,7 +21,6 @@ class ContentRelationsController < ApplicationController
 
       @content_relation                         = ContentRelation.new
       
-      @project                                  = Project.find(params[:project_id])
       @content                                  = @project.contents.where(:id => params[:content_id]).first
       @content_relation_type                    = @project.content_relation_types.where(:id => params[:content_relation_type_id]).first
       @content_type                             = @content_relation_type.relative_type
@@ -62,7 +60,6 @@ class ContentRelationsController < ApplicationController
 
   def destroy 
   
-#    @project = Project.find(params[:project_id])
 #    @content = Content.find(params[:content_id])
 #    @crt     = ContentRelationType.find(params[:content_relation_type_id])
     @cr      = ContentRelation.find(params[:id])

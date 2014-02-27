@@ -6,6 +6,7 @@ class ApplicationController < ActionController::Base
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
   before_filter :set_start_time
+  before_filter :init_project
 
   
   def dashboard
@@ -40,6 +41,7 @@ class ApplicationController < ActionController::Base
   rescue_from CanCan::AccessDenied do |exception|
     redirect_to root_url, :alert => exception.message
   end
+  
 
 protected
 
@@ -56,6 +58,26 @@ protected
 
   def set_start_time
     @start_time = Time.now.usec
+  end
+  
+  def init_project
+    @project  = Project.find(params[:project_id]) if params[:project_id]
+    if @project
+      @workspaces = @project.workspaces.group_by &:constellation
+    end
+    
+    if params[:constellation]
+      session[:workspace] = [] unless session[:workspace]
+      session[:workspace][@project.id] = {} unless session[:workspace][@project.id]
+      if params[:workspace]
+        session[:workspace][@project.id][params[:constellation]] = params[:workspace].to_i
+      else
+        session[:workspace][@project.id][params[:constellation]] = 0
+      end
+      
+      redirect_to url_for(params.except(:constellation, :workspace))
+    end
+    
   end
   
 end

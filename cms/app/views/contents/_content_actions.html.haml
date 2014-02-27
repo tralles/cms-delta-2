@@ -3,17 +3,17 @@
 
   - if content.user && (current_user.admin? || content.user == current_user )
     = link_to close_project_content_type_content_path(@project, content.content_type, content), :class => 'btn btn-inverse btn-mini' do
-      %i.icon-unlock
+      %i.fa.fa-unlock
       - if large
         Entsperren
 
   - if content.user.nil? || content.user == current_user || current_user.admin?
     = link_to edit_project_content_type_content_path(@project, content.content_type, content, :locale => @locale), :class => 'btn btn-mini btn-success' do
-      %i.icon-edit
+      %i.fa.fa-edit
       - if large
         Bearbeiten
     
     = link_to project_content_type_content_path(@project, content.content_type, content), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content') }, :class => 'btn btn-mini btn-danger' do
-      %i.icon-trash
+      %i.fa.fa-trash-o
       - if large
         Löschen

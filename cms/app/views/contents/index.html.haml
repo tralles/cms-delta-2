@@ -13,7 +13,7 @@
 
         - if @branch
           %strong
-            %i.icon-double-angle-right
+            %i.fa.fa-double-angle-right
             = @branch.route(@locale).name
         
           
@@ -37,7 +37,7 @@
           %th
           %th
       
-        %tbody{ :class => "#{'sortable' if @branch}", :data => { :update => { :url => sort_project_branch_path(@project, @branch) } } }
+        %tbody{ :class => "#{'sortable' if @branch}", :data => { :update => { :url => (@branch) ? sort_project_branch_path(@project, @branch) : '' } } }
           - @contents.each do |content|
             %tr{ :id => "content_#{content.id}", :width => '100%' }
               - if @branch
@@ -50,13 +50,13 @@
                   
                 - if content.user
                   %small.muted.pull-right{ :title => l( content.updated_at ) }
-                    %i.icon-lock
+                    %i.fa.fa-lock
                     &nbsp;
                     = content.user.username if content.user
   
                 - unless content.branches.empty?
                   %strong.muted.pull-right
-                    %i.icon-sitemap
+                    %i.fa.fa-sitemap
                     &nbsp;
                 
               - unless @content_type
@@ -74,7 +74,7 @@
       
       - if @content_type
         = link_to new_project_content_type_content_path(@project, @content_type, params.merge(:branch => @branch)), :class => 'btn btn-mini btn-primary pull-right' do 
-          %i.icon-plus
+          %i.fa.fa-plus
           &nbsp;
           Neuen
           %strong

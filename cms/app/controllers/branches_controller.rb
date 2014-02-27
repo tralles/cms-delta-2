@@ -152,7 +152,6 @@ class BranchesController < ApplicationController
     end
     
     def set_project
-      @project = Project.find(params[:project_id])
       @parent = nil 
       @parent = Branch.find(params[:branch_id]) if params[:branch_id]
       @branches = @project.branches
