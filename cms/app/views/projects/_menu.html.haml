@@ -9,13 +9,23 @@
       %li.nav-header
         = link_to projects_path(locale), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
           %i.pull-right.fa-fw.fa.fa-chevron-up
-
+        %i.fa.fa-leaf
+        &nbsp;
         = @project.name.html_safe
 
-      %li{ :class => "#{ (controller.controller_name == 'branches') ? 'active' : '' }" }
-        = link_to project_branches_path(@project) do
-          %i.pull-right.fa-fw.fa.fa-sitemap
-          Baumstruktur
+
+      - if @project.content_types
+        %li{ :class => "#{ (@content_type.nil? && @contents) ? 'active' : '' }" }
+          = link_to project_contents_path(@project) do
+            %i.pull-right.fa-fw.fa.fa-file
+            Alle Inhalte
+
+        -  @project.content_types.direct.each do |ct|
+          %li{ :class => "#{(@content_type == ct) ? 'active' : ''}" }
+            = link_to project_content_type_contents_path(@project, ct) do
+              %i.pull-right.fa-fw.fa.fa-file-text
+              = ct.name
+
 
       - if @workspaces
         - @workspaces.each do |constellation,workspaces|
@@ -37,23 +47,7 @@
                   %i.pull-right.fa-fw.fa.fa-check
                 = workspace.name
 
-      - if @project.content_types
-        %li.nav-header
-          %i.fa.fa-edit
-          &nbsp;
-          Redaktion
-        %li{ :class => "#{ (@content_type.nil? && @contents) ? 'active' : '' }" }
-          = link_to project_contents_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-file
-            Alle Inhalte
 
-        -  @project.content_types.direct.each do |ct|
-          %li{ :class => "#{(@content_type == ct) ? 'active' : ''}" }
-            = link_to project_content_type_contents_path(@project, ct) do
-              %i.pull-right.fa-fw.fa.fa-file-text
-              = ct.name
-          
-      
       %li.nav-header
         %i.fa.fa-camera-retro
         &nbsp;
@@ -62,10 +56,13 @@
         = link_to project_documents_path(@project) do
           %i.pull-right.fa-fw.fa.fa-picture-o
           Medienbibliothek
-      
-    
-    
-  
+
+      %li{ :class => "#{ (controller.controller_name == 'branches') ? 'active' : '' }" }
+        = link_to project_branches_path(@project) do
+          %i.pull-right.fa-fw.fa.fa-sitemap
+          Baumstruktur
+
+
     - if current_user.admin?
 
       %li.nav-header
