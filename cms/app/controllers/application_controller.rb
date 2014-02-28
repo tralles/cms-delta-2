@@ -62,6 +62,7 @@ protected
   
   def init_project
     @project  = Project.find(params[:project_id]) if params[:project_id]
+    @project  = Project.find(params[:id]) if params[:id] && controller_name == 'projects'
     if @project
       @workspaces = @project.workspaces.group_by &:constellation
     end
@@ -76,6 +77,14 @@ protected
       end
       
       redirect_to url_for(params.except(:constellation, :workspace))
+    end
+    
+    @filter_workspaces  = []
+    
+    if session[:workspace] && session[:workspace][@project.id]
+      session[:workspace][@project.id].each do |c,ws|
+        @filter_workspaces << ws if ws > 0
+      end
     end
     
   end

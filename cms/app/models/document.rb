@@ -2,6 +2,9 @@ class Document < ActiveRecord::Base
 
 
   belongs_to :project
+
+  has_many :workspaceables, :as => :workspaceable, :dependent => :destroy
+  has_many :workspaces, :through => :workspaceables
   
   has_many :documentables, :dependent => :destroy
 

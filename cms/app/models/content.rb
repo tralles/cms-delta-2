@@ -20,6 +20,8 @@ class Content < ActiveRecord::Base
   has_many :documentables, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :documentables
 
+  has_many :workspaceables, :as => :workspaceable, :dependent => :destroy
+  has_many :workspaces, :through => :workspaceables
 
   has_many :content_relations, :dependent => :destroy
   has_many :inverse_content_relations, :class_name => "ContentRelation", :foreign_key => "relative_id"
@@ -30,6 +32,7 @@ class Content < ActiveRecord::Base
 
   
   scope :direct, -> { joins(:content_type).where('content_types.direct_edit = 1') }
+  scope :by_workspace, ->(workspaces) { joins(:workspaces).where('workspaces.id IN(?)', workspaces ) unless workspaces.empty? }
 
 
 #       SELECT 		contents.id 														AS content_id,

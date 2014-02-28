@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140227101423) do
+ActiveRecord::Schema.define(version: 20140228132940) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -274,6 +274,14 @@ ActiveRecord::Schema.define(version: 20140227101423) do
 
   add_index "users_to_projects", ["project_id"], name: "index_users_to_projects_on_project_id", using: :btree
   add_index "users_to_projects", ["user_id"], name: "index_users_to_projects_on_user_id", using: :btree
+
+  create_table "workspaceables", force: true do |t|
+    t.integer  "workspace_id"
+    t.string   "workspaceable_type"
+    t.integer  "workspaceable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "workspaces", force: true do |t|
     t.integer  "project_id"

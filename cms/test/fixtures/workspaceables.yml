@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  workspace_id: 1
+  workspaceable_type: MyString
+  workspaceable_id: 1
+
+two:
+  workspace_id: 1
+  workspaceable_type: MyString
+  workspaceable_id: 1

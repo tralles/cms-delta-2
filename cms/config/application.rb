@@ -23,6 +23,7 @@ module Delta2
     I18n.default_locale = :de
     config.encoding = "utf-8"
     
+    I18n.enforce_available_locales = false
     
     config.generators do |g|
       g.template_engine :haml

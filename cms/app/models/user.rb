@@ -11,6 +11,9 @@ class User < ActiveRecord::Base
   has_many :responsibilities, :class_name => "UsersToProjects"
   has_many :projects, :through => :responsibilities
 
+  has_many :workspaceables, :as => :workspaceable, :dependent => :destroy
+  has_many :workspaces, :through => :workspaceables
+
   validates_presence_of :name, :surname, :email
 
   has_many :contents

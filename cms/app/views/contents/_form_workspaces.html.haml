@@ -1,0 +1,15 @@
+- if @workspaces
+  %hr
+  .form-inputs
+    = hidden_field_tag 'content[workspace_ids][]'
+    - @workspaces.each do |constellation,workspaces|
+      .control-group
+        .control-label
+          = constellation
+
+        .controls
+          - workspaces.each do |workspace|
+            - checked = ( @content && @content.workspaces && @content.workspaces.include?(workspace) )  ? true : false
+            %label.checkbox
+              = check_box_tag 'content[workspace_ids][]', workspace.id, checked
+              = workspace.name

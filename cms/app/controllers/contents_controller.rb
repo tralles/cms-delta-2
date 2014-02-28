@@ -140,18 +140,18 @@ class ContentsController < ApplicationController
 
       if params[:content_type_id]
         @content_type = ContentType.find(params[:content_type_id]) 
-        @contents     = @content_type.contents.direct
+        @contents     = @content_type.contents.direct.by_workspace(@filter_workspaces)
         # puts 'content_type_id'
         # puts @contents
       end
       
       if params[:branch]
         @branch       = @project.branches.where('branches.id = ?', params[:branch]).first 
-        @contents     = (@content_type) ? @branch.contents.direct.where(:content_type => @content_type) : @branch.contents
+        @contents     = (@content_type) ? @branch.contents.direct.by_workspace(@filter_workspaces).where(:content_type => @content_type) : @branch.contents
         # puts 'branch'
         # puts @contents
       else
-        @contents     = @project.contents.direct unless @contents
+        @contents     = @project.contents.direct.by_workspace(@filter_workspaces) unless @contents
       end
       
     end
