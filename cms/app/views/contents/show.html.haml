@@ -27,7 +27,7 @@
             
             
 
-        %dl
+        %dl.dl-horizontal
           - @content.content_elements.lang(@locale).each do |ce|
             %dt
               = ce.content_element_type.name
@@ -39,9 +39,25 @@
               
               - else
                 = ce.html(@locale)
-              
-              
-            
+              &nbsp;              
+
+
+
+
+
+      - unless @content.workspaces.empty?
+        %dl.dl-horizontal
+          - @content.workspaces.group_by(&:constellation).each do |constellation, workspaces|
+            %dt= constellation
+            %dd
+              - workspaces.each do |workspace|
+                = workspace.name
+                %br
+
+
+
+
+
       - if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega)
         %fieldset
           %legend
@@ -70,6 +86,7 @@
 
 
 
+
       - unless @content.content_type.content_relation_types.empty?
         %br
         %hr
@@ -93,6 +110,7 @@
                   %div{ :id => content_relation_type.intern, :class => "tab-pane #{'active' if content_relation_type == @content.content_type.content_relation_types.first} " }
                     
                     = render :partial => 'contents/show_relations_relationtable', :locals => { :content_relation_type => content_relation_type, :content => @content } 
+
 
 
 

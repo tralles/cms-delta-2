@@ -68,6 +68,7 @@ $(document).on('ready page:load', function() {
                           autoresize: false
                         });
                         
+  $('[rel=tooltip]').tooltip(); 
 
 
 	$('form').on('submit',   function() { 

@@ -32,18 +32,10 @@ class Content < ActiveRecord::Base
 
   
   scope :direct, -> { joins(:content_type).where('content_types.direct_edit = 1') }
-  scope :by_workspace, ->(workspaces) { joins(:workspaces).where('workspaces.id IN(?)', workspaces ) unless workspaces.empty? }
+  scope :by_content_type, ->(content_type) { joins(:content_type).where('content_types.id = ?', content_type) if content_type }
+  scope :by_workspace, ->(workspaces) { joins(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id').having('count(workspaces.id) >= ?', workspaces.size) unless workspaces.empty? }
 
 
-#       SELECT 		contents.id 														AS content_id,
-#       			REPLACE(URLENCODE(VALUE) COLLATE utf8_unicode_ci, '%20', '+') 		AS filename
-#       
-#       FROM 		content_elements 
-#       LEFT JOIN 	contents ON (contents.id = content_elements.content_id)
-#       
-#       WHERE		contents.project_id = 1
-#       
-#       HAVING 		filename = 'test+1'
 
 
 

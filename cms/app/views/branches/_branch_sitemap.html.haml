@@ -2,10 +2,6 @@
   
   - if @content && branch.contents.include?(@content) || (@branch && @branch == branch)
     %i.fa.fa-check.pull-right
-  - else
-    - contentsforbranch = (@content_type) ? branch.contents.direct.by_workspace(@filter_workspaces).where(:content_type => @content_type) : branch.contents
-    - if contentsforbranch.size > 0
-      %small.badge.badge-info.pull-right= contentsforbranch.size
   
   - if @content_type && branch.content_types.include?(@content_type)
     = link_to branch.route(@locale).name, project_content_type_contents_path( @project, @content_type, params.merge(:branch => branch) )

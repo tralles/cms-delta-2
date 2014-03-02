@@ -142,7 +142,10 @@ small.badge
   opacity: .25;
 }
 
-
+.tooltip-inner {
+    white-space:pre;
+    max-width:none;
+}
 
 
 
