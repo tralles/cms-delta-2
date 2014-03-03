@@ -7,7 +7,7 @@ if ($("textarea.inline_documents").length > 0) {
   $("textarea.inline_documents").each(function(index) {
     $(".documentactions").remove();
     if ($("#docpoover .line").length > 0) {
-      return $(this).after("<div class=\"documentactions\"><span class=\"documentaction btn btn-mini btn-info\" rel=\"" + $(this).attr("id") + "\"><i class=\"icon-picture\" /> Dokumente</span></div>");
+      return $(this).after("<div class=\"documentactions\"><span class=\"documentaction btn btn-mini btn-info\" rel=\"" + $(this).attr("id") + "\"><i class=\"fa fa-picture-o\" /> Dokumente</span></div>");
     }
   });
   $('.documentaction').popover({
