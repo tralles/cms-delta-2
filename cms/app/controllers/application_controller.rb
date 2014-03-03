@@ -61,30 +61,37 @@ protected
   end
   
   def init_project
+    @filter_workspaces  = []
     @project  = Project.find(params[:project_id]) if params[:project_id]
     @project  = Project.find(params[:id]) if params[:id] && controller_name == 'projects'
-    if @project
-      @workspaces = @project.workspaces.group_by &:constellation
-    end
-    
-    if params[:constellation]
-      session[:workspace] = [] unless session[:workspace]
-      session[:workspace][@project.id] = {} unless session[:workspace][@project.id]
-      if params[:workspace]
-        session[:workspace][@project.id][params[:constellation]] = params[:workspace].to_i
-      else
-        session[:workspace][@project.id][params[:constellation]] = 0
+
+    if current_user && ( (@project && ( current_user.projects.include?(@project) || current_user.admin? )) || @project.nil? )
+
+      if @project
+        @workspaces = @project.workspaces.group_by &:constellation
+        
+        if params[:constellation]
+          session[:workspace] = [] unless session[:workspace]
+          session[:workspace][@project.id] = {} unless session[:workspace][@project.id]
+          if params[:workspace]
+            session[:workspace][@project.id][params[:constellation]] = params[:workspace].to_i
+          else
+            session[:workspace][@project.id][params[:constellation]] = 0
+          end
+          
+          redirect_to url_for(params.except(:constellation, :workspace))
+        end
+        
+        
+        if session[:workspace] && session[:workspace][@project.id]
+          session[:workspace][@project.id].each do |c,ws|
+            @filter_workspaces << ws if ws > 0
+          end
+        end
       end
-      
-      redirect_to url_for(params.except(:constellation, :workspace))
-    end
-    
-    @filter_workspaces  = []
-    
-    if session[:workspace] && session[:workspace][@project.id]
-      session[:workspace][@project.id].each do |c,ws|
-        @filter_workspaces << ws if ws > 0
-      end
+
+    else
+      redirect_to root_path
     end
     
   end
