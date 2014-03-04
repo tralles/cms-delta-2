@@ -11,15 +11,16 @@ admin = User.create!({:email => "tralles@qb-it.de", :name => 'Marco', :surname =
 languages = Constant.create!({ :category => 'languages', :name => 'Deutsch', :value => 'de', :art => 'String', :sys => true })
 languages = Constant.create!({ :category => 'languages', :name => 'Englisch', :value => 'en', :art => 'String', :sys => false })
 
-fields = Constant.create!({ :category => 'fields', :name => 'Text : Einzeilig', :value => 'textfield', :art => 'String', :sys => true })
-fields = Constant.create!({ :category => 'fields', :name => 'Text : Mehrzeilig', :value => 'textarea', :art => 'Text', :sys => true })
-
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Datum', :value => 'date', :art => 'Date', :sys => true })
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Uhrzeit', :value => 'time', :art => 'Text', :sys => true })
 
+fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Ziel-Inhalts Typ (matches intern)', :value => 'ContentType', :art => 'reference', :sys => true })
+fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Konstante (matches intern)', :value => 'Constant', :art => 'reference', :sys => true })
+
 fields = Constant.create!({ :category => 'fields', :name => 'Checkbox', :value => 'boolean', :art => 'Checkbox', :sys => true })
 
-fields = Constant.create!({ :category => 'fields', :name => 'Ziel : Inhalts Typ (matches intern)', :value => 'ContentType', :art => 'reference', :sys => true })
+fields = Constant.create!({ :category => 'fields', :name => 'Text : Einzeilig', :value => 'textfield', :art => 'String', :sys => true })
+fields = Constant.create!({ :category => 'fields', :name => 'Text : Mehrzeilig', :value => 'textarea', :art => 'Text', :sys => true })
 
 fields = Constant.create!({ :category => 'relations', :name => 'n:m', :value => 'n:m', :art => 'relation', :sys => true })
 

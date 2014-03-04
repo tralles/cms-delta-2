@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140228132940) do
+ActiveRecord::Schema.define(version: 20140303195000) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
