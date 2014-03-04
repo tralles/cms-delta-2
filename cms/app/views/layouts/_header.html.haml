@@ -63,15 +63,15 @@
                 
                 
           %ul.nav.pull-right
-            - if @project
+            - if @project && @project.id
               
               %li
                 %form.navbar-search
                   %input{ :id => 'search', :type => "text", :class => "search-query", :rel => "#{search_suggest_path(@project)}", :autocomplete => "off", :placeholder => 'Suche …' }
 
             
-            %li.divider-vertical
-              = ''
+              %li.divider-vertical
+                = ''
           
           
             %li.dropdown

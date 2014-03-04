@@ -155,7 +155,7 @@ class Content < ActiveRecord::Base
     repraesentant = ''
     self.content_elements.where('content_elements.language = ?', language).each do |ce|
       trenner = (repraesentant.empty?) ? '' : ' : '
-      repraesentant = repraesentant + trenner + ce.value if ce.content_element_type.badge
+      repraesentant = repraesentant + trenner + ce.deep_value if ce.content_element_type.badge
     end
     
     repraesentant

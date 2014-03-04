@@ -6,6 +6,7 @@ class ContentElement < ActiveRecord::Base
 
   belongs_to :content
   belongs_to :content_element_type
+  
 
 
   scope :lang, ->(lang) { where(:language => lang) unless lang.nil? }
@@ -20,6 +21,8 @@ class ContentElement < ActiveRecord::Base
     if self.content_element_type.field_type == 'ContentType'
       content = self.content.project.contents.where(:id => self.value).first
       value = (content) ? content.rep(language) : self.value
+    elsif self.content_element_type.field_type == 'Constant'
+      value = self.deep_value
     else
       value = self.value
     end
@@ -97,6 +100,40 @@ class ContentElement < ActiveRecord::Base
   
     return doc
   
+  end
+  
+  
+  
+  def deep_value
+    ausgabe = ''
+  
+    case self.content_element_type.field_type
+      when 'Constant'  
+        constant = self.project.constants.where(:name => self.content_element_type.intern).first
+        unless constant.value.blank?
+          index       = read_attribute(:value)
+          liste       = eval constant.value
+          collection  = liste[self.language]
+          
+          newlist     = {}
+          collection.each { |elm| newlist[elm[1]] = elm[0] }
+          
+          val       = newlist[index]
+        end
+        
+        ausgabe = val if val
+  
+      else
+        ausgabe = read_attribute(:value)
+
+    end
+    
+    return ausgabe
+
+  end
+  
+  def project
+    return self.content.project
   end
 
 

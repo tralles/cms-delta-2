@@ -5,7 +5,7 @@ class WorkspacesController < ApplicationController
   # GET /workspaces
   # GET /workspaces.json
   def index
-    @workspaces = Workspace.all
+    @workspaces = @project.workspaces
   end
 
   # GET /workspaces/1
@@ -30,7 +30,7 @@ class WorkspacesController < ApplicationController
 
     respond_to do |format|
       if @workspace.save
-        format.html { redirect_to [@project, @workspace], notice: 'Workspace was successfully created.' }
+        format.html { redirect_to project_workspaces_url(@project), notice: 'Workspace was successfully created.' }
         format.json { render action: 'show', status: :created, location: [@project, @workspace] }
       else
         format.html { render action: 'new' }
@@ -44,7 +44,7 @@ class WorkspacesController < ApplicationController
   def update
     respond_to do |format|
       if @workspace.update(workspace_params)
-        format.html { redirect_to [@project, @workspace], notice: 'Workspace was successfully updated.' }
+        format.html { redirect_to project_workspaces_url(@project), notice: 'Workspace was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }

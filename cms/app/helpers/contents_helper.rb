@@ -38,6 +38,17 @@ module ContentsHelper
 
         ausgabe = select_tag identifier, options_for_select(collection, value), :include_blank => true, :class => "input-block-level#{css}"
 
+      when 'Constant'
+
+        constant = @project.constants.where(:name => content_element_type.intern).first
+        collection = []
+        unless constant.value.blank?
+          liste = eval constant.value
+          collection = liste[@locale.to_s]
+        end
+
+        ausgabe = select_tag identifier, options_for_select(collection, value), :include_blank => true, :class => "input-block-level#{css}"
+
 
       when 'textarea'
         css << ' redactor' if content_element_type.wysiwyg

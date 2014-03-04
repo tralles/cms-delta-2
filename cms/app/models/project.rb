@@ -8,6 +8,7 @@ class Project < ActiveRecord::Base
   has_many :workspaces, :dependent => :destroy
   
   has_many :constant_relations, :as => :configurable
+  has_many :constants, :through => :constant_relations
   
   has_many :content_types, :dependent => :destroy
   
