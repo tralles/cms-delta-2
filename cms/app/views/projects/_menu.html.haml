@@ -48,19 +48,22 @@
                 = workspace.name
 
 
-      %li.nav-header
-        %i.fa.fa-camera-retro
-        &nbsp;
-        Design
-      %li{ :class => "#{ (controller.controller_name == 'documents') ? 'active' : '' }" }
-        = link_to project_documents_path(@project) do
-          %i.pull-right.fa-fw.fa.fa-picture-o
-          Medienbibliothek
-
-      %li{ :class => "#{ (controller.controller_name == 'branches') ? 'active' : '' }" }
-        = link_to project_branches_path(@project) do
-          %i.pull-right.fa-fw.fa.fa-sitemap
-          Baumstruktur
+      - if can?(:read, :documents) || can?(:read, :branches)
+        %li.nav-header
+          %i.fa.fa-camera-retro
+          &nbsp;
+          Design
+        - if can?(:read, :documents)
+          %li{ :class => "#{ (controller.controller_name == 'documents') ? 'active' : '' }" }
+            = link_to project_documents_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-picture-o
+              Medienbibliothek
+  
+        - if can?(:read, :branches)
+          %li{ :class => "#{ (controller.controller_name == 'branches') ? 'active' : '' }" }
+            = link_to project_branches_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-sitemap
+              Baumstruktur
 
 
     - if current_user.admin?

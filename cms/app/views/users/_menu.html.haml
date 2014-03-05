@@ -6,9 +6,10 @@
   %ul.nav.nav-list
     - if @user && !@user.new_record?
       %li.nav-header
-        %thin
-          User 
-        = @user.id
+        %thin.pull-right.muted
+          ID
+          = @user.id
+        = @user.email
       %li
         = link_to @user do
           %i.fa.fa-user.pull-right

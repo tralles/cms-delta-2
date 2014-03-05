@@ -6,7 +6,6 @@ Delta2::Application.routes.draw do
 
   resources :users
   resources :constants
-  resources :permissions
     
   
   
@@ -88,6 +87,7 @@ Delta2::Application.routes.draw do
         post 'sort'
       end
     end  
+    
 
     member do
       match 'settings', :via => :all

@@ -29,7 +29,7 @@
 
         %dl.dl-horizontal
           - @content.content_elements.lang(@locale).each do |ce|
-            %dt
+            %dt{ :class => "#{(ce.html(@locale).blank?) ? 'muted' : '' }" }
               = ce.content_element_type.name
             %dd
               - if ce.content_element_type.html

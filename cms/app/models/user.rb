@@ -5,7 +5,7 @@ class User < ActiveRecord::Base
   devise :database_authenticatable, :recoverable, :rememberable, :trackable, :lockable, :validatable
 
 
-  has_many :rights, :class_name => "CreateUsersToPermissions"
+  has_many :rights, :class_name => "UsersToPermissions"
   has_many :permissions, :through => :rights
          
   has_many :responsibilities, :class_name => "UsersToProjects"
