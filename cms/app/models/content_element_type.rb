@@ -31,6 +31,7 @@ class ContentElementType < ActiveRecord::Base
         ausgabe = false if name == 'markdown'
         ausgabe = false if name == 'wysiwyg'
         ausgabe = false if name == 'redactor'
+        ausgabe = false if name == 'autosize'
       end
     rescue 
     end

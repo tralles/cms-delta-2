@@ -53,6 +53,8 @@ module ContentsHelper
       when 'textarea'
         css << ' redactor' if content_element_type.wysiwyg
         css << ' html' if content_element_type.html
+        css << ' markdown' if content_element_type.markdown
+        css << ' autosize' if content_element_type.autosize
         ausgabe = text_area_tag identifier, value, :rows => content_element_type.rows, :class => "input-block-level#{css}"
 
 

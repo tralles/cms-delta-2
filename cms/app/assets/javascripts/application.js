@@ -68,6 +68,16 @@ $(document).on('ready page:load', function() {
                           autoresize: false
                         });
                         
+                        
+  $('textarea.autosize').autosize(); 
+                        
+  $("textarea.markdown").pagedownBootstrap({
+	'sanatize': true,
+	'help': function () { window.open('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'); return false; },
+	'hooks': [
+	]
+});
+                        
   $('[rel=tooltip]').tooltip(); 
 
 
