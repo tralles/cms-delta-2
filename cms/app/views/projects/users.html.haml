@@ -18,6 +18,8 @@
 
       .box
         .box-title
+          %i.fa.fa-users
+          &nbsp;
           Benutzerverwaltung
         .box-content.nopadding.condensed
           %table.table.table-condensed.table-striped.table-bordered
@@ -25,6 +27,7 @@
               %th{ :colspan => 2 } User
               %th Rolle
               %th Individuelle Berechtigungen
+              %th
   
             - @project.users.each do |user|
               %tr
@@ -36,3 +39,15 @@
                 %td
                   = (user.admin?) ? 'Admin' : 'Redakteur'
                 %td
+                %td
+                  - if user.admin?
+                    %button.btn.btn-disbled.btn-mini.pull-right{ :disabled => 'disabled' }
+                      %i.fa.fa-bolt
+                      &nbsp;
+                      Administrator
+                  
+                  - else
+                    = link_to project_user_permissions_path(@project,user), :class => 'btn btn-primary btn-mini pull-right' do
+                      %i.fa.fa-user
+                      &nbsp;
+                      Berechtigungen

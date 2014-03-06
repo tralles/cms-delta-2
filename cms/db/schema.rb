@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305100000) do
+ActiveRecord::Schema.define(version: 20140305122437) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -199,6 +199,17 @@ ActiveRecord::Schema.define(version: 20140305100000) do
     t.string   "protocol",   default: "http://"
     t.string   "host"
     t.boolean  "primary"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "permissions", force: true do |t|
+    t.integer  "user_id"
+    t.integer  "project_id"
+    t.string   "action"
+    t.string   "subject_class"
+    t.string   "subject_id"
+    t.boolean  "inverse"
     t.datetime "created_at"
     t.datetime "updated_at"
   end

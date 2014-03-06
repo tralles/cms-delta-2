@@ -1,4 +1,5 @@
-.handle
+
+%div{ :class => "#{'handle' if can?(:edit, :branches)}" } 
 
 - if form && branch == form.object
   %strong 
@@ -15,14 +16,17 @@
 
 - unless form
   .btn-group.pull-right
-    = link_to edit_project_branch_path(@project, branch), :class=> 'btn btn-mini btn-success' do
-      %i.fa.fa-edit
+    - if can?(:edit, :branches)
+      = link_to edit_project_branch_path(@project, branch), :class=> 'btn btn-mini btn-success' do
+        %i.fa.fa-edit
   
-    = link_to new_project_branch_branch_path(branch.project, branch), :class=> 'btn btn-mini btn-primary' do
-      %i.fa.fa-plus
+    - if can?(:create, :branches)
+      = link_to new_project_branch_branch_path(branch.project, branch), :class=> 'btn btn-mini btn-primary' do
+        %i.fa.fa-plus
     
-    = link_to [@project, branch], :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.branch') }, :class => 'btn btn-mini btn-danger' do 
-      %i.fa.fa-trash-o
+    - if can?(:delete, :branches)
+      = link_to [@project, branch], :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.branch') }, :class => 'btn btn-mini btn-danger' do 
+        %i.fa.fa-trash-o
   
 - else
   .pull-right

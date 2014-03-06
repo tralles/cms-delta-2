@@ -1,0 +1,1 @@
+$("#perm_#{@action}_#{@subject_class}_#{@subject_id}").html("#{escape_javascript(render("/permissions/permissions_link", action: @action, subject_class: @subject_class, subject_id: @subject_id))}")

@@ -4,24 +4,9 @@ class Ability
 
   def initialize(user)
 
-    user ||= User.new # create a guest user in no user exists
-
     if user.admin?
       can :manage, :all
     else
-
-
-      user.permissions.each do |permission|
-      
-        puts permission
-      
-        if permission.subject_id.nil?
-          can permission.action.to_sym, permission.subject_class.to_sym
-        else
-          can permission.action.to_sym, permission.subject_class.to_sym, :id => permission.subject_id
-        end
-      end
-    
     end
   end  
 

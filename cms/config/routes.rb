@@ -93,6 +93,14 @@ Delta2::Application.routes.draw do
       match 'settings', :via => :all
       match 'users', :via => :all
     end
+    
+    
+    resources :users do
+      resources :permissions do
+        post :add, :on => :collection
+        delete :remove, :on => :collection
+      end
+    end
   end
     
   

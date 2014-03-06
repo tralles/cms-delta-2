@@ -1,12 +1,16 @@
 class ApplicationController < ActionController::Base
+
+
+      include CanCan::Ability
+      
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
   protect_from_forgery with: :exception
   
+  before_filter :init_project
   before_filter :configure_permitted_parameters, if: :devise_controller?
   before_action :set_locale
   before_filter :set_start_time
-  before_filter :init_project
 
   
   def dashboard
@@ -20,7 +24,6 @@ class ApplicationController < ActionController::Base
   
   def search 
     @contents = Content.where(:project_id => params[:project_id]).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%").group('contents.id')
-    puts @contents
   end
   
   
@@ -38,9 +41,9 @@ class ApplicationController < ActionController::Base
   helper_method :permitted_params
   
 
-  rescue_from CanCan::AccessDenied do |exception|
-    redirect_to root_url, :alert => exception.message
-  end
+#  rescue_from CanCan::AccessDenied do |exception|
+#    redirect_to root_url, :alert => exception.message
+#  end
   
 
 protected
@@ -91,6 +94,29 @@ protected
       end
 
     else
+    end
+    
+    if @project
+    
+      
+      if current_user.admin?
+        can :manage, :all
+      else
+  
+      
+        current_user.permissions.by_project(@project).each do |permission|
+          puts permission
+        
+          if permission.subject_id.nil?
+            can permission.action.to_sym, permission.subject_class.to_sym
+          else
+            can permission.action.to_sym, permission.subject_class.to_sym, :id => permission.subject_id
+          end
+        end
+      
+      end
+    
+    
     end
     
   end

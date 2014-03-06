@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user_id: 1
+  action: MyString
+  subject_class: MyString
+  subject_id: MyString
+  inverse: false
+
+two:
+  user_id: 1
+  action: MyString
+  subject_class: MyString
+  subject_id: MyString
+  inverse: false

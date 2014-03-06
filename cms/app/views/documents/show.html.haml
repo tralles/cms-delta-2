@@ -29,13 +29,12 @@
             %br
             = @document.doctype_name
             
-            
-          %td{ :width => 85 }
-    
-            = link_to edit_project_document_path(@project, @document), :class => 'btn btn-mini btn-success pull-right' do
-              %i.fa.fa-edit
-              &nbsp;
-              Bearbeiten
+          - if can?(:edit, :documents) 
+            %td{ :width => 85 }
+              = link_to edit_project_document_path(@project, @document), :class => 'btn btn-mini btn-success pull-right' do
+                %i.fa.fa-edit
+                &nbsp;
+                Bearbeiten
 
     .span3
       %h1

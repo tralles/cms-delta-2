@@ -1,0 +1,23 @@
+- subject_id = (defined? subject_id) ? subject_id : nil
+- if @user
+  - if Permission.is_stored?(@user, @project, action, subject_class)
+    - if can? :delete, :data_user
+      = link_to remove_project_user_permissions_path( @project, @user, :action_value => action, :subject_class => subject_class, :subject_id => subject_id),
+                :method => :delete,
+                :remote => true,
+                :class => "btn btn-mini btn-inverse" do
+        %i.fa.fa-fw.fa-times
+        Entfernen
+    - else
+      Zugeordnet
+  
+  - else
+    - if can? :create, :data_user
+      = link_to add_project_user_permissions_path( @project, @user, :action_value => action, :subject_class => subject_class, :subject_id => subject_id),
+                :method => :post,
+                :remote => true,
+                :class => "btn btn-mini btn-warning" do
+        %i.fa.fa-fw.fa-plus
+        Hinzufügen
+    - else
+      NICHT

@@ -1,0 +1,138 @@
+.container
+  .row
+    .span3
+      = render 'menu'  
+      
+
+    .span9
+
+      %h1 Individuelle Berechtigungen
+      
+      - if @user.admin?
+        .alert.alert-block
+          %strong
+            %i.fa.fa-exclamation-triangle
+            &nbsp;
+            Achtung
+          %br
+          Administrative User benötigen keine individuelle Berechtigungen.
+      
+      - else
+        .box.alternate
+          .box-title
+            = @user.username
+          .box-content.nopadding.condensed
+            #permissions.accordion{ :style => 'margin: 0px !important;' }   
+              .accordion-group
+                .accordion-heading
+                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#general"}
+                    %i.fa.fa-cogs
+                    &nbsp;
+                    Allgemein
+                #general.accordion-body.collapse.in
+                  .accordion-inner.nopadding
+                    %table.table.table-striped.table-hover
+                      %thead{ :style => 'background: #fee;' }
+                        %tr
+                          %th{:width => 200 }= "Funktion"
+                          %th Anzeigen
+                          %th Hinzufügen
+                          %th Bearbeiten
+                          %th Löschen
+                  
+                      %tbody
+                        %tr
+                          %th Medienbibliothek
+                          = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "documents" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "create", :subject_class => "documents" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "edit",   :subject_class => "documents" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "delete", :subject_class => "documents" }
+
+                        %tr
+                          %th Baumstruktur
+                          = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "branches" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "create", :subject_class => "branches" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "edit",   :subject_class => "branches" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "delete", :subject_class => "branches" }
+
+            
+              .accordion-group
+                .accordion-heading
+                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#contenttypes"} 
+                    %i.fa.fa-th-list
+                    &nbsp;
+                    Content-Types
+                #contenttypes.accordion-body.collapse
+                  .accordion-inner.nopadding
+                    %table.table.table-striped.table-hover
+                      %thead{ :style => 'background: #fee;' }
+                        %tr
+                          %th{:width => 200 } Content-Type
+                          %th Anzeigen
+                          %th Hinzufügen
+                          %th Bearbeiten
+                          %th Löschen
+                  
+                      %tbody
+                        - @project.content_types.direct.each do |content_type|
+                          %tr
+                            %th= content_type.name
+                            = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => content_type.class.name, :subject_id => content_type.id }
+                            = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => content_type.class.name, :subject_id => content_type.id }
+                            = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => content_type.class.name, :subject_id => content_type.id }
+                            = render :partial => '/permissions/index_td', :locals => { :action => "archive", :subject_class => content_type.class.name, :subject_id => content_type.id }   
+
+            
+              .accordion-group
+                .accordion-heading
+                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#workspaces"} 
+                    %i.fa.fa-desktop
+                    &nbsp;
+                    Workspaces
+                #workspaces.accordion-body.collapse
+                  .accordion-inner.nopadding
+                    %table.table.table-striped.table-hover
+                      %thead{ :style => 'background: #fee;' }
+                        %tr
+                          %th{:width => 200 }
+                            = "Kategorie"
+                          %th= "Lesen"
+                          %th= "Erstellen/Ändern"
+                          %th= "Stornieren"
+                          %th= "Archivieren"
+                  
+                      %tbody
+                        %tr
+                          %th
+                            = "Einzelbesucher"
+                          = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "single_visitor" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "create", :subject_class => "single_visitor" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "delete", :subject_class => "single_visitor" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "archive", :subject_class => "single_visitor" }          
+            
+              .accordion-group
+                .accordion-heading
+                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#tree"} 
+                    %i.fa.fa-sitemap
+                    &nbsp;
+                    Baumstruktur
+                #tree.accordion-body.collapse
+                  .accordion-inner.nopadding
+                    %table.table.table-striped.table-hover
+                      %thead{ :style => 'background: #fee;' }
+                        %tr
+                          %th{:width => 200 }
+                            = "Kategorie"
+                          %th= "Lesen"
+                          %th= "Erstellen/Ändern"
+                          %th= "Stornieren"
+                          %th= "Archivieren"
+                  
+                      %tbody
+                        %tr
+                          %th
+                            = "Einzelbesucher"
+                          = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "single_visitor" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "create", :subject_class => "single_visitor" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "delete", :subject_class => "single_visitor" }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "archive", :subject_class => "single_visitor" }

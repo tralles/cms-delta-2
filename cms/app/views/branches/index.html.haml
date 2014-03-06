@@ -14,37 +14,41 @@
         
 
       %br
-      
-      = link_to new_project_branch_path(@project), :class => 'btn btn-mini btn-primary pull-right' do
-        %i.fa.fa-plus
-        &nbsp;
-        Neuen Hauptmenüpunkt anlegen
+      - if can?(:create, :branches)
+        = link_to new_project_branch_path(@project), :class => 'btn btn-mini btn-primary pull-right' do
+          %i.fa.fa-plus
+          &nbsp;
+          Neuen Hauptmenüpunkt anlegen
       
       
     .span3
       %h1= raw "&nbsp;"
-      .well
-        %table
-          %tr
-            %td{:width => 35}
-              %button.btn.btn-mini.btn-success
-                %i.fa.fa-edit
-            %td
-              Bearbeiten
-            
-          %tr
-            %td
-              %button.btn.btn-mini.btn-primary
-                %i.fa.fa-plus
-            %td
-              Untermenüpunkt anlegen
-              
-          %tr
-            %td
-              %button.btn.btn-mini.btn-danger
-                %i.fa.fa-trash-o        
-            %td
-              Löschen
+      - if can?(:edit, :branches) || can?(:create, :branches) || can?(:delete, :branches)
+        .well
+          %table
+            - if can?(:edit, :branches)
+              %tr
+                %td{:width => 35}
+                  %button.btn.btn-mini.btn-success
+                    %i.fa.fa-fw.fa-edit
+                %td
+                  Bearbeiten
+  
+            - if can?(:create, :branches)
+              %tr
+                %td
+                  %button.btn.btn-mini.btn-primary
+                    %i.fa.fa-fw.fa-plus
+                %td
+                  Untermenüpunkt anlegen
+  
+            - if can?(:delete, :branches)
+              %tr
+                %td
+                  %button.btn.btn-mini.btn-danger
+                    %i.fa.fa-fw.fa-trash-o        
+                %td
+                  Löschen
         
       .alert.alert-error
         %i.fa.fa-warning-sign.fa.fa-4x.pull-right

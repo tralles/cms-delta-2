@@ -1,0 +1,3 @@
+- subject_id = (defined? subject_id) ? subject_id : nil
+%td{:id => "perm_#{action}_#{subject_class}_#{subject_id}"}
+  = render :partial => '/permissions/permissions_link', :locals => {:action => action, :subject_class => subject_class, :subject_id => subject_id}

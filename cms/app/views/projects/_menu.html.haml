@@ -27,7 +27,7 @@
               = ct.name
 
 
-      - if @workspaces
+      - if @workspaces && @content_type
         - @workspaces.each do |constellation,workspaces|
           %li.nav-header
             - if get_workspace(constellation) > 0
@@ -109,3 +109,16 @@
           = link_to new_project_path do
             %i.pull-right.fa-fw.fa.fa-plus
             Projekt anlegen
+    - elsif !@project
+      
+      %li.nav-header
+        %i.fa.fa-fw.fa-list
+        &nbsp;
+        Projektübersicht
+        
+      - current_user.projects.each do |project|
+        %li
+          = link_to project do 
+            %i.fa.fa-fw.fa-leaf
+            &nbsp;
+            = project.name

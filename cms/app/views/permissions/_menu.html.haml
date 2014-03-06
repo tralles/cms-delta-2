@@ -1,0 +1,23 @@
+
+%h1
+  &nbsp;
+
+.well.navi
+  %ul.nav.nav-list
+    %li.nav-header
+      = link_to project_path(@project), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
+        %i.pull-right.fa-fw.fa.fa-chevron-left
+      %i.fa.fa-fw.fa-leaf
+      &nbsp;
+      = @project.name.html_safe
+    
+    - @project.users.each do |user|
+      %li{ :class => "#{ (@user == user) ? 'active' : '' }" }
+        
+        = link_to project_user_permissions_path(@project,user) do
+          - if user.admin?
+            %i.pull-right.fa.fa-fw.fa-bolt
+          - else
+            %i.pull-right.fa.fa-fw.fa-user
+          = user.username
+        

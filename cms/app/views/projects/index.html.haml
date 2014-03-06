@@ -10,19 +10,18 @@
       
       %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
-          %th{ :width => 10 }
-          %th
+          %th{ :colspan => 2 }
             Projekt
-          %th{width: 100}
-            Action
+          - if current_user.admin?
+            %th{width: 100} Action
       
         - @projects.each do |project|
           %tr
-            %td
-              = project.id
             %td= link_to project.name.html_safe, project_path(project)
-            %td
-              - if current_user.admin?
+            %td= project.description
+            
+            - if current_user.admin?
+              %td
                 .btn-group
                   = link_to edit_project_path(project), :class => 'btn btn-mini btn-success' do
                     %i.fa.fa-edit
