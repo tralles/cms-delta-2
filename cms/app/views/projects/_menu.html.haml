@@ -27,7 +27,8 @@
               = ct.name
 
 
-      - if @workspaces && @content_type
+      - if @workspaces && @content_type || @contents
+      
         - @workspaces.each do |constellation,workspaces|
           %li.nav-header
             - if get_workspace(constellation) > 0

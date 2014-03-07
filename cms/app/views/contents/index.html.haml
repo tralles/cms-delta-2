@@ -38,53 +38,53 @@
           %th
       
         %tbody{ :class => "#{'sortable' if @branch}", :data => { :update => { :url => (@branch) ? sort_project_branch_path(@project, @branch) : '' } } }
-          - puts @contents
           - @contents.each do |content|
-          
-            %tr{ :id => "content_#{content.id}", :width => '100%' }
-              - if @branch
-                %td.handle
-                  
-              
-              %td
-                = link_to project_content_type_content_path(@project, content.content_type, content, params.merge(:locale => @locale)) do
-                  = content.rep(@locale).html_safe
-                  
-  
-              %td
-                - unless content.branches.empty?
-                  %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.branches.map{ |b| b.route(@locale).name }.join("\n") }"  } }
-                    %i.fa.fa-sitemap.fa-fw
-
-                - unless content.workspaces.empty?
-                  %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.workspaces.map{ |w| w.name }.join("\n") }"  } }
-                    %i.fa.fa-desktop.fa-fw
-
-                - if content.user
-                  %small.muted{ :title => l( content.updated_at ) }
-                    %i.fa.fa-lock.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.user.username } - "  } }
+            - if current_user.can_view_content?(content)
+            
+              %tr{ :id => "content_#{content.id}", :width => '100%' }
+                - if @branch 
+                  %td{ :class => "#{(current_user.admin? || Permission.is_stored?(current_user, @project, :edit, content.content_type.class.name, content.content_type.id) ) ? 'handle' : '' }" }
+                    
                 
-              - unless @content_type
-                %td= content.content_type.name
+                %td
+                  = link_to project_content_type_content_path(@project, content.content_type, content, params.merge(:locale => @locale)) do
+                    = content.rep(@locale).html_safe
+                    
+    
+                %td
+                  - unless content.branches.empty?
+                    %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.branches.map{ |b| b.route(@locale).name }.join("\n") }"  } }
+                      %i.fa.fa-sitemap.fa-fw
   
+                  - unless content.workspaces.empty?
+                    %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.workspaces.map{ |w| w.name }.join("\n") }"  } }
+                      %i.fa.fa-desktop.fa-fw
   
-              %td{ :width => 45 }
-                - content.languages.each do |lng|
-                  = image_tag asset_path("flags/#{lng}.png")
+                  - if content.user
+                    %small.muted{ :title => l( content.updated_at ) }
+                      %i.fa.fa-lock.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.user.username } - "  } }
                   
-              %td{ :width => 50 }
-                = render :partial => 'content_actions', :locals => { :content => content }
+                - unless @content_type
+                  %td= content.content_type.name
+    
+    
+                %td{ :width => 45 }
+                  - content.languages.each do |lng|
+                    = image_tag asset_path("flags/#{lng}.png")
+                    
+                %td{ :width => 50 }
+                  = render :partial => 'content_actions', :locals => { :content => content }
 
                 
       
       - if @content_type
-        = link_to new_project_content_type_content_path(@project, @content_type, params.merge(:branch => @branch)), :class => 'btn btn-mini btn-primary pull-right' do 
-          %i.fa.fa-plus
-          &nbsp;
-          Neuen
-          %strong
-            = @content_type.name
-          anlegen
+        - if current_user.admin? || Permission.is_stored?(current_user, @project, :create, @content_type.class.name, @content_type.id)
+          = link_to new_project_content_type_content_path(@project, @content_type, params.merge(:branch => @branch)), :class => 'btn btn-mini btn-primary pull-right' do 
+            %i.fa.fa-plus
+            &nbsp;
+            %strong
+              = @content_type.name
+            anlegen
       
 
 

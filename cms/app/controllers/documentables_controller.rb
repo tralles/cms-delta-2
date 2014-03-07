@@ -12,7 +12,7 @@ class DocumentablesController < ApplicationController
       @content      = @documentable.parent 
       @project      = @documentable.project
     else
-      puts @documentable.update(permitted_params.documentable)
+      # puts @documentable.update(permitted_params.documentable)
     end
   end
 

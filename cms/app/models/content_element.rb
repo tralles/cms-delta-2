@@ -23,6 +23,8 @@ class ContentElement < ActiveRecord::Base
       value = (content) ? content.rep(language) : self.value
     elsif self.content_element_type.field_type == 'Constant'
       value = self.deep_value
+    elsif self.content_element_type.field_type == 'boolean'
+      value = (self.value == 'true') ? 'Ja' : 'Nein'
     else
       value = self.value
     end

@@ -1,6 +1,7 @@
 class ContentsController < ApplicationController
   before_action :set_content, only: [:show, :close, :edit, :update, :destroy]
   before_action :set_project
+  before_action :set_hidden_brances, only: [:update]
 
   # GET /contents
   # GET /contents.json
@@ -154,6 +155,14 @@ class ContentsController < ApplicationController
         @contents     = @project.contents.direct.by_workspace(@filter_workspaces) unless @contents
       end
       
+    end
+    
+    
+    def set_hidden_brances
+      # prevent blocked paths from beeing removed even if the user can not set the path directly
+      @content.branches.each do |branch|
+        params[:content][:branch_ids] << branch.id if !params[:content][:branch_ids].include?(branch.id) && !current_user.visible_path?(branch)
+      end
     end
 
 

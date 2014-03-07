@@ -20,7 +20,9 @@
       - else
         .box.alternate
           .box-title
-            = @user.username
+            %thin.pull-right= @user.email
+            %strong= @user.username
+            
           .box-content.nopadding.condensed
             #permissions.accordion{ :style => 'margin: 0px !important;' }   
               .accordion-group
@@ -36,20 +38,20 @@
                         %tr
                           %th{:width => 200 }= "Funktion"
                           %th Anzeigen
-                          %th Hinzufügen
+                          %th Erstellen
                           %th Bearbeiten
                           %th Löschen
                   
                       %tbody
                         %tr
-                          %th Medienbibliothek
+                          %th.text-left Medienbibliothek
                           = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "documents" }
                           = render :partial => '/permissions/index_td', :locals => { :action => "create", :subject_class => "documents" }
                           = render :partial => '/permissions/index_td', :locals => { :action => "edit",   :subject_class => "documents" }
                           = render :partial => '/permissions/index_td', :locals => { :action => "delete", :subject_class => "documents" }
 
                         %tr
-                          %th Baumstruktur
+                          %th.text-left Baumstruktur
                           = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "branches" }
                           = render :partial => '/permissions/index_td', :locals => { :action => "create", :subject_class => "branches" }
                           = render :partial => '/permissions/index_td', :locals => { :action => "edit",   :subject_class => "branches" }
@@ -69,18 +71,18 @@
                         %tr
                           %th{:width => 200 } Content-Type
                           %th Anzeigen
-                          %th Hinzufügen
+                          %th Erstellen
                           %th Bearbeiten
                           %th Löschen
                   
                       %tbody
                         - @project.content_types.direct.each do |content_type|
                           %tr
-                            %th= content_type.name
+                            %th.text-left= content_type.name
                             = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => content_type.class.name, :subject_id => content_type.id }
                             = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => content_type.class.name, :subject_id => content_type.id }
-                            = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => content_type.class.name, :subject_id => content_type.id }
-                            = render :partial => '/permissions/index_td', :locals => { :action => "archive", :subject_class => content_type.class.name, :subject_id => content_type.id }   
+                            = render :partial => '/permissions/index_td', :locals => { :action => "edit",    :subject_class => content_type.class.name, :subject_id => content_type.id }
+                            = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => content_type.class.name, :subject_id => content_type.id }   
 
             
               .accordion-group
@@ -94,21 +96,29 @@
                     %table.table.table-striped.table-hover
                       %thead{ :style => 'background: #fee;' }
                         %tr
-                          %th{:width => 200 }
-                            = "Kategorie"
-                          %th= "Lesen"
-                          %th= "Erstellen/Ändern"
-                          %th= "Stornieren"
-                          %th= "Archivieren"
+                          %th{ :colspan => 2, :width => 200 } Workspace
+                          %th Anzeigen
+                          %th Erstellen
+                          %th Bearbeiten
+                          %th Löschen
                   
                       %tbody
-                        %tr
-                          %th
-                            = "Einzelbesucher"
-                          = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "single_visitor" }
-                          = render :partial => '/permissions/index_td', :locals => { :action => "create", :subject_class => "single_visitor" }
-                          = render :partial => '/permissions/index_td', :locals => { :action => "delete", :subject_class => "single_visitor" }
-                          = render :partial => '/permissions/index_td', :locals => { :action => "archive", :subject_class => "single_visitor" }          
+                        - constellation = ''
+                        - @project.workspaces.each do |workspace|
+                          - if constellation != workspace.constellation
+                            - constellation = workspace.constellation
+                            %tr
+                              %th.text-left{ :colspan => 2, :width => 200 }= constellation
+                              %th{ :colspan => 4 }
+                              
+                        
+                          %tr
+                            %th{ :width => 10 }
+                            %th.text-left{ :width => 190 }= workspace.name
+                            = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => workspace.class.name, :subject_id => workspace.id }
+                            = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => workspace.class.name, :subject_id => workspace.id }
+                            = render :partial => '/permissions/index_td', :locals => { :action => "edit",    :subject_class => workspace.class.name, :subject_id => workspace.id }
+                            = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => workspace.class.name, :subject_id => workspace.id }         
             
               .accordion-group
                 .accordion-heading
@@ -120,19 +130,15 @@
                   .accordion-inner.nopadding
                     %table.table.table-striped.table-hover
                       %thead{ :style => 'background: #fee;' }
+                        - branches = @project.branches.arrange(:order => :position)
+                        - @maxdepth = 0
+                        - @project.branches.map { |branch| @maxdepth = branch.depth if @maxdepth < branch.depth }
                         %tr
-                          %th{:width => 200 }
-                            = "Kategorie"
-                          %th= "Lesen"
-                          %th= "Erstellen/Ändern"
-                          %th= "Stornieren"
-                          %th= "Archivieren"
+                          %th{:width => 200 } Menüpunkt
+                          %th Blockiert
+                          -# %th Erstellen
+                          -# %th Bearbeiten
+                          -# %th Löschen
                   
                       %tbody
-                        %tr
-                          %th
-                            = "Einzelbesucher"
-                          = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "single_visitor" }
-                          = render :partial => '/permissions/index_td', :locals => { :action => "create", :subject_class => "single_visitor" }
-                          = render :partial => '/permissions/index_td', :locals => { :action => "delete", :subject_class => "single_visitor" }
-                          = render :partial => '/permissions/index_td', :locals => { :action => "archive", :subject_class => "single_visitor" }
+                        = render :partial => '/permissions/index_branch', :locals => { :branches => branches }

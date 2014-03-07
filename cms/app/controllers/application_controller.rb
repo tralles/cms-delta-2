@@ -105,7 +105,7 @@ protected
   
       
         current_user.permissions.by_project(@project).each do |permission|
-          puts permission
+          #puts permission
         
           if permission.subject_id.nil?
             can permission.action.to_sym, permission.subject_class.to_sym

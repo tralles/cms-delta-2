@@ -7,4 +7,16 @@ class ::Hash
     rescue 
     end
   end
+  
+
+  def max_depth
+    max_depth = 1
+    depth_func = ->(hsh, cur_depth) do
+      max_depth = cur_depth if cur_depth > max_depth
+      hsh["children"].to_a.each{|h| depth_func.call(h, cur_depth+1)}
+      max_depth
+    end
+    depth_func.call(self, 0)
+  end  
+  
 end

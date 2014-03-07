@@ -1,0 +1,10 @@
+- branches.map do |branch, sub_branches|
+  %tr
+    %th.text-left{ :style => "padding-left: #{ branch.depth * 15 + 8 }px;" }= branch.route(@language).name
+    = render :partial => '/permissions/index_td', :locals => { :action => "blocked",    :subject_class => branch.class.name, :subject_id => branch.id }
+    -# = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => branch.class.name, :subject_id => branch.id }
+    -# = render :partial => '/permissions/index_td', :locals => { :action => "edit",    :subject_class => branch.class.name, :subject_id => branch.id }
+    -# = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => branch.class.name, :subject_id => branch.id }  
+
+  - if sub_branches
+    = render :partial => '/permissions/index_branch', :locals => { :branches => sub_branches }
