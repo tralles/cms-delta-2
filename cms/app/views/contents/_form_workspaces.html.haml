@@ -2,7 +2,7 @@
   %hr
   .form-inputs
     = hidden_field_tag 'content[workspace_ids][]'
-    - @workspaces.each do |constellation,workspaces|
+    - @workspace_constellations.each do |constellation,workspaces|
       .control-group
         .control-label
           = constellation

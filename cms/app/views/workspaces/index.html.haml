@@ -13,7 +13,7 @@
           %th Gruppe
           %th{width: 100} Action
       
-        - @workspaces.each do |workspace|
+        - @workspace_constellations.each do |workspace|
           %tr
             %td= link_to workspace.intern, [@project, workspace]
             %td= workspace.name

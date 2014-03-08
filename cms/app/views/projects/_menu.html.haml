@@ -14,22 +14,23 @@
         = @project.name.html_safe
 
 
-      - if @project.content_types
-        %li{ :class => "#{ (@content_type.nil? && @contents) ? 'active' : '' }" }
-          = link_to project_contents_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-file
-            Alle Inhalte
+      - unless @filter_content_types.empty?
+        - if @filter_content_types.size > 1      
+          %li{ :class => "#{ (@content_type.nil? && @contents) ? 'active' : '' }" }
+            = link_to project_contents_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-file
+              Alle Inhalte
 
-        -  @project.content_types.direct.each do |ct|
+        -  @filter_content_types.each do |ct|
           %li{ :class => "#{(@content_type == ct) ? 'active' : ''}" }
             = link_to project_content_type_contents_path(@project, ct) do
               %i.pull-right.fa-fw.fa.fa-file-text
               = ct.name
 
 
-      - if @workspaces && @content_type || @contents
+      - if @workspaces && ( @content_type || @contents )
       
-        - @workspaces.each do |constellation,workspaces|
+        - @workspace_constellations.each do |constellation,workspaces|
           %li.nav-header
             - if get_workspace(constellation) > 0
               .pull-right

@@ -23,7 +23,7 @@ class ApplicationController < ActionController::Base
   
   
   def search 
-    @contents = Content.where(:project_id => params[:project_id]).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%").group('contents.id')
+    @contents = Content.where(:project_id => params[:project_id]).by_content_types(@filter_content_types).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%").group('contents.id')
   end
   
   
@@ -64,14 +64,22 @@ protected
   end
   
   def init_project
-    @filter_workspaces  = []
+    @filter_workspaces      = []
+    @filter_content_types   = []
+    @workspaces             = []
+
     @project  = Project.find(params[:project_id]) if params[:project_id]
     @project  = Project.find(params[:id]) if params[:id] && controller_name == 'projects'
 
     if current_user && ( (@project && ( current_user.projects.include?(@project) || current_user.admin? )) || @project.nil? )
 
       if @project
-        @workspaces = @project.workspaces.group_by &:constellation
+        workspaces               = ( current_user.workspaces(@project).empty? ) ? @project.workspaces : current_user.workspaces(@project)
+        workspaces.each do |ws|
+          @workspaces << ws
+        end
+        
+        @workspace_constellations = workspaces.group_by &:constellation
         
         if params[:constellation]
           session[:workspace] = [] unless session[:workspace]
@@ -97,7 +105,17 @@ protected
     end
     
     if @project
-    
+
+      if current_user.content_types(@project).empty?
+        @project.content_types.direct.each do |ct|
+          @filter_content_types << ct 
+        end
+      else
+        current_user.content_types(@project).each do |ct|
+          @filter_content_types << ct 
+        end
+      end
+      
       
       if current_user.admin?
         can :manage, :all

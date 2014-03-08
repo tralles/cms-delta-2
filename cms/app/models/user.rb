@@ -10,9 +10,6 @@ class User < ActiveRecord::Base
   has_many :responsibilities, :class_name => "UsersToProjects"
   has_many :projects, :through => :responsibilities
 
-  has_many :workspaceables, :as => :workspaceable, :dependent => :destroy
-  has_many :workspaces, :through => :workspaceables
-
   validates_presence_of :name, :surname, :email
 
   has_many :contents
@@ -66,6 +63,27 @@ class User < ActiveRecord::Base
 
   end
   
+  
+  
+  
+  
+  def workspaces(project)
+    workspaces = []
+    self.permissions.where(:project_id => project).where(:subject_class => 'Workspace').where(:action => :read).each do |ws|
+      workspaces << project.workspaces.where(:id => ws.subject_id).first
+    end
+    
+    return workspaces
+  end
+  
+  def content_types(project)
+    content_types = []
+    self.permissions.where(:project_id => project).where(:subject_class => 'ContentType').where(:action => :read).each do |ct|
+      content_types << project.content_types.direct.where(:id => ct.subject_id).first
+    end
+    
+    return content_types
+  end
   
   
   

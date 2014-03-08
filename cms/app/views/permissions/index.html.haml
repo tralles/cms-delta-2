@@ -97,10 +97,7 @@
                       %thead{ :style => 'background: #fee;' }
                         %tr
                           %th{ :colspan => 2, :width => 200 } Workspace
-                          %th Anzeigen
-                          %th Erstellen
-                          %th Bearbeiten
-                          %th Löschen
+                          %th Zuweisen & Filtern
                   
                       %tbody
                         - constellation = ''
@@ -116,9 +113,6 @@
                             %th{ :width => 10 }
                             %th.text-left{ :width => 190 }= workspace.name
                             = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => workspace.class.name, :subject_id => workspace.id }
-                            = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => workspace.class.name, :subject_id => workspace.id }
-                            = render :partial => '/permissions/index_td', :locals => { :action => "edit",    :subject_class => workspace.class.name, :subject_id => workspace.id }
-                            = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => workspace.class.name, :subject_id => workspace.id }         
             
               .accordion-group
                 .accordion-heading

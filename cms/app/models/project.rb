@@ -12,6 +12,8 @@ class Project < ActiveRecord::Base
   
   has_many :content_types, :dependent => :destroy
   
+  has_many :permissions, :dependent => :destroy
+  
   has_many :branches, :dependent => :destroy
   has_many :contents, :dependent => :destroy
   

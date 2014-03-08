@@ -1,7 +1,7 @@
 class ContentsController < ApplicationController
   before_action :set_content, only: [:show, :close, :edit, :update, :destroy]
   before_action :set_project
-  before_action :set_hidden_brances, only: [:update]
+  before_action :set_hidden_ressources, only: [:update]
 
   # GET /contents
   # GET /contents.json
@@ -141,27 +141,32 @@ class ContentsController < ApplicationController
 
       if params[:content_type_id]
         @content_type = ContentType.find(params[:content_type_id]) 
-        @contents     = @content_type.contents.direct.by_workspace(@filter_workspaces)
+        @contents     = @content_type.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces)
         # puts 'content_type_id'
-        # puts @contents
+        puts @contents
       end
       
       if params[:branch]
         @branch       = @project.branches.where('branches.id = ?', params[:branch]).first 
-        @contents     = (@content_type) ? @branch.contents.direct.by_workspace(@filter_workspaces).where(:content_type => @content_type) : @branch.contents
+        @contents     = (@content_type) ? @branch.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces).where(:content_type => @content_type) : @branch.contents
         # puts 'branch'
         # puts @contents
       else
-        @contents     = @project.contents.direct.by_workspace(@filter_workspaces) unless @contents
+        @contents     = @project.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces) unless @contents
       end
       
     end
     
     
-    def set_hidden_brances
+    def set_hidden_ressources
       # prevent blocked paths from beeing removed even if the user can not set the path directly
       @content.branches.each do |branch|
         params[:content][:branch_ids] << branch.id if !params[:content][:branch_ids].include?(branch.id) && !current_user.visible_path?(branch)
+      end
+      
+      # prevent workspaces from beeing removed even it the user can not set directly
+      @content.workspaces.each do |workspace|
+        params[:content][:workspace_ids] << workspace.id if !params[:content][:workspace_ids].include?(workspace.id) && (!current_user.workspaces(@project).empty? && !current_user.workspaces(@project).include?(workspace))
       end
     end
 

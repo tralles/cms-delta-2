@@ -32,8 +32,12 @@ class Content < ActiveRecord::Base
 
   
   scope :direct, -> { joins(:content_type).where('content_types.direct_edit = 1') }
-  scope :by_content_type, ->(content_type) { joins(:content_type).where('content_types.id = ?', content_type) if content_type }
+
   scope :by_workspace, ->(workspaces) { joins(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id').having('count(workspaces.id) >= ?', workspaces.size) unless workspaces.empty? }
+  scope :in_workspaces, ->(workspaces) { joins(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id') unless workspaces.empty? }
+
+  scope :by_content_type, ->(content_type) { where('contents.content_type_id = ?', content_type) if content_type }
+  scope :by_content_types, ->(content_types) { where('contents.content_type_id IN(?)', content_types) unless content_types.empty? }
 
 
 
