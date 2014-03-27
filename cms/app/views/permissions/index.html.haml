@@ -57,6 +57,11 @@
                           = render :partial => '/permissions/index_td', :locals => { :action => "edit",   :subject_class => "branches" }
                           = render :partial => '/permissions/index_td', :locals => { :action => "delete", :subject_class => "branches" }
 
+                        %tr
+                          %th.text-left Suche
+                          = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "search" }
+                          %td{ :colspan => 3 }
+
             
               .accordion-group
                 .accordion-heading
@@ -65,24 +70,55 @@
                     &nbsp;
                     Content-Types
                 #contenttypes.accordion-body.collapse
-                  .accordion-inner.nopadding
-                    %table.table.table-striped.table-hover
-                      %thead{ :style => 'background: #fee;' }
-                        %tr
-                          %th{:width => 200 } Content-Type
-                          %th Anzeigen
-                          %th Erstellen
-                          %th Bearbeiten
-                          %th Löschen
+                  .accordion-inner
                   
-                      %tbody
+                    .tabbable.tabs-left
+                      %ul.nav.nav-tabs
                         - @project.content_types.direct.each do |content_type|
-                          %tr
-                            %th.text-left= content_type.name
-                            = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => content_type.class.name, :subject_id => content_type.id }
-                            = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => content_type.class.name, :subject_id => content_type.id }
-                            = render :partial => '/permissions/index_td', :locals => { :action => "edit",    :subject_class => content_type.class.name, :subject_id => content_type.id }
-                            = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => content_type.class.name, :subject_id => content_type.id }   
+                          %li{ :class => "#{ 'active' if @project.content_types.direct.first == content_type }" }
+                            %a{ :href => "#tabct#{content_type.id}", :data => { :toggle => 'tab' } }
+                              = content_type.name
+                    
+                      .tab-content
+                        - @project.content_types.direct.each do |content_type|
+                          %div{ :id => "tabct#{content_type.id}", :class => "tab-pane #{ 'active' if @project.content_types.direct.first == content_type }"  }
+                            .tabbable
+                              %ul.nav.nav-tabs
+                                %li.active
+                                  %a{ :href => "#tabct#{content_type.id}basics", :data => { :toggle => 'tab' } }
+                                    Allgemein
+
+                                %li
+                                  %a{ :href => "#tabct#{content_type.id}cet", :data => { :toggle => 'tab' } }
+                                    Datenfelder 
+                            
+                              .tab-content
+                                .tab-pane.active{ :id => "tabct#{content_type.id}basics" }
+                                  %table.table.table-striped.table-hover
+                                    %tr
+                                      %th Anzeigen
+                                      %th Erstellen
+                                      %th Bearbeiten
+                                      %th Löschen
+                                    %tr
+                                      = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => content_type.class.name, :subject_id => content_type.id }
+                                      = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => content_type.class.name, :subject_id => content_type.id }
+                                      = render :partial => '/permissions/index_td', :locals => { :action => "edit",    :subject_class => content_type.class.name, :subject_id => content_type.id }
+                                      = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => content_type.class.name, :subject_id => content_type.id }   
+                                
+                                .tab-pane{ :id => "tabct#{content_type.id}cet" }
+                                  %table.table.table-striped.table-hover
+                                    %tr
+                                      %th Datenfeld
+                                      %th Anzeigen blockieren
+                                      %th Editieren blockieren
+                                    - content_type.content_element_types.each do |content_element_type|
+                                      %tr
+                                        %td
+                                          %strong= content_element_type.name
+                                        = render :partial => '/permissions/index_td', :locals => { :action => "block_read",    :subject_class => content_element_type.class.name, :subject_id => content_element_type.id }
+                                        = render :partial => '/permissions/index_td', :locals => { :action => "block_edit",    :subject_class => content_element_type.class.name, :subject_id => content_element_type.id }
+                            
 
             
               .accordion-group

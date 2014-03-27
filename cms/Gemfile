@@ -62,7 +62,7 @@ gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
   
 # UI
 gem 'hirb'
-gem 'font-awesome-rails'
+gem 'font-awesome-rails', '~> 4.0.3.1'
 gem 'bootstrap-sass', '2.3.2.1'
 gem 'haml-rails'
 gem 'haml'

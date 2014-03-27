@@ -10,19 +10,21 @@
         %tr
           %th Intern
           %th Name
-          %th Gruppe
           %th{width: 100} Action
       
-        - @workspace_constellations.each do |workspace|
+        - @workspace_constellations.each do |constellation, workspaces|
           %tr
-            %td= link_to workspace.intern, [@project, workspace]
-            %td= workspace.name
-            %td= workspace.constellation
-            %td
-              .btn-group
-                = link_to edit_project_workspace_path(@project, workspace), :class => 'btn btn-mini btn-success' do
-                  %i.fa.fa-edit
-                  Bearbeiten
-                = link_to [@project, workspace], :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content_type') }, :class => 'btn btn-mini btn-danger' do
-                  %i.fa.fa-trash-o
-                  Löschen
+            %th{ colspan: 3 }= constellation
+        
+          - workspaces.each do |workspace|          
+            %tr
+              %td= link_to workspace.intern, [@project, workspace]
+              %td= workspace.name
+              %td
+                .btn-group
+                  = link_to edit_project_workspace_path(@project, workspace), :class => 'btn btn-mini btn-success' do
+                    %i.fa.fa-edit
+                    Bearbeiten
+                  = link_to [@project, workspace], :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content_type') }, :class => 'btn btn-mini btn-danger' do
+                    %i.fa.fa-trash-o
+                    Löschen

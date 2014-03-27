@@ -63,7 +63,7 @@
                 
                 
           %ul.nav.pull-right
-            - if @project && @project.id
+            - if @project && @project.id && can?(:read, :search)
               
               %li
                 %form.navbar-search

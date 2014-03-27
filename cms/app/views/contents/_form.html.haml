@@ -14,16 +14,22 @@
         %options
           .form-inputs
             - @content_type.content_element_types.each do |cet|
-              .control-group
-                %label.control-label
-                  - if cet.mandatory
-                    %abbr{ :title => "Pflichfeld" } *
-                  = cet.name
-                  
-                  
-                .controls
-                  = cetform @content, cet
+              - if !Permission.is_stored?(current_user, @project, :block_edit, cet.class.name, cet.id)
+              
+                .control-group
+                  %label.control-label
+                    - if cet.mandatory
+                      %abbr{ :title => "Pflichfeld" } *
+                    = cet.name
+                    
+                    
+                  .controls
+                    = cetform @content, cet
+
+
           = render :partial => 'contents/form_workspaces'     
+
+
       %br
 
 

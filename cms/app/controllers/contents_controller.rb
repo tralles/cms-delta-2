@@ -141,19 +141,41 @@ class ContentsController < ApplicationController
 
       if params[:content_type_id]
         @content_type = ContentType.find(params[:content_type_id]) 
-        @contents     = @content_type.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces)
+        if current_user.admin?
+          @contents     = @content_type.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces)
+        else
+          @contents     = @content_type.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces)
+        end
         # puts 'content_type_id'
-        puts @contents
+        # puts @contents
       end
       
       if params[:branch]
         @branch       = @project.branches.where('branches.id = ?', params[:branch]).first 
-        @contents     = (@content_type) ? @branch.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces).where(:content_type => @content_type) : @branch.contents
+        if current_user.admin?
+          @contents     = (@content_type) ? @branch.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).where(:content_type => @content_type) : @branch.contents
+        else
+          @contents     = (@content_type) ? @branch.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces).where(:content_type => @content_type) : @branch.contents
+        end
         # puts 'branch'
         # puts @contents
       else
-        @contents     = @project.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces) unless @contents
+        if current_user.admin?
+          @contents     = @project.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces) unless @contents
+        else
+          @contents     = @project.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).in_workspaces(@workspaces) unless @contents
+        end
       end
+
+      # puts '+ + + + + + +'      
+      # puts '@filter_workspaces'
+      # puts @filter_workspaces   
+      # puts '+ + + + + + +'      
+      # puts '@workspaces'
+      # puts @workspaces
+      # puts '+ + + + + + +'      
+      # puts @contents.to_sql
+      # puts '+ + + + + + +'      
       
     end
     

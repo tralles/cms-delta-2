@@ -29,17 +29,19 @@
 
         %dl.dl-horizontal
           - @content.content_elements.lang(@locale).each do |ce|
-            %dt{ :class => "#{(ce.html(@locale).blank?) ? 'muted' : '' }" }
-              = ce.content_element_type.name
-            %dd
-              - if ce.content_element_type.html
-                %pre.code.html
-                  = preserve do
-                    = ce.html(@locale).gsub('<', '<')
-              
-              - else
-                = ce.html(@locale)
-              &nbsp;              
+            - if !Permission.is_stored?(current_user, @project, :block_read, ce.content_element_type.class.name, ce.content_element_type.id)
+            
+              %dt{ :class => "#{(ce.html(@locale).blank?) ? 'muted' : '' }" }
+                = ce.content_element_type.name
+              %dd
+                - if ce.content_element_type.html
+                  %pre.code.html
+                    = preserve do
+                      = ce.html(@locale).gsub('<', '<')
+                
+                - else
+                  = ce.html(@locale)
+                &nbsp;              
 
 
 
