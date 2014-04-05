@@ -60,12 +60,22 @@
 
 
 
-      - if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega)
+      - if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega) || @content.option(:dates)
         %fieldset
           %legend
             Meta
   
           %dl.dl-horizontal
+            - if @content.option(:dates)
+              %dt
+                Erstellt am
+              %dd
+                = l @content.created_at
+              %dt
+                zuletzt geändert
+              %dd
+                = l @content.updated_at
+
             - if @content.option(:ref)
               %dt
                 Referenz

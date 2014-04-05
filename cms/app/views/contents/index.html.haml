@@ -62,7 +62,11 @@
   
                   - if content.user
                     %small.muted{ :title => l( content.updated_at ) }
-                      %i.fa.fa-lock.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.user.username } - "  } }
+                      %i.fa.fa-lock.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.user.username }"  } }
+                      
+                  - if content.option(:dates)
+                    %small.muted{ :title => l( content.updated_at ) }
+                      %i.fa.fa-clock-o.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ l content.updated_at }"  } }
                   
                 - unless @content_type
                   %td= content.content_type.name

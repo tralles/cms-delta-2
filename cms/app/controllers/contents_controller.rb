@@ -24,7 +24,10 @@ class ContentsController < ApplicationController
     @content.user = nil
     @content.save
     
-    redirect_to project_content_type_contents_path(@project, @content_type)
+    respond_to do |format|
+      format.html { redirect_to project_content_type_contents_path(@project, @content_type) }
+      format.js { }
+    end
   end
 
   # GET /contents/1/edit

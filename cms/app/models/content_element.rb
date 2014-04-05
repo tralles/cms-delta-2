@@ -7,6 +7,10 @@ class ContentElement < ActiveRecord::Base
   belongs_to :content
   belongs_to :content_element_type
   
+  
+  
+  
+  default_scope { includes(:content_element_type).order('content_element_types.position ASC') }
 
 
   scope :lang, ->(lang) { where(:language => lang) unless lang.nil? }
