@@ -116,6 +116,7 @@ class ContentElement < ActiveRecord::Base
     case self.content_element_type.field_type
       when 'Constant'  
         constant = self.project.constants.where(:name => self.content_element_type.intern).first
+        
         unless constant.value.blank?
           index       = read_attribute(:value)
           liste       = eval constant.value

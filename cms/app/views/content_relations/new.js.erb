@@ -49,4 +49,24 @@ $('#contentrelationwindow form').on('submit',   function() {
 
 });
 
+
+  $('#contentrelationwindow textarea.redactor').redactor({ lang: 'de', 
+                          buttons: ['html', '|', 
+                                    'bold', 'italic', 'deleted', '|', 
+                                    'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
+                                    'table', 'link', '|',
+                                    'fontcolor', 'backcolor', '|', 
+                                    'horizontalrule'],
+                          minHeight: 200,
+                          autoresize: false
+                        });
+                        
+                        
+  $("#contentrelationwindow textarea.markdown").pagedownBootstrap({
+	'sanatize': true,
+	'help': function () { window.open('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'); return false; },
+	'hooks': [
+	]
+});
+
 NProgress.done();
