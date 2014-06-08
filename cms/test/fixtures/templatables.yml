@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  project_id: 1
+  template_id: 1
+  templatable_type: MyString
+  templatable_id: 1
+
+two:
+  project_id: 1
+  template_id: 1
+  templatable_type: MyString
+  templatable_id: 1

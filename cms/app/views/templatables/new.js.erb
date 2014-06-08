@@ -1,0 +1,8 @@
+$('#templatableswindow').remove();
+
+$('body').append("<%= j( render :partial => 'templatables/edit_modal' )  %>");
+
+$('#templatableswindow').modal({ backdrop: true, keyboard: false });
+
+
+NProgress.done();

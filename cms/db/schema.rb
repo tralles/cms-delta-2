@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305122437) do
+ActiveRecord::Schema.define(version: 20140605210036) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -228,6 +228,24 @@ ActiveRecord::Schema.define(version: 20140305122437) do
 
   add_index "projects", ["project_id"], name: "index_projects_on_project_id", using: :btree
   add_index "projects", ["ref_id"], name: "index_projects_on_ref_id", using: :btree
+
+  create_table "templatables", force: true do |t|
+    t.integer  "project_id"
+    t.integer  "template_id"
+    t.string   "templatable_type"
+    t.integer  "templatable_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "templates", force: true do |t|
+    t.integer  "project_id"
+    t.string   "action"
+    t.string   "title"
+    t.text     "code"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "name"

@@ -4,8 +4,8 @@
     %fieldset
       %legend
         Untermenü zu Punkt
-        
-    
+
+
       #tree
         %ul.nested_branches
           %li
@@ -15,7 +15,7 @@
           %li
             %ul
               = nested_branches @branches.arrange(:order => :position), f
-  
+
 
   %fieldset
     %legend
@@ -24,20 +24,15 @@
     .row
       .span9
         -# = f.error_notification
-          
-        
+
       .span5
-        
-      
         = f.input :name           if permitted_params.branch_attributes.include?(:name)
-          
         = f.input :ref_id         if permitted_params.branch_attributes.include?(:ref_id)
-          
-      
-  
+
       .span4
         = f.input :hidden         if permitted_params.branch_attributes.include?(:hidden)
         = f.input :unattached     if permitted_params.branch_attributes.include?(:unattached)
+
 
 
   %fieldset
@@ -47,32 +42,46 @@
       .span9
         - if @branch.new_record?
           - @project.languages.each do |language|
-            = f.fields_for :branch_routes do |ff| 
+            = f.fields_for :branch_routes do |ff|
               = ff.error_notification
               = ff.input :language, :as => :select, :collection => @project.languages, :include_blank => false
-              = ff.input :name 
+              = ff.input :name
               = ff.input :route
-              = ff.input :jump 
-              - unless language == @project.languages.last              
+              = ff.input :jump
+              - unless language == @project.languages.last
                 %hr
-              
-        
+
+
         - else
-          = f.fields_for :branch_routes do |ff| 
+          = f.fields_for :branch_routes do |ff|
             = ff.error_notification
             = ff.input :language, :as => :select, :collection => @project.languages, :include_blank => false
-            = ff.input :name 
+            = ff.input :name
             = ff.input :route
-            = ff.input :jump 
+            = ff.input :jump
 
 
   %fieldset
     %legend
       Inhalts-Typen
-        
+
     = f.association :content_types, :as => :check_boxes, :collection => @project.content_types
-      
+
+
+  %fieldset
+    %legend
+      Template
+    .row
+      #templetablestable
+        = render :partial => 'templatables/templatable_table', :locals => { :parent => @branch }
+
+
+      .pull-right
+        = link_to new_project_templatable_path(@project, :templatable_type => @branch.class.name, :templatable_id => @branch.id), :remote => true, :class => 'btn btn-mini btn-success' do
+          %i.fa.fa-plus
+          Template Hinzufügen
+
+
   .row
     .form-actions
       = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
-  

@@ -3,9 +3,9 @@
 
 .well.navi
   %ul.nav.nav-list
-      
+
     - if @project && !@project.new_record?
-  
+
       %li.nav-header
         = link_to projects_path(locale), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
           %i.pull-right.fa-fw.fa.fa-chevron-up
@@ -15,7 +15,7 @@
 
 
       - unless @filter_content_types.empty?
-        - if @filter_content_types.size > 1      
+        - if @filter_content_types.size > 1
           %li{ :class => "#{ (@content_type.nil? && @contents) ? 'active' : '' }" }
             = link_to project_contents_path(@project) do
               %i.pull-right.fa-fw.fa.fa-file
@@ -29,7 +29,7 @@
 
 
       - if @workspaces && ( @content_type || @contents )
-      
+
         - @workspace_constellations.each do |constellation,workspaces|
           %li.nav-header
             - if get_workspace(constellation) > 0
@@ -39,9 +39,9 @@
             %i.fa.fa-desktop
             &nbsp;
             = constellation
-              
-              
-          
+
+
+
           - workspaces.each do |workspace|
             %li
               = link_to params.merge(:constellation => constellation, :workspace => workspace) do
@@ -60,7 +60,7 @@
             = link_to project_documents_path(@project) do
               %i.pull-right.fa-fw.fa.fa-picture-o
               Medienbibliothek
-  
+
         - if can?(:read, :branches)
           %li{ :class => "#{ (controller.controller_name == 'branches') ? 'active' : '' }" }
             = link_to project_branches_path(@project) do
@@ -74,7 +74,7 @@
         %i.fa.fa-cogs
         &nbsp;
         Administration
-        
+
       - if @project && !@project.new_record?
         %li{ :class => "#{ (controller.controller_name == 'projects' && controller.action_name == 'settings') ? 'active' : '' }" }
           = link_to settings_project_path(@project) do
@@ -85,42 +85,46 @@
             %i.pull-right.fa-fw.fa.fa-group
             Benutzer
 
-  
+
         %li.divider
-        
+
         %li
           = link_to project_workspaces_path(@project) do
             %i.pull-right.fa-fw.fa.fa-desktop
             Workspaces
-          
-        
+
+        %li
+          = link_to project_templates_path(@project) do
+            %i.pull-right.fa-fw.fa.fa-code
+            Templates
+
         %li.divider
-  
+
         %li
           = link_to project_content_types_path(@project) do
             %i.pull-right.fa-fw.fa.fa-th-list
             Inhalts Typen
-  
+
         %li
           = link_to project_content_relation_types_path(@project) do
             %i.pull-right.fa-fw.fa.fa-magnet
             Inhalts Typen Relationen
-  
+
       - else
         %li
           = link_to new_project_path do
             %i.pull-right.fa-fw.fa.fa-plus
             Projekt anlegen
     - elsif !@project
-      
+
       %li.nav-header
         %i.fa.fa-fw.fa-list
         &nbsp;
         Projektübersicht
-        
+
       - current_user.projects.each do |project|
         %li
-          = link_to project do 
+          = link_to project do
             %i.fa.fa-fw.fa-leaf
             &nbsp;
             = project.name

@@ -57,39 +57,82 @@ insertAtCaret: function(myValue){
 
 $(document).on('ready page:load', function() {
 
-  $('textarea.redactor').redactor({ lang: 'de', 
-                          buttons: ['html', '|', 
-                                    'bold', 'italic', 'deleted', '|', 
+  $('textarea.redactor').redactor({ lang: 'de',
+                          buttons: ['html', '|',
+                                    'bold', 'italic', 'deleted', '|',
                                     'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
                                     'table', 'link', '|',
-                                    'fontcolor', 'backcolor', '|', 
+                                    'fontcolor', 'backcolor', '|',
                                     'horizontalrule'],
                           minHeight: 200,
                           autoresize: false
                         });
-                        
-                        
-  $('textarea.autosize').autosize(); 
-                        
+
+
+  $('textarea.autosize').autosize();
+
   $("textarea.markdown").pagedownBootstrap({
 	'sanatize': true,
 	'help': function () { window.open('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'); return false; },
 	'hooks': [
 	]
 });
-                        
-  $('[rel=tooltip]').tooltip(); 
+
+  $('[rel=tooltip]').tooltip();
 
 
-	$('form').on('submit',   function() { 
+  if( $('textarea.aceditor') && $('#aceditor') )
+  {
+    var editor = ace.edit("aceditor");
+    var textarea = $('textarea.aceditor').hide();
+    editor.getSession().setValue(textarea.val());
+    editor.setTheme("ace/theme/twilight");
+    editor.session.setMode("ace/mode/html_ruby");
+
+
+    editor.setOptions({
+      maxLines: Infinity,
+      showInvisibles: true,
+      showFoldWidgets: true,
+      fontSize: 10
+    });
+
+    editor.getSession().on('change', function(){
+      textarea.val(editor.getSession().getValue());
+    });
+
+/*
+    function smit()
+    {
+      $('.form-horizontal').submit()
+      return false;
+    }
+
+    $(document).unbind('keyup.ctrl_s');
+    $(document).bind('keydown.ctrl_s', smit );
+
+    $(document).unbind('keyup.meta_s');
+    $(document).bind('keydown.meta_s', smit );
+
+    $('#aceditor *').unbind('keyup.ctrl_s');
+    $('#aceditor *').bind('keydown.ctrl_s', smit );
+
+    $('#aceditor *').unbind('keyup.meta_s');
+    $('#aceditor *').bind('keydown.meta_s', smit );
+*/
+
+  }
+
+
+	$('form').on('submit',   function() {
 	  allok = true;
 
 	  if($(this).find('.required').length > 0)
 	  {
-  	  $(this).find('.required').each(function(){ 
+  	  $(this).find('.required').each(function(){
           if($(this).val().length == 0 && ($(this).is('input') || $(this).is('textarea') ))
           {
-      	    allok = false;  
+      	    allok = false;
             $(this).parent().parent().addClass('error');
             $(this).parent().addClass('error');
           }
@@ -103,22 +146,22 @@ $(document).on('ready page:load', function() {
 
     if(allok)
     {
-	    NProgress.start(); NProgress.set(0.8); 
+	    NProgress.start(); NProgress.set(0.8);
 	  }
 	  else
 	  {
       return false;
 	  }
-  
+
   });
-  
-  
+
+
   $( document ).ajaxStart(function() {
     NProgress.start();
     NProgress.set(0.5);
   });
-  
-  
+
+
   $( document ).ajaxStop(function() {
     NProgress.done();
     NProgress.remove();
@@ -129,7 +172,3 @@ $(document).on('ready page:load', function() {
 $(document).on('page:fetch',   function() { NProgress.start(); NProgress.set(0.8); });
 $(document).on('page:change',  function() { NProgress.done(); });
 $(document).on('page:restore', function() { NProgress.remove(); });
-
-
-
-

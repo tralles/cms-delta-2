@@ -1,0 +1,33 @@
+.container
+  .row
+    .span3
+      = render 'templates/menu'
+
+    .span6
+      %h1
+        %i.fa.fa-code
+        Templates
+
+      %table.table.table-condensed.table-striped.table-bordered.table-hover
+        %tr
+          %th Title
+          %th Verwendung
+          %th
+
+        - @templates.each do |template|
+          %tr
+            %td= template.title
+            %td
+              - template.parents.each do |parent|
+                = link_to [parent.project, parent] do
+                  = parent.class.name
+
+            %td
+              .btn-group.pull-right
+                = link_to [template.project, template], :class => 'btn btn-mini' do
+                  Anzeigen
+                = link_to edit_project_template_path(template.project, template), :class => 'btn btn-mini btn-success' do
+                  Bearbeiten
+
+                = link_to [template.project, template], :class => 'btn btn-mini btn-danger', :method => :delete, :data => { :confirm => 'Are you sure?' } do
+                  Löschen

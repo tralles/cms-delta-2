@@ -1,0 +1,18 @@
+#templatableswindow.modal.hide.fade{:role => "dialog", :tabindex => "-1"}
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel
+      Bearbeiten
+
+  = simple_form_for([@project, @templatable], :remote => true, html: {class: 'form-horizontal' }) do |f|
+    .modal-body
+      = hidden_field_tag :templatable_id, @templatable.templatable_id
+      = hidden_field_tag :templatable_type, @templatable.templatable_type
+      = f.input :template_id, :as => :select, :collection => @project.templates, :input_html => { :class => 'input-block-level' }
+
+
+    .modal-footer
+      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+
+
+      %button.btn.btn-inverse{"aria-hidden" => "true", "data-dismiss" => "modal"} Abbrehen

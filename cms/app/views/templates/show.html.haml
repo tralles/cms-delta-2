@@ -1,0 +1,19 @@
+.container
+  .row
+    .span3
+      = render 'templates/menu'
+
+    .span9
+      %h1
+        %i.fa.fa-code
+        Templates
+        = @template.title
+
+
+      %pre.code
+        = preserve do
+          = @template.code
+
+      .pull-right
+        = link_to edit_project_template_path(@template.project, @template), :class => 'btn btn-mini btn-success' do
+          Bearbeiten

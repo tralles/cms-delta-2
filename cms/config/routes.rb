@@ -2,38 +2,43 @@ Delta2::Application.routes.draw do
 
 
 
+  resources :templates
+
   devise_for :users # , :path => "/", :path_names => { :sign_in => 'login', :sign_out => 'logout', :password => 'secret', :confirmation => 'verification', :unlock => 'unblock', :registration => 'register', :sign_up => 'join' }
 
   resources :users
   resources :constants
-    
-  
-  
+
+
+
 
 
   resources :projects do
-  
+
     resources :hosts
     resources :constants
     resources :workspaces
 
+    resources :templates
+    resources :templatables
+
     resources :documentables
-    
+
     resources :documents do
-      collection do 
+      collection do
         match 'search', :via => :all
       end
     end
 
     resources :branches do
       resources :branches do
-      end  
-      
-      member do 
+      end
+
+      member do
         post 'sort'
       end
 
-      collection do 
+      collection do
         post 'nestedsort'
       end
     end
@@ -41,22 +46,22 @@ Delta2::Application.routes.draw do
     resources :contents do
       resources :documents do
 
-        member do 
+        member do
           get 'assign'
           get 'remove'
         end
-        
-        collection do 
+
+        collection do
           post 'sort'
           match 'search', :via => :all
         end
       end
-      
+
       resources :content_relation_types do
-        resources :content_relations do 
+        resources :content_relations do
           resources :contents
-      
-          collection do 
+
+          collection do
             post 'sort'
           end
         end
@@ -64,37 +69,37 @@ Delta2::Application.routes.draw do
     end
 
     resources :content_relation_types do
-      
-      collection do 
+
+      collection do
         post 'sort'
       end
     end
 
     resources :content_types do
       resources :content_element_types do
-      end  
+      end
 
       resources :contents do
         resources :content_elements do
-        end  
-        
+        end
+
         member do
           get 'close'
         end
-      end  
+      end
 
-      member do 
+      member do
         post 'sort'
       end
-    end  
-    
+    end
+
 
     member do
       match 'settings', :via => :all
       match 'users', :via => :all
     end
-    
-    
+
+
     resources :users do
       resources :permissions do
         post :add, :on => :collection
@@ -102,21 +107,21 @@ Delta2::Application.routes.draw do
       end
     end
   end
-    
-  
-  
-  
-  
+
+
+
+
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
   root 'application#dashboard'
-  
-  
+
+
   match '/upload/:project_id/:documentable_type/:documentable_id/create' => 'documents#create', :as => 'create_upload', :via => :all
   match '/upload/:project_id/:documentable_type/:documentable_id/uploaded' => 'documents#uploaded', :as => 'uploaded', :via => :all
-  
+
   get 'logout' => 'users#logout', :as => 'logout'
   match 'search/:project_id/suggest' => 'application#search', :as => 'search_suggest', :via => :all
 
@@ -158,7 +163,7 @@ Delta2::Application.routes.draw do
   #       get 'recent', on: :collection
   #     end
   #   end
-  
+
   # Example resource route with concerns:
   #   concern :toggleable do
   #     post 'toggle'

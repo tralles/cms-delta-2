@@ -1,0 +1,13 @@
+%table.table.table-bordered.table-condensed.table-striped
+  - parent.templatables.each do |templatable|
+    %tr
+      %td.text-right.text-muted{ :width => 50 }
+        = templatable.id
+      %td
+        %strong
+          = templatable.template.title
+      %td{ :width => 100 }
+        .btn-group.pull-right
+          = link_to [templatable.project, templatable], :method => :delete, :remote => true, :class => 'btn btn-danger btn-mini' do
+            %i.fa.fa-trash-o
+            Löschen

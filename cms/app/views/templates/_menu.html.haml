@@ -1,0 +1,24 @@
+%h1
+  &nbsp;
+
+.well.navi
+  %ul.nav.nav-list
+
+    %li.nav-header
+      = link_to project_path(@project), :class => 'pull-right', :style => 'margin: 0; padding: 0' do
+        %i.pull-right.fa-fw.fa.fa-chevron-left
+      %i.fa.fa-fw.fa-leaf
+      &nbsp;
+      = @project.name.html_safe
+
+
+    %li
+      = link_to project_templates_path(@project) do
+        %i.pull-right.fa-fw.fa.fa-code
+        Templates
+
+
+    %li
+      = link_to new_project_template_path(@project) do
+        %i.pull-right.fa-fw.fa.fa-plus
+        Neues Template
