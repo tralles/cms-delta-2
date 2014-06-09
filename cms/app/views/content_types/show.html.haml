@@ -1,24 +1,26 @@
 .container
   .row
     .span3
-      = render 'menu'  
+      = render 'menu'
 
 
     .span9
-    
+
       .row
         .span9
           %h1
             Inhalts Typ:
             %strong
               = @content_type.name
-          
+
           %fieldset
             %legend
+              %i.fa.fa-wrench.muted
+              &nbsp;
               Basics
 
             %dl.dl-horizontal
-      
+
               %dt
                 Intern
               %dd
@@ -31,39 +33,41 @@
                 %dd
                   = @content_type.editor
                   &nbsp;
-            
+
               - unless @content_type.ref_id.blank?
                 %dt
                   Ref
                 %dd
                   = @content_type.ref_id
                   &nbsp;
-                
-            
+
+
               - unless @content_type.meta.blank?
                 %dt
                   Meta
                 %dd
                   %code
                     = @content_type.meta
-    
+
           .form-actions
             .btn-group.pull-right
               = link_to edit_project_content_type_path(@project, @content_type), :class => 'btn btn-mini btn-success' do
                 %i.fa.fa-edit
                 Bearbeiten
-              
+
               = link_to project_content_type_path(@project, @content_type), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content_type') }, :class => 'btn btn-mini btn-danger' do
                 %i.fa.fa-trash-o
                 Löschen
-    
+
         .span9
           %fieldset
             %legend
+              %i.fa.fa-list.muted
+              &nbsp;
               Datenfelder
-          
+
             %table.table.table-condensed.table-striped.table-bordered.table-hover
-              %tr 
+              %tr
                 %th{:width => 5}
                 %th Name
                 %th intern
@@ -79,20 +83,35 @@
                       = cet.intern
                     %td
                       = Constant.fields(:id => cet.field_type).name unless Constant.fields(:id => cet.field_type).nil?
-                      
+
                     %td{ :style => 'width: 50px;' }
                       .btn-group
                         = link_to edit_project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :class => 'btn btn-mini btn-success' do
                           %i.fa.fa-edit
-                        
+
                         = link_to project_content_type_content_element_type_path(@content_type.project, @content_type, cet), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => 'Are you sure?' }, :class => 'btn btn-mini btn-danger' do
                           %i.fa.fa-trash-o
-            
+
             = link_to new_project_content_type_content_element_type_path(@project, @content_type), :class => 'btn btn-mini btn-primary pull-right' do
               %i.fa.fa-plus
               &nbsp;
               Neues Datenfeld
-                    
-              
-              
-        
+
+
+
+
+
+          %fieldset
+            %legend
+              %i.fa.fa-code.muted
+              &nbsp;
+              Templates
+
+            #templetablestable
+              = render :partial => 'templatables/templatable_table', :locals => { :parent => @content_type }
+
+
+            .pull-right
+              = link_to new_project_templatable_path(@project, :templatable_type => @content_type.class.name, :templatable_id => @content_type.id), :remote => true, :class => 'btn btn-mini btn-success' do
+                %i.fa.fa-plus
+                Template Hinzufügen

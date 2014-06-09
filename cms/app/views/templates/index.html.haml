@@ -11,17 +11,21 @@
       %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
           %th Title
+          %th Action
           %th Verwendung
+          %th Versionen
           %th
 
         - @templates.each do |template|
           %tr
             %td= template.title
+            %td= template.action
             %td
               - template.parents.each do |parent|
                 = link_to [parent.project, parent] do
                   = parent.class.name
-
+            %td
+              = template.versions.size
             %td
               .btn-group.pull-right
                 = link_to [template.project, template], :class => 'btn btn-mini' do

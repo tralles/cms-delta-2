@@ -1,5 +1,7 @@
 class Template < ActiveRecord::Base
 
+  has_paper_trail :only => [:code]
+
   belongs_to :project
   has_many :templatables, :dependent => :destroy
 

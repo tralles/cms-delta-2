@@ -30,7 +30,7 @@ class Content < ActiveRecord::Base
 
 
 
-  
+
   scope :direct, -> { includes(:content_type).where('content_types.direct_edit = 1') }
 
   scope :by_workspace, ->(workspaces) { includes(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id').having('count(workspaces.id) >= ?', workspaces.size) unless workspaces.empty? }
@@ -66,18 +66,18 @@ class Content < ActiveRecord::Base
 
       unless ce.new_record?
         ce.value = ce.value.gsub(/\[img:(\d+)(?:\:(\d+))(?:\:(left|right))\]/).each do |doc|
-        
+
           match,id,width,align = $&,$1,$2,$3
-  
+
           match = recalulateimg(match,id,width)
         end
         ce.update_column( :value, ce.value ) if ce.value_changed?
-  
-  
+
+
         ce.value = ce.value.gsub(/\[img:(\d+)(?:\:(\d+))\]/).each do |doc|
-        
+
           match,id,width = $&,$1,$2
-  
+
           match = recalulateimg(match,id,width)
         end
         ce.update_column( :value, ce.value ) if ce.value_changed?
@@ -92,9 +92,9 @@ class Content < ActiveRecord::Base
 
 
   def recalulateimg(match,id,width)
-  
+
     puts "recalulateimg(#{match},#{id},#{width})"
-  
+
     if document = Document.where('documents.id = ?', id).first
       if width.present?
         case document.document_content_type
@@ -128,9 +128,9 @@ class Content < ActiveRecord::Base
       puts 'remove match '
       match = ""    # Fundstelle [img...] kann weg, weil Documentable ist mehr existiert
     end
-  
+
     return match
-  
+
   end
 
 
@@ -143,7 +143,7 @@ class Content < ActiveRecord::Base
     self.content_relations.by_content_relation_type(crt).each do |cr|
       ausgabe << cr
     end
-    
+
     return ausgabe
   end
 
@@ -161,73 +161,73 @@ class Content < ActiveRecord::Base
       trenner = (repraesentant.empty?) ? '' : ' : '
       repraesentant = repraesentant + trenner + ce.deep_value if ce.content_element_type.badge
     end
-    
+
     repraesentant
 
   end
-  
+
   def filename(language)
-  
+
     unless self.branches.empty?
       branch = self.branches.first
       filename = '/' + language.to_s + branch.route(language).route + '/' + CGI::escape(self.rep(language)) + '.htm'
-      
+
       filename = filename.downcase
     end
   end
-  
-  
+
+
   def languages
-  
+
     languages = []
-  
-    self.content_elements.group(:language).each do |ce| 
+
+    self.content_elements.group(:language).each do |ce|
       languages << ce.language
     end
-    
+
     languages
   end
-  
-  
-  
+
+
+
   def option(name, args = nil)
     ausgabe = nil
-    
+
     meta = YAML::load(self.content_type.meta)
 
     if meta && meta.send(name.to_sym)
       ausgabe = meta.send(name.to_sym)
     end
-      
+
     return ausgabe
 
   end
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   def reorder_documents(args = {})
-    
+
     documentable = self.documentables.where(:document_id => args[:document]).first
     documentable.position = args[:position]
     documentable.save
 
   end
-  
+
   def reorder_content_relations(args = {})
-    
+
     relation = self.content_relations.where(:relative_id => args[:relative]).first
     relation.position = args[:position]
     relation.save
 
   end
-  
-  
-  
+
+
+
   def method_missing(name, args = nil)
     ausgabe = nil
 
@@ -240,7 +240,7 @@ class Content < ActiveRecord::Base
     else
       ce = ce.first
     end
-    
+
     if ce
       if ce.content_element_type.field_type == 'ContentType'
         reference = self.project.contents.where(:id => ce.value ).first
@@ -250,22 +250,22 @@ class Content < ActiveRecord::Base
       elsif ce.content_element_type.field_type == 'boolean'
         ausgabe = ( ce.value == 'true' ) ? true : false
       else
-        ausgabe = ce.value 
+        ausgabe = ce.value
       end
     end
 
     unless ausgabe
-    
+
       content_relations = self.content_relations.includes(:content_relation_type).where('content_relation_types.intern = ?', name).references(:content_relation_type)
       unless content_relations.empty?
         ausgabe = []
-        content_relations.each do |cr|        
+        content_relations.each do |cr|
           ausgabe << { :id => cr.relative.id, :repraesentant => cr.relative.rep(I18n.locale), :content => cr.relative }
         end
-      
+
       end
-      
-    
+
+
     end
 
     return ausgabe

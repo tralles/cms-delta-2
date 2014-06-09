@@ -38,7 +38,7 @@ GEM
       tzinfo (~> 0.3.37)
     acts_as_list (0.4.0)
       activerecord (>= 3.0)
-    ancestry (2.0.0)
+    ancestry (2.1.0)
       activerecord (>= 3.0.0)
     arel (4.0.2)
     bcrypt (3.1.7)
@@ -67,16 +67,17 @@ GEM
       execjs
     coffee-script-source (1.7.0)
     daemons (1.1.9)
-    dalli (2.7.0)
+    dalli (2.7.2)
     debug_inspector (0.0.2)
+    diffy (3.0.4)
     ensure_valid_encoding (0.5.3)
     erubis (2.7.0)
     eventmachine (1.0.3)
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
-    execjs (2.0.2)
-    font-awesome-rails (4.0.3.1)
+    execjs (2.2.0)
+    font-awesome-rails (4.0.3.2)
       railties (>= 3.2, < 5.0)
     haml (4.0.5)
       tilt
@@ -86,7 +87,7 @@ GEM
       haml (>= 3.1, < 5.0)
       railties (>= 4.0.1)
     hike (1.2.3)
-    hirb (0.7.1)
+    hirb (0.7.2)
     i18n (0.6.9)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
@@ -94,10 +95,10 @@ GEM
     jquery-rails (3.1.0)
       railties (>= 3.0, < 5.0)
       thor (>= 0.14, < 2.0)
-    jquery-ui-rails (4.2.0)
+    jquery-ui-rails (4.2.1)
       railties (>= 3.2.16)
     json (1.8.1)
-    kaminari (0.15.1)
+    kaminari (0.16.0)
       actionpack (>= 3.0.0)
       activesupport (>= 3.0.0)
     kaminari-bootstrap (3.0.1)
@@ -108,23 +109,26 @@ GEM
     mail (2.5.4)
       mime-types (~> 1.16)
       treetop (~> 1.4.8)
-    meta_request (0.2.9)
+    meta_request (0.3.0)
       callsite
       rack-contrib
       railties
     mime-types (1.25.1)
     minitest (4.7.5)
-    multi_json (1.9.2)
-    mysql2 (0.3.15)
+    multi_json (1.10.1)
+    mysql2 (0.3.16)
     orm_adapter (0.5.0)
+    paper_trail (3.0.2)
+      activerecord (>= 3.0, < 5.0)
+      activesupport (>= 3.0, < 5.0)
     paperclip (4.1.1)
       activemodel (>= 3.0.0)
       activesupport (>= 3.0.0)
       cocaine (~> 0.5.3)
       mime-types
-    polyamorous (0.6.4)
+    polyamorous (1.0.0)
       activerecord (>= 3.0)
-    polyglot (0.3.4)
+    polyglot (0.3.5)
     quiet_assets (1.0.2)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
@@ -145,11 +149,13 @@ GEM
       activesupport (= 4.0.3)
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
-    rake (10.2.2)
-    ransack (1.1.0)
+    rake (10.3.2)
+    ransack (1.2.3)
       actionpack (>= 3.0)
       activerecord (>= 3.0)
-      polyamorous (~> 0.6.0)
+      activesupport (>= 3.0)
+      i18n
+      polyamorous (~> 1.0.0)
     rdoc (4.1.1)
       json (~> 1.4)
     ref (1.0.5)
@@ -182,7 +188,7 @@ GEM
       eventmachine (>= 1.0.0)
       rack (>= 1.0.0)
     thor (0.19.1)
-    thread_safe (0.3.3)
+    thread_safe (0.3.4)
     tilt (1.4.1)
     treetop (1.4.15)
       polyglot
@@ -210,6 +216,7 @@ DEPENDENCIES
   coffee-rails (~> 4.0.0)
   dalli
   devise!
+  diffy
   ensure_valid_encoding
   exception_notification
   font-awesome-rails (~> 4.0.3.1)
@@ -224,6 +231,7 @@ DEPENDENCIES
   kramdown
   meta_request
   mysql2
+  paper_trail (~> 3.0.2)
   paperclip
   quiet_assets
   rails (= 4.0.3)

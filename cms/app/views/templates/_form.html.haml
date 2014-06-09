@@ -2,10 +2,26 @@
   = f.error_notification
 
   .form-inputs
-    = f.input :action, input_html: {  :class => "input-block-level" }
+    = f.input :action, collection: [ "index", "show"], input_html: {  :class => "input-block-level" }
     = f.input :title, input_html: {  :class => "input-block-level" }
     = f.input :code, input_html: {  :class => "input-block-level autosize aceditor" }
     %pre#aceditor
 
   .form-actions
     = f.button :submit
+
+
+  %hr
+
+  .text-muted
+    Mit der Tastenkobination
+    %strong
+      %span.btn.btn-mini.btn-xs{ :disabled => true }
+        - if get_operating_system == 'Mac'
+          cmd ⌘
+        - else
+          strg
+      +
+      %span.btn.btn-mini.btn-xs{ :disabled => true }
+        s
+    kann das Template auch on the fly gespeichert werden.

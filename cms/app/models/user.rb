@@ -6,7 +6,7 @@ class User < ActiveRecord::Base
 
 
   has_many :permissions, :dependent => :destroy
-         
+
   has_many :responsibilities, :class_name => "UsersToProjects"
   has_many :projects, :through => :responsibilities
 
@@ -22,13 +22,13 @@ class User < ActiveRecord::Base
   def admin?
     return admin
   end
-  
-  
-  
+
+
+
   def can_view_content?(content)
-  
+
     ausgabe = false
-  
+
     if content.branches.empty?
       ausgabe = true
     else
@@ -36,11 +36,11 @@ class User < ActiveRecord::Base
         ausgabe = self.visible_path?(branch)
       end
     end
-  
+
     return ausgabe
   end
-  
-  
+
+
   def visible_path?(branch)
     ausgabe = false
 
@@ -52,45 +52,45 @@ class User < ActiveRecord::Base
           atleastoneinpathisblocked = true
         end
       end
-      
+
       ausgabe = (atleastoneinpathisblocked) ? false : true
-      
+
     else
       ausgabe = true
     end
-  
+
     return ausgabe
 
   end
-  
-  
-  
-  
-  
+
+
+
+
+
   def workspaces(project)
     workspaces = []
     self.permissions.where(:project_id => project).where(:subject_class => 'Workspace').where(:action => :read).each do |ws|
       workspaces << project.workspaces.where(:id => ws.subject_id).first
     end
-    
+
     return workspaces
   end
-  
+
   def content_types(project)
     content_types = []
     self.permissions.where(:project_id => project).where(:subject_class => 'ContentType').where(:action => :read).each do |ct|
       content_types << project.content_types.direct.where(:id => ct.subject_id).first
     end
-    
+
     return content_types
   end
-  
-  
-  
+
+
+
   def releaseContents
-  
+
     self.contents.each do |content|
-      content.user = nil 
+      content.user = nil
       content.save
     end
   end

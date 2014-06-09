@@ -65,11 +65,12 @@
     %legend
       Inhalts-Typen
 
-    = f.association :content_types, :as => :check_boxes, :collection => @project.content_types
+    = f.association :content_types, :as => :check_boxes, :collection => @project.content_types.direct
 
 
   %fieldset
     %legend
+      %i.fa.fa-fw.fa-fork
       Template
     .row
       #templetablestable

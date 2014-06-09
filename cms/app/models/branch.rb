@@ -13,7 +13,7 @@ class Branch < ActiveRecord::Base
   has_many :content_types, :through => :cttb
 
 
-  has_many :ctbs, :class_name => "ContentToBranches", :dependent => :destroy, :order => 'position ASC'
+  has_many :ctbs, :class_name => "ContentToBranches", :dependent => :destroy #, :order => 'position ASC'
   has_many :contents, :through => :ctbs
 
 

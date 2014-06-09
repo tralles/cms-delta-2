@@ -48,7 +48,7 @@ end
 
 
 
-group :development do 
+group :development do
   gem 'better_errors'
   gem 'binding_of_caller'
   gem 'meta_request'
@@ -59,7 +59,7 @@ end
 
 gem 'devise', github: 'plataformatec/devise', branch: 'rails4'
 
-  
+
 # UI
 gem 'hirb'
 gem 'font-awesome-rails', '~> 4.0.3.1'
@@ -69,12 +69,14 @@ gem 'haml'
 gem 'simple_form', '~> 3.0.0.rc'
 
 
-gem 'kramdown' 
+gem 'kramdown'
 
 
 gem 'ancestry'  # bäume
 gem 'acts_as_list' # reihenfolge
 
+gem 'paper_trail', '~> 3.0.2' # versionen
+gem 'diffy'
 
 gem 'cancan'
 

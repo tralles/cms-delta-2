@@ -80,8 +80,22 @@ $(document).on('ready page:load', function() {
 
   $('[rel=tooltip]').tooltip();
 
+  hljs.initHighlightingOnLoad();
 
-  if( $('textarea.aceditor') && $('#aceditor') )
+
+  if( $('a.diffylink') )
+  {
+    $('a.diffylink').on('click', function(){
+      $('.diffycode').hide();
+      $('.diffylink').show();
+
+      rel = $(this).attr('rel');
+      $('#link'+rel).hide();
+      $('#'+rel).show();
+    });
+  }
+
+  if( $('textarea.aceditor').length > 0 && $('#aceditor').length > 0 )
   {
     var editor = ace.edit("aceditor");
     var textarea = $('textarea.aceditor').hide();
@@ -101,25 +115,19 @@ $(document).on('ready page:load', function() {
       textarea.val(editor.getSession().getValue());
     });
 
-/*
     function smit()
     {
       $('.form-horizontal').submit()
       return false;
     }
 
-    $(document).unbind('keyup.ctrl_s');
-    $(document).bind('keydown.ctrl_s', smit );
 
-    $(document).unbind('keyup.meta_s');
-    $(document).bind('keydown.meta_s', smit );
 
-    $('#aceditor *').unbind('keyup.ctrl_s');
-    $('#aceditor *').bind('keydown.ctrl_s', smit );
+    $(document).on('keydown', null, 'ctrl+s', smit );
+    $(document).on('keydown', null, 'meta+s', smit );
 
-    $('#aceditor *').unbind('keyup.meta_s');
-    $('#aceditor *').bind('keydown.meta_s', smit );
-*/
+    $('#aceditor *').on('keydown', null, 'ctrl+s', smit );
+    $('#aceditor *').on('keydown', null, 'meta+s', smit );
 
   }
 
