@@ -4,8 +4,8 @@
     <%= javascript_tag do %>
       var fileCount = 0;
       var addedFiles = 0;
-  
-      function createUploader() 
+
+      function createUploader()
       {
         var uploader = new qq.FineUploader({
           element: document.getElementById('bootstrapped-fine-uploader'),
@@ -30,8 +30,8 @@
             fail: 'alert alert-error'
           },
           callbacks: {
-            onUpload: function() { 
-                NProgress.start(); 
+            onUpload: function() {
+                NProgress.start();
                 $('#contendocuments').attr('style', 'opacity:.15');
             },
             onUploadChunk: function() { NProgress.inc(); },
@@ -43,16 +43,18 @@
               if (responseJSON.success) {
                 $('#thumbnail-fine-uploader').append('<img src="img/success.jpg" alt="' + fileName + '">');
               }
-              
+
               addedFiles ++;
-              
-              console.log(addedFiles / fileCount);
+
+              percent = addedFiles / fileCount * 100;
+              console.log('upload ' + percent + '% erledigt …' );
               NProgress.set( addedFiles / fileCount );
               if( fileCount == addedFiles)
               {
                 NProgress.done();
                 <% if @content %>
                   $('#documents').load('<%= uploaded_path(@project, @content.class.name, @content.id) %>');
+                  console.log('upload done');
                 <% end %>
                 NProgress.remove();
               }
@@ -60,11 +62,11 @@
           }
         });
       }
-  
+
       $(document).on('ready page:load', function() {
-        
+
         createUploader();
-      
+
       });
     <% end %>
   <% end %>

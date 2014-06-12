@@ -19,11 +19,11 @@ class ContentsController < ApplicationController
     @content.project        = @project
     @content.content_type   = @content_type
   end
-  
+
   def close
     @content.user = nil
     @content.save
-    
+
     respond_to do |format|
       format.html { redirect_to project_content_type_contents_path(@project, @content_type) }
       format.js { }
@@ -34,7 +34,7 @@ class ContentsController < ApplicationController
   def edit
     @content.user = current_user
     @content.save
-    
+
     @crt = params[:crt]
   end
 
@@ -42,25 +42,39 @@ class ContentsController < ApplicationController
   # POST /contents.json
   def create
     @content = Content.new(permitted_params.content)
-    
+
     @content.project        = @project
     @content.content_type   = @content_type
 
     respond_to do |format|
       if @content.save
-      
+
+
+        @content.ctbs.each do |ctb|
+          if params[:link]
+              ctb.link = (params[:link] == ctb.branch_id.to_s) ? true : false
+          end
+
+          if params[:caption]
+              ctb.caption = (params[:caption][ctb.branch_id.to_s]) ? params[:caption][ctb.branch_id.to_s] : ''
+          end
+
+          ctb.save
+        end
+
+
         if params[:content_elements][:add]
           params[:content_elements][:add].each do |content_element_type, value|
             begin
               @content.content_elements.build(:content_element_type_id => content_element_type, :language => @locale, :value => value).save
-            rescue 
+            rescue
               flash[:error] = t('fehler.ascii')
               @content.content_elements.build(:content_element_type_id => content_element_type, :language => @locale, :value => cleanup(value)).save
             end
           end
         end
         @content.proof_bracketcommands
-      
+
         format.html { redirect_to edit_project_content_type_content_path(@project, @content_type, @content, :locale => @locale), notice: 'Content was successfully created.' }
         format.json { render action: 'show', status: :created, location: [@project, @content_type, @content] }
       else
@@ -73,16 +87,16 @@ class ContentsController < ApplicationController
   # PATCH/PUT /contents/1
   # PATCH/PUT /contents/1.json
   def update
-    
+
     @content_relation_type = @project.content_relation_types.where(:intern => params[:crt]).first if params[:crt]
-    
+
     respond_to do |format|
       if @content.update(permitted_params.content)
-      
-        
+
+
         @content.user = nil
         @content.save
-      
+
         if params[:content_elements][:add]
           params[:content_elements][:add].each do |content_element_type, value|
             begin
@@ -98,20 +112,34 @@ class ContentsController < ApplicationController
         if params[:content_elements][:update]
           params[:content_elements][:update].each do |content_element_id, value|
             ce = @content.content_elements.where('content_elements.id = ?', content_element_id).first
-            
-            begin 
+
+            begin
               ce.value = value
               ce.save
-            rescue 
+            rescue
               flash[:error] = t('fehler.ascii')
               ce.value = cleanup(value)
               ce.save
             end
           end
         end
-        
+
+
+        @content.ctbs.each do |ctb|
+          if params[:link]
+              ctb.link = (params[:link] == ctb.branch_id.to_s) ? true : false
+          end
+
+          if params[:caption]
+              ctb.caption = (params[:caption][ctb.branch_id.to_s]) ? params[:caption][ctb.branch_id.to_s] : ''
+          end
+
+          ctb.save
+        end
+
+
         @content.proof_bracketcommands
-      
+
         format.html { redirect_to project_content_type_content_path(@project, @content_type, @content, :locale => @locale), notice: 'Content was successfully updated.' }
         format.js {}
         format.json { head :no_content }
@@ -138,12 +166,12 @@ class ContentsController < ApplicationController
     def set_content
       @content = Content.find(params[:id])
     end
-  
+
     def set_project
       @branches       = @project.branches
 
       if params[:content_type_id]
-        @content_type = ContentType.find(params[:content_type_id]) 
+        @content_type = ContentType.find(params[:content_type_id])
         if current_user.admin?
           @contents     = @content_type.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces)
         else
@@ -152,9 +180,9 @@ class ContentsController < ApplicationController
         # puts 'content_type_id'
         # puts @contents
       end
-      
+
       if params[:branch]
-        @branch       = @project.branches.where('branches.id = ?', params[:branch]).first 
+        @branch       = @project.branches.where('branches.id = ?', params[:branch]).first
         if current_user.admin?
           @contents     = (@content_type) ? @branch.contents.direct.by_content_types(@filter_content_types).by_workspace(@filter_workspaces).where(:content_type => @content_type) : @branch.contents
         else
@@ -170,25 +198,25 @@ class ContentsController < ApplicationController
         end
       end
 
-      # puts '+ + + + + + +'      
+      # puts '+ + + + + + +'
       # puts '@filter_workspaces'
-      # puts @filter_workspaces   
-      # puts '+ + + + + + +'      
+      # puts @filter_workspaces
+      # puts '+ + + + + + +'
       # puts '@workspaces'
       # puts @workspaces
-      # puts '+ + + + + + +'      
+      # puts '+ + + + + + +'
       # puts @contents.to_sql
-      # puts '+ + + + + + +'      
-      
+      # puts '+ + + + + + +'
+
     end
-    
-    
+
+
     def set_hidden_ressources
       # prevent blocked paths from beeing removed even if the user can not set the path directly
       @content.branches.each do |branch|
         params[:content][:branch_ids] << branch.id if !params[:content][:branch_ids].include?(branch.id) && !current_user.visible_path?(branch)
       end
-      
+
       # prevent workspaces from beeing removed even it the user can not set directly
       @content.workspaces.each do |workspace|
         params[:content][:workspace_ids] << workspace.id if !params[:content][:workspace_ids].include?(workspace.id) && (!current_user.workspaces(@project).empty? && !current_user.workspaces(@project).include?(workspace))
@@ -204,7 +232,7 @@ class ContentsController < ApplicationController
         :universal_newline => true       # Always break lines with \n
       }
       input = input.encode Encoding.find('ISO-8859-1'), encoding_options
-      
+
       return input
     end
 

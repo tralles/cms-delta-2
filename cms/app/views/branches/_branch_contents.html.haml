@@ -5,5 +5,14 @@
   = branch.route(@locale).name
 
 - if @content_type && branch.content_types.include?(@content_type)
-  - checked = ( branch.contents.include?(@content) || (@content.new_record? && @branch && @branch == branch) ) ? true : false
-  = check_box_tag 'content[branch_ids][]', branch.id, checked, :class => 'pull-right', :style => 'margin: 5px 5px 0 0;'
+  .pull-right.metaline
+    - ctb = @content.ctbs.where(:branch => branch).first
+    - caption = (ctb) ? ctb.caption : ''
+    = text_field_tag "caption[#{branch.id}]", caption, :class => 'metafield', :rel => 'tooltip', :data => { :toggle=>"tooltip", :placement=>"top"}, :title=>"Beschreibung"
+
+    - checked = (ctb && ctb.link) ? true : false
+    = radio_button_tag "link", branch.id, checked, :style => 'margin: 5px 5px 0 0;', :rel => 'tooltip', :data => { :toggle=>"tooltip", :placement=>"top"}, :title=>"Link-Ziel"
+
+
+    - checked = ( branch.contents.include?(@content) || (@content.new_record? && @branch && @branch == branch) ) ? true : false
+    = check_box_tag 'content[branch_ids][]', branch.id, checked, :style => 'margin: 5px 5px 0 0;', :rel => 'tooltip', :data => { :toggle=>"tooltip", :placement=>"top"}, :title=>"Zuweisung zum Menüpunkt"

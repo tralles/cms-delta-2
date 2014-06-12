@@ -99,9 +99,12 @@ $(document).on('ready page:load', function() {
   {
     var editor = ace.edit("aceditor");
     var textarea = $('textarea.aceditor').hide();
+
     editor.getSession().setValue(textarea.val());
-    editor.setTheme("ace/theme/twilight");
+    editor.getSession().setTabSize(2);
     editor.session.setMode("ace/mode/html_ruby");
+
+    editor.setTheme("ace/theme/twilight");
 
 
     editor.setOptions({

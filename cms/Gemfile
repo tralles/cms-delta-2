@@ -87,7 +87,12 @@ gem 'paperclip'
 
 
 gem 'kaminari'
-gem 'kaminari-bootstrap'
+
+## Bootstrap 3:
+# gem 'kaminari-bootstrap', '~> 3.0.1'
+
+## Bootstrap 2:
+gem 'kaminari-bootstrap', '~> 0.1.3'
 
 
 

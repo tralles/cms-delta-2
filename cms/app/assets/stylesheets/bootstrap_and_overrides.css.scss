@@ -169,6 +169,28 @@ small.badge
 
 
 
+.metafield
+{
+  border: none !important;
+  border-bottom: 1px solid #eee !important;
+  box-shadow: none !important;
+  outline: none !important;
+  padding: 0px 5px !important;
+  background: rgba(255, 255, 255, .5) !important;
+}
+
+.metaline:hover > .metafield
+{
+  background: #fff !important;
+}
+
+
+
+
+
+
+
+
 
 /* custom inclusion of right, left and below tabs */
 

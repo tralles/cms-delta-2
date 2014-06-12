@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140609135154) do
+ActiveRecord::Schema.define(version: 20140611144508) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -126,10 +126,13 @@ ActiveRecord::Schema.define(version: 20140609135154) do
     t.integer  "position"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.boolean  "link"
+    t.string   "caption"
   end
 
   add_index "content_to_branches", ["branch_id"], name: "index_content_to_branches_on_branch_id", using: :btree
   add_index "content_to_branches", ["content_id"], name: "index_content_to_branches_on_content_id", using: :btree
+  add_index "content_to_branches", ["link"], name: "index_content_to_branches_on_link", using: :btree
   add_index "content_to_branches", ["position"], name: "index_content_to_branches_on_position", using: :btree
 
   create_table "content_types", force: true do |t|

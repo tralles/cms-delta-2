@@ -6,7 +6,10 @@
   %options
     #tree.navi
       = hidden_field_tag 'content[branch_ids][]', ''
+      = hidden_field_tag 'caption[0]', ''
+      = hidden_field_tag 'link', ''
+
       %ul.nested_branches.contents
-        = content_in_branches @branches.arrange(:order => :position) 
-      
+        = content_in_branches @branches.arrange(:order => :position)
+
 %br

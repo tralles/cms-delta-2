@@ -116,6 +116,8 @@ class DocumentsController < ApplicationController
         @content = Content.find(params[:documentable_id])
       end
 
+      render :layout => false
+
   end
 
 
