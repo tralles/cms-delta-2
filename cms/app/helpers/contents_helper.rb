@@ -10,21 +10,21 @@ module ContentsHelper
       css       = ''
 
       identifier = "content_elements[add][#{content_element_type.id}]"
-      
+
       ce = content.value(content_element_type.id, @locale)
-      if ce 
+      if ce
         identifier = "content_elements[update][#{ce.id}]"
         value = ce.value
       end
-  
 
 
-      
-    
+
+
+
     css << ' inline_documents' if content_element_type.inline_documents
 
     css << ' required' if content_element_type.mandatory
-    
+
 
 
     case content_element_type.simple_form
@@ -32,11 +32,30 @@ module ContentsHelper
 
         content_type = @project.content_types.where(:intern => content_element_type.intern).first
         collection = []
-        content_type.contents.each do |content|
-          collection << [content.rep(@locale), content.id]
+
+        meta = YAML::load(content_element_type.meta)
+        if meta && meta.constrains
+          # Nur Inhalte mit gleichen Vater-Inhalt
+
+
+        if @content_relation_type
+          # neuen Inhalt
+          content.content_relations.where(:content_relation_type_id => content.content_relation_types(content_element_type.intern).first.id).each do |cnt|
+            collection << [cnt.relative.rep(@locale), cnt.relative.id]
+          end
+        else
+          # Inhalt bearbeiten
+          
+        end
+
+        else
+          content_type.contents.each do |cnt|
+            collection << [cnt.rep(@locale), cnt.id]
+          end
         end
 
         ausgabe = select_tag identifier, options_for_select(collection, value), :include_blank => true, :class => "input-block-level#{css}"
+
 
       when 'Constant'
 
@@ -59,17 +78,17 @@ module ContentsHelper
 
 
       when 'boolean'
-        ausgabe = ausgabe + hidden_field_tag( identifier, 'false') 
+        ausgabe = ausgabe + hidden_field_tag( identifier, 'false')
         ausgabe = ausgabe + check_box_tag( identifier, 'true', ((value.blank? || value == 'false') ? false : true) )
         ausgabe = raw ausgabe
 
 
       when 'date'
-        ausgabe = raw "<div class='input-append date' data-date='#{value}' data-date-format='dd-mm-yyyy'>#{ text_field_tag identifier, value, :class =>  "span2 datepicker#{css}" }<span class='add-on muted'>#{Time.zone.now.to_date}</span></div>" 
+        ausgabe = raw "<div class='input-append date' data-date='#{value}' data-date-format='dd-mm-yyyy'>#{ text_field_tag identifier, value, :class =>  "span2 datepicker#{css}" }<span class='add-on muted'>#{Time.zone.now.to_date}</span></div>"
 
 
       when 'time'
-        ausgabe = raw "<div class='input-append time'>#{ text_field_tag identifier, value, :class =>  "span2 timepicker#{css}" }<span class='add-on muted'>#{Time.zone.now.strftime('%H:%M')}</span></div>" 
+        ausgabe = raw "<div class='input-append time'>#{ text_field_tag identifier, value, :class =>  "span2 timepicker#{css}" }<span class='add-on muted'>#{Time.zone.now.strftime('%H:%M')}</span></div>"
 
 
       else
@@ -77,8 +96,8 @@ module ContentsHelper
 
 
     end
-  
-  
+
+
     return ausgabe
   end
 

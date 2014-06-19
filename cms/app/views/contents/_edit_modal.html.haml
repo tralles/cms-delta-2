@@ -4,10 +4,11 @@
     %h3#myModalLabel
       Bearbeiten
 
+
   = simple_form_for([@project, @content_type, @content], :remote => true, html: {class: 'form-horizontal' }) do |f|
     .modal-body
       -# = f.error_notification
-      
+
       - if @crt
         = hidden_field_tag :crt, @crt
 
@@ -26,11 +27,38 @@
               = cetform @content, cet
 
 
-      = f.input :ref_id
-      
-    
+      = f.input :ref_id, :input_html => { :class => "input-block-level" }
+
+
+      - if @content_type.editor == 2
+        - meta = YAML::load(@content_type.meta)
+        - if meta.content_relation_type
+          - content_relation_type = @project.content_relation_types.where(:intern => meta.content_relation_type).first
+          - parent = @content.inverse_content_relations.first.content
+          %fieldset
+            %legend= content_relation_type.name
+
+            %table.table.table-condensed.table-bordered.table-hovered
+              - parent.content_relations.each do |cr|
+                - if cr.relative.content_type_id == content_relation_type.content_type_id
+                  %tr
+                    %th.tr{ :width => '25%' }= cr.relative.rep(@locale)
+                    -# %td
+                    -#  = content_relation_type.inspect
+                    %td
+                      %form.navbar-search
+                        %input{ :id => 'search', :type => "text", :class => "ctsuggestion", :rel => "#{search_suggest_by_content_type_path(@project, content_relation_type.relative_type_id)}", :autocomplete => "off", :placeholder => "#{content_relation_type.relative_type.name} suchen …" }
+                        %input{ :type => :hidden, :name => 'content_id', :value => @content.id }
+                        %input{ :type => :hidden, :name => 'relative_id', :value => parent.id }
+                        %input{ :type => :hidden, :name => 'binder_id', :value => cr.relative.id }
+
+                      %div{ :id => "cr#{cr.id}" }
+                        %table.table
+
+
+
     .modal-footer
-      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' } 
-        
-      
+      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+
+
       %button.btn.btn-inverse{"aria-hidden" => "true", "data-dismiss" => "modal"} Abbrehen

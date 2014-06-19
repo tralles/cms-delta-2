@@ -124,6 +124,7 @@ Delta2::Application.routes.draw do
 
   get 'logout' => 'users#logout', :as => 'logout'
   match 'search/:project_id/suggest' => 'application#search', :as => 'search_suggest', :via => :all
+  match 'search/:project_id/:content_type_id/suggest' => 'application#search', :as => 'search_suggest_by_content_type', :via => :all
 
 
 

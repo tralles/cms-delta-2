@@ -16,6 +16,7 @@ class Content < ActiveRecord::Base
   has_many :ctbs, :class_name => "ContentToBranches", :dependent => :destroy
   has_many :branches, :through => :ctbs
 
+  has_many :bindings, :class_name => "ContentRelation", :foreign_key => "binder_id"
 
   has_many :documentables, :as => :documentable, :dependent => :destroy
   has_many :documents, :through => :documentables
@@ -51,6 +52,17 @@ class Content < ActiveRecord::Base
 
 
 
+  def binder
+      self.project.content_relation_types.where(:binder_type => self.content_type)
+  end
+
+  def content_relation_types(intern = false)
+    if intern
+      self.project.content_relation_types.where(:content_type => self.content_type).where(:intern => intern)
+    else
+      self.project.content_relation_types.where(:content_type => self.content_type)
+    end
+  end
 
 
 
@@ -93,7 +105,7 @@ class Content < ActiveRecord::Base
 
   def recalulateimg(match,id,width)
 
-    puts "recalulateimg(#{match},#{id},#{width})"
+    # puts "recalulateimg(#{match},#{id},#{width})"
 
     if document = Document.where('documents.id = ?', id).first
       if width.present?

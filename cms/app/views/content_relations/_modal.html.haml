@@ -26,10 +26,10 @@
           %label.control-label
             Referenz
           .controls
-            = text_field_tag :ref, params[:ref]
-      
+            = text_field_tag :ref, params[:ref], :class => "input-block-level"
+
     .modal-footer
-      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' } 
-        
-      
+      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+
+
       %button.btn.btn-inverse{"aria-hidden" => "true", "data-dismiss" => "modal"} Abbrehen

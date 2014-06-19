@@ -25,7 +25,11 @@ class ApplicationController < ActionController::Base
 
 
   def search
-    @contents = Content.where(:project_id => params[:project_id]).by_content_types(@filter_content_types).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%").group('contents.id')
+    if params[:content_type_id]
+      @contents = Content.where(:project_id => params[:project_id]).by_content_types(params[:content_type_id]).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%").group('contents.id')
+    else
+      @contents = Content.where(:project_id => params[:project_id]).by_content_types(@filter_content_types).joins(:content_elements).where('content_elements.value LIKE ?', "%#{params[:query]}%").group('contents.id')
+    end
   end
 
 
