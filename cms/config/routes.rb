@@ -19,7 +19,9 @@ Delta2::Application.routes.draw do
     resources :constants
     resources :workspaces
 
-    resources :templates
+    resources :templates do
+      resources :versions
+    end
     resources :templatables
 
     resources :documentables

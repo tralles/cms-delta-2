@@ -40,10 +40,11 @@ de:
       content_element_type: 'Soll dieser Inhalts-Typ wirklich gelöscht werden? Alle Inhalte dieses Typs werden dann ebenfalls vernichtet!'
       constant: 'Soll diese Konstante wirklich gelöscht werden? Dies hat direkte Auswirkungen auf alle Projekte und die Funktionsweise des CMS|delta II'
       branch: 'Soll dieser Menüpunkt wirklich gelöscht werden? Die Inhalte dieses Menüpunkts bleiben erhalten.'
+      version: 'Soll die Version %{version} wirklich gelöscht werden?'
 
 
   activerecord:
-  
+
     models:
       user: 'User'
       branch: 'Menüpunkt'
@@ -58,7 +59,7 @@ de:
         name: 'Name'
         value: 'Inhalt'
         art: 'Typ'
-        
+
       branch:
         name: 'Bezeichnung'
         ref: 'Referenz'
@@ -70,23 +71,23 @@ de:
         name: 'Titel'
         route: 'Route'
         jump: 'Sprung-Ziel'
-        
+
       user:
-        name: 'Vorname' 
-        surname: 'Nachname' 
-        email: 'E-Mail' 
+        name: 'Vorname'
+        surname: 'Nachname'
+        email: 'E-Mail'
         password: 'Passwort'
         password_confirmation: 'Passwort Wiederholung'
         remember_me: 'Angemeldet bleiben'
-      
-      content_type: 
+
+      content_type:
         name: 'Name'
         intern: 'Intern'
         editor: 'Editor'
         meta: 'Meta'
         ref: 'Referenz'
-      
-      content_element_type: 
+
+      content_element_type:
         name: 'Name'
         intern: 'Intern'
         field_type: 'Feld-Typ'
@@ -97,18 +98,18 @@ de:
         ref: 'Referenz'
 
       host:
-        protocoll: 'Protokoll' 
-        host: 'Domain-Name' 
-        primary: 'Primär-Host' 
+        protocoll: 'Protokoll'
+        host: 'Domain-Name'
+        primary: 'Primär-Host'
 
-      project: 
+      project:
         name: 'Name'
         description: 'Beschreibung'
         intern: 'Intern'
         status: 'Status'
         ref: 'Referenz'
-        
-  
+
+
     errors:
       models:
         user:
@@ -124,45 +125,45 @@ de:
             password:
               blank: 'Du musst ein passwort eingeben.'
               confirmation: 'Passwort und Passwort-Wiederholung müssen übereinstimmen.'
-              
-   
-   
-   
-   
-   
-   
+
+
+
+
+
+
+
   ransack:
     asc: "Aufsteigend"
     desc: "Absteigend"
-    or: "oder"   
+    or: "oder"
     predicates:
       cont: "enthält"
       not_cont: "enthält nicht"
       start: "beginnt mit"
       end: "endet mit"
       gt: "größer als"
-      lt: "kleiner als"   
-      eq: "kleiner als"   
-   
-   
-   
-   
-   
-   
-   
+      lt: "kleiner als"
+      eq: "kleiner als"
+
+
+
+
+
+
+
   unauthorized:
     manage:
       all: "Not authorized to %{action} %{subject}."
       user: "Not allowed to manage other user accounts."
     update:
-      project: "Not allowed to update this project."   
-   
-   
-   
-   
-   
-   
-   
+      project: "Not allowed to update this project."
+
+
+
+
+
+
+
   date:
     abbr_day_names:
     - So
@@ -173,7 +174,7 @@ de:
     - Fr
     - Sa
     abbr_month_names:
-    - 
+    -
     - Jan
     - Feb
     - Mär
@@ -199,7 +200,7 @@ de:
       long: ! '%e. %B %Y'
       short: ! '%e. %b'
     month_names:
-    - 
+    -
     - Januar
     - Februar
     - März
