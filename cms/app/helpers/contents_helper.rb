@@ -45,7 +45,7 @@ module ContentsHelper
           end
         else
           # Inhalt bearbeiten
-          
+
         end
 
         else
@@ -66,12 +66,14 @@ module ContentsHelper
           collection = liste[@locale.to_s]
         end
 
-        ausgabe = select_tag identifier, options_for_select(collection, value), :include_blank => true, :class => "input-block-level#{css}"
-
+        if collection && !collection.empty?
+          ausgabe = select_tag identifier, options_for_select(collection, value), :include_blank => true, :class => "input-block-level#{css}"
+        end
 
       when 'textarea'
         css << ' redactor' if content_element_type.wysiwyg
         css << ' html' if content_element_type.html
+        css << ' html' if content_element_type.haml
         css << ' markdown' if content_element_type.markdown
         css << ' autosize' if content_element_type.autosize
         ausgabe = text_area_tag identifier, value, :rows => content_element_type.rows, :class => "input-block-level#{css}"

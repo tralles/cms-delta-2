@@ -29,6 +29,8 @@ class ContentElementType < ActiveRecord::Base
       else
         ausgabe = 2 if name == 'rows'
         ausgabe = false if name == 'markdown'
+        ausgabe = false if name == 'haml'
+        ausgabe = false if name == 'html'
         ausgabe = false if name == 'wysiwyg'
         ausgabe = false if name == 'redactor'
         ausgabe = false if name == 'autosize'

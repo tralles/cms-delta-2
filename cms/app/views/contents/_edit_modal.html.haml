@@ -48,9 +48,9 @@
                     %td
                       %form.navbar-search
                         %input{ :id => 'search', :type => "text", :class => "ctsuggestion", :rel => "#{search_suggest_by_content_type_path(@project, content_relation_type.relative_type_id)}", :autocomplete => "off", :placeholder => "#{content_relation_type.relative_type.name} suchen …" }
-                        %input{ :type => :hidden, :name => 'content_id', :value => @content.id }
-                        %input{ :type => :hidden, :name => 'relative_id', :value => parent.id }
-                        %input{ :type => :hidden, :name => 'binder_id', :value => cr.relative.id }
+                        %input{ :type => :text, :name => 'content_id', :value => @content.id }
+                        %input{ :type => :text, :name => 'relative_id', :value => parent.id }
+                        %input{ :type => :text, :name => 'binder_id', :value => cr.relative.id }
 
                       %div{ :id => "cr#{cr.id}" }
                         %table.table

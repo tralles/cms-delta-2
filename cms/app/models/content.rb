@@ -126,7 +126,7 @@ class Content < ActiveRecord::Base
               begin
                 command_line.run
               rescue Cocaine::ExitStatusError => e
-                puts e.message # => "Command 'git commit' returned 1. Expected 0"
+                # puts e.message # => "Command 'git commit' returned 1. Expected 0"
               end
 
               # Quelle: https://github.com/thoughtbot/cocaine
@@ -137,7 +137,7 @@ class Content < ActiveRecord::Base
 
       end # if width.present?
     else
-      puts 'remove match '
+      # puts 'remove match '
       match = ""    # Fundstelle [img...] kann weg, weil Documentable ist mehr existiert
     end
 

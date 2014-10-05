@@ -1,8 +1,8 @@
 .container
   .row
     .span3
-      = render 'projects/menu'  
-    
+      = render 'projects/menu'
+
     .span6
 
       %h1
@@ -12,8 +12,8 @@
             »
             = @content_type.name
 
-      
-      
+
+
       %fieldset
         %legend
           Inhalte
@@ -22,26 +22,26 @@
               - btnclass = 'btn-inverse' if @locale.to_s == lng.to_s
               = link_to url_for(params.merge(:locale => lng)), :class => "btn btn-mini #{btnclass}" do
                 = lng
-                
-              
-            
-            
+
+
+
+
 
         %dl.dl-horizontal
           - @content.content_elements.lang(@locale).each do |ce|
             - if !Permission.is_stored?(current_user, @project, :block_read, ce.content_element_type.class.name, ce.content_element_type.id)
-            
+
               %dt{ :class => "#{(ce.html(@locale).blank?) ? 'muted' : '' }" }
                 = ce.content_element_type.name
               %dd
-                - if ce.content_element_type.html
+                - if ce.content_element_type.html ||  ce.content_element_type.haml
                   %pre.code.html
                     = preserve do
                       = ce.html(@locale).gsub('<', '<')
-                
+
                 - else
                   = ce.html(@locale)
-                &nbsp;              
+                &nbsp;
 
 
 
@@ -64,7 +64,7 @@
         %fieldset
           %legend
             Meta
-  
+
           %dl.dl-horizontal
             - if @content.option(:dates)
               %dt
@@ -82,14 +82,14 @@
               %dd
                 = @content.ref_id
 
-                
+
             - if @content.option(:alpha)
               %dt
                 Sichtbar ab
               %dd
                 = l @content.alpha_datum unless @content.alpha_datum.nil?
 
-            - if @content.option(:omega)                
+            - if @content.option(:omega)
               %dt
                 Sichtbar bis
               %dd
@@ -109,25 +109,25 @@
             &nbsp;
             Verbundene Daten
           %options
-          
+
             .tabbable
               %ul.nav.nav-tabs
                 - @content.content_type.content_relation_types.each do |content_relation_type|
                   %li{ :class => "#{'active' if content_relation_type == @content.content_type.content_relation_types.first} " }
-                    %a{"data-toggle" => "tab", :href => "##{content_relation_type.intern}"} 
+                    %a{"data-toggle" => "tab", :href => "##{content_relation_type.intern}"}
                       = content_relation_type.name
-      
+
               .tab-content
                 - @content.content_type.content_relation_types.each do |content_relation_type|
                   %div{ :id => content_relation_type.intern, :class => "tab-pane #{'active' if content_relation_type == @content.content_type.content_relation_types.first} " }
-                    
-                    = render :partial => 'contents/show_relations_relationtable', :locals => { :content_relation_type => content_relation_type, :content => @content } 
+
+                    = render :partial => 'contents/show_relations_relationtable', :locals => { :content_relation_type => content_relation_type, :content => @content }
 
 
 
 
 
-      - unless @content.documents.empty?      
+      - unless @content.documents.empty?
         %br
         %hr
         %br
@@ -140,7 +140,7 @@
           %table.table.table-condensed.table-striped.table-bordered.table-hover
             - @content.documents.each do |document|
               - documentable = Documentable.where(:project => @project).where(:documentable_type => 'Content').where(:documentable_id => @content.id).where(:document_id => document.id).first
-            
+
               %tr
                 %td{ :width => 50 }
                   = link_to image_tag( document.document.url(:thumb) ), [document.project, document]
@@ -157,26 +157,26 @@
                     %br
                     %strong Doctype:
                     = documentable.doctype_name
-              
+
                   - unless documentable.title.blank?
                     %br
                     = documentable.title
-              
+
                   - unless documentable.info.blank?
                     %br
                     = documentable.info
-           
-      
-      
+
+
+
       .form-actions
         .pull-right
           = render :partial => 'content_actions', :locals => { :content => @content, :large => true }
-          
+
 
     .span3
       %h1
         Sitemap
-        
+
       #sitemap.well.navi
         %ul.nested_branches.contents
           = sitemap @branches.arrange(:order => :position)
