@@ -3,6 +3,16 @@ cms/tmp/
 cms/public/uploads/
 cms/vendor/bundle/
 
+client/log/
+client/tmp/
+client/vendor/bunlde/
+
+cms/config/database.yml
+
+cms/config/initializers/secret_token.rb
+cms/config/secrets.yml
+
+client/config/initializers/secret_token.rb
 
 cms/memcached.sh
 cms/start.sh
