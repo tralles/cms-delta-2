@@ -3,7 +3,7 @@ class Permission < ActiveRecord::Base
 
   belongs_to :user
   belongs_to :project
-  
+
   scope :by_project, ->(project) { where('project_id = ?', project.id) unless project.nil? }
 
 

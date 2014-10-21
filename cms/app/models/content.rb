@@ -32,10 +32,10 @@ class Content < ActiveRecord::Base
 
 
 
-  scope :direct, -> { includes(:content_type).where('content_types.direct_edit = 1') }
+  scope :direct, -> { includes(:content_type).references(:content_type).where('content_types.direct_edit = true') }
 
-  scope :by_workspace, ->(workspaces) { includes(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id').having('count(workspaces.id) >= ?', workspaces.size) unless workspaces.empty? }
-  scope :in_workspaces, ->(workspaces) { includes(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id') unless workspaces.empty? }
+  scope :by_workspace, ->(workspaces) { includes(:workspaces).references(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id').having('count(workspaces.id) >= ?', workspaces.size) unless workspaces.empty? }
+  scope :in_workspaces, ->(workspaces) { includes(:workspaces).references(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id') unless workspaces.empty? }
 
   scope :by_content_type, ->(content_type) { where('contents.content_type_id = ?', content_type) if content_type }
   scope :by_content_types, ->(content_types) { where('contents.content_type_id IN(?)', content_types) unless content_types.empty? }
@@ -193,8 +193,8 @@ class Content < ActiveRecord::Base
 
     languages = []
 
-    self.content_elements.group(:language).each do |ce|
-      languages << ce.language
+    self.content_elements.each do |ce|
+      languages << ce.language unless languages.include?(ce.language)
     end
 
     languages
@@ -243,7 +243,7 @@ class Content < ActiveRecord::Base
   def method_missing(name, args = nil)
     ausgabe = nil
 
-    ce = self.content_elements.includes(:content_element_type).where('content_element_types.intern = ?', name).references(:content_element_types)
+    ce = self.content_elements.includes(:content_element_type).references(:content_element_types).where('content_element_types.intern = ?', name)
 
     if args && args[:locale]
       ce = ce.where('content_elements.language = ?', args[:locale]).first
@@ -268,7 +268,7 @@ class Content < ActiveRecord::Base
 
     unless ausgabe
 
-      content_relations = self.content_relations.includes(:content_relation_type).where('content_relation_types.intern = ?', name).references(:content_relation_type)
+      content_relations = self.content_relations.includes(:content_relation_type).references(:content_element_types).where('content_relation_types.intern = ?', name)
       unless content_relations.empty?
         ausgabe = []
         content_relations.each do |cr|
