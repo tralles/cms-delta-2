@@ -40,6 +40,7 @@ class Content < ActiveRecord::Base
   scope :by_content_type, ->(content_type) { where('contents.content_type_id = ?', content_type) if content_type }
   scope :by_content_types, ->(content_types) { where('contents.content_type_id IN(?)', content_types) unless content_types.empty? }
 
+  scope :by_crt_and_content_and_binder, ->(content_relation_type, content, binder) { where('contents.id IN(?)', ContentRelation.select(:relative_id).where(:content_relation_type => content_relation_type).where(:content => content).where(:binder => binder)) }
 
 
 

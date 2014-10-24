@@ -76,75 +76,81 @@ $("#contentrelationwindow textarea.markdown").pagedownBootstrap
 
 
 
+if $('.ctsuggestion').length > 0
+  $('.ctsuggestion').each (index, input) ->
+
+    $(input).typeahead
+      minLength:3,
+      source: (query, process) ->
+        $.ajax
+          url: $(input).attr("rel")
+          type: "POST"
+          data: "query=" + query
+          dataType: "JSON"
+          async: true
+          success: (data) ->
+            NProgress.done()
+            resultList = data.map((item) ->
+              link =
+                href: item.href
+                title: item.title
+                id: item.id
+
+              JSON.stringify link
+            )
+            process resultList
 
 
-
-$(".ctsuggestion").typeahead
-  minLength:3,
-  source: (query, process) ->
-    $.ajax
-      url: $('.ctsuggestion').attr("rel")
-      type: "POST"
-      data: "query=" + query
-      dataType: "JSON"
-      async: true
-      success: (data) ->
+      matcher: (obj) ->
         NProgress.done()
-        resultList = data.map((item) ->
-          link =
-            href: item.href
-            title: item.title
-            id: item.id
-
-          JSON.stringify link
-        )
-        process resultList
+        item = JSON.parse(obj)
+        ~item.title.toLowerCase().indexOf(@query.toLowerCase())
 
 
-  matcher: (obj) ->
-    NProgress.done()
-    item = JSON.parse(obj)
-    ~item.title.toLowerCase().indexOf(@query.toLowerCase())
-
-  #sorter: (items) ->
-  #  NProgress.done()
-  #  beginswith = []
-  #  caseSensitive = []
-  #  caseInsensitive = []
-  #  item = undefined
-  #  while link = items.shift()
-  #    item = JSON.parse(link)
-  #    unless item.title.toLowerCase().indexOf(@query.toLowerCase())
-  #      beginswith.push JSON.stringify(item)
-  #    else if ~item.name.indexOf(@query)
-  #      caseSensitive.push JSON.stringify(item)
-  #    else
-  #      caseInsensitive.push JSON.stringify(item)
-  #  beginswith.concat caseSensitive, caseInsensitive
-
-  highlighter: (link) ->
-    NProgress.done()
-    item = JSON.parse(link)
-    query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
-    item.title.replace new RegExp("(" + query + ")", "ig"), ($1, match) ->
-      "<strong>" + match + "</strong>"
+      highlighter: (link) ->
+        NProgress.done()
+        item = JSON.parse(link)
+        query = @query.replace(/[\-\[\]{}()*+?.,\\\^$|#\s]/g, "\\$&")
+        item.title.replace new RegExp("(" + query + ")", "ig"), ($1, match) ->
+          "<strong>" + match + "</strong>"
 
 
-  updater: (link) ->
-    NProgress.done()
-    item = JSON.parse(link)
-    alert(item.id )
-    # window.location.href = item.href
-    # $("#search").attr "href", item.href
-    # item.title
+      updater: (link) ->
+        NProgress.done()
+        item = JSON.parse(link)
+        content_relation_id       = $(input).attr("crid")
+        content_relation_type_id  = $(input).attr("crtid")
+        content_id                = $(input).attr("content")
+        binder_id                 = $(input).attr("binder")
+        relative_id               = item.id
+
+        $(input).val('')
+
+        $.ajax
+          url: '/bind/'+content_relation_type_id+'/'+content_id+'/'+binder_id+'/'+relative_id
+          type: "POST"
+          data: "crid=" + content_relation_id
+          async: true
+          success: (data) ->
+            NProgress.done()
+            $(input).val('')
 
 
-
-
-
-
-
-
+      #sorter: (items) ->
+      #  NProgress.done()
+      #  beginswith = []
+      #  caseSensitive = []
+      #  caseInsensitive = []
+      #  item = undefined
+      #  while link = items.shift()
+      #    item = JSON.parse(link)
+      #    unless item.title.toLowerCase().indexOf(@query.toLowerCase())
+      #      beginswith.push JSON.stringify(item)
+      #    else if ~item.name.indexOf(@query)
+      #      caseSensitive.push JSON.stringify(item)
+      #    else
+      #      caseInsensitive.push JSON.stringify(item)
+      #  beginswith.concat caseSensitive, caseInsensitive
 
 
 

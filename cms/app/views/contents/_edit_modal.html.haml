@@ -42,19 +42,23 @@
               - parent.content_relations.each do |cr|
                 - if cr.relative.content_type_id == content_relation_type.content_type_id
                   %tr
-                    %th.tr{ :width => '25%' }= cr.relative.rep(@locale)
-                    -# %td
-                    -#  = content_relation_type.inspect
-                    %td
-                      %form.navbar-search
-                        %input{ :id => 'search', :type => "text", :class => "ctsuggestion", :rel => "#{search_suggest_by_content_type_path(@project, content_relation_type.relative_type_id)}", :autocomplete => "off", :placeholder => "#{content_relation_type.relative_type.name} suchen …" }
-                        %input{ :type => :text, :name => 'content_id', :value => @content.id }
-                        %input{ :type => :text, :name => 'relative_id', :value => parent.id }
-                        %input{ :type => :text, :name => 'binder_id', :value => cr.relative.id }
+                    %th.tr{ :width => '25%' }
+                      = cr.relative.rep(@locale)
+                    %td{ :style => 'padding: 0;' }
+                      %form{ :style => 'margin: 0;' }
+                        %input#search.ctsuggestion.input-block-level{   :type           => "text",
+                                                                        :crid           => cr.id,
+                                                                        :crtid          => content_relation_type.id,
+                                                                        :binder         => @content.id,
+                                                                        :content        => cr.relative.id,
+                                                                        :rel            => search_suggest_by_content_type_path(@project, content_relation_type.relative_type_id),
+                                                                        :autocomplete   => "off",
+                                                                        :placeholder    => "#{content_relation_type.relative_type.name} suchen …"  }
 
-                      %div{ :id => "cr#{cr.id}" }
-                        %table.table
+                        - bindingcontents = ContentRelation.by_crt_and_content_and_binder(content_relation_type, cr.relative, @content)
 
+                        %div{ :id => "cr#{cr.id}" }
+                          = render :partial => 'content_relations/bindings', :locals => { :bindingcontents => bindingcontents }
 
 
     .modal-footer
