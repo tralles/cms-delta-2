@@ -12,7 +12,6 @@ Delta2::Application.routes.draw do
 
 
 
-
   resources :projects do
 
     resources :hosts
@@ -128,7 +127,8 @@ Delta2::Application.routes.draw do
   match 'search/:project_id/suggest' => 'application#search', :as => 'search_suggest', :via => :all
   match 'search/:project_id/:content_type_id/suggest' => 'application#search', :as => 'search_suggest_by_content_type', :via => :all
 
-
+  match 'bind/:content_relation_type_id/:content_id/:binder_id/:relative_id' => 'content_relations#bind', :as => 'bind_by_crt', :via => :all
+  match 'unbind/:content_relation_id' => 'content_relations#unbind', :as => 'delete_content_relation', :via => :all
 
 
 

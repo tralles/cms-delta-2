@@ -1,0 +1,13 @@
+%table.table.table-condensed.table-striped.table-bordered.table-hover{ :style => 'margin: 0;' }
+  %tbody.sortable{ :data => { :update => { :url => '/' } } }
+  - bindingcontents.each do |relation|
+    - content = relation.relative
+    %tr{ :id => "cr#{relation.id}"  }
+      %td.handle
+      %td
+        = content.rep(@locale).html_safe
+
+      %td{ :width => '15px' }
+        .btn-group.pull-right
+          = link_to delete_content_relation_path(relation), :remote => true, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.content') }, :class => 'btn btn-mini btn-danger' do
+            %i.fa.fa-trash-o

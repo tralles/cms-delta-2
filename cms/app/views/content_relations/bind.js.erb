@@ -1,0 +1,3 @@
+$('#cr<%= @crid %>').html("<%= j( render :partial => 'content_relations/bindings', :locals => { :bindingcontents => @bindingcontents } )  %>");
+
+$('.ctsuggestion').val('');
