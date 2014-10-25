@@ -11,13 +11,8 @@ class ContentRelation < ActiveRecord::Base
 
 
 
-<<<<<<< master
-  scope :by_content_relation_type, ->(crt) { includes(:content_relation_type).where('content_relation_types.intern = ?', crt) unless crt.nil? }
-
-=======
   scope :by_content_relation_type, ->(crt) { includes(:content_relation_type).references(:content_relation_type).where('content_relation_types.intern = ?', crt) unless crt.nil? }
   scope :by_crt_and_content_and_binder, ->(content_relation_type, content, binder) { where(:content_relation_type => content_relation_type).where(:content => content).where(:binder => binder) }
->>>>>>> local
 
   default_scope { order('content_relations.position ASC') }
 
