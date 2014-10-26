@@ -1,21 +1,35 @@
 .container
   .row
     .span3
-      = render 'menu'  
+      = render 'menu'
 
 
     .span6
       %h1 Inhalts Typ bearbeiten
 
-          
-        
+
+
       .box.alternate
         .box-title
           = "„#{@content_type.name}” bearbeiten"
-        .box-content.nopadding      
+        .box-content.nopadding
           = render 'form'
-      
 
+
+      .box.alternate
+        .box-title
+          %i.fa.fa-fw.fa-fork
+          Templates
+        .box-content.nopadding
+          #templetablestable
+            = render :partial => 'templatables/templatable_table', :locals => { :parent => @content_type }
+
+
+          .form-actions
+            .pull-right
+              = link_to new_project_templatable_path(@project, :templatable_type => @content_type.class.name, :templatable_id => @content_type.id), :remote => true, :class => 'btn btn-mini btn-success' do
+                %i.fa.fa-plus
+                Template Hinzufügen
 
     .span3
-      = render 'meta_hints'  
+      = render 'meta_hints'

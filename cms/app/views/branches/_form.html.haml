@@ -73,14 +73,15 @@
       %i.fa.fa-fw.fa-fork
       Template
     .row
-      #templetablestable
-        = render :partial => 'templatables/templatable_table', :locals => { :parent => @branch }
+      .span9
+        #templetablestable
+          = render :partial => 'templatables/templatable_table', :locals => { :parent => @branch }
 
 
-      .pull-right
-        = link_to new_project_templatable_path(@project, :templatable_type => @branch.class.name, :templatable_id => @branch.id), :remote => true, :class => 'btn btn-mini btn-success' do
-          %i.fa.fa-plus
-          Template Hinzufügen
+        .pull-right
+          = link_to new_project_templatable_path(@project, :templatable_type => @branch.class.name, :templatable_id => @branch.id), :remote => true, :class => 'btn btn-mini btn-success' do
+            %i.fa.fa-plus
+            Template Hinzufügen
 
 
   .row
