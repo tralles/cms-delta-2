@@ -1,6 +1,8 @@
 $('#templatableswindow').remove();
 
-$('body').append("<%= j( render :partial => 'templatables/edit_modal' )  %>");
+<%= puts @templatable %>
+
+$('body').append("<%= j( render :partial => 'templatables/edit_modal', :locals => { :parent => @templatable } )  %>");
 
 $('#templatableswindow').modal({ backdrop: true, keyboard: false });
 

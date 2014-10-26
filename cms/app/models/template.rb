@@ -20,5 +20,9 @@ class Template < ActiveRecord::Base
   end
 
 
+  def name
+    return "<strong>#{self.title}</strong> (#{self.action})".html_safe
+  end
+
 
 end

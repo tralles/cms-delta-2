@@ -42,7 +42,7 @@ class TemplatablesController < ApplicationController
     def set_parent
 
       if @templatable
-        @parent = @templatable.parent
+        @parent = @templatable
       elsif params[:project_id]
         @parent = Project.find(params[:project_id])
       end
