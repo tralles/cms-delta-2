@@ -6,7 +6,7 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
-admin = User.create!({:email => "tralles@qb-it.de", :name => 'Marco', :surname => 'Tralles', :admin => true, :password => "initialp4ssword", :password_confirmation => "initialp4ssword" })
+admin = User.create!({:email => "admin@your-domain.tld", :name => 'Admin', :surname => 'Superuser', :admin => true, :password => "initialp4ssword", :password_confirmation => "initialp4ssword" })
 
 languages = Constant.create!({ :category => 'languages', :name => 'Deutsch', :value => 'de', :art => 'String', :sys => true })
 languages = Constant.create!({ :category => 'languages', :name => 'Englisch', :value => 'en', :art => 'String', :sys => false })
@@ -23,4 +23,3 @@ fields = Constant.create!({ :category => 'fields', :name => 'Text : Einzeilig', 
 fields = Constant.create!({ :category => 'fields', :name => 'Text : Mehrzeilig', :value => 'textarea', :art => 'Text', :sys => true })
 
 fields = Constant.create!({ :category => 'relations', :name => 'n:m', :value => 'n:m', :art => 'relation', :sys => true })
-
