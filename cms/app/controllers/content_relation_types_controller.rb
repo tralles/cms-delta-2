@@ -58,34 +58,34 @@ class ContentRelationTypesController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  
-  
-  
+
+
+
+
 
 
   def sort
     nummer = 1
-    
+
 
     params[:content_relation_type].each do |crt|
       @project.reorder_content_relation_type :crt => crt, :position => nummer
       nummer = nummer + 1
     end
-    
+
     render json: {:success => true }
-    
-  end  
-  
-  
-  
+
+  end
+
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_content_relation_type
       @content_relation_type = ContentRelationType.find(params[:id])
     end
-    
+
     def set_project
       @content_relation_types = @project.content_relation_types
     end

@@ -12,6 +12,6 @@ class ContentRelationType < ActiveRecord::Base
 
   default_scope { order('position ASC') }
 
-  scope :by_project, lambda { |project| includes(:content_type).where('content_types.project_id = ?', project.id) unless project.nil? }
+  scope :by_project, lambda { |project| includes(:content_type).references(:content_type).where('content_types.project_id = ?', project.id) unless project.nil? }
 
 end
