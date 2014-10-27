@@ -2,10 +2,10 @@ class Document < ActiveRecord::Base
 
 
   belongs_to :project
-  
-  has_many :documentables, :dependent => :destroy
 
-  has_attached_file :document, 
+  has_many :documentables#, :dependent => :destroy
+
+  has_attached_file :document,
     :styles => {
       :thumb => ["50x50#", :png],
       :icon => ["100x100#", :png],
@@ -39,17 +39,17 @@ class Document < ActiveRecord::Base
       geo = Paperclip::Geometry.from_file(document.queued_for_write[:original])
       self.width = geo.width
       self.height = geo.height
-    rescue 
+    rescue
     end
   end
-  
-  
-  
-  
-  
+
+
+
+
+
   def filetype
     self.document_content_type.split('/')[1]
-  end 
+  end
 
 
 

@@ -1,50 +1,16 @@
 
-
-.navbar-wrapper
-  #navigation.navbar.navbar-static-top.navbar-inverse
-    .navbar-inner
-      .container
-        %button.btn.btn-navbar{ :type => "button", :data => { :toggle => "collapse", :target => ".nav-collapse" } }
-          %span.icon-bar
-          %span.icon-bar
-          %span.icon-bar
-        = link_to '/', :class=> "brand" do
-          = @project.name
-        .nav-collapse.collapse
-          %ul.nav.pull-right.page
-            %li.dropdown
-              = link_to '#', :class => "dropdown-toggle", :data => { :toggle => "dropdown" } do
-                Home
-                %b.caret
-              
-              %ul.dropdown-menu
-                = menu @project.branches, false, false
-     
-            = menu @branch.path.first.children, true
-
-
-%header.page-title
-  .container
-    %h1
-      = @branch.route(@language).name
-
-
-.container
-  .row
-    .span12
-      %pre
-        = params.to_yaml
-
 - if params[:action] == 'show'
-  .container
-    .row
-      .span12
-        %pre
-          = @content.to_yaml
+  - if template = @branch.templates.where(:action => :show).first
+    = render :inline => template.code
+  - elsif template = @content.content_type.templates.where(:action => :show).first
+    = render :inline => template.code
+  - else
+    = render :partial => "templates/show/#{@content.content_type.intern}", :locals => { :content => @content } rescue render :partial => 'templates/show/fallback', :locals => { :content => @content }
+
 
 - else
-  .container
-    .row
-      - @contents.each do |content|
-        = render :partial => "templates/index/#{content.content_type.intern}", :locals => { :content => content } rescue render :partial => 'templates/index/fallback', :locals => { :content => content } 
-  
+  - if template = @branch.templates.where(:action => :index).first
+    = render :inline => template.code
+  - else
+    - @contents.each do |content|
+      = render :partial => "templates/index/#{content.content_type.intern}", :locals => { :content => content } rescue render :partial => 'templates/index/fallback', :locals => { :content => content }

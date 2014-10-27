@@ -11,22 +11,3 @@
  *= require_self
  *= require_tree .
  */
-
-
-
-
-#debug
-{
-  position: absolute;
-  z-index: 9999999;
-  top: 0px;
-  right: 0px;
-  opacity: .5;
-  padding: 25px;
-  background: #fee;
-}
-
-#debug:hover
-{
-  opacity: 1;
-}

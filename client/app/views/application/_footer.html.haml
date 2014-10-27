@@ -1,0 +1,7 @@
+.clarfix
+.container
+  .col-md-12
+    %ul.breadcrumb
+      = breadcrump @branch
+      - if @content
+        %li= @content.title
