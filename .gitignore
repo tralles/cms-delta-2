@@ -1,7 +1,7 @@
-cms/log/
-cms/tmp/
-cms/public/uploads/
-cms/vendor/bundle/
+cms/log
+cms/tmp
+cms/public/uploads
+cms/vendor/bundle
 
 cms/config/database.yml
 cms/config/secrets.yml
@@ -14,10 +14,10 @@ cms/start.sh
 
 
 
-client/log/
-client/tmp/
-client/public/uploads/
-client/vendor/bunlde/
+client/log
+client/tmp
+client/public/uploads
+client/vendor/bunlde
 
 client/config/database.yml
 client/config/secrets.yml
