@@ -17,7 +17,10 @@
     = render :partial => 'application/main_nav'
 
     .container
-      .col-md-12
+      .col-sm-3.hidden-xs
+        %ul.nav.nav-stacked
+          = menu @project.branches
+      .col-sm-9.col-xs-12
         = yield
 
     = render :partial => 'application/footer'
