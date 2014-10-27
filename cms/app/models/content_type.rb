@@ -4,7 +4,7 @@ class ContentType < ActiveRecord::Base
   belongs_to :project
 
 
-  has_many :content_element_types, :dependent => :destroy, :order => 'position ASC'
+  has_many :content_element_types, :dependent => :destroy
 
 
   has_many :contents, :dependent => :destroy

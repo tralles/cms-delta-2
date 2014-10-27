@@ -5,6 +5,8 @@ class ContentElementType < ActiveRecord::Base
 
   validates_presence_of :name, :intern
 
+  default_scope { order('position ASC') }
+
 
   def simple_form
 
