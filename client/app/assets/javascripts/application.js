@@ -15,3 +15,34 @@
 //= require turbolinks
 //= require bootstrap
 //= require_tree .
+
+
+
+
+
+
+
+initalize = function() {
+
+	// delegate calls to data-toggle="lightbox"
+  $('*[data-toggle="lightbox"]').off('click');
+
+  $('*[data-toggle="lightbox"]').on('click', function(event) {
+    event.preventDefault();
+    $(this).ekkoLightbox();
+    return false;
+  });
+
+
+  $('.res img').addClass('img-responsive');
+
+  $('.tabbable .tab a').on('click', function(e) {
+    e.preventDefault();
+    $(this).tab('show');
+  });
+
+}
+
+$(document).ready(initalize);
+$(document).on('page:load', initalize);
+$(document).on('page:change', initalize);

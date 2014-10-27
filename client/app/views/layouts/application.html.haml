@@ -1,0 +1,24 @@
+!!!
+%html
+  %head
+    %title= @project.name
+
+    %meta{content: "width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no", name: "viewport"}
+
+    = stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true
+    = javascript_include_tag "application", "data-turbolinks-track" => true
+
+    = csrf_meta_tags
+
+    = render :partial => 'application/styles'
+
+
+  %body{"data-no-turbolink" => "true"}
+    = render :partial => 'application/main_nav'
+
+    .container
+      .col-md-12
+        = yield
+
+    = render :partial => 'application/footer'
+    = render :partial => 'application/analytics'

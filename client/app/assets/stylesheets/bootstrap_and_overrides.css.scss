@@ -1,5 +1,3 @@
-
-
 $baseFontSize:          14px;
 $baseLineHeight:        21px;
 
@@ -19,67 +17,3 @@ $linkColor:             #3399ff;
 @import "bootstrap-responsive";
 
 @import "font-awesome";
-
-
-header
-{
-  margin-bottom: 50px;
-}
-
-a.brand
-{
-  color: #444 !important;
-}
-
-.brand .small
-{
-  font-weight: 100  !important;
-}
-
-.well.navi
-{
-  padding: 0 0 8px 0;
-}
-
-.well.navi .nav-header
-{
-  background: #ddd;
-  color: #333;
-  letter-spacing: 1px;
-  text-shadow: 1px 1px 1px rgba(255, 255, 255, .5);
-}
-
-.well.navi .nav-header a:hover
-{
-  background: transparent;
-}
-
-thin
-{
-  font-weight: 100 !important;
-}
-
-.control-group.datetime select
-{
-  width: auto;
-}
-
-
-.typeahead {
-    z-index: 1100;
-}
-
-
-.imgleft
-{
-  float: left;
-  margin: 0 15px 15px 0;
-}
-
-.imgright
-{
-  float: right;
-  margin: 0 0 15px 15px;
-  border: 1px solid rgba(255, 255, 255, .5);
-  box-shadow: 1px 1px 4px rgba(0, 0, 0, .25);
-}
