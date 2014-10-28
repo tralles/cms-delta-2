@@ -1,13 +1,13 @@
 class BranchesController < ApplicationController
   before_action :set_branch, only: [:show, :edit, :update, :destroy]
   before_action :set_project
-  
-  
-  
-  
+
+
+
+
   def sort
     nummer = 1
-    
+
     if params[:content]
       @branch = Branch.find(params[:id])
 
@@ -15,36 +15,36 @@ class BranchesController < ApplicationController
         @branch.reorder :content => contentID, :position => nummer
         nummer = nummer + 1
       end
-    
+
     end
   end
-  
+
   def nestedsort
 
     position = 1
 
     tree = ActiveSupport::JSON.decode params[:tree]
-    
+
     tree.each do |root|
-      
+
       branch = @project.branches.where(:id => root.id).first
       branch.parent = nil
       branch.position = position
       branch.save
-      
+
       position = position + 1
-      
-      begin 
+
+      begin
         if root.children
-          self.nestedsort_reorder(branch, root.children) 
+          self.nestedsort_reorder(branch, root.children)
         end
-      rescue 
+      rescue
       end
     end
 
 
     render :inline => '', :layout => false
-    
+
   end
 
   def nestedsort_reorder(parent, children)
@@ -55,15 +55,15 @@ class BranchesController < ApplicationController
       branch.parent = parent
       branch.position = position
       branch.save
-      
+
       position = position + 1
 
-      begin 
+      begin
         if child.children
           branch = @project.branches.where(:id => child.id).first
           nestedsort_reorder(branch, child.children)
         end
-      rescue 
+      rescue
       end
     end
   end
@@ -119,9 +119,9 @@ class BranchesController < ApplicationController
       if params[:parent_id]
         @parent = @project.branches.where('id = ?', params[:parent_id]).first
         if @parent
-          @branch.parent = @parent 
+          @branch.parent = @parent
         else
-          @branch.parent = nil
+          @branch.ancestry = nil
         end
       end
 
@@ -150,11 +150,11 @@ class BranchesController < ApplicationController
     def set_branch
       @branch = Branch.find(params[:id])
     end
-    
+
     def set_project
-      @parent = nil 
+      @parent = nil
       @parent = Branch.find(params[:branch_id]) if params[:branch_id]
       @branches = @project.branches
     end
-    
+
 end

@@ -7,26 +7,26 @@
         %span.fa.fa-bar
         %span.fa.fa-bar
 
-    
-      = link_to 'http://www.artemisium.de', :target => '_blank', :class=>"brand" do
+
+      = link_to '/', :target => '_blank', :class=>"brand" do
         CMS | delta II
-      
+
       - if current_user
         .nav-collapse.collapse
           %ul.nav
             %li
-              = link_to '/' do 
+              = link_to '/' do
                 %i.fa.fa-dashboard
                 Dashboard
-                
-                
-              
+
+
+
             %li.dropdown
               = link_to '#', :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do
                 %i.fa.fa-list
                 Projekte
                 %b.caret
-            
+
               %ul.dropdown-menu
                 %li
                   = link_to projects_path do
@@ -36,18 +36,18 @@
 
                   - current_user.projects.each do |project|
                     %li
-                      = link_to project do  
+                      = link_to project do
                         = project.name.html_safe
 
 
-                
+
             - if current_user.admin?
               %li.dropdown
                 = link_to '#', :class => 'dropdown-toggle', :data => {:toggle=>"dropdown"} do
                   %i.fa.fa-fire
                   Administration
                   %b.caret
-              
+
                 %ul.dropdown-menu
                   %li
                     = link_to users_path do
@@ -59,21 +59,21 @@
                       %i.fa.fa-cogs
                       Konstanten
 
-                  
-                
-                
+
+
+
           %ul.nav.pull-right
             - if @project && @project.id && can?(:read, :search)
-              
+
               %li
                 %form.navbar-search
                   %input{ :id => 'search', :type => "text", :class => "search-query", :rel => "#{search_suggest_path(@project)}", :autocomplete => "off", :placeholder => 'Suche …' }
 
-            
+
               %li.divider-vertical
                 = ''
-          
-          
+
+
             %li.dropdown
               %a#drop1{:href => "#", :class => "dropdown-toggle", "data-toggle" => "dropdown", :role => "button"}
                 %i.fa.fa-user
@@ -84,18 +84,18 @@
                   = link_to edit_user_path(current_user) do
                     %i.fa.fa-wrench
                     Einstellungen
-          
-          
+
+
                 %li.divider
                   = ''
                 %li
                   = link_to logout_path do
                     %i.fa.fa-off
                     Logout
-    
+
       - else
         %ul.nav.pull-right
           %li
-            = link_to new_session_path('user') do 
+            = link_to new_session_path('user') do
               %i.fa.fa-signin
               Login
