@@ -121,7 +121,7 @@ class BranchesController < ApplicationController
         if @parent
           @branch.parent = @parent
         else
-          @branch.ancestry = nil
+          @branch.parent = nil
         end
       end
 
