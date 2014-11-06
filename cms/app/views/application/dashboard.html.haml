@@ -1,15 +1,15 @@
 .container
   .row
     .span3
-  
+
     .span9
-      %h1      
+      %h1
         %i.fa.fa-dashboard
         Dashboard
-        
+
 
   %br
-  
+
 .container
   .row
     .span3
@@ -38,7 +38,7 @@
       - current_user.projects.each do |project|
         .row
 
-          .span5
+          .span6
 
             .box
               .box-title
@@ -46,10 +46,10 @@
                   %i.fa.fa-leaf
                   &nbsp;
                   = project.name
-                  
-                
-                
-                
+
+
+
+
               .box-content.nopadding.condensed
                 %table.table.table-bordered.table-condensed.table-hover.table-striped
                   %tr
@@ -62,14 +62,14 @@
                       Beschreibung
                     %td
                       = project.description
-    
+
                   - if project.ref_id && !project.ref_id.blank?
                     %tr
                       %th.text-right
                         Referenz
                       %td
-                        = project.ref_id      
-          
+                        = project.ref_id
+
                   %tr
                     %th.text-right
                       Hosts
@@ -82,53 +82,18 @@
                             = "#{host.protocol}#{host.host}"
                         - else
                           = "#{host.protocol}#{host.host}"
-                        %br          
-                        
-          .span2
-            .box
-              .box-title
-                Statistik
-              .box-content.nopadding.condensed
-                %table.table.table-bordered.table-condensed.table-hover.table-striped
-                  %tr
-                    %th.text-right{ :width => 150 }
-                      Menüpunkte
-                    %td{ :style => 'background: #F38630; text-align: right;', :width => 50 }
-                      = project.branches.size
-          
-                  %tr
-                    %th.text-right
-                      Inhalts-Typen
-                    %td{ :style => 'background: #E0E4CC; text-align: right;' }
-                      = project.content_types.size
-          
-                  %tr
-                    %th.text-right
-                      Inhalte
-                    %td{ :style => 'background: #69D2E7; text-align: right;' }
-                      = project.contents.size
-                      
-                  %tr
-                    %th.text-right
-                      Dokumente
-                    %td{ :style => 'background: #ffD2E7; text-align: right;' }
-                      = project.documents.size
-                      
-                  %tr
-                    %th.text-right
-                      Workspaces
-                    %td{ :style => 'background: #5599E7; text-align: right;' }
-                      = project.workspaces.size
-          .span2
+                        %br
+
+          .span3
             .box
               .box-title
                 Statistik
               .box-content.nopadding.condensed
 
-                %canvas{ :id => "project#{project.id}", :width => 160, :height => 160 }
-                
+                %div{ :id => "project#{project.id}", :style => 'height: 160px;' }
+
                 - content_for :scripts do
                   - javascript_tag do
-                    = "var roject#{project.id}data = [ { value: #{project.branches.size}, color:'#F38630' }, { value : #{project.content_types.size}, color : '#E0E4CC' }, { value : #{project.contents.size}, color : '#69D2E7' }, { value : #{project.documents.size}, color : '#ffD2E7' }, { value : #{project.workspaces.size}, color : '#5599E7' } ]"
-                    = "var project#{project.id}ctx = document.getElementById('project#{project.id}').getContext('2d');"
-                    = "new Chart(project#{project.id}ctx).Doughnut(roject#{project.id}data,{ percentageInnerCutout : 75 });"
+                    = "var roject#{project.id}data = [ { value: #{project.branches.size}, label:'Menüpunkte' }, { value : #{project.content_types.size}, label : 'Inhalts-Typen' }, { value : #{project.contents.size}, label : 'Inhalte' }, { value : #{project.documents.size}, label : 'Dokumente' }, { value : #{project.workspaces.size}, label : 'Workspaces' } ]"
+                    = "var colors = [ '#F23568', '#7F58A6', '#4BF275', '#F2D43D', '#BF2E21' ]"
+                    = "Morris.Donut({ element: 'project#{project.id}', data: roject#{project.id}data, colors: colors })"
