@@ -194,8 +194,8 @@ class Content < ActiveRecord::Base
 
     languages = []
 
-    self.content_elements.group(:language).each do |ce|
-      languages << ce.language
+    self.content_elements.each do |ce|
+      languages << ce.language unless languages.include?(ce.language)
     end
 
     languages
