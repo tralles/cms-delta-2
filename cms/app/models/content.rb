@@ -32,7 +32,7 @@ class Content < ActiveRecord::Base
 
 
 
-  scope :direct, -> { includes(:content_type).references(:content_type).where('content_types.direct_edit = 1') }
+  scope :direct, -> { includes(:content_type).references(:content_type).where('content_types.direct_edit = ?', true) }
 
   scope :by_workspace, ->(workspaces) { includes(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id').having('count(workspaces.id) >= ?', workspaces.size) unless workspaces.empty? }
   scope :in_workspaces, ->(workspaces) { includes(:workspaces).where('workspaces.id IN(?)', workspaces ).group('contents.id') unless workspaces.empty? }
