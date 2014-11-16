@@ -1,19 +1,19 @@
 class Host < ActiveRecord::Base
 
   belongs_to :project
-  
+
   after_save :check_primary
-  
-  scope :primary, -> { where(:primary => 1).first }
-  
-  
-  
-  private 
-  
-  
+
+  scope :primary, -> { where(:primary => true).first }
+
+
+
+  private
+
+
     def check_primary
-    
-      if self.primary 
+
+      if self.primary
         self.project.hosts.each do |host|
           if host != self && host.primary
             host.primary = false
@@ -22,6 +22,6 @@ class Host < ActiveRecord::Base
         end
       end
     end
-  
+
 
 end

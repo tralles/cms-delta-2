@@ -24,7 +24,7 @@ class Content < ActiveRecord::Base
 
   scope :by_crt_and_content_and_binder, ->(content_relation_type, content, binder) { where('contents.id IN(?)', ContentRelation.select(:relative_id).where(:content_relation_type => content_relation_type).where(:content_id => content.id).where(:binder_id => binder.id)) }
 
-  scope :direct, -> { joins(:content_type).where('content_types.direct_edit = 1') }
+  scope :direct, -> { joins(:content_type).where('content_types.direct_edit = true') }
 
 
 
