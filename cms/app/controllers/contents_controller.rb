@@ -208,6 +208,8 @@ class ContentsController < ApplicationController
       # puts @contents.to_sql
       # puts '+ + + + + + +'
 
+      @contents = @contents.page params[:page]
+
     end
 
 

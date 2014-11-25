@@ -1,5 +1,8 @@
 class Content < ActiveRecord::Base
 
+  paginates_per 50
+  
+
   has_many :content_elements, :dependent => :destroy
 #  accepts_nested_attributes_for :content_elements, :allow_destroy => true
 

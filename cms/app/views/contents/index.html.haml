@@ -91,6 +91,7 @@
                   = render :partial => 'content_actions', :locals => { :content => content }
 
 
+      = paginate @contents
 
       - if @content_type
         - if current_user.admin? || Permission.is_stored?(current_user, @project, :create, @content_type.class.name, @content_type.id)
