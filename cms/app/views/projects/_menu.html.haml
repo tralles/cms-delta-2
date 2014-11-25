@@ -26,6 +26,8 @@
             = link_to project_content_type_contents_path(@project, ct) do
               %i.pull-right.fa-fw.fa.fa-file-text
               = ct.name
+              %span.badge.pull-right
+                = @project.contents.where(:content_type => ct).size
 
 
       - if @workspaces && ( @content_type || @contents )
