@@ -1,0 +1,17 @@
+.container
+  .row
+    .span3
+      = render 'menu'
+
+    .span9
+
+      %h1
+        %i.fa.fa-fw.fa-leaf
+        &nbsp;
+        = @project.name.html_safe
+
+      %p.lead
+        = @project.description
+    
+
+      = render 'form_css'

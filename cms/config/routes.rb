@@ -110,6 +110,7 @@ Delta2::Application.routes.draw do
     member do
       match 'settings', :via => :all
       match 'users', :via => :all
+      match 'css', :via => :all
     end
 
 
