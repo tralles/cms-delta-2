@@ -100,11 +100,15 @@ $(document).on('ready page:load', function() {
   if( $('textarea.aceditor').length > 0 && $('#aceditor').length > 0 )
   {
     var editor = ace.edit("aceditor");
-    var textarea = $('textarea.aceditor').hide();
+    var textarea = $('textarea.aceditor')
+
+    $('textarea.aceditor').closest('.control-group').hide();
 
     editor.getSession().setValue(textarea.val());
     editor.getSession().setTabSize(2);
-    editor.session.setMode("ace/mode/html_ruby");
+
+    if($('textarea.aceditor').attr('mode') == 'css') { editor.session.setMode("ace/mode/css"); }
+    else { editor.session.setMode("ace/mode/html_ruby"); }
 
     editor.setTheme("ace/theme/twilight");
 

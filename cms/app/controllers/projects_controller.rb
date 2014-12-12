@@ -18,6 +18,9 @@ class ProjectsController < ApplicationController
   def show
   end
 
+  def css
+  end
+
   # GET /projects/new
   def new
     @project = Project.new
@@ -69,33 +72,33 @@ class ProjectsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
-  
-  
-  
-  
-  
-  
-  
+
+
+
+
+
+
+
+
   def settings
   end
-  
-  
+
+
   def users
   end
-  
-  
-  
-  
-  
+
+
+
+
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_project
-      
+
       if !current_user.projects.include?(@project) && !current_user.admin?
         redirect_to root_path
       end
     end
-    
+
 end
