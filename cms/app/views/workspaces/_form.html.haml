@@ -7,5 +7,12 @@
     = f.input :constellation
     = f.input :name
 
+  %fieldset
+    %legend
+      Inhalts-Typen
+
+    = f.association :content_types, :as => :check_boxes, :collection => @project.content_types.direct
+
+
   .form-actions
     = f.button :submit, :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }

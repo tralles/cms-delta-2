@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140612214923) do
+ActiveRecord::Schema.define(version: 20141205071207) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -39,9 +39,11 @@ ActiveRecord::Schema.define(version: 20140612214923) do
   end
 
   add_index "branches", ["ancestry"], name: "index_branches_on_ancestry", using: :btree
+  add_index "branches", ["hidden"], name: "index_branches_on_hidden", using: :btree
   add_index "branches", ["position"], name: "index_branches_on_position", using: :btree
   add_index "branches", ["project_id"], name: "index_branches_on_project_id", using: :btree
   add_index "branches", ["ref_id"], name: "index_branches_on_ref_id", using: :btree
+  add_index "branches", ["unattached"], name: "index_branches_on_unattached", using: :btree
 
   create_table "constant_relations", force: true do |t|
     t.integer  "constant_id"
@@ -50,6 +52,10 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "constant_relations", ["configurable_id"], name: "index_constant_relations_on_configurable_id", using: :btree
+  add_index "constant_relations", ["configurable_type"], name: "index_constant_relations_on_configurable_type", using: :btree
+  add_index "constant_relations", ["constant_id"], name: "index_constant_relations_on_constant_id", using: :btree
 
   create_table "constants", force: true do |t|
     t.string   "category"
@@ -61,6 +67,11 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.boolean  "sys"
     t.integer  "project_id"
   end
+
+  add_index "constants", ["art"], name: "index_constants_on_art", using: :btree
+  add_index "constants", ["category"], name: "index_constants_on_category", using: :btree
+  add_index "constants", ["project_id"], name: "index_constants_on_project_id", using: :btree
+  add_index "constants", ["sys"], name: "index_constants_on_sys", using: :btree
 
   create_table "content_element_types", force: true do |t|
     t.integer  "content_type_id"
@@ -112,6 +123,10 @@ ActiveRecord::Schema.define(version: 20140612214923) do
   end
 
   add_index "content_relation_types", ["binder_type_id"], name: "index_content_relation_types_on_binder_type_id", using: :btree
+  add_index "content_relation_types", ["content_type_id"], name: "index_content_relation_types_on_content_type_id", using: :btree
+  add_index "content_relation_types", ["intern"], name: "index_content_relation_types_on_intern", using: :btree
+  add_index "content_relation_types", ["relation_type"], name: "index_content_relation_types_on_relation_type", using: :btree
+  add_index "content_relation_types", ["relative_type_id"], name: "index_content_relation_types_on_relative_type_id", using: :btree
 
   create_table "content_relations", force: true do |t|
     t.integer  "content_relation_type_id"
@@ -125,6 +140,10 @@ ActiveRecord::Schema.define(version: 20140612214923) do
   end
 
   add_index "content_relations", ["binder_id"], name: "index_content_relations_on_binder_id", using: :btree
+  add_index "content_relations", ["content_id"], name: "index_content_relations_on_content_id", using: :btree
+  add_index "content_relations", ["content_relation_type_id"], name: "index_content_relations_on_content_relation_type_id", using: :btree
+  add_index "content_relations", ["position"], name: "index_content_relations_on_position", using: :btree
+  add_index "content_relations", ["relative_id"], name: "index_content_relations_on_relative_id", using: :btree
 
   create_table "content_to_branches", force: true do |t|
     t.integer  "branch_id"
@@ -153,13 +172,25 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.boolean  "direct_edit"
   end
 
+  add_index "content_types", ["direct_edit"], name: "index_content_types_on_direct_edit", using: :btree
   add_index "content_types", ["editor"], name: "index_content_types_on_editor", using: :btree
+  add_index "content_types", ["intern"], name: "index_content_types_on_intern", using: :btree
   add_index "content_types", ["project_id"], name: "index_content_types_on_project_id", using: :btree
   add_index "content_types", ["ref_id"], name: "index_content_types_on_ref_id", using: :btree
 
   create_table "content_types_to_branches", force: true do |t|
     t.integer  "branch_id"
     t.integer  "content_type_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "content_types_to_branches", ["branch_id"], name: "index_content_types_to_branches_on_branch_id", using: :btree
+  add_index "content_types_to_branches", ["content_type_id"], name: "index_content_types_to_branches_on_content_type_id", using: :btree
+
+  create_table "content_types_to_workspaces", force: true do |t|
+    t.integer  "content_type_id"
+    t.integer  "workspace_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -175,7 +206,17 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.text     "filenames"
   end
+
+  add_index "contents", ["alpha_datum"], name: "index_contents_on_alpha_datum", using: :btree
+  add_index "contents", ["content_type_id"], name: "index_contents_on_content_type_id", using: :btree
+  add_index "contents", ["old_id"], name: "index_contents_on_old_id", using: :btree
+  add_index "contents", ["omega_datum"], name: "index_contents_on_omega_datum", using: :btree
+  add_index "contents", ["project_id"], name: "index_contents_on_project_id", using: :btree
+  add_index "contents", ["ref_id"], name: "index_contents_on_ref_id", using: :btree
+  add_index "contents", ["status"], name: "index_contents_on_status", using: :btree
+  add_index "contents", ["user_id"], name: "index_contents_on_user_id", using: :btree
 
   create_table "documentables", force: true do |t|
     t.integer  "project_id"
@@ -190,6 +231,13 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.datetime "updated_at"
   end
 
+  add_index "documentables", ["doctype"], name: "index_documentables_on_doctype", using: :btree
+  add_index "documentables", ["document_id"], name: "index_documentables_on_document_id", using: :btree
+  add_index "documentables", ["documentable_id"], name: "index_documentables_on_documentable_id", using: :btree
+  add_index "documentables", ["documentable_type"], name: "index_documentables_on_documentable_type", using: :btree
+  add_index "documentables", ["position"], name: "index_documentables_on_position", using: :btree
+  add_index "documentables", ["project_id"], name: "index_documentables_on_project_id", using: :btree
+
   create_table "documents", force: true do |t|
     t.integer  "project_id"
     t.string   "document_file_name"
@@ -203,6 +251,8 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.integer  "doctype"
   end
 
+  add_index "documents", ["project_id"], name: "index_documents_on_project_id", using: :btree
+
   create_table "hosts", force: true do |t|
     t.integer  "project_id"
     t.string   "protocol",   default: "http://"
@@ -211,6 +261,11 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "hosts", ["host"], name: "index_hosts_on_host", using: :btree
+  add_index "hosts", ["primary"], name: "index_hosts_on_primary", using: :btree
+  add_index "hosts", ["project_id"], name: "index_hosts_on_project_id", using: :btree
+  add_index "hosts", ["protocol"], name: "index_hosts_on_protocol", using: :btree
 
   create_table "permissions", force: true do |t|
     t.integer  "user_id"
@@ -222,6 +277,13 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "permissions", ["action"], name: "index_permissions_on_action", using: :btree
+  add_index "permissions", ["inverse"], name: "index_permissions_on_inverse", using: :btree
+  add_index "permissions", ["project_id"], name: "index_permissions_on_project_id", using: :btree
+  add_index "permissions", ["subject_class"], name: "index_permissions_on_subject_class", using: :btree
+  add_index "permissions", ["subject_id"], name: "index_permissions_on_subject_id", using: :btree
+  add_index "permissions", ["user_id"], name: "index_permissions_on_user_id", using: :btree
 
   create_table "projects", force: true do |t|
     t.integer  "ref_id"
@@ -235,6 +297,7 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.string   "analytics"
   end
 
+  add_index "projects", ["intern"], name: "index_projects_on_intern", using: :btree
   add_index "projects", ["project_id"], name: "index_projects_on_project_id", using: :btree
   add_index "projects", ["ref_id"], name: "index_projects_on_ref_id", using: :btree
 
@@ -247,6 +310,11 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.datetime "updated_at"
   end
 
+  add_index "templatables", ["project_id"], name: "index_templatables_on_project_id", using: :btree
+  add_index "templatables", ["templatable_id"], name: "index_templatables_on_templatable_id", using: :btree
+  add_index "templatables", ["templatable_type"], name: "index_templatables_on_templatable_type", using: :btree
+  add_index "templatables", ["template_id"], name: "index_templatables_on_template_id", using: :btree
+
   create_table "templates", force: true do |t|
     t.integer  "project_id"
     t.string   "action"
@@ -255,6 +323,9 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "templates", ["action"], name: "index_templates_on_action", using: :btree
+  add_index "templates", ["project_id"], name: "index_templates_on_project_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "name"
@@ -310,6 +381,10 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.datetime "updated_at"
   end
 
+  add_index "workspaceables", ["workspace_id"], name: "index_workspaceables_on_workspace_id", using: :btree
+  add_index "workspaceables", ["workspaceable_id"], name: "index_workspaceables_on_workspaceable_id", using: :btree
+  add_index "workspaceables", ["workspaceable_type"], name: "index_workspaceables_on_workspaceable_type", using: :btree
+
   create_table "workspaces", force: true do |t|
     t.integer  "project_id"
     t.string   "intern"
@@ -318,5 +393,9 @@ ActiveRecord::Schema.define(version: 20140612214923) do
     t.datetime "created_at"
     t.datetime "updated_at"
   end
+
+  add_index "workspaces", ["constellation"], name: "index_workspaces_on_constellation", using: :btree
+  add_index "workspaces", ["intern"], name: "index_workspaces_on_intern", using: :btree
+  add_index "workspaces", ["project_id"], name: "index_workspaces_on_project_id", using: :btree
 
 end

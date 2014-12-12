@@ -12,6 +12,8 @@
           request: {
             <% if @content %>
             endpoint: '<%= create_upload_path(@project, @content.class.name, @content.id) %>'
+            <% elsif @branch %>
+            endpoint: '<%= create_upload_path(@project, @branch.class.name, @branch.id) %>'
             <% else %>
             endpoint: '<%= create_upload_path(@project, '-', 0) %>'
             <% end %>
@@ -54,6 +56,9 @@
                 NProgress.done();
                 <% if @content %>
                   $('#documents').load('<%= uploaded_path(@project, @content.class.name, @content.id) %>');
+                  console.log('upload done');
+                <% elsif @branch %>
+                  $('#documents').load('<%= uploaded_path(@project, @branch.class.name, @branch.id) %>');
                   console.log('upload done');
                 <% end %>
                 NProgress.remove();

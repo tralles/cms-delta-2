@@ -34,6 +34,18 @@ Delta2::Application.routes.draw do
     resources :branches do
       resources :branches do
       end
+      resources :documents do
+
+        member do
+          get 'assign'
+          get 'remove'
+        end
+
+        collection do
+          post 'sort'
+          match 'search', :via => :all
+        end
+      end
 
       member do
         post 'sort'

@@ -74,6 +74,7 @@ class ContentsController < ApplicationController
           end
         end
         @content.proof_bracketcommands
+        @content.setFileNames
 
         format.html { redirect_to edit_project_content_type_content_path(@project, @content_type, @content, :locale => @locale), notice: 'Content was successfully created.' }
         format.json { render action: 'show', status: :created, location: [@project, @content_type, @content] }
@@ -139,6 +140,7 @@ class ContentsController < ApplicationController
 
 
         @content.proof_bracketcommands
+        @content.setFileNames
 
         format.html { redirect_to project_content_type_content_path(@project, @content_type, @content, :locale => @locale), notice: 'Content was successfully updated.' }
         format.js {}
