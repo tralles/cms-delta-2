@@ -68,13 +68,13 @@ class WorkspacesController < ApplicationController
     def set_workspace
       @workspace = Workspace.find(params[:id])
     end
-    
+
     def set_project
     end
 
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def workspace_params
-      params.require(:workspace).permit(:constellation, :intern, :name)
+      params.require(:workspace).permit(:constellation, :intern, :name, :content_type_ids => [])
     end
 end

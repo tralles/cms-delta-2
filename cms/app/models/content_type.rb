@@ -17,6 +17,8 @@ class ContentType < ActiveRecord::Base
   has_many :content_relation_types, :dependent => :destroy
   has_many :inverse_content_relation_types, :class_name => "ContentRelationType", :foreign_key => "relative_type_id", :dependent => :destroy
 
+  has_many :ctws, :class_name => "ContentTypesToWorkspace", :dependent => :destroy
+  has_many :workspaces, :through => :ctws
 
   has_many :templatables, :as => :templatable, :dependent => :destroy
   has_many :templates, :through => :templatables

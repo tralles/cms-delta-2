@@ -1,4 +1,5 @@
-- documentable = Documentable.where(:project => @project).where(:documentable_type => 'Content').where(:documentable_id => @content.id).where(:document_id => document.id).first
+- documentable = Documentable.where(:project => @project).where(:documentable_type => 'Content').where(:documentable_id => @content.id).where(:document_id => document.id).first if @content
+- documentable = Documentable.where(:project => @project).where(:documentable_type => 'Branch').where(:documentable_id => @branch.id).where(:document_id => document.id).first if @branch
 %tr{ :id => "document_#{document.id}", :width => '100%' }
   %td.handle
 
@@ -37,9 +38,15 @@
           %i.fa.fa-cogs
           &nbsp;
           Einstellung
-        
-        = link_to remove_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
-          %i.fa.fa-trash-o
-          &nbsp;
-          Entfernen
-        
+
+        - if @content
+          = link_to remove_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
+            %i.fa.fa-trash-o
+            &nbsp;
+            Entfernen
+
+        - if @branch
+          = link_to remove_project_branch_document_path(@project, @branch, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
+            %i.fa.fa-trash-o
+            &nbsp;
+            Entfernen

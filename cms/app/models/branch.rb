@@ -16,6 +16,8 @@ class Branch < ActiveRecord::Base
   has_many :ctbs, :class_name => "ContentToBranches", :dependent => :destroy
   has_many :contents, :through => :ctbs
 
+  has_many :documentables, :as => :documentable, :dependent => :destroy
+  has_many :documents, :through => :documentables
 
   has_many :templatables, :as => :templatable, :dependent => :destroy
   has_many :templates, :through => :templatables

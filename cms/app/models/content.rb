@@ -1,7 +1,8 @@
+#encoding: utf-8 
 class Content < ActiveRecord::Base
 
   paginates_per 50
-  
+
 
   has_many :content_elements, :dependent => :destroy
 #  accepts_nested_attributes_for :content_elements, :allow_destroy => true
@@ -287,5 +288,31 @@ class Content < ActiveRecord::Base
     return ausgabe
   end
 
+
+  def setFileNames
+    #unless self.branches.empty?
+      filenames = {}
+      self.project.languages.each do |language|
+
+        #unless self.ctbs.link.empty?
+        #  branch = self.ctbs.link.first.branch
+        #else
+        #  branch = self.branches.first
+        #end
+        #filename = "/#{language.to_s}#{branch.route(language).route.downcase}/#{CGI::escape(self.rep(language).downcase)}"
+        filename = self.rep(language).downcase
+        filename  = filename.gsub('&', '+')
+        filename  = filename.gsub('ä', 'ae')
+        filename  = filename.gsub('ö', 'oe')
+        filename  = filename.gsub('ü', 'ue')
+        filename  = filename.gsub('ß', 'ss')
+        filename  = filename.parameterize
+        puts filename, false
+        filenames[language] = CGI::escape(filename)
+      end
+      self.filenames = filenames.to_json
+      self.save!
+    #end
+  end
 
 end

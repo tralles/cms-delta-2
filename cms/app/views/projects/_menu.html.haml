@@ -46,10 +46,14 @@
 
           - workspaces.each do |workspace|
             %li
-              = link_to params.merge(:constellation => constellation, :workspace => workspace) do
-                - if get_workspace(constellation) == workspace.id
-                  %i.pull-right.fa-fw.fa.fa-check
-                = workspace.name
+              - if get_workspace(constellation) == workspace.id
+                %i.pull-right.fa-fw.fa.fa-check
+              - if @content_type && !@content_type.workspaces.include?(workspace)
+                %span.muted
+                  = workspace.name
+              - else
+                = link_to params.merge(:constellation => constellation, :workspace => workspace) do
+                  = workspace.name
 
 
       - if can?(:read, :documents) || can?(:read, :branches)

@@ -47,7 +47,7 @@
 
 
                 %td
-                  = link_to project_content_type_content_path(@project, content.content_type, content, params.merge(:locale => @locale)) do
+                  = link_to project_content_type_content_path(@project, content.content_type, content, :locale => @locale) do
                     = content.rep(@locale).html_safe
 
                   - if content.alpha_datum

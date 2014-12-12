@@ -4,6 +4,9 @@ class Workspace < ActiveRecord::Base
 
   has_many :workspaceables, :dependent => :destroy
 
+  has_many :ctws, :class_name => "ContentTypesToWorkspace", :dependent => :destroy
+  has_many :content_types, :through => :ctws
+
   before_destroy :removePermissions
 
 

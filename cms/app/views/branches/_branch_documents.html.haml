@@ -1,0 +1,20 @@
+#documents
+  %fieldset
+    %legend
+      %i.fa.fa-picture-o
+      &nbsp;
+      Dokumente
+    %options
+      .row
+        .span2
+          = link_to search_project_documents_path(@project), :remote => true, :class => 'btn input-block-level btn-large' do
+            %i.fa.fa-search
+            &nbsp;
+            Suchen
+
+        .span4
+          = render 'documents/button'
+      %hr
+
+      #contendocuments
+        = render :partial => 'documents/branchdocuments', :locals => { :documents => branch.documents }
