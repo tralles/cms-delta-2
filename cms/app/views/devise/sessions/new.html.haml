@@ -4,24 +4,24 @@
       %h4
         %strong Account
         | anmeldung
-        
-      = render :partial => "devise/shared/links" 
-      
+
+      = render :partial => "devise/shared/links"
+
     .span9
       %h4
         %i.fa.fa-signin
         &nbsp;
         Login
-        
+
       %br
-      = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'form-horizontal'} ) do |f| 
-        - devise_error_messages! 
+      = form_for(resource, :as => resource_name, :url => session_path(resource_name), :html => { :class => 'form-horizontal'} ) do |f|
+        - devise_error_messages!
 
 
         .control-group
           = f.label :email, :class => 'control-label'
           .controls
-            = f.email_field :email , :class => 'input-block-level'
+            = f.email_field :email, :autofocus => true, :class => 'input-block-level'
 
 
         .control-group
@@ -33,8 +33,8 @@
         .control-group
           = f.label :remember_me, :class => 'control-label'
           .controls
-            = f.check_box :remember_me 
-            
-            
+            = f.check_box :remember_me
+
+
         .form-actions
           = f.submit "Login", :class => 'btn btn-primary'
