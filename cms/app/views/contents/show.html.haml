@@ -116,6 +116,9 @@
                   %li{ :class => "#{'active' if content_relation_type == @content.content_type.content_relation_types.first} " }
                     %a{"data-toggle" => "tab", :href => "##{content_relation_type.intern}"}
                       = content_relation_type.name
+                      &nbsp;
+                      %span.badge
+                        = @content.relations(content_relation_type.intern).size
 
               .tab-content
                 - @content.content_type.content_relation_types.each do |content_relation_type|

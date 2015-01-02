@@ -5,21 +5,24 @@
       &nbsp;
       Verbundene Daten
     %options
-    
+
       .tabbable
         %ul.nav.nav-tabs
           - @content.content_type.content_relation_types.each do |content_relation_type|
             %li{ :class => "#{'active' if content_relation_type == @content.content_type.content_relation_types.first} " }
-              %a{"data-toggle" => "tab", :href => "##{content_relation_type.intern}"} 
+              %a{"data-toggle" => "tab", :href => "##{content_relation_type.intern}"}
                 = content_relation_type.name
+                &nbsp;
+                %span.badge
+                  = @content.relations(content_relation_type.intern).size
 
         .tab-content
           - @content.content_type.content_relation_types.each do |content_relation_type|
             %div{ :id => content_relation_type.intern, :class => "tab-pane #{'active' if content_relation_type == @content.content_type.content_relation_types.first} " }
-              
-              = render :partial => 'contents/form_relations_relationtable', :locals => { :content_relation_type => content_relation_type, :content => @content } 
-              
-              
+
+              = render :partial => 'contents/form_relations_relationtable', :locals => { :content_relation_type => content_relation_type, :content => @content }
+
+
               = link_to new_project_content_content_relation_type_content_relation_path(@project, @content, content_relation_type), :remote => true, :class => 'btn btn-mini btn-primary pull-right' do
                 %i.fa.fa-plus
                 = content_relation_type.name

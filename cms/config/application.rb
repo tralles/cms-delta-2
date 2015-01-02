@@ -20,11 +20,13 @@ module Delta2
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
     config.i18n.default_locale = :de
-    I18n.default_locale = :de
+    #I18n.default_locale = :de
     config.encoding = "utf-8"
 
+    #I18n.config.enforce_available_locales = true
+    #config.i18n.default_locale = :'de'
     config.i18n.enforce_available_locales = false
-    I18n.enforce_available_locales = false
+    #I18n.enforce_available_locales = false
 
     config.generators do |g|
       g.template_engine :haml
