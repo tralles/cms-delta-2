@@ -54,7 +54,13 @@ class ProjectsController < ApplicationController
 
         @project.set_languages( params[:project][:languages] ) if params[:project][:languages]
 
-        format.html { redirect_to @project, notice: 'Project was successfully updated.' }
+        format.html {
+          if params && params[:project] && params[:project][:css]
+            redirect_to css_project_path(@project), notice: 'CSS was successfully updated.' 
+          else
+            redirect_to @project, notice: 'Project was successfully updated.'
+          end
+        }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
