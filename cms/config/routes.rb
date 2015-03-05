@@ -111,6 +111,7 @@ Delta2::Application.routes.draw do
       match 'settings', :via => :all
       match 'users', :via => :all
       match 'css', :via => :all
+      match 'renew_cache', :via => :all
     end
 
 

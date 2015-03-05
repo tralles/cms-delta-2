@@ -11,7 +11,7 @@
 // about supported directives.
 //
 //= require jquery
-//= require jquery.ui.all
+//= require jquery-ui
 //= require jquery_ujs
 //= require raphael
 //= require morris
@@ -19,6 +19,8 @@
 //= require bootstrap
 //= require_tree .
 
+
+// require jquery.ui.all
 
 
 
@@ -79,6 +81,8 @@ $(document).on('ready page:load', function() {
 	'hooks': [
 	]
 });
+
+  $("select").chosen({disable_search_threshold: 10, width: "100%"});
 
   $('[rel=tooltip]').tooltip();
 

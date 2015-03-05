@@ -101,3 +101,6 @@ gem 'kaminari-bootstrap', '~> 0.1.3'
 gem 'dalli'
 gem 'exception_notification'
 gem 'ensure_valid_encoding'
+
+
+gem "rails-erd"

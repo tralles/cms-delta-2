@@ -74,59 +74,65 @@
               Baumstruktur
 
 
-    - if current_user.admin?
-
-      %li.nav-header
-        %i.fa.fa-cogs
-        &nbsp;
-        Administration
-
+    - if current_user.admin? || can?(:read, :templates) || can?(:read, :css) || can?(:renew, :cache)
       - if @project && !@project.new_record?
-        %li{ :class => "#{ (controller.controller_name == 'projects' && controller.action_name == 'settings') ? 'active' : '' }" }
-          = link_to settings_project_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-gear
-            Einstellungen
-        %li{ :class => "#{ (controller.controller_name == 'projects' && controller.action_name == 'users') ? 'active' : '' }" }
-          = link_to users_project_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-group
-            Benutzer
+        %li.nav-header
+          %i.fa.fa-cogs
+          &nbsp;
+          Administration
+
+        - if current_user.admin?
+          %li{ :class => "#{ (controller.controller_name == 'projects' && controller.action_name == 'settings') ? 'active' : '' }" }
+            = link_to settings_project_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-gear
+              Einstellungen
+          %li{ :class => "#{ (controller.controller_name == 'projects' && controller.action_name == 'users') ? 'active' : '' }" }
+            = link_to users_project_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-group
+              Benutzer
 
 
-        %li.divider
+          %li.divider
 
-        %li
-          = link_to project_workspaces_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-desktop
-            Workspaces
+          %li
+            = link_to project_workspaces_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-desktop
+              Workspaces
 
-        %li
-          = link_to project_templates_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-code
-            Templates
+        - if current_user.admin? || can?(:read, :templates)
+          %li
+            = link_to project_templates_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-code
+              Templates
 
-        %li
-          = link_to css_project_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-css3
-            CSS
+        - if current_user.admin? || can?(:read, :css)
 
-        %li.divider
+          %li
+            = link_to css_project_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-css3
+              CSS
 
-        %li
-          = link_to project_content_types_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-th-list
-            Inhalts Typen
+        - if current_user.admin?
+          %li.divider
 
-        %li
-          = link_to project_content_relation_types_path(@project) do
-            %i.pull-right.fa-fw.fa.fa-magnet
-            Inhalts Typen Relationen
+          %li
+            = link_to project_content_types_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-th-list
+              Inhalts Typen
 
-      - else
-        %li
-          = link_to new_project_path do
-            %i.pull-right.fa-fw.fa.fa-plus
-            Projekt anlegen
-    - elsif !@project
+          %li
+            = link_to project_content_relation_types_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-magnet
+              Inhalts Typen Relationen
+
+        - if current_user.admin? || can?(:renew, :cache)
+          %li.divider
+          %li
+            = link_to renew_cache_project_path(@project) do
+              %i.pull-right.fa-fw.fa.fa-refresh
+              Cache erneuern
+
+    - if !@project
 
       %li.nav-header
         %i.fa.fa-fw.fa-list

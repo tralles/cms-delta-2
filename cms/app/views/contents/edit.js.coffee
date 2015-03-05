@@ -4,6 +4,10 @@ $("#contentrelationwindow").modal
   backdrop: true
   keyboard: false
 
+$("select").chosen
+  disable_search_threshold: 10
+  width: "100%"
+
 $(".datepicker").datepicker
   format: "yyyy-mm-dd"
   weekStart: 1

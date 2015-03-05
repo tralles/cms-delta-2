@@ -10,11 +10,11 @@
       - unless doctypes.empty?
         = f.input :doctype, :as => :select, :collection => doctypes, :input_html => { :class => 'input-block-level' }
       = f.input :title, :input_html => { :class => 'input-block-level' }
-      = f.input :info,  :input_html => { :class => 'input-block-level' }
-      
-    
+      = f.input :info,  :input_html => { :class => 'input-block-level autosize' }
+
+
     .modal-footer
-      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' } 
-        
-      
-      %button.btn.btn-inverse{"aria-hidden" => "true", "data-dismiss" => "modal"} Abbrehen
+      = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
+
+
+      %button.btn.btn-inverse{"aria-hidden" => "true", "data-dismiss" => "modal"} Abbrechen

@@ -1,13 +1,13 @@
 .container
   .row
     .span3
-      = render 'menu'  
-      
+      = render 'menu'
+
 
     .span9
 
       %h1 Individuelle Berechtigungen
-      
+
       - if @user.admin?
         .alert.alert-block
           %strong
@@ -16,15 +16,15 @@
             Achtung
           %br
           Administrative User benötigen keine individuelle Berechtigungen.
-      
+
       - else
         .box.alternate
           .box-title
             %thin.pull-right= @user.email
             %strong= @user.username
-            
+
           .box-content.nopadding.condensed
-            #permissions.accordion{ :style => 'margin: 0px !important;' }   
+            #permissions.accordion{ :style => 'margin: 0px !important;' }
               .accordion-group
                 .accordion-heading
                   %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#general"}
@@ -41,7 +41,7 @@
                           %th Erstellen
                           %th Bearbeiten
                           %th Löschen
-                  
+
                       %tbody
                         %tr
                           %th.text-left Medienbibliothek
@@ -62,23 +62,61 @@
                           = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "search" }
                           %td{ :colspan => 3 }
 
-            
               .accordion-group
                 .accordion-heading
-                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#contenttypes"} 
+                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#admin"}
+                    %i.fa.fa-gear
+                    &nbsp;
+                    Administration
+                #admin.accordion-body.collapse
+                  .accordion-inner.nopadding
+                    %table.table.table-striped.table-hover
+                      %thead{ :style => 'background: #fee;' }
+                        %tr
+                          %th{:width => 200 }= "Funktion"
+                          %th Anzeigen
+                          %th
+                          %th
+                          %th
+
+                      %tbody
+                        %tr
+                          %th.text-left Templates
+
+                          = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => 'templates' }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => 'templates' }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "edit",    :subject_class => 'templates' }
+                          = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => 'templates' }
+                        %tr
+                          %th.text-left CSS
+                          = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "css" }
+                          %td
+                          %td
+                          %td
+                        %tr
+                          %th.text-left Cache
+                          = render :partial => '/permissions/index_td', :locals => { :action => "renew",   :subject_class => "cache" }
+                          %td
+                          %td
+                          %td
+
+
+              .accordion-group
+                .accordion-heading
+                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#contenttypes"}
                     %i.fa.fa-th-list
                     &nbsp;
                     Content-Types
                 #contenttypes.accordion-body.collapse
                   .accordion-inner
-                  
+
                     .tabbable.tabs-left
                       %ul.nav.nav-tabs
                         - @project.content_types.direct.each do |content_type|
                           %li{ :class => "#{ 'active' if @project.content_types.direct.first == content_type }" }
                             %a{ :href => "#tabct#{content_type.id}", :data => { :toggle => 'tab' } }
                               = content_type.name
-                    
+
                       .tab-content
                         - @project.content_types.direct.each do |content_type|
                           %div{ :id => "tabct#{content_type.id}", :class => "tab-pane #{ 'active' if @project.content_types.direct.first == content_type }"  }
@@ -90,8 +128,8 @@
 
                                 %li
                                   %a{ :href => "#tabct#{content_type.id}cet", :data => { :toggle => 'tab' } }
-                                    Datenfelder 
-                            
+                                    Datenfelder
+
                               .tab-content
                                 .tab-pane.active{ :id => "tabct#{content_type.id}basics" }
                                   %table.table.table-striped.table-hover
@@ -104,8 +142,8 @@
                                       = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => content_type.class.name, :subject_id => content_type.id }
                                       = render :partial => '/permissions/index_td', :locals => { :action => "create",  :subject_class => content_type.class.name, :subject_id => content_type.id }
                                       = render :partial => '/permissions/index_td', :locals => { :action => "edit",    :subject_class => content_type.class.name, :subject_id => content_type.id }
-                                      = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => content_type.class.name, :subject_id => content_type.id }   
-                                
+                                      = render :partial => '/permissions/index_td', :locals => { :action => "delete",  :subject_class => content_type.class.name, :subject_id => content_type.id }
+
                                 .tab-pane{ :id => "tabct#{content_type.id}cet" }
                                   %table.table.table-striped.table-hover
                                     %tr
@@ -118,12 +156,12 @@
                                           %strong= content_element_type.name
                                         = render :partial => '/permissions/index_td', :locals => { :action => "block_read",    :subject_class => content_element_type.class.name, :subject_id => content_element_type.id }
                                         = render :partial => '/permissions/index_td', :locals => { :action => "block_edit",    :subject_class => content_element_type.class.name, :subject_id => content_element_type.id }
-                            
 
-            
+
+
               .accordion-group
                 .accordion-heading
-                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#workspaces"} 
+                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#workspaces"}
                     %i.fa.fa-desktop
                     &nbsp;
                     Workspaces
@@ -134,7 +172,7 @@
                         %tr
                           %th{ :colspan => 2, :width => 200 } Workspace
                           %th Zuweisen & Filtern
-                  
+
                       %tbody
                         - constellation = ''
                         - @project.workspaces.each do |workspace|
@@ -143,16 +181,16 @@
                             %tr
                               %th.text-left{ :colspan => 2, :width => 200 }= constellation
                               %th{ :colspan => 4 }
-                              
-                        
+
+
                           %tr
                             %th{ :width => 10 }
                             %th.text-left{ :width => 190 }= workspace.name
                             = render :partial => '/permissions/index_td', :locals => { :action => "read",    :subject_class => workspace.class.name, :subject_id => workspace.id }
-            
+
               .accordion-group
                 .accordion-heading
-                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#tree"} 
+                  %a.accordion-toggle{"data-parent" => "#permissions", "data-toggle" => "collapse", href: "#tree"}
                     %i.fa.fa-sitemap
                     &nbsp;
                     Baumstruktur
@@ -169,6 +207,6 @@
                           -# %th Erstellen
                           -# %th Bearbeiten
                           -# %th Löschen
-                  
+
                       %tbody
                         = render :partial => '/permissions/index_branch', :locals => { :branches => branches }
