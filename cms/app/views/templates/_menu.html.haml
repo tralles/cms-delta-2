@@ -17,8 +17,8 @@
         %i.pull-right.fa-fw.fa.fa-code
         Templates
 
-
-    %li
-      = link_to new_project_template_path(@project) do
-        %i.pull-right.fa-fw.fa.fa-plus
-        Neues Template
+    - if can?(:create, :templates)
+      %li
+        = link_to new_project_template_path(@project) do
+          %i.pull-right.fa-fw.fa.fa-plus
+          Neues Template
