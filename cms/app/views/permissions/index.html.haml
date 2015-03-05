@@ -75,9 +75,9 @@
                         %tr
                           %th{:width => 200 }= "Funktion"
                           %th Anzeigen
-                          %th
-                          %th
-                          %th
+                          %th Erstellen
+                          %th Bearbeiten
+                          %th Löschen
 
                       %tbody
                         %tr
@@ -90,15 +90,15 @@
                         %tr
                           %th.text-left CSS
                           = render :partial => '/permissions/index_td', :locals => { :action => "read",   :subject_class => "css" }
-                          %td
+                          = render :partial => '/permissions/index_td', :locals => { :action => "edit",   :subject_class => "css" }
                           %td
                           %td
                         %tr
                           %th.text-left Cache
+                          %td
+                          %td
+                          %td
                           = render :partial => '/permissions/index_td', :locals => { :action => "renew",   :subject_class => "cache" }
-                          %td
-                          %td
-                          %td
 
 
               .accordion-group

@@ -30,8 +30,9 @@
               .btn-group.pull-right
                 = link_to [template.project, template], :class => 'btn btn-mini' do
                   Anzeigen
-                = link_to edit_project_template_path(template.project, template), :class => 'btn btn-mini btn-success' do
-                  Bearbeiten
-
-                = link_to [template.project, template], :class => 'btn btn-mini btn-danger', :method => :delete, :data => { :confirm => 'Are you sure?' } do
-                  Löschen
+                - if can?(:edit, :templates)
+                  = link_to edit_project_template_path(template.project, template), :class => 'btn btn-mini btn-success' do
+                    Bearbeiten
+                - if can?(:delete, :templates)
+                  = link_to [template.project, template], :class => 'btn btn-mini btn-danger', :method => :delete, :data => { :confirm => 'Are you sure?' } do
+                    Löschen
