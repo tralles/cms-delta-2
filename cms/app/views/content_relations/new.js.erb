@@ -5,6 +5,11 @@ $('body').append("<%= j( render :partial => 'content_relations/modal' )  %>");
 $('#contentrelationwindow').modal({ backdrop: true, keyboard: false });
 
 
+$("select").chosen({
+  disable_search_threshold: 10,
+  width: "100%"
+});
+
 $(".datepicker").datepicker({
   format: "yyyy-mm-dd",
   weekStart: 1,
@@ -20,15 +25,15 @@ $(".timepicker").timepicker({
   minuteStep: 15
 });
 
-$('#contentrelationwindow form').on('submit',   function() { 
+$('#contentrelationwindow form').on('submit',   function() {
   allok = true;
 
   if($(this).find('.required').length > 0)
   {
-	  $(this).find('.required').each(function(){ 
+	  $(this).find('.required').each(function(){
         if($(this).val().length == 0 && ($(this).is('input') || $(this).is('textarea') ))
         {
-    	    allok = false;  
+    	    allok = false;
           $(this).parent().parent().addClass('error');
         }
         else
@@ -40,7 +45,7 @@ $('#contentrelationwindow form').on('submit',   function() {
 
   if(allok)
   {
-    NProgress.start(); NProgress.set(0.8); 
+    NProgress.start(); NProgress.set(0.8);
   }
   else
   {
@@ -50,18 +55,18 @@ $('#contentrelationwindow form').on('submit',   function() {
 });
 
 
-  $('#contentrelationwindow textarea.redactor').redactor({ lang: 'de', 
-                          buttons: ['html', '|', 
-                                    'bold', 'italic', 'deleted', '|', 
+  $('#contentrelationwindow textarea.redactor').redactor({ lang: 'de',
+                          buttons: ['html', '|',
+                                    'bold', 'italic', 'deleted', '|',
                                     'unorderedlist', 'orderedlist', 'outdent', 'indent', '|',
                                     'table', 'link', '|',
-                                    'fontcolor', 'backcolor', '|', 
+                                    'fontcolor', 'backcolor', '|',
                                     'horizontalrule'],
                           minHeight: 200,
                           autoresize: false
                         });
-                        
-                        
+
+
   $("#contentrelationwindow textarea.markdown").pagedownBootstrap({
 	'sanatize': true,
 	'help': function () { window.open('https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet'); return false; },

@@ -1,6 +1,6 @@
 GIT
   remote: git://github.com/plataformatec/devise.git
-  revision: 2c8e242000921910077951ecce538a21e802c59d
+  revision: 7946f681a9c19f6043ba62c892c25a16ffd5c720
   specs:
     devise (3.4.1)
       bcrypt (~> 3.0)
@@ -39,13 +39,13 @@ GEM
       minitest (~> 5.1)
       thread_safe (~> 0.1)
       tzinfo (~> 1.1)
-    acts_as_list (0.5.0)
+    acts_as_list (0.6.0)
       activerecord (>= 3.0)
     ancestry (2.1.0)
       activerecord (>= 3.0.0)
     arel (5.0.1.20140414130214)
     bcrypt (3.1.9)
-    better_errors (2.0.0)
+    better_errors (2.1.0)
       coderay (>= 1.0.0)
       erubis (>= 2.6.6)
       rack (>= 0.9.0)
@@ -56,6 +56,7 @@ GEM
     builder (3.2.2)
     callsite (0.0.11)
     cancan (1.6.10)
+    choice (0.1.7)
     climate_control (0.0.3)
       activesupport (>= 3.0)
     cocaine (0.5.5)
@@ -74,7 +75,7 @@ GEM
     diffy (3.0.7)
     ensure_valid_encoding (0.5.3)
     erubis (2.7.0)
-    eventmachine (1.0.3)
+    eventmachine (1.0.4)
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
@@ -97,7 +98,7 @@ GEM
       haml (>= 4.0.0.rc.1)
       hpricot (~> 0.8.6)
       ruby_parser (~> 3.1.1)
-    i18n (0.6.11)
+    i18n (0.7.0)
     jbuilder (1.5.3)
       activesupport (>= 3.0.0)
       multi_json (>= 1.2.0)
@@ -139,7 +140,7 @@ GEM
     pg (0.17.1)
     polyamorous (1.1.0)
       activerecord (>= 3.0)
-    quiet_assets (1.0.3)
+    quiet_assets (1.1.0)
       railties (>= 3.1, < 5.0)
     rack (1.5.2)
     rack-contrib (1.2.0)
@@ -156,6 +157,11 @@ GEM
       bundler (>= 1.3.0, < 2.0)
       railties (= 4.1.8)
       sprockets-rails (~> 2.0)
+    rails-erd (1.3.0)
+      activerecord (>= 3.2)
+      activesupport (>= 3.2)
+      choice (~> 0.1.6)
+      ruby-graphviz (~> 1.0.4)
     railties (4.1.8)
       actionpack (= 4.1.8)
       activesupport (= 4.1.8)
@@ -174,6 +180,7 @@ GEM
     ref (1.0.5)
     responders (1.1.2)
       railties (>= 3.2, < 4.2)
+    ruby-graphviz (1.0.9)
     ruby_parser (3.1.3)
       sexp_processor (~> 4.1)
     sass (3.2.19)
@@ -212,7 +219,7 @@ GEM
       coffee-rails
     tzinfo (1.2.2)
       thread_safe (~> 0.1)
-    uglifier (2.6.0)
+    uglifier (2.6.1)
       execjs (>= 0.3.0)
       json (>= 1.8.0)
     warden (1.2.3)
@@ -253,6 +260,7 @@ DEPENDENCIES
   pg
   quiet_assets
   rails (= 4.1.8)
+  rails-erd
   ransack
   raphael-rails
   sass-rails (~> 4.0.0)

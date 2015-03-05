@@ -55,7 +55,13 @@ class Project < ActiveRecord::Base
   end
 
 
-  ##
+  # Methodes
+
+  def renew_cache
+    self.cache_version = DateTime.now
+    self.save
+  end
+
   def set_languages languages
 
     lng_before = self.languages

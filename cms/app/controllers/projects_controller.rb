@@ -26,6 +26,11 @@ class ProjectsController < ApplicationController
     @project = Project.new
   end
 
+  def renew_cache
+    @project.renew_cache
+    redirect_to @project, notice: 'Cache renewed.'
+  end
+
   # GET /projects/1/edit
   def edit
   end
@@ -56,7 +61,7 @@ class ProjectsController < ApplicationController
 
         format.html {
           if params && params[:project] && params[:project][:css]
-            redirect_to css_project_path(@project), notice: 'CSS was successfully updated.' 
+            redirect_to css_project_path(@project), notice: 'CSS was successfully updated.'
           else
             redirect_to @project, notice: 'Project was successfully updated.'
           end

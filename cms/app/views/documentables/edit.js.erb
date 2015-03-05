@@ -2,4 +2,5 @@ $('#documentableswindow').remove();
 
 $('body').append("<%= j( render :partial => 'documentables/edit_modal' )  %>");
 
+$('#documentableswindow textarea.autosize').autosize();
 $('#documentableswindow').modal({ backdrop: true, keyboard: false });

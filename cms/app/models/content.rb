@@ -1,11 +1,10 @@
-#encoding: utf-8 
+#encoding: utf-8
 class Content < ActiveRecord::Base
 
   paginates_per 50
 
 
   has_many :content_elements, :dependent => :destroy
-#  accepts_nested_attributes_for :content_elements, :allow_destroy => true
 
 
 
@@ -30,7 +29,6 @@ class Content < ActiveRecord::Base
 
   has_many :content_relations, :dependent => :destroy
   has_many :inverse_content_relations, :class_name => "ContentRelation", :foreign_key => "relative_id"
-#  has_many :owned_content_relations, :class_name => "ContentRelation", :foreign_key => "owner_id", :dependent => :destroy
 
 
 
@@ -187,7 +185,7 @@ class Content < ActiveRecord::Base
 
     unless self.branches.empty?
       branch = self.branches.first
-      filename = '/' + language.to_s + branch.route(language).route + '/' + CGI::escape(self.rep(language)) + '.htm'
+      filename = '/' + language.to_s + branch.route(language).route + '/' + CGI::escape(self.rep(language)) + '.html'
 
       filename = filename.downcase
     end
