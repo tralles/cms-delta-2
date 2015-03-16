@@ -7,7 +7,7 @@
     %options
       .row
         .span2
-          = link_to search_project_documents_path(@project), :remote => true, :class => 'btn input-block-level btn-large' do
+          = link_to search_project_documents_path(@project, :branch_id => @parent), :remote => true, :class => 'btn input-block-level btn-large' do
             %i.fa.fa-search
             &nbsp;
             Suchen
@@ -16,5 +16,5 @@
           = render 'documents/button'
       %hr
 
-      #contendocuments
-        = render :partial => 'documents/branchdocuments', :locals => { :documents => branch.documents }
+      #useddocuments
+        = render :partial => 'documents/useddocuments', :locals => { :documents => parent.documents }

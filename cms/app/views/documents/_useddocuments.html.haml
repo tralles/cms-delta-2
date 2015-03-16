@@ -1,0 +1,10 @@
+%table.table.table-condensed.table-bordered
+  - if @parent.class.name == 'Content'
+    %tbody.sortable{ :data => { :update => { :url => sort_project_content_documents_path(@project, @parent) } } }
+      = render documents
+  - elsif @parent.class.name == 'Branch'
+    %tbody.sortable{ :data => { :update => { :url => sort_project_content_documents_path(@project, @parent) } } }
+      = render documents
+  - else
+    %tbody
+      = render documents

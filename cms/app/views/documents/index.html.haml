@@ -1,21 +1,19 @@
 .container
   .row
     .span3
-      = render 'projects/menu'  
-    
+      = render 'projects/menu'
+
     .span6
 
       %h1
         Medienbibliothek
 
-      
+
       %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
           %th
           %th
             Metadaten
-          %th
-            Inhalt
           %th
             Actions
 
@@ -23,41 +21,48 @@
           %tr{ :id => "document#{document.id}" }
             %td{ :width => 50 }
               = link_to image_tag( document.document.url(:thumb) ), [document.project, document]
-            
+
             %td
-            
-            
+
+              %small.muted
+                = document.document_file_name
+              %br
+
               %strong
                 = document.filetype
               |
               = number_to_human_size document.document_file_size
               |
-              %span.muted
-                = " #{document.width} x #{document.height} Pixel "
+              %span.muted= " #{document.width} x #{document.height} Pixel "
 
               %br
-              %span.muted
-                = document.document_file_name
-            
-              %br
               = document.doctype_name
-                
-            %td
-              - document.documentables.each do |documentable|
-                - if documentable.documentable_type == 'Content'
-                  = link_to documentable.parent.rep(@locale), [documentable.parent.project, documentable.parent]
-                  %br
-                  
+              - unless document.documentables.empty?
+                %small
+                  %ul.nav.nav-stacked
+                    - document.documentables.each do |documentable|
+                      - if documentable.documentable_type == 'Content'
+                        %li
+                          = link_to [documentable.parent.project, documentable.parent] do
+                            %i.fa-fw.fa.fa-file-text
+                            = documentable.parent.rep(@locale)
+                      - elsif documentable.documentable_type == 'Branch'
+                        %li
+                          = link_to edit_project_branch_path(documentable.parent.project, documentable.parent) do
+                            %i.fa-fw.fa.fa-sitemap
+                            = documentable.parent.route(@locale).route
+
+
             %td{ :width => 150 }
               .btn-group.pull-right
-              
-                - if can?(:edit, :documents) 
+
+                - if can?(:edit, :documents)
                   = link_to edit_project_document_path(@project, document), :class => 'btn btn-mini btn-success' do
                     %i.fa.fa-edit
                     &nbsp;
                     Bearbeiten
-                
-                - if can?(:delete, :documents) 
+
+                - if can?(:delete, :documents)
                   - if current_user.admin? && document.documentables.empty?
                     = link_to project_document_path(@project, document), :remote => true, :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.document') }, :class => 'btn btn-mini btn-danger' do
                       %i.fa.fa-trash-o
@@ -68,10 +73,10 @@
                       %i.fa.fa-ban-circle
                       &nbsp;
                       Löschen
-              
+
 
       = paginate @documents
-        
+
       %hr
 
       = render 'documents/button'
@@ -80,4 +85,4 @@
       %h1
         Suche
 
-      = render 'documents/search'  
+      = render 'documents/search'

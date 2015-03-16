@@ -1,52 +1,52 @@
-- documentable = Documentable.where(:project => @project).where(:documentable_type => 'Content').where(:documentable_id => @content.id).where(:document_id => document.id).first if @content
-- documentable = Documentable.where(:project => @project).where(:documentable_type => 'Branch').where(:documentable_id => @branch.id).where(:document_id => document.id).first if @branch
-%tr{ :id => "document_#{document.id}", :width => '100%' }
-  %td.handle
+- documentable = Documentable.where(:project => @project).where(:documentable_type => @parent.class.name).where(:documentable_id => @parent.id).where(:document_id => document.id).first
+- if documentable
+  %tr{ :id => "document_#{document.id}", :width => '100%' }
+    %td.handle
 
-  %td{ :width => 50 }
-    = link_to image_tag( document.document.url(:thumb) ), [document.project, document], :target => '_blank'
+    %td{ :width => 50 }
+      = link_to image_tag( document.document.url(:thumb) ), [document.project, document], :target => '_blank'
 
-  %td
-    = "[img:#{document.id}]"
+    %td
+      = "[img:#{document.id}]"
 
-  %td
-    %strong
-      = document.filetype
-    |
-    = number_to_human_size document.document_file_size
-    %span.muted
-      = "| #{document.width} x #{document.height} Pixel "
+    %td
+      %strong
+        = document.filetype
+      |
+      = number_to_human_size document.document_file_size
+      %span.muted
+        = "| #{document.width} x #{document.height} Pixel "
 
-    - if documentable.doctype_name
-      %br
-      %strong Doctype:
-      = documentable.doctype_name
+      - if documentable.doctype_name
+        %br
+        %strong Doctype:
+        = documentable.doctype_name
 
-    - unless documentable.title.blank?
-      %br
-      = documentable.title
+      - unless documentable.title.blank?
+        %br
+        = documentable.title
 
-    - unless documentable.info.blank?
-      %br
-      = documentable.info
+      - unless documentable.info.blank?
+        %br
+        = documentable.info
 
 
-  %td
-    %nobr.pull-right
-      .btn-group
-        = link_to edit_project_documentable_path(@project, documentable), :remote => true, :class => 'btn btn-success btn-mini' do
-          %i.fa.fa-cogs
-          &nbsp;
-          Einstellung
-
-        - if @content
-          = link_to remove_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
-            %i.fa.fa-trash-o
+    %td
+      %nobr.pull-right
+        .btn-group
+          = link_to edit_project_documentable_path(@project, documentable), :remote => true, :class => 'btn btn-success btn-mini' do
+            %i.fa.fa-cogs
             &nbsp;
-            Entfernen
+            Einstellung
 
-        - if @branch
-          = link_to remove_project_branch_document_path(@project, @branch, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
-            %i.fa.fa-trash-o
-            &nbsp;
-            Entfernen
+          - if @content
+            = link_to remove_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
+              %i.fa.fa-trash-o
+              &nbsp;
+              Entfernen
+
+          - if @branch
+            = link_to remove_project_branch_document_path(@project, @branch, document), :remote => true, :class => 'btn btn-danger btn-mini ' do
+              %i.fa.fa-trash-o
+              &nbsp;
+              Entfernen

@@ -1,6 +1,6 @@
 $("#document<%= @document.id %>.fxline").remove()
-$("#contendocuments").html('<%= j( render :partial => 'documents/contendocuments', :locals => { :documents => @content.documents } ) %>')
-$("#docpoover").html('<%= j( render :partial => 'documents/contendocuments_docpoover', :locals => { :documents => @content.documents } ) %>')
+$("#useddocuments").html('<%= j( render :partial => 'documents/useddocuments', :locals => { :documents => @parent.documents } ) %>')
+$("#docpoover").html('<%= j( render :partial => 'documents/useddocuments_docpoover', :locals => { :documents => @parent.documents } ) %>')
 
 
 if ($("textarea.inline_documents").length > 0) {

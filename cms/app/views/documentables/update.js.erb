@@ -1,5 +1,5 @@
 
-$('#contendocuments').html("<%= j( render :partial => 'documents/contendocuments', :locals => { :documents => @content.documents } )  %>");
+$('#useddocuments').html("<%= j( render :partial => 'documents/useddocuments', :locals => { :documents => @parent.documents } )  %>");
 
 $('#documentableswindow').modal('hide');
 $('#documentableswindow').remove();

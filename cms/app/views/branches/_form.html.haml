@@ -84,7 +84,8 @@
             Template Hinzufügen
 
   - unless @branch.new_record?
-    = render :partial => 'branches/branch_documents', :locals => { :branch => @branch }
+    - @parent = @branch
+    = render :partial => 'branches/branch_documents', :locals => { :parent => @branch }
 
   .row
     .form-actions
