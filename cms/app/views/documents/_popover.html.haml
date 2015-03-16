@@ -1,20 +1,18 @@
-.navbar
-  .navbar-inner
-    - if @content
-      = form_tag search_project_content_documents_path(@project, @content), :remote => true, :class => 'navbar-search pull-left' do
-        .input-append
-          = text_field_tag :search, params[:search], :class => 'span2'
-          %button.btn
-            Go
-    - elsif @branch
-      = form_tag search_project_branch_documents_path(@project, @branch), :remote => true, :class => 'navbar-search pull-left' do
-        .input-append
-          = text_field_tag :search, params[:search], :class => 'span2'
-          %button.btn
-            Go
 
+- if @parent && @parent.class.name == 'Content'
+  = form_tag search_project_content_documents_path(@project, @parent), :remote => true, :class => 'navbar-search pull-left' do
+    .input-append
+      = text_field_tag :search, params[:search], :class => 'span5'
+      %button.btn
+        Filter
+- elsif @parent && @parent.class.name == 'Branch'
+  = form_tag search_project_branch_documents_path(@project, @parent), :remote => true, :class => 'navbar-search pull-left' do
+    .input-append
+      = text_field_tag :search, params[:search], :class => 'span5'
+      %button.btn
+        Filter
 
-%hr
+.clearfix
 
 %table.table.table-condensed.table-bordered.table-striped
   - @documents.each do |document|
@@ -30,11 +28,11 @@
         %br
         = number_to_human_size document.document_file_size
       %td
-        - if @content
-          = link_to assign_project_content_document_path(@project, @content, document), :remote => true, :class => 'btn btn-mini' do
+        - if @parent && @parent.class.name == 'Content'
+          = link_to assign_project_content_document_path(@project, @parent, document), :remote => true, :class => 'btn btn-mini' do
             Übernehmen
-        - elsif @branch
-          = link_to assign_project_branch_document_path(@project, @branch, document), :remote => true, :class => 'btn btn-mini' do
+        - elsif @parent && @parent.class.name == 'Branch'
+          = link_to assign_project_branch_document_path(@project, @parent, document), :remote => true, :class => 'btn btn-mini' do
             Übernehmen
 
 

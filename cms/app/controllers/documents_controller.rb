@@ -68,8 +68,8 @@ class DocumentsController < ApplicationController
   def search
     @documents = @project.documents.finder(params[:search]).doctype(params[:doctype])
 
-    if @content
-      @documents = @documents - @content.documents
+    if @parent
+      @documents = @documents - @parent.documents
       @documents = Kaminari.paginate_array(@documents).page(params[:page]).per(10)
     else
       @documents = Kaminari.paginate_array(@documents).page(params[:page])
@@ -80,12 +80,12 @@ class DocumentsController < ApplicationController
 
   def assign
     @document     = Document.find(params[:id])
-    @document.documentables.build(:project => @project, :documentable => @content).save
+    @document.documentables.build(:project => @project, :documentable => @parent).save
   end
 
   def remove
     @document     = Document.find(params[:id])
-    @content.documentables.where(:document_id => @document).destroy_all
+    @parent.documentables.where(:document_id => @document).destroy_all
   end
 
 
@@ -126,7 +126,9 @@ class DocumentsController < ApplicationController
   private
 
     def set_project
-      @content = Content.find(params[:content_id]) if params[:content_id]
+      @parent = Content.find(params[:content_id]) if params[:content_id]
+      @parent = Branch.find(params[:branch_id]) if params[:branch_id]
+      @parent = params[:documentable_type].singularize.classify.constantize.find_by_id(params[:documentable_id]) if params[:documentable_type]
     end
 
 end

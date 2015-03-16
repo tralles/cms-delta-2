@@ -34,7 +34,7 @@
           callbacks: {
             onUpload: function() {
                 NProgress.start();
-                $('#contendocuments').attr('style', 'opacity:.15');
+                $('#useddocuments').attr('style', 'opacity:.15');
             },
             onUploadChunk: function() { NProgress.inc(); },
             onSubmit: function(id, fileName) {

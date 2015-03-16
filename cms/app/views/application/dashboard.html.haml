@@ -90,10 +90,13 @@
                 Statistik
               .box-content.nopadding.condensed
 
-                %div{ :id => "project#{project.id}", :style => 'height: 160px;' }
+                %div{ :id => "project#{project.id}", :style => 'height: 200px' }
+                - contentypes = ''
+                - project.content_types.direct.each do |ct|
+                  - contentypes = contentypes + ", {value: #{ct.contents.size}, label:'Inhalt: #{ct.name}'}"
 
                 - content_for :scripts do
                   - javascript_tag do
-                    = "var roject#{project.id}data = [ { value: #{project.branches.size}, label:'Menüpunkte' }, { value : #{project.content_types.size}, label : 'Inhalts-Typen' }, { value : #{project.contents.size}, label : 'Inhalte' }, { value : #{project.documents.size}, label : 'Dokumente' }, { value : #{project.workspaces.size}, label : 'Workspaces' } ]"
-                    = "var colors = [ '#F23568', '#7F58A6', '#4BF275', '#F2D43D', '#BF2E21' ]"
-                    = "Morris.Donut({ element: 'project#{project.id}', data: roject#{project.id}data, colors: colors })"
+                    = "var roject#{project.id}data = [ { value: #{project.branches.size}, label:'Menüpunkte' }, { value : #{project.documents.size}, label : 'Dokumente' }, { value : #{project.workspaces.size}, label : 'Workspaces' } #{contentypes} ]"
+
+                    = "Morris.Donut({ element: 'project#{project.id}', data: roject#{project.id}data, resize: true, redraw: true })"

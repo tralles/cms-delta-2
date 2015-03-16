@@ -7,9 +7,9 @@ class DocumentablesController < ApplicationController
 
   def update
     @documentable   = Documentable.find(params[:id])
-    
+
     if @documentable.update(permitted_params.documentable)
-      @content      = @documentable.parent 
+      @parent       = @documentable.parent
       @project      = @documentable.project
     else
       # puts @documentable.update(permitted_params.documentable)
