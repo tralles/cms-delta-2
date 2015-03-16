@@ -24,8 +24,8 @@
 
             %td
 
-              %small.muted
-                = document.document_file_name
+              %small.muted{ :title=>document.document_file_name, :rel => 'tooltip', :data => { :toggle=>"tooltip", :placement=>"top"} }
+                = excerpt document.document_file_name, '', :radius => 50
               %br
 
               %strong

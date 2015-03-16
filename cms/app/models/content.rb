@@ -1,8 +1,6 @@
 #encoding: utf-8
 class Content < ActiveRecord::Base
 
-  paginates_per 50
-
 
   has_many :content_elements, :dependent => :destroy
 

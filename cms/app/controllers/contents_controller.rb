@@ -211,7 +211,10 @@ class ContentsController < ApplicationController
       # puts @contents.to_sql
       # puts '+ + + + + + +'
 
-      @contents = @contents.page params[:page]
+
+      params[:size] = 50 unless params[:size]
+
+      @contents = @contents.page( params[:page]).per(params[:size])
 
     end
 

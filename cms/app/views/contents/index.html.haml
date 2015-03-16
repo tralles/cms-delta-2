@@ -91,10 +91,19 @@
                   = render :partial => 'content_actions', :locals => { :content => content }
 
 
+
+      .btn-group.pull-right
+        - [50, 100, 200, 500].each do |size|
+          = link_to params.merge(:size => size), :class => "btn btn-mini #{(params[:size].to_i == size) ? 'btn-primary' : 'btn-default'}" do
+            = size
+
       = paginate @contents
+
 
       - if @content_type
         - if current_user.admin? || Permission.is_stored?(current_user, @project, :create, @content_type.class.name, @content_type.id)
+          .clearfix
+          %hr
           = link_to new_project_content_type_content_path(@project, @content_type, params.merge(:branch => @branch)), :class => 'btn btn-mini btn-primary pull-right' do
             %i.fa.fa-plus
             &nbsp;
