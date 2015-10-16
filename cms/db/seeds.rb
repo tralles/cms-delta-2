@@ -9,7 +9,7 @@
 admin = User.create!({:email => "admin@your-domain.tld", :name => 'Admin', :surname => 'Superuser', :admin => true, :password => "initialp4ssword", :password_confirmation => "initialp4ssword" })
 
 languages = Constant.create!({ :category => 'languages', :name => 'Deutsch', :value => 'de', :art => 'String', :sys => true })
-languages = Constant.create!({ :category => 'languages', :name => 'Englisch', :value => 'en', :art => 'String', :sys => false })
+languages = Constant.create!({ :category => 'languages', :name => 'Englisch', :value => 'en', :art => 'String', :sys => true })
 
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Datum', :value => 'date', :art => 'Date', :sys => true })
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Uhrzeit', :value => 'time', :art => 'Text', :sys => true })

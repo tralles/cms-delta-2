@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301102309) do
+ActiveRecord::Schema.define(version: 20151005122035) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -272,7 +275,7 @@ ActiveRecord::Schema.define(version: 20150301102309) do
     t.integer  "project_id"
     t.string   "action"
     t.string   "subject_class"
-    t.string   "subject_id"
+    t.integer  "subject_id"
     t.boolean  "inverse"
     t.datetime "created_at"
     t.datetime "updated_at"

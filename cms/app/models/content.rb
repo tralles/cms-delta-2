@@ -206,7 +206,7 @@ class Content < ActiveRecord::Base
   def option(name, args = nil)
     ausgabe = nil
 
-    meta = YAML::load(self.content_type.meta)
+    meta = YAML::load(self.content_type.meta) if self.content_type.meta
 
     if meta && meta.send(name.to_sym)
       ausgabe = meta.send(name.to_sym)

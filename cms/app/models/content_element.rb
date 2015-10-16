@@ -135,7 +135,7 @@ class ContentElement < ActiveRecord::Base
 
     end
 
-    return ausgabe
+    return ausgabe ||= ''
 
   end
 
