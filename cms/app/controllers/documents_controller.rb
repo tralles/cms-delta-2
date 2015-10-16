@@ -128,7 +128,7 @@ class DocumentsController < ApplicationController
     def set_project
       @parent = Content.find(params[:content_id]) if params[:content_id]
       @parent = Branch.find(params[:branch_id]) if params[:branch_id]
-      @parent = params[:documentable_type].singularize.classify.constantize.find_by_id(params[:documentable_id]) if params[:documentable_type]
+      @parent = params[:documentable_type].singularize.classify.constantize.find_by_id(params[:documentable_id]) if params[:documentable_type] && params[:documentable_id] && params[:documentable_id].to_i > 0
     end
 
 end
