@@ -31,5 +31,13 @@ module Delta2
     config.generators do |g|
       g.template_engine :haml
     end
+
+    # Set up email
+    EMAIL = YAML.load(File.read(Rails.root.join("config", "email.yml")))[Rails.env]
+    config.action_mailer.raise_delivery_errors = true
+    config.action_mailer.default_url_options = EMAIL['default_url_options'].symbolize_keys
+    config.action_mailer.smtp_settings = EMAIL['smtp'].symbolize_keys
+    config.action_mailer.delivery_method = EMAIL['mode'].to_sym
+    config.action_mailer.asset_host = EMAIL['asset_host']
   end
 end
