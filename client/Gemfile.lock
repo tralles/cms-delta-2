@@ -55,7 +55,7 @@ GEM
       execjs
     coffee-script-source (1.8.0)
     daemons (1.1.9)
-    dalli (2.7.2)
+    dalli (2.7.4)
     debug_inspector (0.0.2)
     erubis (2.7.0)
     eventmachine (1.0.3)
