@@ -80,9 +80,9 @@ Delta2::Application.configure do
 
   config.middleware.use ExceptionNotification::Rack,
     :email => {
-      :email_prefix => "CMS|delta II : ",
-      :sender_address => %{"notifier" <no-reply@your-domain.tld>},
-      :exception_recipients => %w{webmaster@your-domain.tld}
+      :email_prefix => "SHMH: CMS|delta II : ",
+      :sender_address => %{"SHMH exception notifier" <no-reply@giantmonkey.de>},
+      :exception_recipients => %w{tralles@qb-it.de kontakt+shmh-cms@giantmonkey.de}
     }
 
   PAPERCLIP_COMMAND_PATH = "/usr/bin/"
