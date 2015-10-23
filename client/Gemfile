@@ -63,3 +63,4 @@ gem 'kaminari-bootstrap'
 
 
 gem 'dalli'
+gem 'exception_notification'
