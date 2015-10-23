@@ -118,12 +118,12 @@
           %li
             = link_to project_content_types_path(@project) do
               %i.pull-right.fa-fw.fa.fa-th-list
-              Inhalts Typen
+              Inhaltstypen
 
           %li
             = link_to project_content_relation_types_path(@project) do
               %i.pull-right.fa-fw.fa.fa-magnet
-              Inhalts Typen Relationen
+              Inhaltstypen Relationen
 
         - if current_user.admin? || can?(:renew, :cache)
           %li.divider

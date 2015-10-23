@@ -15,13 +15,13 @@
     %li
       = link_to project_content_types_path(@project) do
         %i.pull-right.fa-fw.fa.fa-th-list
-        Inhalts Typen
+        Inhaltstypen
         
       
     %li
       = link_to new_project_content_type_path(@project) do
         %i.pull-right.fa-fw.fa.fa-plus
-        Neuer Inhalts Typ
+        Neuer Inhaltstyp
       
     - if @content_type && !@content_type.new_record?
       %li.nav-header
