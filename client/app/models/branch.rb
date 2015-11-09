@@ -30,7 +30,7 @@ class Branch < ActiveRecord::Base
     elsif route = self.branch_routes.first
       return route
     else
-      return nil?
+      return nil
     end
   end
 
