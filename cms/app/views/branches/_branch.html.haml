@@ -3,16 +3,18 @@
 
 - if form && branch == form.object
   %strong 
-    = branch.route(@locale).name
+    = branch.route(@locale).try(:name)
 
   %small
     > kann nicht Unterpunkt zu sich oder seinen Unterpunkten sein …
     
 - else
-  = branch.route(@locale).name
+  - if branch.branch_routes.empty?
+    %i.fa.fa-fw.fa-exclamation-triangle
+  = branch.route(@locale).try(:name) || 'keine route'
   %small.muted
-    = branch.route(@locale).route
   
+    = branch.route(@locale).try(:route) || '/keine route'
 
 - unless form
   .btn-group.pull-right

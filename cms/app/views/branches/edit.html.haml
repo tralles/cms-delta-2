@@ -10,7 +10,7 @@
       %ul.breadcrumb
         - @branch.path.each do |branch|
           %li
-            = branch.route(@locale).name
+            = branch.route(@locale).try(:name)
             %span.divider
               %i.fa.fa-angle-right
 
