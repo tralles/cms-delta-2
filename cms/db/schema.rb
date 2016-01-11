@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150301102309) do
+ActiveRecord::Schema.define(version: 20160104123308) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -207,6 +207,7 @@ ActiveRecord::Schema.define(version: 20150301102309) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.text     "filenames"
+    t.boolean  "hidden",          default: false
   end
 
   add_index "contents", ["alpha_datum"], name: "index_contents_on_alpha_datum", using: :btree
