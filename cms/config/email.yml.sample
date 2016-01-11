@@ -1,0 +1,27 @@
+defaults: &DEFAULTS
+  mode: smtp
+  asset_host: delta-2.example.net
+  smtp:
+    address: ""
+    port: 25
+    user_name: ""
+    password: ""
+    authentication: plain
+    enable_starttls_auto: true
+  default_url_options:
+    host: delta-2.example.net
+
+development:
+  mode: letter_opener
+  smtp: {}
+  default_url_options:
+    host: delta-2.example.net
+
+production:
+  <<: *DEFAULTS
+
+staging:
+  <<: *DEFAULTS
+
+test:
+  <<: *DEFAULTS
