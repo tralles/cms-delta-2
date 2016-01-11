@@ -63,21 +63,29 @@
                       = l content.omega_datum
 
                 %td
-                  - unless content.branches.empty?
-                    %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.branches.map{ |b| b.route(@locale).name }.join("\n") }"  } }
-                      %i.fa.fa-sitemap.fa-fw
+                  %nobr
+                    - if content.hidden
+                      %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "hidden"  } }
+                        %i.fa.fa-fw.fa-eye-slash
+                    - else
+                      %strong.text-success{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "visible"  } }
+                        %i.fa.fa-fw.fa-eye
 
-                  - unless content.workspaces.empty?
-                    %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.workspaces.map{ |w| w.name }.join("\n") }"  } }
-                      %i.fa.fa-desktop.fa-fw
+                    - unless content.branches.empty?
+                      %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.branches.map{ |b| b.route(@locale).name }.join("\n") }"  } }
+                        %i.fa.fa-sitemap.fa-fw
 
-                  - if content.user
-                    %small.muted{ :title => l( content.updated_at ) }
-                      %i.fa.fa-lock.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.user.username }"  } }
+                    - unless content.workspaces.empty?
+                      %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.workspaces.map{ |w| w.name }.join("\n") }"  } }
+                        %i.fa.fa-desktop.fa-fw
 
-                  - if content.option(:dates)
-                    %small.muted{ :title => l( content.updated_at ) }
-                      %i.fa.fa-clock-o.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ l content.updated_at }"  } }
+                    - if content.user
+                      %small.muted{ :title => l( content.updated_at ) }
+                        %i.fa.fa-lock.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.user.username }"  } }
+
+                    - if content.option(:dates)
+                      %small.muted{ :title => l( content.updated_at ) }
+                        %i.fa.fa-clock-o.fa-fw{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ l content.updated_at }"  } }
 
                 - unless @content_type
                   %td= content.content_type.name

@@ -1,11 +1,12 @@
-- if @content.option(:ref) || @content.option(:alpha) || @content.option(:omega)
+- if @content.option(:ref) || @content.option(:hidden) || @content.option(:alpha) || @content.option(:omega) || @content.option(:dates)
   %fieldset
     %legend
       Metadaten
-        
+
     %options
       .form-inputs
         = f.input :ref_id                             , :input_html => { :class => 'input-block-level' }    if @content.option(:ref)
-        = f.input :alpha_datum, :include_blank => true, :input_html => { :class => 'input-block-level' }    if @content.option(:alpha)
-        = f.input :omega_datum, :include_blank => true, :input_html => { :class => 'input-block-level' }    if @content.option(:omega)
+        = f.input :hidden                             , :input_html => { :class => 'input-block-level' }    if @content.option(:hidden)
+        = f.input :alpha_datum, :include_blank => true, :input_html => { :class => 'input-datetime' }    if @content.option(:alpha) || @content.option(:dates)
+        = f.input :omega_datum, :include_blank => true, :input_html => { :class => 'input-datetime' }    if @content.option(:omega) || @content.option(:dates)
   %br
