@@ -12,6 +12,7 @@ class Document < ActiveRecord::Base
     :styles => {
       :thumb => ["50x50#", :png],
       :icon => ["100x100#", :png],
+      :square => ["400x400#", :png],
       :preview => ["200x200>", :png],
       :normal => ["640x400>", :png],
       :popup => ["800x600>", :png]
