@@ -14,7 +14,7 @@
         - if @branch
           %strong
             %i.fa.fa-double-angle-right
-            = @branch.route(@locale).name
+            = @branch.route(@locale).try(:name)
 
 
 
@@ -72,7 +72,7 @@
                         %i.fa.fa-fw.fa-eye
 
                     - unless content.branches.empty?
-                      %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.branches.map{ |b| b.route(@locale).name }.join("\n") }"  } }
+                      %strong.muted{ :rel => "tooltip", :data => {:toggle=>"tooltip", :placement=>"top", :original_title => "#{ content.branches.map{ |b| b.route(@locale).try(:name) || 'keine route' }.join("\n") }"  } }
                         %i.fa.fa-sitemap.fa-fw
 
                     - unless content.workspaces.empty?

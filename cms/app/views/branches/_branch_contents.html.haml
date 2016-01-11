@@ -1,8 +1,8 @@
 - if branch.contents.include?(@content)
   %strong
-    = branch.route(@locale).name
+    = branch.route(@locale).try(:name)
 - else
-  = branch.route(@locale).name
+  = branch.route(@locale).try(:name)
 
 - if @content_type && branch.content_types.include?(@content_type)
   .pull-right.metaline
