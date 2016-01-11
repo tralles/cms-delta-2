@@ -172,7 +172,7 @@ class Content < ActiveRecord::Base
     repraesentant = ''
     self.content_elements.where('content_elements.language = ?', language).each do |ce|
       trenner = (repraesentant.empty?) ? '' : ' : '
-      repraesentant = repraesentant + trenner + ce.deep_value if ce.content_element_type.badge
+      repraesentant = repraesentant + trenner + ce.deep_value.to_s if ce.content_element_type.badge
     end
 
     repraesentant
@@ -206,10 +206,12 @@ class Content < ActiveRecord::Base
   def option(name, args = nil)
     ausgabe = nil
 
-    meta = YAML::load(self.content_type.meta)
+    if self.content_type.meta.present?
+      meta = YAML::load(self.content_type.meta)
 
-    if meta && meta.send(name.to_sym)
-      ausgabe = meta.send(name.to_sym)
+      if meta && meta.send(name.to_sym)
+        ausgabe = meta.send(name.to_sym)
+      end
     end
 
     return ausgabe
