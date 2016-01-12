@@ -41,12 +41,12 @@
                 %small
                   %ul.nav.nav-stacked
                     - document.documentables.each do |documentable|
-                      - if documentable.documentable_type == 'Content'
+                      - if documentable.documentable_type == 'Content' && documentable.parent
                         %li
                           = link_to [documentable.parent.project, documentable.parent] do
                             %i.fa-fw.fa.fa-file-text
                             = documentable.parent.rep(@locale)
-                      - elsif documentable.documentable_type == 'Branch'
+                      - elsif documentable.documentable_type == 'Branch' && documentable.parent
                         %li
                           = link_to edit_project_branch_path(documentable.parent.project, documentable.parent) do
                             %i.fa-fw.fa.fa-sitemap
