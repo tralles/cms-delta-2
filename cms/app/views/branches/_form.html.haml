@@ -81,7 +81,7 @@
         .pull-right
           = link_to new_project_templatable_path(@project, :templatable_type => @branch.class.name, :templatable_id => @branch.id), :remote => true, :class => 'btn btn-mini btn-success' do
             %i.fa.fa-plus
-            Template Hinzufügen
+            Template hinzufügen
 
   - unless @branch.new_record?
     - @parent = @branch
