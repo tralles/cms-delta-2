@@ -4,6 +4,7 @@ cms/public/uploads
 cms/vendor/bundle
 
 cms/config/database.yml
+cms/config/email.yml
 cms/config/secrets.yml
 cms/config/initializers/secret_token.rb
 cms/config/initializers/mailer.rb
