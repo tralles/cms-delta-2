@@ -7,7 +7,7 @@
     = link_to project_content_type_contents_path( @project, @content_type, params.merge(:branch => branch) ) do
       - if branch.branch_routes.empty?
         %i.fa.fa-fw.fa-exclamation-triangle
-      branch.route(@locale).try(:name)
+      = branch.route(@locale).try(:name)
   - elsif @content_type.nil?
     = link_to project_contents_path( @project, params.merge(:branch => branch) ) do
       - if branch.branch_routes.empty?
