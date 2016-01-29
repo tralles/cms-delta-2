@@ -20,6 +20,7 @@ client/public/uploads
 client/vendor/bunlde
 
 client/config/database.yml
+client/config/email.yml
 client/config/secrets.yml
 client/config/initializers/mailer.rb
 client/config/initializers/secret_token.rb
