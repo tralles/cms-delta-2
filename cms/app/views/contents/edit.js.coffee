@@ -21,6 +21,12 @@ $(".timepicker").timepicker
   defaultTime: false
   minuteStep: 15
 
+$('.datetimepicker').datetimepicker
+  format: 'yyyy-mm-dd hh:ii'
+  weekStart: 1
+  todayHighlight: true
+  language: 'de'
+
 $(".typeahead").typeahead()
 $("#contentrelationwindow form").on "submit", ->
   allok = true
