@@ -4,28 +4,21 @@ module ContentsHelper
 
   def cetform content, content_element_type
 
-      ausgabe   = ''
+    ausgabe   = ''
+    value     = ''
+    css       = ''
 
-      value     = ''
-      css       = ''
+    identifier = "content_elements[add][#{content_element_type.id}]"
 
-      identifier = "content_elements[add][#{content_element_type.id}]"
-
-      ce = content.value(content_element_type.id, @locale)
-      if ce
-        identifier = "content_elements[update][#{ce.id}]"
-        value = ce.value
-      end
-
-
-
-
+    ce = content.value(content_element_type.id, @locale)
+    if ce
+      identifier = "content_elements[update][#{ce.try(:id)}]"
+      value = ce.try(:value) || ''
+        value.strip!
+    end
 
     css << ' inline_documents' if content_element_type.inline_documents
-
     css << ' required' if content_element_type.mandatory
-
-
 
     case content_element_type.simple_form
       when 'ContentType'
@@ -92,9 +85,11 @@ module ContentsHelper
       when 'time'
         ausgabe = raw "<div class='input-append time'>#{ text_field_tag identifier, value, :class =>  "span2 timepicker#{css}" }<span class='add-on muted'>#{Time.zone.now.strftime('%H:%M')}</span></div>"
 
+      when 'date_time'
+        ausgabe = text_field_tag identifier, value, :class =>  "input-block-level datetimepicker", 'data-format'=>"yyyy-MM-dd hh:mm", 'data-date'=>"#{value}"
 
       else
-        ausgabe = text_field_tag identifier, value, :class =>  "input-block-level#{css}"
+        ausgabe = text_field_tag( identifier, value, :class =>  "input-block-level")
 
 
     end
