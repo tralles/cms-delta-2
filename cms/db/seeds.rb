@@ -13,6 +13,7 @@ languages = Constant.create!({ :category => 'languages', :name => 'Englisch', :v
 
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Datum', :value => 'date', :art => 'Date', :sys => true })
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Uhrzeit', :value => 'time', :art => 'Text', :sys => true })
+fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Datetime', :value => 'date_time', :art => 'Text', :sys => true })
 
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Ziel-Inhaltstyp (matches intern)', :value => 'ContentType', :art => 'reference', :sys => true })
 fields = Constant.create!({ :category => 'fields', :name => 'Auswahl : Konstante (matches intern)', :value => 'Constant', :art => 'reference', :sys => true })
