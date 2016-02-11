@@ -11,12 +11,10 @@ jQuery ->
       calendarWeeks: true
       language: "de"
 
-    
     $(".timepicker").timepicker
       showMeridian: false
       template: false
       showInputs: false
       defaultTime: false
       minuteStep: 15
-
 
