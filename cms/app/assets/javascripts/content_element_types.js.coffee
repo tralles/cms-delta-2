@@ -11,7 +11,6 @@ jQuery ->
       calendarWeeks: true
       language: "de"
 
-    
     $(".timepicker").timepicker
       showMeridian: false
       template: false
@@ -19,4 +18,8 @@ jQuery ->
       defaultTime: false
       minuteStep: 15
 
-
+    $('.datetimepicker').datetimepicker
+      format: 'yyyy-mm-dd hh:ii'
+      weekStart: 1
+      todayHighlight: true
+      language: 'de'

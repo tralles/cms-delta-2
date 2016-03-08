@@ -10,9 +10,7 @@ class ContentElementType < ActiveRecord::Base
 
   def simple_form
 
-    unless ausgabe = Constant.fields(:id => self.field_type).value
-      ausgabe = 'textfield'
-    end
+    ausgabe = Constant.fields(:id => self.field_type).try(:value) || self.field_type || 'textfield'
 
     return ausgabe
   end

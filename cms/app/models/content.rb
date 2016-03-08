@@ -47,7 +47,7 @@ class Content < ActiveRecord::Base
 
 
   def value content_element_type, language
-    self.content_elements.where('content_elements.content_element_type_id = ?', content_element_type).where('content_elements.language = ?', language).first
+    self.content_elements.where('content_elements.content_element_type_id = ?', content_element_type).where('content_elements.language = ?', language).first || ''
   end
 
 
