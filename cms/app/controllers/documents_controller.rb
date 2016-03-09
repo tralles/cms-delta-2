@@ -28,7 +28,7 @@ class DocumentsController < ApplicationController
 
       if @document.save
 
-        @document.documentables.create( :documentable_type => params[:documentable_type], :documentable_id => params[:documentable_id], :project => @project ) if params[:documentable_type] && params[:documentable_id] && params[:documentable_id].to_i != 0
+        @document.documentables.create( :documentable_type => params[:documentable_type], :documentable_id => params[:documentable_id], :project => @project ) if params[:documentable_type] && params[:documentable_id].to_i != 0
 
         render json: {:success => true, :src => @document.document.url(:thumb)}
       else
