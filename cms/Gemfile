@@ -106,4 +106,4 @@ gem 'ensure_valid_encoding'
 
 gem "rails-erd"
 
-gem 'newrelic_rpm', group: :new_relic
+gem 'newrelic_rpm'
