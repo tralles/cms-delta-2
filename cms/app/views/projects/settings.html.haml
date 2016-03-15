@@ -1,11 +1,11 @@
 .container
   .row
     .span3
-      = render 'menu'     
+      = render 'menu'
 
     .span9
 
-      %h1 
+      %h1
         %i.fa.fa-fw.fa-leaf
         &nbsp;
         = @project.name.html_safe
@@ -15,14 +15,14 @@
 
 
 
-      
+
       = simple_form_for(@project, html: {class: 'form-horizontal' }) do |f|
         %fieldset
           %legend
             %i.fa.fa-gear
             &nbsp;
             Basics
-      
+
           .row
             .span5
               = f.input :name           if permitted_params.project_attributes.include?(:name)
@@ -34,7 +34,7 @@
 
             .span4
               - if permitted_params.project_attributes.include?(:analytics)
-                .alert.alert-info                
+                .alert.alert-info
                   %strong
                     Hinweis
                   %p
@@ -44,18 +44,18 @@
 
         %br
         %br
-  
+
         %fieldset
           %legend
             %i.fa.fa-flag
             &nbsp;
             Internationalisierung
-  
+
           = hidden_field_tag "project[languages][]"
           .row
             .span5
               - Constant.languages.each do |lng|
-                .control-group            
+                .control-group
                   = label_tag '', 'Sprachen', :class => 'control-label'
                   .controls
                     %label
@@ -65,24 +65,24 @@
                       &nbsp;
                       = lng.name
             .span4
-              .alert.info                
+              .alert.info
                 %i.fa.fa-warning-sign.fa.fa-4x.pull-right
                 %strong
                   Achtung
                 %p
                   Wenn Sie Sprachen entfernen, bleiben die Texte in der Sprache bestehen, sind aber nicht mehr bearbeitbar!
-  
+
         .form-actions
           = f.submit 'Speichern', :class => 'btn btn-primary', :data => { :disable_with => 'Übertrage Daten ...' }
           = link_to @project, :class => 'btn btn-inverse pull-right' do
             Abbrechen
-          
-          
-            
-        
+
+
+
+
         %br
         %br
-        
+
       %fieldset
         %legend
           %i.fa.fa-cloud
@@ -91,18 +91,18 @@
 
         #hosts
           = render 'hosts/index'
-          
+
 
 
         = link_to new_project_host_path(@project), :class => 'btn btn-primary btn-mini pull-right', :remote => true do
           %i.fa.fa-plus
           &nbsp;
           Neuen Host anlegen
-            
-        
+
+
         %br
         %br
-        
+
       %fieldset
         %legend
           %i.fa.fa-cogs
@@ -111,7 +111,7 @@
 
         #hosts
           = render 'constants/project_index'
-          
+
 
 
         = link_to new_project_constant_path(@project), :class => 'btn btn-primary btn-mini pull-right' do
