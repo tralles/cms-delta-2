@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160104123308) do
+ActiveRecord::Schema.define(version: 20160308190359) do
 
   create_table "branch_routes", force: true do |t|
     t.integer  "branch_id"
@@ -99,7 +99,7 @@ ActiveRecord::Schema.define(version: 20160104123308) do
     t.integer  "content_id"
     t.integer  "content_element_type_id"
     t.string   "language"
-    t.text     "value"
+    t.text     "value",                   limit: 16777215
     t.integer  "status"
     t.datetime "created_at"
     t.datetime "updated_at"
