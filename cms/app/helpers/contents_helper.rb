@@ -11,7 +11,7 @@ module ContentsHelper
     identifier = "content_elements[add][#{content_element_type.id}]"
 
     ce = content.value(content_element_type.id, @locale)
-    if ce
+    if ce.try(:id)
       identifier = "content_elements[update][#{ce.try(:id)}]"
       value = ce.try(:value) || ''
         value.strip!
