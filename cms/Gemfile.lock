@@ -257,7 +257,7 @@ DEPENDENCIES
   kramdown
   meta_request
   morrisjs-rails
-  mysql2
+  mysql2 (~> 0.3.18)
   newrelic_rpm
   paper_trail (~> 3.0.2)
   paperclip
