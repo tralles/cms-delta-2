@@ -68,6 +68,8 @@ class DocumentsController < ApplicationController
   def search
     @documents = @project.documents.finder(params[:search]).doctype(params[:doctype])
 
+    @parent = params[:parent_type].singularize.classify.constantize.find_by_id(params[:parent_id]) if params[:parent_type] && params[:parent_id]
+
     if @parent
       @documents = @documents - @parent.documents
       @documents = Kaminari.paginate_array(@documents).page(params[:page]).per(10)
