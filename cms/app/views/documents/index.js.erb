@@ -1,7 +1,12 @@
-$("#mmw").remove();
+if($('#mbm').length > 0) {
+  $('#mbm .modal-body').html('<%= j( render :partial => 'documents/popover' ) %>');
+}
+else {
+  $("body").append('<div id="mbm" class="modal hide fade"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button><h3>Medienbibliothek</h3></div><div class="modal-body" style="max-height: 720px;"><%= j( render :partial => 'documents/popover' ) %></div></div>');
+}
 
-$("body").append('<div id="mmw" title="Medienbibliothek"><%= j( render :partial => 'documents/popover' ) %></div>');
-
-$("#mmw").dialog( { width: 600 });
+if( !$('#mbm').hasClass('in') ) {
+  $("#mbm").modal( );
+}
 
 NProgress.done();
