@@ -14,12 +14,13 @@
 
 .clearfix
 
-%table.table.table-condensed.table-bordered.table-striped
+%table.table.table-condensed.table-hover
   - @documents.each do |document|
     %tr.fxline{ :id => "document#{document.id}" }
       %td{ :width => 50 }
         = image_tag document.document.url(:thumb)
-
+      %td
+        = "[img:#{document.id}]"
       %td
         %strong
           = document.filetype
@@ -28,12 +29,13 @@
         %br
         = number_to_human_size document.document_file_size
       %td
-        - if @parent && @parent.class.name == 'Content'
-          = link_to assign_project_content_document_path(@project, @parent, document), :remote => true, :class => 'btn btn-mini' do
-            Übernehmen
-        - elsif @parent && @parent.class.name == 'Branch'
-          = link_to assign_project_branch_document_path(@project, @parent, document), :remote => true, :class => 'btn btn-mini' do
-            Übernehmen
+        .pull-right
+          - if @parent && @parent.class.name == 'Content'
+            = link_to assign_project_content_document_path(@project, @parent, document), :remote => true, :class => 'btn btn-mini' do
+              Übernehmen
+          - elsif @parent && @parent.class.name == 'Branch'
+            = link_to assign_project_branch_document_path(@project, @parent, document), :remote => true, :class => 'btn btn-mini' do
+              Übernehmen
 
 
 = paginate @documents , :remote => true
