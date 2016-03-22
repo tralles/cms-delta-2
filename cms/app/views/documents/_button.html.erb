@@ -1,6 +1,5 @@
 <% if can?(:create, :documents) %>
   <div id="bootstrapped-fine-uploader"></div>
-  <% content_for :scripts do %>
     <%= javascript_tag do %>
       var fileCount = 0;
       var addedFiles = 0;
@@ -74,5 +73,4 @@
 
       });
     <% end %>
-  <% end %>
 <% end %>
