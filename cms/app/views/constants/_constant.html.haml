@@ -9,12 +9,12 @@
         %button.btn.btn-mini{ :disabled => 'disabled' }
           %i.fa.fa-cogs
           System-Konstante
-      
+
       - else
         = link_to edit_constant_path(constant), :class => 'btn btn-mini btn-success' do
           %i.fa.fa-edit
           Bearbeiten
-      
+
         = link_to constant, :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.constant') }, :class => 'btn btn-mini btn-danger' do
           %i.fa.fa-trash-o
           Löshen
