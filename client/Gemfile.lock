@@ -58,7 +58,7 @@ GEM
     dalli (2.7.4)
     debug_inspector (0.0.2)
     erubis (2.7.0)
-    eventmachine (1.0.3)
+    eventmachine (1.2.0.1)
     exception_notification (4.0.1)
       actionmailer (>= 3.0.4)
       activesupport (>= 3.0.4)
