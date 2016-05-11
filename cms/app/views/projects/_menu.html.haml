@@ -139,6 +139,7 @@
         &nbsp;
         Projektübersicht
 
+    - if current_user.admin?
       %li
         = link_to new_project_path do
           %i.fa.fa-plus.pull-right
