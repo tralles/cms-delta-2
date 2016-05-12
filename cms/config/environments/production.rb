@@ -84,6 +84,4 @@ Delta2::Application.configure do
       :sender_address => %{"notifier" <no-reply@your-domain.tld>},
       :exception_recipients => %w{webmaster@your-domain.tld}
     }
-
-  PAPERCLIP_COMMAND_PATH = "/usr/bin/"
 end
