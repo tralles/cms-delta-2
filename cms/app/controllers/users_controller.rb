@@ -6,7 +6,7 @@ class UsersController < ApplicationController
   def new
     @user = User.new
   end
-  
+
   def create
     @user = User.new(permitted_params.user)
 
@@ -20,14 +20,14 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
   def update
     
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
         params[:user].delete(:password)
         params[:user].delete(:password_confirmation)
-    end    
-    
+    end
+
     respond_to do |format|
       if @user.update(permitted_params.user)
         sign_in(@user, :bypass => true) if @user == current_user
