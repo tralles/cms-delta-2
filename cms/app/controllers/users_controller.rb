@@ -1,8 +1,7 @@
 class UsersController < ApplicationController
-
   before_filter :findUser, :only => [:show, :edit, :update]
+  before_action :admin_user,     only: [:destroy, :show, :create, :new, :index]
 
-  
   def new
     @user = User.new
   end
@@ -70,6 +69,12 @@ class UsersController < ApplicationController
   
   
 private
+
+  # Confirms an admin user.
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+    flash[:notice] = "Fehlende Administratorenrechte"
+  end
 
   def findUser
     if current_user.admin?
