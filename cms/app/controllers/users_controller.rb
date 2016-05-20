@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   before_filter :findUser, :only => [:show, :edit, :update]
-  before_action :admin_user,     only: [:destroy, :show, :create, :new, :index]
+  before_action :admin_user, only: [:destroy, :show, :create, :new, :index]
 
   def new
     @user = User.new
@@ -45,9 +45,8 @@ class UsersController < ApplicationController
     end
   end
 
-  
-  
-  def index 
+
+  def index
 
     @search = User.search(params[:q])
     @users  = @search.result(distinct: true)    
@@ -65,8 +64,7 @@ class UsersController < ApplicationController
     
     redirect_to root_path
   end
-  
-  
+
   
 private
 
