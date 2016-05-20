@@ -1,8 +1,5 @@
 class Ability
   include CanCan::Ability
-  
-
-  def initialize(user)
 
   def initialize(user)
     user ||= User.new # guest user (not logged in)
@@ -11,7 +8,8 @@ class Ability
     else
       can :read, :all
     end
-  end  
+  end
+end
 
 
 ##  def initialize(user)
