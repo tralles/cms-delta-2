@@ -71,7 +71,8 @@ private
   # Confirms an admin user.
   def admin_user
     redirect_to(root_url) unless current_user.admin?
-    flash[:notice] = "Fehlende Administratorenrechte"
+    if !current_user.admin then flash[:notice] = t('unauthorized.manage.user')
+    end
   end
 
   def findUser
