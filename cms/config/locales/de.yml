@@ -28,7 +28,7 @@ de:
     delete:
       title: 'Datensatz löschen'
       branch_route: 'Soll diese Route wirklich gelöscht werden?'
-      user: 'Soll dieser User wirklich gelöscht werden?'
+      user: 'Soll dieser Benutzer wirklich gelöscht werden?'
       project: 'Soll dieses Projekt und alle seine Daten wirklich gelöscht werden?'
       permission: 'Soll diese Berechtigung wirklich entfernt werden?'
       host: 'Soll dieser host wirklich gelöscht werden? Die Webseite ist dann unter der URL nicht mehr erreichbar.'
@@ -46,7 +46,7 @@ de:
   activerecord:
 
     models:
-      user: 'User'
+      user: 'Benutzer'
       branch: 'Menüpunkt'
       content: 'Inhalt'
       content_type: 'Inhaltstyp'
@@ -116,7 +116,7 @@ de:
           attributes:
             nickname:
               blank: 'Du musste einen Nicknamen angeben.'
-              taken: 'Es gibt schon einen User mit diesem Nicknamen.'
+              taken: 'Es gibt schon einen Benutzer mit diesem Namen.'
 
             email:
               blank: 'Du musste eine E-Mail angeben.'
