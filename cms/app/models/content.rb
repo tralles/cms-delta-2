@@ -122,7 +122,7 @@ class Content < ActiveRecord::Base
               dst_file_name = "#{dst_dir_name}#{File.basename(src_file_name)}"
 
 
-              command_line = Cocaine::CommandLine.new( "#{PAPERCLIP_COMMAND_PATH}convert", "#{src_file_name} -resize #{width} #{dst_file_name}" )
+              command_line = Cocaine::CommandLine.new( "convert", "#{src_file_name} -resize #{width} #{dst_file_name}" )
 
               begin
                 command_line.run
