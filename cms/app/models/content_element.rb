@@ -76,7 +76,8 @@ class ContentElement < ActiveRecord::Base
     align = false if align == 'none'
   
     if document = Document.where('documents.id = ?', id).first
-  
+      documentable = self.content.documentables.where(document_id: document.id).first
+
       case document.document_content_type
         when /\Aimage/
           alt     = ''
@@ -90,10 +91,10 @@ class ContentElement < ActiveRecord::Base
             width = document.width
           end
           # siehe Client
-          doc = "<img src=\"#{url}\" alt=\"#{alt}\" width=\"#{width}\" data-popup=\"#{popup}\" #{' class="img'+align+'" ' if align } >"
+          doc = "<img src=\"#{url}\" alt=\"#{alt}\" max-width=\"100%\" width=\"#{width}\" data-popup=\"#{popup}\" #{' class="img-responsive '+align+'" ' if align } >"
   
         when /\Aapplication\/pdf\z/
-          alt = '&darr; PDF download'
+          alt = "&darr; #{documentable.try(:title) || 'PDF download'}"
   
           doc = "<a title=\"#{alt}\" href=\"#{document.document.url(:original)}\" type=\"application/pdf\"><strong>#{alt}</strong> (#{ number_to_human_size( document.document_file_size) })</a>"              
         else
