@@ -2,7 +2,7 @@ class ProjectsController < ApplicationController
 
   before_filter :authenticate_user!
   before_action :set_project, except: [:index, :new, :create]
-
+  before_action :admin_user, only: [:new, :create]
   # GET /projects
   # GET /projects.json
   def index
@@ -104,6 +104,12 @@ class ProjectsController < ApplicationController
 
 
   private
+    # Confirms an admin user.
+    def admin_user
+      redirect_to(root_url) unless current_user.admin?
+      if !current_user.admin then flash[:notice] = t('unauthorized.manage.project')
+      end
+    end
     # Use callbacks to share common setup or constraints between actions.
     def set_project
 
