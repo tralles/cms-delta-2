@@ -1,33 +1,32 @@
 .container
   .row
     .span3
-      = render 'menu'  
-      
+      = render 'menu'
+
 
     .span9
 
       %h1 Projektübersicht
-      
+
       %table.table.table-condensed.table-striped.table-bordered.table-hover
         %tr
           %th{ :colspan => 2 }
             Projekt
           - if current_user.admin?
             %th{width: 100} Action
-      
+
         - @projects.each do |project|
           %tr
             %td= link_to project.name.html_safe, project_path(project)
             %td= project.description
-            
+
             - if current_user.admin?
               %td
                 .btn-group
                   = link_to edit_project_path(project), :class => 'btn btn-mini btn-success' do
                     %i.fa.fa-edit
                     Bearbeiten
-                  
+
                   = link_to project_path(project), :method => :delete, :title => t('confirmation.delete.title'), :data => { :confirm => t('confirmation.delete.project') }, :class => 'btn btn-mini btn-danger' do
                     %i.fa.fa-trash-o
                     Löschen
-            
