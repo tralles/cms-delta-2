@@ -1,30 +1,36 @@
 
 %h1
   &nbsp;
+- if current_user.admin?
+  .well.navi
+    %ul.nav.nav-list
+      - if @user && !@user.new_record?
+        %li.nav-header
+          %thin.pull-right.muted
+            ID
+            = @user.id
+          = @user.email
 
-.well.navi
-  %ul.nav.nav-list
-    - if @user && !@user.new_record?
-      %li.nav-header
-        %thin.pull-right.muted
-          ID
-          = @user.id
-        = @user.email
-      %li
-        = link_to @user do
-          %i.fa.fa-user.pull-right
-          Anzeigen
-            
-      %li
-        = link_to edit_user_path(@user) do
-          %i.fa.fa-edit.pull-right
-          Bearbeiten
-  
-    - if current_user.admin?
-      %li.nav-header
-        Administration
-        
-      %li
-        = link_to new_user_path do
-          %i.fa.fa-plus.pull-right
-          User anlegen
+        %li
+          = link_to @user do
+            %i.fa.fa-user.pull-right
+            Benutzer
+
+        %li
+          = link_to edit_user_path(@user) do
+            %i.fa.fa-edit.pull-right
+            Bearbeiten
+
+      - if current_user.admin?
+        %li.nav-header
+          Administration
+
+        %li
+          = link_to new_user_path do
+            %i.fa.fa-plus.pull-right
+            Benutzerkonto anlegen
+
+          = link_to users_path do
+            %i.fa.fa-user.pull-right
+            Alle Benutzer anzeigen
+

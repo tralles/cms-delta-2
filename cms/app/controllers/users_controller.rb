@@ -1,12 +1,11 @@
 class UsersController < ApplicationController
-
   before_filter :findUser, :only => [:show, :edit, :update]
+  before_action :admin_user, only: [:destroy, :show, :create, :new, :index]
 
-  
   def new
     @user = User.new
   end
-  
+
   def create
     @user = User.new(permitted_params.user)
 
@@ -20,14 +19,20 @@ class UsersController < ApplicationController
       end
     end
   end
-  
+
+  def destroy
+    User.find(params[:id]).destroy
+    flash[:success] = "User deleted"
+    redirect_to users_url
+  end
+
   def update
     
     if params[:user][:password].blank? && params[:user][:password_confirmation].blank?
         params[:user].delete(:password)
         params[:user].delete(:password_confirmation)
-    end    
-    
+    end
+
     respond_to do |format|
       if @user.update(permitted_params.user)
         sign_in(@user, :bypass => true) if @user == current_user
@@ -40,9 +45,8 @@ class UsersController < ApplicationController
     end
   end
 
-  
-  
-  def index 
+
+  def index
 
     @search = User.search(params[:q])
     @users  = @search.result(distinct: true)    
@@ -60,10 +64,16 @@ class UsersController < ApplicationController
     
     redirect_to root_path
   end
-  
-  
+
   
 private
+
+  # Confirms an admin user.
+  def admin_user
+    redirect_to(root_url) unless current_user.admin?
+    if !current_user.admin then flash[:notice] = t('unauthorized.manage.user')
+    end
+  end
 
   def findUser
     if current_user.admin?

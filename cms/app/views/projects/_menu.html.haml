@@ -139,11 +139,11 @@
         &nbsp;
         Projektübersicht
 
-    - if current_user.admin?
-      %li
-        = link_to new_project_path do
-          %i.fa.fa-plus.pull-right
-          Projekt anlegen
+      - if current_user.admin?
+        %li
+          = link_to new_project_path do
+            %i.fa.fa-plus.pull-right
+            Projekt anlegen
 
       - current_user.projects.each do |project|
         %li
