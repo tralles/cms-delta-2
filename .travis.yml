@@ -5,5 +5,8 @@ rvm:
  - jruby
  - rbx-2
 # uncomment and edit the following line if your project needs to run something other than `rake`:
-script: cd cms && bundle install && exec rails c
+script:
+cd cms
+bundle install
+exec rails c
 
