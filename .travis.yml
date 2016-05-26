@@ -1,10 +1,11 @@
 language: ruby
 rvm:
- - 2.1
- - 2.2
- - jruby-9.0.0.0
- - jruby
- - rbx-2
+   - 2.0
+   - 2.1
+   - 2.2
+   - jruby-9.0.0.0
+   - jruby
+   - rbx-2
 
  env:
    - "SUITE=units       DB=postgresql"
@@ -22,16 +23,16 @@ rvm:
      fi
    - "sudo apt-get update -qq"
    - "sudo apt-get --no-install-recommends install bzr cvs git mercurial subversion"
-
-   # uncomment and edit the following line if your project needs to run something other than `rake`:
-   script:
-   cd cms
-   @@ -38,6 +46,6 @@ script:
-      - "RUN_ON_NOT_OFFICIAL='' RUBY_VER=1.9 BRANCH=trunk bundle exec rake config/database.yml"
-      - "bundle install"
-      - export TEST_SUITE=${SUITE}
-      - "JRUBY_OPTS=-J-Xmx1024m bundle exec rake ci"
-      - JRUBY_OPTS='-J-Xmx1024m -J-XX:MaxPermSize=1024m' bundle exec rake ci
-    notifications:
-      email: false
-   exec rails c
+ script:
+...	...
+@@ -38,6 +46,6 @@ script:
+   - cd cms
+   - "RUN_ON_NOT_OFFICIAL='' RUBY_VER=1.9 BRANCH=trunk bundle exec rake config/database.yml"
+   - "bundle install"
+   - export TEST_SUITE=${SUITE}
+   - "JRUBY_OPTS=-J-Xmx1024m bundle exec rake ci"
+   - JRUBY_OPTS='-J-Xmx1024m -J-XX:MaxPermSize=1024m' bundle exec rake ci
+   - exec rails c
+ notifications:
+   email: false
+...	...
