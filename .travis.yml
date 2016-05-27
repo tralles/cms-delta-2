@@ -25,7 +25,7 @@ script:
    - bundle install
    - cp config/email.yml.sample config/email.yml
    - cp config/database.yml.sample config/database.yml
-   - cp config/secrets.yml.sampl config/secrets.yml
+   - cp config/secrets.yml.sample config/secrets.yml
    - "JRUBY_OPTS=-J-Xmx1024m bundle exec rails c"
    - JRUBY_OPTS='-J-Xmx1024m -J-XX:MaxPermSize=1024m' bundle exec rails c
    - bundle exec rails c
