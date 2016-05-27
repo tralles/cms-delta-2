@@ -24,11 +24,11 @@ env:
 
 script:
    - cd cms
+   - bundle install
    - "RUN_ON_NOT_OFFICIAL='' RUBY_VER=1.9 BRANCH=trunk bundle exec rails c config/database.yml"
-   - "bundle install"
    - export TEST_SUITE=${SUITE}
    - "JRUBY_OPTS=-J-Xmx1024m bundle exec rails c"
    - JRUBY_OPTS='-J-Xmx1024m -J-XX:MaxPermSize=1024m' bundle exec rails c
-   - exec rails c
+   - bundle exec rails c
 notifications:
    email: false
