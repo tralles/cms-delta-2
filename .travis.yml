@@ -18,15 +18,12 @@ env:
        rvm get master ;
        rvm use ${TRAVIS_RUBY_VERSION} --install ;
        ruby --version ;
-     fi
-  - "sudo apt-get update -qq"
-  - "sudo apt-get --no-install-recommends install bzr cvs git mercurial subversion"
-
+    fi
+  
 script:
    - cd cms
    - bundle install
-   - "RUN_ON_NOT_OFFICIAL='' RUBY_VER=1.9 BRANCH=trunk bundle exec rails c config/database.yml"
-   - export TEST_SUITE=${SUITE}
+   - cp config/email.yml.sample config/email.yml
    - "JRUBY_OPTS=-J-Xmx1024m bundle exec rails c"
    - JRUBY_OPTS='-J-Xmx1024m -J-XX:MaxPermSize=1024m' bundle exec rails c
    - bundle exec rails c
