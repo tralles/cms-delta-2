@@ -1,13 +1,13 @@
 language: ruby
 rvm:
-   - 2.0
-   - 2.1
-   - 2.2
-   - jruby-9.0.0.0
-   - jruby
-   - rbx-2
+- 2.0
+- 2.1
+- 2.2
+- jruby-9.0.0.0
+- jruby
+- rbx-2
 
- env:
+env:
    - "SUITE=units       DB=postgresql"
 ...	...
 @@ -27,6 +28,13 @@ matrix:
