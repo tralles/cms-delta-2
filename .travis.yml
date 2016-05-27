@@ -24,7 +24,7 @@ script:
    - cd cms
    - bundle install
    - cp config/email.yml.sample config/email.yml
-   - "JRUBY_OPTS=-J-Xmx1024m bundle exec rails c"
+   - "JRUBY_OPTS=-J-Xmx1024m bundle exec rake ci"
    - JRUBY_OPTS='-J-Xmx1024m -J-XX:MaxPermSize=1024m' bundle exec rails c
    - bundle exec rails c
 notifications:
