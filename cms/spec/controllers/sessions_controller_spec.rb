@@ -1,5 +1,5 @@
 require 'rails_helper'
-
+require 'byebug'
 describe Devise::SessionsController do
   # routes are mapped as:
   # match 'login' => 'session#create'
@@ -26,7 +26,7 @@ describe Devise::SessionsController do
         puts @request.env["rack.session"].inspect
         puts warden.inspect
         puts warden.session_serializer.session.inspect
-        byebug
+        #byebug
         session["warden.user.user.key"].should == user.id
       end
     end
