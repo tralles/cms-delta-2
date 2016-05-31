@@ -1,0 +1,34 @@
+language: ruby
+rvm:
+- 2.0
+- 2.1
+- 2.2
+- jruby-9.0.0.0
+- jruby
+- rbx-2
+
+env:
+- "SUITE=units       DB=postgresql"
+  # https://github.com/jruby/jruby/issues/779
+- rvm: jruby  
+  before_install:
+   # https://github.com/travis-ci/travis-ci/issues/4720
+  - if [[ ${TRAVIS_RUBY_VERSION} =~ jruby-9\.0 ]] ;
+    then
+       rvm get master ;
+       rvm use ${TRAVIS_RUBY_VERSION} --install ;
+       ruby --version ;
+    fi
+  
+script:
+   - cd cms
+   - bundle install
+   - cp config/email.yml.sample config/email.yml
+   - cp config/database.yml.sample config/database.yml
+   - cp config/secrets.yml.sample config/secrets.yml
+   - cp config/newrelic.yml.sample config/newrelic.yml
+   - "JRUBY_OPTS=-J-Xmx1024m bundle exec rails c"
+   - JRUBY_OPTS='-J-Xmx1024m -J-XX:MaxPermSize=1024m' bundle exec rails c
+   - bundle exec rails c
+notifications:
+   email: false
